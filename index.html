@@ -2,13 +2,13 @@
     <head>
         <meta name="content-type" content="text/html; charset=utf-8" />
         <title>monogusa jQuery plugin</title>
-        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-        <script type="text/javascript">google.load("jquery", 1);</script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.monogusa.js"></script>
         <script type="text/javascript">
             $(function(){
-                $(".autoover").autoover();
-                $(".alternate table").alternate();
+                $(".stripe").monogusa("stripe");
+                $(".highlight tr").monogusa("highlight");
+                $("#tab").monogusa("tab");
             });
         </script>
     </head>
@@ -21,7 +21,7 @@
         <pre>&lt;script type="text/javascript" src="/path/to/jquery.js"&gt;&lt;/script&gt;
 または
 &lt;script type="text/javascript" src="http://www.google.com/jsapi"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="/path/to/jquery.js"&gt;
+&lt;script type="text/javascript"&gt;
 google.load("jquery", [version]);
 &lt;/script&gt;
 または
@@ -39,8 +39,9 @@ google.load("jquery", [version]);
                 <li><a href="#">sample text</a></li>
             </ul>
         </div>
-        <div class="alternate">
-            <table border="0" cellpadding="0" cellspacing="0">
+        <div class="sample_box">
+            <h3>Stripeテーブル</h3>
+            <table border="0" cellpadding="0" cellspacing="0" class="stripe">
                 <tr>
                     <th>table cell head</th>
                     <td>table cell description</td>
@@ -58,6 +59,46 @@ google.load("jquery", [version]);
                     <td>table cell description</td>
                 </tr>
             </table>
+        </div>
+        <div class="sample_box">
+            <h3>Highligh表示</h3>
+            <table border="0" cellpadding="0" cellspacing="0" class="highlight">
+                <tr>
+                    <th>table cell head</th>
+                    <td>table cell description</td>
+                </tr>
+                <tr>
+                    <th>table cell head</th>
+                    <td>table cell description</td>
+                </tr>
+                <tr>
+                    <th>table cell head</th>
+                    <td>table cell description</td>
+                </tr>
+                <tr>
+                    <th>table cell head</th>
+                    <td>table cell description</td>
+                </tr>
+            </table>
+        </div>
+        <div class="sample_box">
+            <h3>Simpleタブパネル</h3>
+            <div id="tab">
+                <ul>
+                    <li><a href="#tab1">Tab1</a></li>
+                    <li><a href="#tab2">Tab2</a></li>
+                    <li><a href="#tab3">Tab3</a></li>
+                </ul>
+                <div id="tab1">
+                    <p>content in tab1</p>
+                </div>
+                <div id="tab2">
+                    <p>content in tab2</p>
+                </div>
+                <div id="tab3">
+                    <p>content in tab3</p>
+                </div>
+            </div>
         </div>
     </body>
 </html>
