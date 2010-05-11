@@ -45,7 +45,7 @@
 
 (function($){
     var allowedPlugins = [
-        "autoover", "tab", "stripe", "highlight", "scroller", "accordion"
+        "autoover", "blank", "tab", "stripe", "highlight", "scroller", "accordion"
     ];
     $.fn.monogusa = function(method, options) {
         if(!allowedPlugins.inArray(method)) {
@@ -171,6 +171,14 @@
                     });
                 });
             });
+        },
+        /**
+         * popup window blacnk link
+         *
+         * @access public
+         * @param  options    Object
+         */
+        blank: function (options) {
         },
         /**
          * accordion slider menu
