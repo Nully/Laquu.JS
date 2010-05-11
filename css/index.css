@@ -1,0 +1,67 @@
+@charset "utf-8";
+/**
+ * layouts
+ *
+ */
+body {
+     background: #FCFCFC;
+}
+#container {
+    width: 860px;
+    margin: 0 auto;
+    padding: 20px;
+    border:1px solid #999;
+    border-radius: 6px;
+    }
+h1 { text-align: center; font-size: 3.5em; margin: 0 0 30px; padding: 0; }
+pre {
+    line-height: 1.5;
+    padding: 5px;
+    margin: 0 0 5px;
+    border: 1px solid #CECECE;
+    border-radius: 6px;
+}
+.sample_box {
+    padding: 10px;
+    margin: 0 0 30px 0;
+    border: 1px solid #CECECE;
+    border-radius: 6px;
+}
+.red { color: #EE0000; }
+.small { font-size: 11px; }
+.margin-bottom20 { margin: 0 0 20px 0; }
+.scroller { text-align: right; }
+
+
+
+/**
+ * accordion style
+ *
+ */
+
+
+
+
+/**
+ * highlight style
+ *
+ */
+
+
+
+
+/**
+ * stripe style
+ *
+ */
+
+
+
+
+/**
+ * ui tab style
+ *
+ */
+
+
+
