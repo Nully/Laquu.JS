@@ -59,7 +59,63 @@
 
     // monogusa Object
     $.monogusa = {
+        /**
+         * accordion slider menu
+         *
+         * @access public
+         * @param  options    Object
+         *  header_class:   accordion slider header class name
+         *  in_speed    :   accordion slide in speed (open)
+         *  out_speed   :   accordion slide out speed (close)
+         *  in_callback :   accordion open complete callback
+         *  out_callback:   accordion close complete callback
+         */
         accordion: function(options) {
+            var settings = $.extend({
+                header_class: "accordion_header",
+                in_speed: 200,
+                out_speed: 300,
+                in_callback: function() {},
+                out_callback: function() {}
+            }, options || {});
+
+            // calback functions is not a function, set to clouser function.
+            if(!$.isFunction(settings.in_callback)) {
+                settings.in_callback = function() {};
+            }
+            if(!$.isFunction(settings.out_callback)) {
+                settings.out_callback = function() {};
+            }
+
+
+            // each of accordions
+            return this.each(function(i){
+                var $headers = $("." + settings.header_class + " a", this),
+                    $panels;
+
+                $headers.each(function(j){
+                    var _target = $(this).attr("href");
+
+                    // panel selectors
+                    if($panels) $panels = $panels.add(_target);
+                    else $panels = $(_target);
+
+                    $(this).bind("click", function(ev){
+                        var $current_panel = $($(this).attr("href"));
+
+                        // is current panel shown return false.
+                        if($current_panel.is(":visible")) {
+                            return false;
+                        }
+
+                        // toggle accordion.
+                        $panels.filter(":visible").slideUp(settings.out_speed, settings.out_callback);
+                        $current_panel.slideDown(settings.in_speed, settings.in_callback);
+                        ev.preventDefault();
+                    });
+                });
+                $panels.not(":first").hide();
+            });
         },
         /**
          * simple tab panel
@@ -84,17 +140,6 @@
                     $anchors = $("a", $li),
                     panelSelectors;
 
-                $li.css({
-                    "float": "left"
-                });
-                $anchors.css({
-                    "border": "1px solid #CECECE",
-                    "padding": "3px",
-                    "margin-right": "5px",
-                    "display": "block"
-                });
-
-
                 $t.addClass("monogusa-tabbox-" + i);
                 $anchors.each(function(){
                     var selector = $(this).attr("href");
@@ -114,7 +159,6 @@
                         ev.preventDefault();
                     });
                 });
-                panelSelectors.css("clear", "both");
                 $anchors.first().trigger("click");
             });
         },
@@ -163,6 +207,42 @@
                         settings.onOut.call(this);
                     }
                     $(this).removeClass(settings.hover_class);
+                });
+            });
+        },
+        /**
+         * scroller
+         *
+         * @access public
+         * @param  options     Object
+         *  scroll_speed:    text or int. "ex) 'slow', 'fast', 1500"
+         *  easing      :    required jQuery easing plugin. default supported 'linear', 'swing'.
+         *  callback    :    scroll to end callback
+         */
+        scroller: function(options) {
+            var _target = $.browser.safari ? "body": "html";
+            var settings = $.extend({
+                scroll_speed: 1000,
+                easing: "swing",
+                callback: function() {}
+            }, options || {});
+
+            return this.each(function(i){
+                var t = this,
+                    $t = $(t)
+                    anchor = function() {
+                        if(t.tagName == "A") {
+                            return t;
+                        }
+                        return $t.find("a").get(0);
+                    }(),
+                    $anchor = $(anchor);
+
+                // bind to click handler
+                $anchor.bind("click", function(ev){
+                    var top = $($(this).attr("href")).offset().top;
+                    $(_target).animate({scrollTop: top}, settings.scroll_speed, settings.easing, settings.callback);
+                    ev.preventDefault();
                 });
             });
         },
