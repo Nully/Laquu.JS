@@ -37,11 +37,15 @@
         }
         return false;
     }
+
+    String.prototype.replaceAll = function(o, n) {
+        return this.split(o).join(n);
+    }
 })();
 
 (function($){
     var allowedPlugins = [
-        "tab", "stripe", "highlight", "scroller", "accordion"
+        "autoover", "tab", "stripe", "highlight", "scroller", "accordion"
     ];
     $.fn.monogusa = function(method, options) {
         if(!allowedPlugins.inArray(method)) {
@@ -59,6 +63,115 @@
 
     // monogusa Object
     $.monogusa = {
+        /**
+         * autoover to link
+         *
+         * @access public
+         * @param  options      Object
+         *  mode   :     String        rollover mode. set to 'opacity' or 'toggle'.
+         *  opacity:     Float|Int     rollover opacity value
+         *  onStep :     Function      rollover animate callback method
+         *  onHover:     Function      rollover hover callback
+         *  onOut  :     Function      rollover mouseout callback
+         */
+        autoover: function(options) {
+            var settings = $.extend({
+                mode: "opacity",
+                opacity: .7,
+                duration: 400,
+                suffix: "_on",
+                onStep: function() {},
+                onComplete: function() {},
+                onHover: function() {},
+                onOut: function() {}
+            }, options || {});
+            var modeHandler = (function(mode) {
+                switch(mode) {
+                    case "opacity":
+                        return function(event) {
+                            var $t = $(this);
+                            if(event.originalEvent.type == "mouseover") {
+                                $t.animate({ opacity: settings.opacity }, {
+                                    duration: settings.duration,
+                                    queue: false,
+                                    complete: settings.onComplete,
+                                    step: settings.onStep
+                                });
+                            }
+                            else {
+                                $t.animate({ opacity: 1 }, {
+                                    duration: settings.duration,
+                                    queue: false,
+                                    complete: settings.onComplete,
+                                    step: settings.onStep
+                                });
+                            }
+                        }
+                        break;
+                    default:
+                        return function(event) {
+                            var $t = $(this),
+                                $img = $t.children("img:first");
+
+                            // no have a image
+                            if($img.size() <= 0) {
+                                return;
+                            }
+
+                            if(event.originalEvent.type == "mouseover") {
+                                var tmp = $img.attr("src").split(".");
+                                var ext = "." + tmp.pop(),
+                                    _on = tmp.join(".") + settings.suffix;
+                                $img.attr("src", _on + ext);
+                            }
+                            else {
+                                $img.attr("src", $img.attr("src").replace(settings.suffix, ""));
+                            }
+                        }
+                        break;
+                }
+            })(settings.mode);
+
+
+            // on step is function ?
+            if(!$.isFunction(settings.onStep))
+                settings.onStep = function() {};
+
+            // on step is function ?
+            if(!$.isFunction(settings.onComplete))
+                settings.onComplete = function() {};
+
+            // onHover is function ?
+            if(!$.isFunction(settings.onStep))
+                settings.onHover = function() {};
+
+            // onOut is function ?
+            if(!$.isFunction(settings.onStep))
+                settings.onOut = function() {};
+
+
+            // do each anchors
+            return this.each(function(i){
+                var t = this,
+                    $t = $(t),
+                    $anchors = (function(el){
+                        if(el.tagName == "A") {
+                            return el;
+                        }
+                        return $(el).find("a");
+                    })(t);
+
+                $anchors.each(function() {
+                    $(this).hover(function(ev){
+                        settings.onHover.call(this, ev);
+                        modeHandler.call(this, ev);
+                    }, function(ev) {
+                        settings.onOut.call(this, ev);
+                        modeHandler.call(this, ev);
+                    });
+                });
+            });
+        },
         /**
          * accordion slider menu
          *
@@ -136,25 +249,28 @@
 
             return this.each(function(i){
                 var $t = $(this),
-                    $li = $("li", $t),
+                    $ul = $("ul:first", $t),
+                    $li = $("li", $ul),
                     $anchors = $("a", $li),
                     panelSelectors;
 
-                $t.addClass("monogusa-tabbox-" + i);
+                $ul.addClass("monogusa-tabs monogusa-tabbox-" + i);
                 $anchors.each(function(){
                     var selector = $(this).attr("href");
                     if(panelSelectors) {
-                        panelSelectors = panelSelectors.add(selector);
+                        panelSelectors = panelSelectors.add(selector).addClass("monogusa-panels");
                     }
                     else {
                         panelSelectors = $(selector);
                     }
 
                     $(this).bind("click", function(ev){
+                        $anchors.removeClass(settings.tab_active_class);
                         panelSelectors.hide();
                         if($.isFunction(settings.onClick)) {
                             settings.onClick.call(this, this);
                         }
+                        $(this).addClass(settings.tab_active_class);
                         $(selector).show();
                         ev.preventDefault();
                     });
@@ -247,18 +363,6 @@
             });
         },
         /**
-         * RiseError message
-         *
-         * @access public
-         * @param  message    String    error message
-         */
-        riseError: function(message) {
-            if(window.console) {
-                console.log(message);
-            }
-            alert(message);
-        },
-        /**
          * KONAMI command !!
          *
          * @access public
@@ -279,6 +383,18 @@
                     }
                 }
             });
+        },
+        /**
+         * RiseError message
+         *
+         * @access public
+         * @param  message    String    error message
+         */
+        riseError: function(message) {
+            if(window.console) {
+                console.log(message);
+            }
+            alert(message);
         }
     };
 })(jQuery);
