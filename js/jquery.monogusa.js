@@ -257,6 +257,28 @@
                 console.log(message);
             }
             alert(message);
+        },
+        /**
+         * KONAMI command !!
+         *
+         * @access public
+         * @param  cmd        execute command
+         * @param  callback   commnad executable callback, default meltdown !
+         */
+        konami: function(cmd, callback) {
+            var pushed =[],
+                command = cmd ? cmd: "38,38,40,40,37,39,37,39,66,65";
+                clb = $.isFunction(callback) ? callback : function () {(function(){var s=document.createElement("script");s.charset="UTF-8";var da=new Date();s.src="http://www.rr.iij4u.or.jp/~kazumix/d/javascript/meltdown/meltdown.js?"+da.getTime(); document.body.appendChild(s)})();};
+
+            $(document).keyup(function(ev) {
+                if(command.match(ev.keyCode)) {
+                    pushed.push(ev.keyCode);
+                    var tmp = pushed.join(",");
+                    if(tmp == command) {
+                        clb.call(this, this, ev);
+                    }
+                }
+            });
         }
     };
 })(jQuery);
