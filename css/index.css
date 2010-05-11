@@ -21,16 +21,34 @@ pre {
     border: 1px solid #CECECE;
     border-radius: 6px;
 }
+li { list-style-type: none; }
+table {
+    border-top: 1px solid #CECECE;
+    border-right: 1px solid #CECECE;
+}
+table th, table td {
+    padding: 3px 6px;
+    border-bottom: 1px solid #CECECE;
+    border-left: 1px solid #CECECE;
+}
+table th {  }
+table td {}
+
+/*-- Classes */
 .sample_box {
     padding: 10px;
     margin: 0 0 30px 0;
     border: 1px solid #CECECE;
     border-radius: 6px;
 }
+
+
 .red { color: #EE0000; }
 .small { font-size: 11px; }
 .margin-bottom20 { margin: 0 0 20px 0; }
 .scroller { text-align: right; }
+
+
 
 
 
@@ -46,7 +64,7 @@ pre {
  * highlight style
  *
  */
-
+.monogusa_hover { background: #FFFFCC; }
 
 
 
@@ -54,7 +72,8 @@ pre {
  * stripe style
  *
  */
-
+.odd { background: #FFF; }
+.even { background: #ECECEC; }
 
 
 
@@ -62,6 +81,21 @@ pre {
  * ui tab style
  *
  */
-
-
+.monogusa-tabs { padding: 0; margin: 0; }
+.monogusa-tabs li { float: left; margin: 0 10px 0 0; }
+.monogusa-tabs a {
+    display: block;
+    padding: 5px;
+    border-top: 1px solid #CECECE;
+    border-right: 1px solid #CECECE;
+    border-left: 1px solid #CECECE;
+    background: #FFF;
+}
+.monogusa-tabs a.active {
+    background: #EFEFEF;
+}
+.monogusa-panels {
+    clear: both;
+    border: 1px solid #CECECE;
+}
 
