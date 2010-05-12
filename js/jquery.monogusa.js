@@ -179,6 +179,57 @@
          * @param  options    Object
          */
         blank: function (options) {
+            var settings = $.extend({
+                toolbar:     "yes",
+                location:    "yes",
+                directories: "yes",
+                status:      "yes",
+                menubar:     "yes",
+                scrollbar:   "yes",
+                resizable:   "yes",
+                close:       "yes"
+            }, options || {}),
+            parseQuery = function(q) {
+                var query = q.replace(/^[^\?]+\??/, ""),
+                    params = {};
+
+                if(!query) return params;
+
+                var parts = query.split(/[;&]/);
+                for(var i = 0; i < parts.length; i ++) {
+                    var pairs = parts[i].split("="),
+                        k = unescape(pairs[0]),
+                        v = unescape(pairs[1]);
+
+                    params[k] = v;
+                }
+
+                return params;
+            },
+            windowHandler = function(elm) {
+                var baseURL = elm.href.split("?")[0],
+                    q = parseQuery(elm.href),
+                    param = "",
+                    window_title = elm.title || "";
+
+                // parsed query
+                for(var j in q) {
+                    param += j + "=" + q[j] + ",";
+                }
+
+                // setting object
+                for(var i in settings) {
+                    param += i + "=" + settings[i] + ",";
+                }
+
+                param = param.slice(0, param.length - 1);
+                window.open(baseURL, "monogusa_blank_window", param);
+            };
+
+            this.bind("click", function(ev){
+                windowHandler(this);
+                ev.preventDefault();
+            });
         },
         /**
          * accordion slider menu
