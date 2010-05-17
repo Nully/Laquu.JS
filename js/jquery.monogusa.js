@@ -43,26 +43,27 @@
     }
 })();
 
-(function($){
-    var allowedPlugins = [
-        "autoover", "blank", "tab", "stripe", "highlight", "scroller", "accordion"
-    ];
-    $.fn.monogusa = function(method, options) {
-        if(!allowedPlugins.inArray(method)) {
-            throw $.monogusa.riseError("not allowd method '"+ method +"' !");
-        }
 
-        try{
-            return $.monogusa[method].call(this, options);
+
+(function($){
+    $.fn.monogusa = function(fn, options) {
+        return new $.monogusa(this, fn, options);
+    }
+
+    $.monogusa = function(el, fn, options) {
+        try {
+            this[fn].call(el, options);
         }
         catch(e) {
-            throw $.monogusa.riseError(e);
+            this.riseError(e);
         }
     }
 
 
-    // monogusa Object
-    $.monogusa = {
+    // prototype alias
+    $.monogusa.fn = $.monogusa.prototype = {};
+    $.monogusa.fn.extend = $.extend;
+    $.monogusa.fn.extend({
         /**
          * autoover to link
          *
@@ -149,14 +150,13 @@
             if(!$.isFunction(settings.onStep))
                 settings.onOut = function() {};
 
-
             // do each anchors
             return this.each(function(i){
                 var t = this,
                     $t = $(t),
                     $anchors = (function(el){
                         if(el.tagName == "A") {
-                            return el;
+                            return $(el);
                         }
                         return $(el).find("a");
                     })(t);
@@ -455,6 +455,6 @@
             }
             alert(message);
         }
-    };
+    });
 })(jQuery);
 
