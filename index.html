@@ -3,206 +3,31 @@
         <meta name="content-type" content="text/html; charset=utf-8" />
         <title>monogusa jQuery plugin</title>
         <link type="text/css" href="css/index.css" media="all" rel="stylesheet" />
+        <link type="text/css" href="css/sh_style.css" media="all" rel="stylesheet" />
+        <script type="text/javascript" src="js/sh_main.min.js"></script>
+        <script type="text/javascript" src="js/sh_javascript.min.js"></script>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
         <script type="text/javascript" src="js/jquery.monogusa.js"></script>
         <script type="text/javascript">
             $(function(){
-                $(".inline-tab").monogusa("tab");
+                $("a[href^=#]").bind("click", function(){ return false; });
+                $(".inline-tabs").monogusa("tab");
 
-                $(".accordion").monogusa("accordion");
-                $(".autoover-opacity").monogusa("autoover");
-                $(".autoover-image-opacity").monogusa("autoover");
-                $(".autoover-toggle").monogusa("autoover", {
+                $("#autoover-panel2 .autoover-alpha").monogusa("autoover");
+                $("#autoover-panel2 a").monogusa("autoover", {
                     mode: "toggle"
                 });
-                $(".blank").monogusa("blank");
-                $(".stripe").monogusa("stripe");
-                $(".highlight tr").monogusa("highlight");
-                $("#tab").monogusa("tab");
-                $(".scroller").monogusa("scroller");
-                $.monogusa.konami();
+                sh_highlightDocument('', '.js');
             });
         </script>
     </head>
     <body>
         <div id="container">
             <h1>monogusa.js</h1>
-            <h2>monogusa.jsって？</h2>
-            <p>monogusa.jsは、普段から怠けたい人の為をなるべく怠けられるようにするためのjQueryプラグインです。</p>
-
-
-            <h2>使い方</h2>
-            <p>普段jQueryを使うように、jQueryコアを読み込み、その後にmonogusa.jsを読み込みます。</p>
-            <pre>&lt;script type="text/javascript" src="/path/to/jquery.js"&gt;&lt;/script&gt;
-または
-&lt;script type="text/javascript" src="http://www.google.com/jsapi"&gt;&lt;/script&gt;
-&lt;script type="text/javascript"&gt;
-google.load("jquery", [version]);
-&lt;/script&gt;
-または
-&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/[version]/jquery.min.js"&gt;&lt;/script&gt;</pre>
-            <p class="red small margin-bottom20">※[version]の部分は、利用するjQueryのバージョンを記述してください。</p>
-
-
-            <h2>ダウンロード</h2>
-            <p>ダウンロードは<a href="#">こちら</a>から</p>
-
-
-            <h2>サンプル</h2>
-            <div class="sample_box">
-                <h3>Accordionスライダー</h3>
-                <dl class="accordion">
-                    <dt class="accordion_header"><a href="#accordion_1-1">アコーディオン1-1</a></dt>
-                    <dd id="accordion_1-1">アコーディオン内容1</dd>
-                    <dt class="accordion_header"><a href="#accordion_1-2">アコーディオン1-2</a></dt>
-                    <dd id="accordion_1-2">アコーディオン内容2</dd>
-                    <dt class="accordion_header"><a href="#accordion_1-3">アコーディオン1-3</a></dt>
-                    <dd id="accordion_1-3">アコーディオン内容3</dd>
-                </dl>
-
-                <div class="accordion">
-                    <p class="accordion_header"><a href="#accordion_2-1">アコーディオン2-1</a></p>
-                    <div id="accordion_2-1">ああああああああああああああああああああ</div>
-                    <p class="accordion_header"><a href="#accordion_2-2">アコーディオン2-2</a></p>
-                    <div id="accordion_2-2">いいいいいいいいいいいいいいいいいいいい</div>
-                    <p class="accordion_header"><a href="#accordion_2-3">アコーディオン2-3</a></p>
-                    <div id="accordion_2-3">うううううううううううううううううううう</div>
-                </div>
-
-                <div class="accordion">
-                    <h4 class="accordion_header"><a href="#accordion_3-1">アコーディオン3-1</a></h4>
-                    <div id="accordion_3-1">あああああああああああああああああ</div>
-                    <h4 class="accordion_header"><a href="#accordion_3-2">アコーディオン3-2</a></h4>
-                    <div id="accordion_3-2">いいいいいいいいいいいいいいいいい</div>
-                    <h4 class="accordion_header"><a href="#accordion_3-3">アコーディオン3-3</a></h4>
-                    <div id="accordion_3-3">ううううううううううううううううう</div>
-                </div>
-            </div>
-
-
-            <div class="sample_box">
-                <h3>Blankリンク</h3>
-                <p><a href="http://www.yahoo.co.jp/?width=600&height=600" class="blank">yahooへ</a></p>
-                <p><a href="http://www.google.co.jp/" class="blank">googleへ</a></p>
-            </div>
-
-
-
-            <div class="sample_box">
-                <h3>Autooverロールオーバー</h3>
-                <div class="inline-tab">
-                    <ul>
-                        <li><a href="#autoover-opacity">テキスト透明度</a></li>
-                        <li><a href="#autoover-image-opacity">画像透明度</a></li>
-                        <li><a href="#autoover-toggle">画像切り替え</a></li>
-                    </ul>
-                    <div id="autoover-opacity">
-                        <ul class="autoover-opacity">
-                            <li><a href="#">Menu1</a></li>
-                            <li><a href="#">Menu2</a></li>
-                            <li><a href="#">Menu3</a></li>
-                            <li><a href="#">Menu4</a></li>
-                            <li><a href="#">Menu5</a></li>
-                        </ul>
-                    </div>
-                    <div id="autoover-image-opacity">
-                        <ul class="autoover-image-opacity">
-                            <li><a href="#"><img src="img/btn.gif" alt="button1" /></a></li>
-                            <li><a href="#"><img src="img/btn.gif" alt="button2" /></a></li>
-                            <li><a href="#"><img src="img/btn.gif" alt="button3" /></a></li>
-                            <li><a href="#"><img src="img/btn.gif" alt="button4" /></a></li>
-                            <li><a href="#"><img src="img/btn.gif" alt="button5" /></a></li>
-                        </ul>
-                    </div>
-                    <div id="autoover-toggle">
-                        <ul class="autoover-toggle">
-                            <li><a href="#"><img src="img/btn.gif" alt="button1" /></a></li>
-                            <li><a href="#"><img src="img/btn.gif" alt="button2" /></a></li>
-                            <li><a href="#"><img src="img/btn.gif" alt="button3" /></a></li>
-                            <li><a href="#"><img src="img/btn.gif" alt="button4" /></a></li>
-                            <li><a href="#"><img src="img/btn.gif" alt="button5" /></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="sample_box">
-                <h3>Stripeテーブル</h3>
-                <div class="inline-tab">
-                    <ul>
-                        <li><a href="#stripe-table">表交互</a></li>
-                    </ul>
-                    <table border="0" cellpadding="0" cellspacing="0" class="stripe">
-                        <tr>
-                            <th>table cell head</th>
-                            <td>table cell description</td>
-                        </tr>
-                        <tr>
-                            <th>table cell head</th>
-                            <td>table cell description</td>
-                        </tr>
-                        <tr>
-                            <th>table cell head</th>
-                            <td>table cell description</td>
-                        </tr>
-                        <tr>
-                            <th>table cell head</th>
-                            <td>table cell description</td>
-                        </tr>
-                        <tr>
-                            <th>table cell head</th>
-                            <td>table cell description</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-
-            <div class="sample_box">
-                <h3>Highligh表示</h3>
-                <table border="0" cellpadding="0" cellspacing="0" class="highlight">
-                    <tr>
-                        <th>table cell head</th>
-                        <td>table cell description</td>
-                    </tr>
-                    <tr>
-                        <th>table cell head</th>
-                        <td>table cell description</td>
-                    </tr>
-                    <tr>
-                        <th>table cell head</th>
-                        <td>table cell description</td>
-                    </tr>
-                    <tr>
-                        <th>table cell head</th>
-                        <td>table cell description</td>
-                    </tr>
-                </table>
-            </div>
-
-
-            <div class="sample_box">
-                <h3>Simpleタブパネル</h3>
-                <div class="inline-tab">
-                    <ul>
-                        <li><a href="#tab1">Tab1</a></li>
-                        <li><a href="#tab2">Tab2</a></li>
-                        <li><a href="#tab3">Tab3</a></li>
-                    </ul>
-                    <div id="tab1">
-                        <p>content in tab1</p>
-                    </div>
-                    <div id="tab2">
-                        <p>content in tab2</p>
-                    </div>
-                    <div id="tab3">
-                        <p>content in tab3</p>
-                    </div>
-                </div>
-            </div>
-            <p class="scroller"><a href="#container">PageTopへ</a></p>
+            <h2>monogusa.jsは、だらけるためのjQueryプラグインです。</h2>
+            <p>monogusa.jsは普段からのHTML製作をダラけて、だらけ多分、他の場所の勉強時間を増やすためのjQueryプラグインです。</p>
+            <p>製作でだらけ多分、別な場所でがんばれる、楽しいプラグインです。</p>
         <!-- End container --></div>
     </body>
 </html>
