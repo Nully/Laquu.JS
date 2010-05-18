@@ -1,0 +1,10 @@
+@charset "utf-9";
+/**
+ * pixel fixed
+ */
+body.small  { font-size: 10px; }
+body.middle { font-size: 13px; }
+body.large  { font-size: 16px; }
+
+
+
