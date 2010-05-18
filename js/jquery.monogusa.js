@@ -500,9 +500,15 @@
                 path = path + "/";
             }
 
+            // location pattern filename ?
             var pattern = loc.match(/[\w.]+$/)
-            if(pattern.length) {
+            if(pattern) {
                 loc = loc.replace(pattern[0], "");
+            }
+
+            // location pathname end of slash ?
+            if(!loc.match(/\/$/)) {
+                loc = loc + "/";
             }
 
             // create font-switch css link element
