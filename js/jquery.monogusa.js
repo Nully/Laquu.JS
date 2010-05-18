@@ -458,6 +458,82 @@
             });
         },
         /**
+         * simple font size switcher
+         *
+         * @access public
+         * @param  options     Object
+         *  path : font-switch.css file path
+         *  name : font-switch.css file name.
+         */
+        fswitch: function(options) {
+            var settings = $.extend({
+                path: "css/",
+                name: "fswitch.css",
+                title: "\u30d5\u30a9\u30f3\u30c8\u30b5\u30a4\u30ba",
+                label: {
+                    small: "\u5c0f",
+                    middle: "\u4e2d",
+                    large: "\u5927"
+                }
+            }, options || {});
+
+            // font-size switch buttons
+            var sizes = [
+                "small", "middle", "large"
+            ];
+
+            // sanitize file path, file name
+            var path = settings.path,
+                filename = settings.name;
+
+            // dose not end slash.
+            if(!path.match(/.+[/]$/)) {
+                path = path + "/";
+            }
+
+            // create font-switch css link element
+            var link = document.createElement("link");
+            link.href = window.location.pathname + path + filename;
+            link.type = "text/css";
+            link.rel  = "stylesheet";
+            link.id   = "monogusa-fontswitch-link";
+            $("head").append(link);
+
+            /**
+             * @TODO: cookie manage by last selected font-size class name.
+             **/
+
+            // do each create button element
+            this.each(function(i){
+                var $box = $(this),
+                    $dl = $('<dl id="monogusa-fswitch-'+ i +'" />').appendTo($box),
+                    nodes;
+
+                $('<dt class="monogusa-fswitch-title-'+ i +'" />').text(settings.title).appendTo($dl);
+                $.each(sizes, function(i, name) {
+                    var elm = $('<a href="#'+ name +'" class="monogusa-fsize-'+ name +'" />').text(settings.label[name]);
+                    elm.data("font-size", name);
+
+                    var $dd = $('<dd class="monogusa-fswitch-label" />').append(elm).appendTo($dl);
+
+                    // push jQuery nodes
+                    if(nodes) {
+                        nodes = nodes.add($dd);
+                    }
+                    else {
+                        nodes = $dd;
+                    }
+                });
+
+                nodes.find("a").bind("click", function(){
+                    var $body = $("body");
+                    $body.removeClass($body.attr("class"));
+                    $body.addClass($(this).data("font-size"));
+                    return false;
+                });
+            });
+        },
+        /**
          * scroller
          *
          * @access public
