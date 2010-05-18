@@ -492,16 +492,22 @@
 
             // sanitize file path, file name
             var path = settings.path,
-                filename = settings.name;
+                filename = settings.name,
+                loc = window.location.pathname;
 
             // dose not end slash.
             if(!path.match(/.+[/]$/)) {
                 path = path + "/";
             }
 
+            var pattern = loc.match(/[\w.]+$/)
+            if(pattern.length) {
+                loc = loc.replace(pattern[0], "");
+            }
+
             // create font-switch css link element
             var link = document.createElement("link");
-            link.href = window.location.pathname + path + filename;
+            link.href = loc + path + filename;
             link.type = "text/css";
             link.rel  = "stylesheet";
             link.id   = "monogusa-fontswitch-link";
