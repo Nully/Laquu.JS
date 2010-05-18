@@ -161,6 +161,11 @@
                         return $(el).find("a");
                     })(t);
 
+                // if has no anchors continue next elements
+                if($anchors.size() <= 0) {
+                    return true;
+                }
+
                 $anchors.each(function() {
                     $(this).hover(function(ev){
                         settings.onHover.call(this, ev);
