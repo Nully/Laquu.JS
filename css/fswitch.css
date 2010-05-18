@@ -7,4 +7,26 @@ body.middle { font-size: 13px; }
 body.large  { font-size: 16px; }
 
 
+/**
+ * YUI based font-size style
+ * !! use this style comment out remove.
+body.small  { font-size: 77%; }
+body.middle { font-size: 100%; }
+body.large  { font-size: 123.1%; }
+ */
+
+
+
+/**
+ * parsent based font-size style
+ * !! body set the font-size '62.5%' required
+ * !! font-size 62.5% is convert to 'pixel' 10px.
+body.small  { font-size: 100%; }
+body.middle { font-size: 130%; }
+body.large  { font-size: 160%; }
+ */
+
+
+
+
 
