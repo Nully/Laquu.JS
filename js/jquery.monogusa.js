@@ -373,6 +373,7 @@
         tab: function(options) {
             var settings = $.extend({
                 tab_active_class: "active",
+                show_speed: 800,
                 onClick: function() {},
                 onChange: function() {}
             }, options || {});
@@ -396,16 +397,18 @@
                     }
 
                     $(this).bind("click", function(ev){
-                        $anchors.removeClass(settings.tab_active_class);
                         panelSelectors.hide();
-                        if($.isFunction(settings.onClick)) {
-                            settings.onClick.call(this, this);
-                        }
-                        $(this).addClass(settings.tab_active_class);
-                        $(selector).show();
+                        $li.removeClass(settings.tab_active_class);
+                        
+                        // onClick handler
+                        if($.isFunction(settings.onClick)) { settings.onClick.call(this, this); }
+
+                        $(this).parent().addClass(settings.tab_active_class);
+                        $(selector).fadeIn(settings.show_speed);
                         ev.preventDefault();
                     });
                 });
+                panelSelectors.wrapAll('<div class="monogusa-tab-panel-wrap">');
                 $anchors.first().trigger("click");
             });
         },
