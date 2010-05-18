@@ -1,119 +1,4 @@
 @charset "utf-8";
-/* v1.0 | 20080212 */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
-del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center,
-dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	outline: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-	background: transparent;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-
-/* remember to define focus styles! */
-:focus {
-	outline: 0;
-}
-
-/* remember to highlight inserts somehow! */
-ins {
-	text-decoration: none;
-}
-del {
-	text-decoration: line-through;
-}
-
-/* tables still need 'cellspacing="0"' in the markup */
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-
-/**
- * layouts
- *
- */
-body {
-    font-size: 62.5%;
-    background: #FCFCFC;
-}
-
-
-#container {
-    margin: 20px auto;
-    font-size: 120%;
-    width: 860px;
-    padding: 20px;
-    border:1px solid #999;
-    border-radius: 6px;
-    }
-h1 {
-    text-align: center;
-    font-size: 180%;
-    margin: 0 0 30px;
-    padding: 0;
-}
-h2 {
-    font-size: 140%;
-}
-h3 {}
-h4 {}
-
-pre {
-    /*line-height: 1.5;
-    padding: 5px;
-    margin: 0 0 5px;
-    border: 1px solid #CECECE;
-    border-radius: 6px;*/
-}
-li { list-style-type: none; }
-table {
-    border-top: 1px solid #CECECE;
-    border-right: 1px solid #CECECE;
-}
-table th, table td {
-    padding: 3px 6px;
-    border-bottom: 1px solid #CECECE;
-    border-left: 1px solid #CECECE;
-}
-table th {  }
-table td {}
-
-/*-- Classes */
-.sample_box {
-    padding: 10px;
-    margin: 0 0 30px 0;
-    border: 1px solid #CECECE;
-    border-radius: 6px;
-}
-
-
-.red { color: #EE0000; }
-.small { font-size: 11px; }
-.margin-bottom20 { margin: 0 0 20px 0; }
-.scroller { text-align: right; }
-
-
-
-
-
 /**
  * accordion style
  *
@@ -143,22 +28,35 @@ table td {}
  * ui tab style
  *
  */
-.monogusa-tabs { padding: 0; margin: 0; }
-.monogusa-tabs li { float: left; margin: 0 10px 0 0; }
-.monogusa-tabs a {
-    display: block;
-    padding: 5px;
-    border-top: 1px solid #CECECE;
-    border-right: 1px solid #CECECE;
+.monogusa-tabs {
+    padding: 0;
+    margin: 0;
     border-left: 1px solid #CECECE;
-    background: #FFF;
+    border-bottom: 1px solid #CECECE;
+    height: 31px;
 }
-.monogusa-tabs a.active {
+.monogusa-tabs li {
+    float: left;
+    margin: 0 0 -1px 0;
+    border: 1px solid #CECECE;
+    border-left: none;
+    line-height: 30px;
+    height: 30px;
     background: #EFEFEF;
 }
-.monogusa-panels {
+.monogusa-tabs a {
+    display: block;
+    padding: 0 10px;
+}
+.monogusa-tabs .active {
+    background: #FFF;
+    border-bottom-color: #FFF;
+}
+.monogusa-tab-panel-wrap {
     clear: both;
-    border: 1px solid #CECECE;
+    border-left: 1px solid #CECECE;
+    border-bottom: 1px solid #CECECE;
+    border-right: 1px solid #CECECE;
     padding: 8px;
     background: #FFF;
 }
