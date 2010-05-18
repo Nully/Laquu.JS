@@ -173,6 +173,78 @@
             });
         },
         /**
+         * simple new ticker
+         *
+         * @access public
+         * @param  options    Object
+         */
+        ticker: function(options) {
+            var settings =$.extend({
+                hide_speed: .6,
+                pause: 3,
+                show_count: 1
+            }, options || {});
+
+            this.each(function(){
+                var $t  = $(this),
+                    $ul = $("ul", $t),
+                    $items = $("li", $ul),
+                    currentItem = 0,
+                    itemLength = $items.size(),
+                    itemHeight = $items.first().outerHeight(),
+                    timer,
+                    hideSpeed = settings.hide_speed * 1000;
+
+                // start timer
+                function startTimer() {
+                    console.log("a");
+                    timer = setInterval(slideTicker, settings.pause * 1000);
+                }
+
+                // stop timer
+                function stopTimer() {
+                    clearInterval(timer);
+                }
+
+                // do animation ticker
+                function slideTicker() {
+                    var firstItem = $ul.children().first(),
+                        moveTicker = function() {
+                            $items.animate({top: "-=" + itemHeight});
+                        };
+                    if(currentItem >= itemLength) { currentItem = 0; }
+                    $items.eq(currentItem)
+                        .animate({opacity: 0}, hideSpeed, function(){
+                            $ul.append(firstItem);
+                            $(this).css("top", itemHeight * itemLength);
+                            firstItem.animate({opacity: 1});
+                            moveTicker();
+                        });
+                    ++ currentItem;
+                }
+
+
+                $ul.addClass("monogusa-ticker");
+                $items.addClass("monogusa-tiker-items");
+
+                $ul.css({
+                    position: "relative",
+                    overflow: "hidden",
+                    height: itemHeight * settings.show_count
+                });
+                $items.css({position: "absolute"});
+                $items.each(function(i){
+                    $(this).css("top", i * itemHeight);
+                });
+
+                // hover action
+                $items.hover(startTimer, stopTimer);
+
+                // do ticker !
+                startTimer();
+            });
+        },
+        /**
          * popup window blacnk link
          *
          * @access public
