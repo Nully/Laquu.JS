@@ -545,6 +545,8 @@
                 });
 
                 nodes.find("a").bind("click", function(){
+                    nodes.removeClass("fswitch_current");
+                    $(this).addClass("fswitch_current");
                     var $body = $("body");
                     $body.removeClass($body.attr("class"));
                     $body.addClass($(this).data("font-size"));
