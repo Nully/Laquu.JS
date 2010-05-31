@@ -44,11 +44,7 @@
 })();
 
 
-
-(function($){
-    $.fn.monogusa = function(fn, options) {
-        return new $.monogusa(this, fn, options);
-    }
+(function(){
 
     $.monogusa = function(el, fn, options) {
         try {
@@ -64,17 +60,6 @@
     $.monogusa.fn = $.monogusa.prototype = {};
     $.monogusa.fn.extend = $.extend;
     $.monogusa.fn.extend({
-        /**
-         * autoover to link
-         *
-         * @access public
-         * @param  options      Object
-         *  mode   :     String        rollover mode. set to 'opacity' or 'toggle'.
-         *  opacity:     Float|Int     rollover opacity value
-         *  onStep :     Function      rollover animate callback method
-         *  onHover:     Function      rollover hover callback
-         *  onOut  :     Function      rollover mouseout callback
-         */
         autoover: function(options) {
             var settings = $.extend({
                 mode: "opacity",
@@ -177,12 +162,6 @@
                 });
             });
         },
-        /**
-         * simple new ticker
-         *
-         * @access public
-         * @param  options    Object
-         */
         ticker: function(options) {
             var settings =$.extend({
                 hide_speed: .6,
@@ -248,12 +227,6 @@
                 startTimer();
             });
         },
-        /**
-         * popup window blacnk link
-         *
-         * @access public
-         * @param  options    Object
-         */
         blank: function (options) {
             var settings = $.extend({
                 toolbar:     "yes",
@@ -307,17 +280,6 @@
                 ev.preventDefault();
             });
         },
-        /**
-         * accordion slider menu
-         *
-         * @access public
-         * @param  options    Object
-         *  header_class:   accordion slider header class name
-         *  in_speed    :   accordion slide in speed (open)
-         *  out_speed   :   accordion slide out speed (close)
-         *  in_callback :   accordion open complete callback
-         *  out_callback:   accordion close complete callback
-         */
         accordion: function(options) {
             var settings = $.extend({
                 header_class: "accordion_header",
@@ -365,15 +327,6 @@
                 $panels.not(":first").hide();
             });
         },
-        /**
-         * simple tab panel
-         * for core UI tab, jQuery UI use it.
-         *
-         * @access pubic
-         * @param  options    Object
-         *  onClick:  on click to tab click callback
-         *  onChange: on change to tab panel callback
-         */
         tab: function(options) {
             var settings = $.extend({
                 tab_active_class: "active",
@@ -416,14 +369,6 @@
                 $anchors.first().trigger("click");
             });
         },
-        /**
-         * stripe a rows.
-         *
-         * @access public
-         * @param  options    Object
-         *  odd_class:  odd row class
-         *  even_class: even row class
-         */
         stripe: function(options) {
             var settings = $.extend({
                 odd_class: "odd",
@@ -437,12 +382,6 @@
                 });
             });
         },
-        /**
-         * highlight for IE, not supported :hover class.
-         *
-         * @access public
-         * @param  options    Object
-         */
         highlight: function(options) {
             var settings = $.extend({
                 hover_class: "monogusa_hover",
@@ -464,14 +403,6 @@
                 });
             });
         },
-        /**
-         * simple font size switcher
-         *
-         * @access public
-         * @param  options     Object
-         *  path : font-switch.css file path
-         *  name : font-switch.css file name.
-         */
         fswitch: function(options) {
             var settings = $.extend({
                 path: "css/",
@@ -518,10 +449,6 @@
             link.id   = "monogusa-fontswitch-link";
             $("head").append(link);
 
-            /**
-             * @TODO: cookie manage by last selected font-size class name.
-             **/
-
             // do each create button element
             this.each(function(i){
                 var $box = $(this),
@@ -552,15 +479,6 @@
                 });
             });
         },
-        /**
-         * scroller
-         *
-         * @access public
-         * @param  options     Object
-         *  scroll_speed:    text or int. "ex) 'slow', 'fast', 1500"
-         *  easing      :    required jQuery easing plugin. default supported 'linear', 'swing'.
-         *  callback    :    scroll to end callback
-         */
         scroller: function(options) {
             var _target = $.browser.safari ? "body": "html";
             var settings = $.extend({
@@ -588,13 +506,6 @@
                 });
             });
         },
-        /**
-         * KONAMI command !!
-         *
-         * @access public
-         * @param  cmd        execute command
-         * @param  callback   commnad executable callback, default meltdown !
-         */
         konami: function(cmd, callback) {
             var pushed =[],
                 command = cmd ? cmd: "38,38,40,40,37,39,37,39,66,65";
@@ -610,12 +521,6 @@
                 }
             });
         },
-        /**
-         * RiseError message
-         *
-         * @access public
-         * @param  message    String    error message
-         */
         riseError: function(message) {
             if(window.console) {
                 console.log(message);
@@ -623,5 +528,5 @@
             alert(message);
         }
     });
-})(jQuery);
+})();
 
