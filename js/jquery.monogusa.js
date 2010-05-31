@@ -181,6 +181,7 @@
 
                 // start timer
                 function startTimer() {
+                    console.log("a");
                     timer = setInterval(slideTicker, settings.pause * 1000);
                 }
 
