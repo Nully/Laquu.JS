@@ -1,5 +1,10 @@
 CHANGELOG
 --------------------------------------------------------------------------------
+ver 2.0
+ sub support MooTools
+
+
+--
 ver 1.0
  change to monogusa plugin namespace
    '$.fn.monogusa'
