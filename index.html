@@ -11,7 +11,9 @@
         <script type="text/javascript" src="js/mootools.monogusa.js"></script>
         <script type="text/javascript">
             window.addEvent("domready", function(){
-                new monogusa("rollover", $$(".example ul"));
+                new monogusa("rollopacity", $$("#monogosaRoll .rollopacity a"));
+                new monogusa("rollimage", $$("#monogosaRoll .rollimage img"));
+                new monogusa("ticker", $$("#monogusaTicker ul"));
             });
         </script>
     </head>
@@ -22,10 +24,35 @@
             <h2>monogusa.jsは、だらけるためのjQueryプラグインです。</h2>
             <p>monogusa.jsは普段からのHTML製作をダラけて、だらけたぶん、他の場所の勉強時間を増やすためのjQueryプラグインです。</p>
             <p>製作でだらけたぶん、別な場所でがんばれる、楽しいプラグインです。</p>
-            <div class="example">
-                <ul>
-                    <li><a href="#">Samle Text</a></li>
-                    <li><img src="img/btn.gif" alt="Sample Button" /></li>
+            <div id="monogosaRoll">
+                <div class="example rollopacity">
+                    <ul>
+                        <li><a href="#">Samle Text</a></li>
+                        <li><a href="#"><img src="img/btn.gif" alt="Sample Button" /></a></li>
+                    </ul>
+                </div>
+
+                <div class="example rollimage">
+                    <ul>
+                        <li><img src="img/btn.gif" alt="Sample Button" /></li>
+                        <li><img src="img/btn.gif" alt="Sample Button" /></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div id="monogusaTicker">
+                <ul id="ticker">
+                    <li>ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01</li>
+                    <li>ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02</li>
+                    <li>ティッカー03</li>
+                    <li>ティッカー04ティッカー04ティッカー04ティッカー04ティッカー04ティッカー04ティッカー04ティッカー04ティッカー04</li>
+                    <li>ティッカー05</li>
+                    <li>ティッカー06</li>
+                    <li>ティッカー07</li>
+                    <li>ティッカー08</li>
+                    <li>ティッカー09</li>
+                    <li>ティッカー10</li>
                 </ul>
             </div>
         <!-- End container --></div>
