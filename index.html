@@ -13,7 +13,10 @@
             window.addEvent("domready", function(){
                 new monogusa("rollopacity", $$("#monogosaRoll .rollopacity a"));
                 new monogusa("rollimage", $$("#monogosaRoll .rollimage img"));
-                new monogusa("ticker", $$("#monogusaTicker ul"));
+                new monogusa("ticker", $("ticker"));
+                new monogusa("blank", $$("#monogusaBlank a"));
+                new monogusa("accordion", $("monogusaAccordion"));
+                new monogusa("tab", $$("#monogusaTab"));
             });
         </script>
     </head>
@@ -41,7 +44,7 @@
             </div>
 
 
-            <div id="monogusaTicker">
+            <div id="monogusaTicker" class="example">
                 <ul id="ticker">
                     <li>ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01ティッカー01</li>
                     <li>ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02ティッカー02</li>
@@ -54,6 +57,42 @@
                     <li>ティッカー09</li>
                     <li>ティッカー10</li>
                 </ul>
+            </div>
+
+
+            <div id="monogusaBlank">
+                <div class="example">
+                    <p><a href="http://yahoo.co.jp/">Yahoo.co.jpへ</a></p>
+                    <p><a href="http://google.co.jp/?width=800&amp;height=600">google.co.jpへ</a></p>
+                </div>
+            </div>
+
+
+            <div id="monogusaAccordion" class="example">
+                <h4 class="monogusa_accordion_header">accordion header</h4>
+                <div class="monogusa_accordion_content">
+                    aaaaaaaaaaaaaaaaaaaaaaa
+                </div>
+                <h4 class="monogusa_accordion_header">accordion header</h4>
+                <div class="monogusa_accordion_content">
+                    aaaaaaaaaaaaaaaaaaaaaaa
+                </div>
+                <h4 class="monogusa_accordion_header">accordion header</h4>
+                <div class="monogusa_accordion_content">
+                    aaaaaaaaaaaaaaaaaaaaaaa
+                </div>
+            </div>
+
+
+            <div id="monogusaTab" class="example">
+                <ul>
+                    <li><a href="#panel1">show panel 1</a></li>
+                    <li><a href="#panel2">show panel 2</a></li>
+                    <li><a href="#panel3">show panel 3</a></li>
+                </ul>
+                <div id="panel1">panel1</div>
+                <div id="panel2">panel2</div>
+                <div id="panel3">panel3</div>
             </div>
         <!-- End container --></div>
     </body>
