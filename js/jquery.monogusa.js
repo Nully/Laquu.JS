@@ -44,492 +44,548 @@
 })();
 
 
-(function(){
-
-    $.monogusa = function(el, fn, options) {
-        try {
-            this[fn].call(el, options);
-        }
-        catch(e) {
-            this.riseError(e);
-        }
-    }
+(function($){
+    // Global object
+    $.monogusa = {
+        version: 1.0
+    };
 
 
-    // prototype alias
-    $.monogusa.fn = $.monogusa.prototype = {};
-    $.monogusa.fn.extend = $.extend;
-    $.monogusa.fn.extend({
-        autoover: function(options) {
-            var settings = $.extend({
-                mode: "opacity",
-                opacity: .7,
-                duration: 400,
-                suffix: "_on",
-                onStep: function() {},
-                onComplete: function() {},
-                onHover: function() {},
-                onOut: function() {}
-            }, options || {});
-            var modeHandler = (function(mode) {
-                switch(mode) {
-                    case "opacity":
-                        return function(event) {
-                            var $t = $(this);
-                            if(event.originalEvent.type == "mouseover") {
-                                $t.animate({ opacity: settings.opacity }, {
-                                    duration: settings.duration,
-                                    queue: false,
-                                    complete: settings.onComplete,
-                                    step: settings.onStep
-                                });
-                            }
-                            else {
-                                $t.animate({ opacity: 1 }, {
-                                    duration: settings.duration,
-                                    queue: false,
-                                    complete: settings.onComplete,
-                                    step: settings.onStep
-                                });
-                            }
-                        }
-                        break;
-                    default:
-                        return function(event) {
-                            var $t = $(this),
-                                $img = $t.children("img:first");
+    /**
+     * opacity rollover plugin
+     *
+     * @param  elems    jQuery ElementCollection
+     * @param  options  Object
+     *         opacity: rolloverd item to opacity
+     *         duration: fadeTo speed
+     *         onComplete: complete callback
+     *         onHover: hover callback
+     *         onOut: mouseout callback
+     */
+    $.monogusa.opacityOver = function(elms, options) {
+        elms.each(function(){
+            new opacityOver($(this));
+        });
+    };
+    var opacityOver = function(elm, options) {
+        this.init(elm, options);
+    };
+    opacityOver.fn = opacityOver.prototype = {};
+    opacityOver.fn.extend = $.extend;
+    opacityOver.fn.extend({
+        options: {
+            opacity: .7,
+            duration: 300,
+            onComplete: function() {},
+            onHover: function() {},
+            onOut: function() {}
+        },
+        init: function(elm, options) {
+            var t = this;
+            this.element = elm;
+            this.options = this.extend(this.options, options || {});
 
-                            // no have a image
-                            if($img.size() <= 0) {
-                                return;
-                            }
-
-                            if(event.originalEvent.type == "mouseover") {
-                                var tmp = $img.attr("src").split(".");
-                                var ext = "." + tmp.pop(),
-                                    _on = tmp.join(".") + settings.suffix;
-                                $img.attr("src", _on + ext);
-                            }
-                            else {
-                                $img.attr("src", $img.attr("src").replace(settings.suffix, ""));
-                            }
-                        }
-                        break;
-                }
-            })(settings.mode);
-
-
-            // on step is function ?
-            if(!$.isFunction(settings.onStep))
-                settings.onStep = function() {};
-
-            // on step is function ?
-            if(!$.isFunction(settings.onComplete))
-                settings.onComplete = function() {};
-
-            // onHover is function ?
-            if(!$.isFunction(settings.onStep))
-                settings.onHover = function() {};
-
-            // onOut is function ?
-            if(!$.isFunction(settings.onStep))
-                settings.onOut = function() {};
-
-            // do each anchors
-            return this.each(function(i){
-                var t = this,
-                    $t = $(t),
-                    $anchors = (function(el){
-                        if(el.tagName == "A") {
-                            return $(el);
-                        }
-                        return $(el).find("a");
-                    })(t);
-
-                // if has no anchors continue next elements
-                if($anchors.size() <= 0) {
-                    return true;
-                }
-
-                $anchors.each(function() {
-                    $(this).hover(function(ev){
-                        settings.onHover.call(this, ev);
-                        modeHandler.call(this, ev);
-                    }, function(ev) {
-                        settings.onOut.call(this, ev);
-                        modeHandler.call(this, ev);
-                    });
-                });
+            // add event
+            this.element.hover(function(ev){
+                t.hoverHandler(ev);
+            }, function(ev){
+                t.outHandler(ev);
             });
         },
-        ticker: function(options) {
-            var settings =$.extend({
-                hide_speed: .6,
-                pause: 3,
-                show_count: 1
-            }, options || {});
-
-            this.each(function(){
-                var $t  = $(this),
-                    $ul = $("ul", $t),
-                    $items = $("li", $ul),
-                    currentItem = 0,
-                    itemLength = $items.size(),
-                    itemHeight = $items.first().outerHeight(),
-                    timer,
-                    hideSpeed = settings.hide_speed * 1000;
-
-                // start timer
-                function startTimer() {
-                    console.log("a");
-                    timer = setInterval(slideTicker, settings.pause * 1000);
-                }
-
-                // stop timer
-                function stopTimer() {
-                    clearInterval(timer);
-                }
-
-                // do animation ticker
-                function slideTicker() {
-                    var firstItem = $ul.children().first(),
-                        moveTicker = function() {
-                            $items.animate({top: "-=" + itemHeight});
-                        };
-                    if(currentItem >= itemLength) { currentItem = 0; }
-                    $items.eq(currentItem)
-                        .animate({opacity: 0}, hideSpeed, function(){
-                            $ul.append(firstItem);
-                            $(this).css("top", itemHeight * itemLength);
-                            firstItem.animate({opacity: 1});
-                            moveTicker();
-                        });
-                    ++ currentItem;
-                }
-
-
-                $ul.addClass("monogusa-ticker");
-                $items.addClass("monogusa-tiker-items");
-
-                $ul.css({
-                    position: "relative",
-                    overflow: "hidden",
-                    height: itemHeight * settings.show_count
-                });
-                $items.css({position: "absolute"});
-                $items.each(function(i){
-                    $(this).css("top", i * itemHeight);
-                });
-
-                // hover action
-                $items.hover(startTimer, stopTimer);
-
-                // do ticker !
-                startTimer();
-            });
+        hoverHandler: function(ev) {
+            this.options.onHover.call(ev.currentTarget);
+            this.doTween(ev.currentTarget, this.options.opacity);
         },
-        blank: function (options) {
-            var settings = $.extend({
-                toolbar:     "yes",
-                location:    "yes",
-                directories: "yes",
-                status:      "yes",
-                menubar:     "yes",
-                scrollbar:   "yes",
-                resizable:   "yes",
-                close:       "yes"
-            }, options || {}),
-            parseQuery = function(q) {
-                var query = q.replace(/^[^\?]+\??/, ""),
-                    params = {};
-
-                if(!query) return params;
-
-                var parts = query.split(/[;&]/);
-                for(var i = 0; i < parts.length; i ++) {
-                    var pairs = parts[i].split("="),
-                        k = unescape(pairs[0]),
-                        v = unescape(pairs[1]);
-
-                    params[k] = v;
-                }
-
-                return params;
-            },
-            windowHandler = function(elm) {
-                var baseURL = elm.href.split("?")[0],
-                    q = parseQuery(elm.href),
-                    param = "",
-                    window_title = elm.title || "";
-
-                // parsed query
-                for(var j in q) {
-                    param += j + "=" + q[j] + ",";
-                }
-
-                // setting object
-                for(var i in settings) {
-                    param += i + "=" + settings[i] + ",";
-                }
-
-                param = param.slice(0, param.length - 1);
-                window.open(baseURL, "monogusa_blank_window", param);
-            };
-
-            this.bind("click", function(ev){
-                windowHandler(this);
-                ev.preventDefault();
-            });
+        outHandler: function(ev) {
+            this.options.onOut.call(ev.currentTarget);
+            this.doTween(ev.currentTarget, 1);
         },
-        accordion: function(options) {
-            var settings = $.extend({
-                header_class: "accordion_header",
-                in_speed: 200,
-                out_speed: 300,
-                in_callback: function() {},
-                out_callback: function() {}
-            }, options || {});
-
-            // calback functions is not a function, set to clouser function.
-            if(!$.isFunction(settings.in_callback)) {
-                settings.in_callback = function() {};
-            }
-            if(!$.isFunction(settings.out_callback)) {
-                settings.out_callback = function() {};
-            }
-
-
-            // each of accordions
-            return this.each(function(i){
-                var $headers = $("." + settings.header_class + " a", this),
-                    $panels;
-
-                $headers.each(function(j){
-                    var _target = $(this).attr("href");
-
-                    // panel selectors
-                    if($panels) $panels = $panels.add(_target);
-                    else $panels = $(_target);
-
-                    $(this).bind("click", function(ev){
-                        var $current_panel = $($(this).attr("href"));
-
-                        // is current panel shown return false.
-                        if($current_panel.is(":visible")) {
-                            return false;
-                        }
-
-                        // toggle accordion.
-                        $panels.filter(":visible").slideUp(settings.out_speed, settings.out_callback);
-                        $current_panel.slideDown(settings.in_speed, settings.in_callback);
-                        ev.preventDefault();
-                    });
-                });
-                $panels.not(":first").hide();
-            });
-        },
-        tab: function(options) {
-            var settings = $.extend({
-                tab_active_class: "active",
-                show_speed: 800,
-                onClick: function() {},
-                onChange: function() {}
-            }, options || {});
-
-
-            return this.each(function(i){
-                var $t = $(this),
-                    $ul = $("ul:first", $t),
-                    $li = $("li", $ul),
-                    $anchors = $("a", $li),
-                    panelSelectors;
-
-                $ul.addClass("monogusa-tabs monogusa-tabbox-" + i);
-                $anchors.each(function(){
-                    var selector = $(this).attr("href");
-                    if(panelSelectors) {
-                        panelSelectors = panelSelectors.add(selector).addClass("monogusa-panels");
-                    }
-                    else {
-                        panelSelectors = $(selector);
-                    }
-
-                    $(this).bind("click", function(ev){
-                        panelSelectors.hide();
-                        $li.removeClass(settings.tab_active_class);
-                        
-                        // onClick handler
-                        if($.isFunction(settings.onClick)) { settings.onClick.call(this, this); }
-
-                        $(this).parent().addClass(settings.tab_active_class);
-                        $(selector).fadeIn(settings.show_speed);
-                        ev.preventDefault();
-                    });
-                });
-                panelSelectors.wrapAll('<div class="monogusa-tab-panel-wrap">');
-                $anchors.first().trigger("click");
-            });
-        },
-        stripe: function(options) {
-            var settings = $.extend({
-                odd_class: "odd",
-                even_class: "even"
-            }, options || {});
-
-            this.each(function(){
-                $(this).find("tr, li").each(function(i){
-                    var cls = (i%2) ? settings.even_class : settings.odd_class;
-                    $(this).addClass(cls);
-                });
-            });
-        },
-        highlight: function(options) {
-            var settings = $.extend({
-                hover_class: "monogusa_hover",
-                onHover: function() {},
-                onOut: function() {}
-            }, options || {});
-
-            this.each(function(){
-                $(this).hover(function(){
-                    if($.isFunction(settings.onHover)) {
-                        settings.onHover.call(this);
-                    }
-                    $(this).addClass(settings.hover_class);
-                }, function(){
-                    if($.isFunction(settings.onOut)) {
-                        settings.onOut.call(this);
-                    }
-                    $(this).removeClass(settings.hover_class);
-                });
-            });
-        },
-        fswitch: function(options) {
-            var settings = $.extend({
-                path: "css/",
-                name: "fswitch.css",
-                title: "\u30d5\u30a9\u30f3\u30c8\u30b5\u30a4\u30ba",
-                label: {
-                    small: "\u5c0f",
-                    middle: "\u4e2d",
-                    large: "\u5927"
-                }
-            }, options || {});
-
-            // font-size switch buttons
-            var sizes = [
-                "small", "middle", "large"
-            ];
-
-            // sanitize file path, file name
-            var path = settings.path,
-                filename = settings.name,
-                loc = window.location.pathname;
-
-            // dose not end slash.
-            if(!path.match(/.+[/]$/)) {
-                path = path + "/";
-            }
-
-            // location pattern filename ?
-            var pattern = loc.match(/[\w.]+$/)
-            if(pattern) {
-                loc = loc.replace(pattern[0], "");
-            }
-
-            // location pathname end of slash ?
-            if(!loc.match(/\/$/)) {
-                loc = loc + "/";
-            }
-
-            // create font-switch css link element
-            var link = document.createElement("link");
-            link.href = loc + path + filename;
-            link.type = "text/css";
-            link.rel  = "stylesheet";
-            link.id   = "monogusa-fontswitch-link";
-            $("head").append(link);
-
-            // do each create button element
-            this.each(function(i){
-                var $box = $(this),
-                    $dl = $('<dl id="monogusa-fswitch-'+ i +'" />').appendTo($box),
-                    nodes;
-
-                $('<dt class="monogusa-fswitch-title-'+ i +'" />').text(settings.title).appendTo($dl);
-                $.each(sizes, function(i, name) {
-                    var elm = $('<a href="#'+ name +'" class="monogusa-fsize-'+ name +'" />').text(settings.label[name]);
-                    elm.data("font-size", name);
-
-                    var $dd = $('<dd class="monogusa-fswitch-label" />').append(elm).appendTo($dl);
-
-                    // push jQuery nodes
-                    if(nodes) {
-                        nodes = nodes.add($dd);
-                    }
-                    else {
-                        nodes = $dd;
-                    }
-                });
-
-                nodes.find("a").bind("click", function(){
-                    nodes.removeClass("fswitch_current");
-                    $(this).addClass("fswitch_current");
-                    var $body = $("body");
-                    $body.removeClass($body.attr("class"));
-                    $body.addClass($(this).data("font-size"));
-                    return false;
-                });
-            });
-        },
-        scroller: function(options) {
-            var _target = $.browser.safari ? "body": "html";
-            var settings = $.extend({
-                scroll_speed: 1000,
-                easing: "swing",
-                callback: function() {}
-            }, options || {});
-
-            return this.each(function(i){
-                var t = this,
-                    $t = $(t)
-                    anchor = function() {
-                        if(t.tagName == "A") {
-                            return t;
-                        }
-                        return $t.find("a").get(0);
-                    }(),
-                    $anchor = $(anchor);
-
-                // bind to click handler
-                $anchor.bind("click", function(ev){
-                    var top = $($(this).attr("href")).offset().top;
-                    $(_target).animate({scrollTop: top}, settings.scroll_speed, settings.easing, settings.callback);
-                    ev.preventDefault();
-                });
-            });
-        },
-        konami: function(cmd, callback) {
-            var pushed =[],
-                command = cmd ? cmd: "38,38,40,40,37,39,37,39,66,65";
-                clb = $.isFunction(callback) ? callback : function () {(function(){var s=document.createElement("script");s.charset="UTF-8";var da=new Date();s.src="http://www.rr.iij4u.or.jp/~kazumix/d/javascript/meltdown/meltdown.js?"+da.getTime(); document.body.appendChild(s)})();};
-
-            $(document).keyup(function(ev) {
-                if(command.match(ev.keyCode)) {
-                    pushed.push(ev.keyCode);
-                    var tmp = pushed.join(",");
-                    if(tmp == command) {
-                        clb.call(this, this, ev);
-                    }
-                }
-            });
-        },
-        riseError: function(message) {
-            if(window.console) {
-                console.log(message);
-            }
-            alert(message);
+        doTween: function(e, o) {
+            $(e).stop(true, true).fadeTo(this.options.duration, o, this.options.onComplete);
         }
     });
-})();
+
+
+    /**
+     * image rollover plugin
+     *
+     * @param  elems    jQuery ElementCollection
+     * @param  options  Object
+     *         suffix: image rollover suffix
+     *         onComplete: complete callback
+     *         onHover: hover callback
+     *         onOut: mouseout callback
+     */
+    $.monogusa.imageOver= function(elems, options) {
+        elems.each(function(){
+            new imageOver($(this), options);
+        });
+    };
+    var imageOver = function(elm, options) {
+        this.init(elm, options);
+    };
+    imageOver.fn = imageOver.prototype = {};
+    imageOver.fn.extend = $.extend;
+    imageOver.fn.extend({
+        options: {
+            suffix: "_on",
+            onComplete: function() {},
+            onHover: function() {},
+            onOut: function() {}
+        },
+        init: function(e, o) {
+            var t = this;
+            this.element = e;
+            this.options = this.extend(this.options, o || {});
+
+            this.element.hover(function(ev){
+                t.hoverHandler(ev);
+            }, function(ev){
+                t.outHandler(ev);
+            });
+        },
+        hoverHandler: function(ev) {
+            this.toggle(ev.currentTarget);
+        },
+        outHandler: function(ev) {
+            this.toggle(ev.currentTarget);
+        },
+        toggle: function(e) {
+            var $e = $(e),
+                base_src = $e.attr("src"),
+                src, tmp, ext, exp = new RegExp(this.options.suffix);
+
+            if(exp.test(base_src)) {
+                src = base_src.replace(exp, "");
+            }
+            else {
+                tmp = base_src.split(".");
+                ext = tmp.pop();
+                src = tmp.join(".") + this.options.suffix + "." + ext;
+            }
+            $e.attr("src", src);
+        }
+    });
+
+
+    /**
+     * news ticker plugin
+     *
+     * @param  elems    jQuery HTML Collection Object
+     * @param  options  Object
+     *         speed: animate speed
+     *         duration: interval speed ( call real time is speed + duration)
+     *         onComplete: Function
+     *         onStep: Function
+     */
+    $.monogusa.ticker = function(elems, options){
+        elems.each(function(){
+            new ticker($(this), options);
+        });
+    };
+    var ticker = function(el, options) {
+        this.init(el, options);
+    };
+    ticker.fn = ticker.prototype = {};
+    ticker.fn.extend = $.extend;
+    ticker.fn.extend({
+        options: {
+            speed: 1000,
+            duration: 2000,
+            onComplete: function() {},
+            onStep: function() {}
+        },
+        current_item: 0,
+        timer: null,
+        init: function(e, o) {
+            var t = this;
+            this.element = e;
+            this.parent  = e.parent();
+            this.items = e.children();
+            this.options = this.extend(this.options, o || {});
+
+            this.parent.css("position", "relative");
+            this.element.css("position", "absolute");
+            this.element.hover(function(){
+                t.clearTimer();
+            }, function(){
+                --t.current_item;
+                t.next();
+            });
+
+            this.next();
+        },
+        next: function() {
+            ++this.current_item;
+            this.rewind();
+            if(!this.timer) {
+                this.timer = setInterval(this.tween, (this.options.duration + this.options.speed), this);
+            }
+        },
+        rewind: function() {
+            if(this.current_item >= this.items.length) {
+                this.current_item = 0;
+            }
+        },
+        tween: function(caller) {
+            var t = caller;
+            var item = t.items.get(t.current_item);
+            t.element.animate({
+                top: -item.offsetTop,
+                left: -item.offsetLeft
+            }, {
+                duration: t.options.speed,
+                queue: false,
+                complete: function() {
+                    var i = (t.current_item === 0) ? t.items.length : t.current_item;
+                    $(t.items[i -1]).appendTo(t.element);
+                    t.element.css({
+                        top: 0,
+                        left: 0
+                    });
+                    t.options.onComplete.apply(arguments);
+                    t.next();
+                },
+                step: t.options.onStep
+            });
+        },
+        clearTimer: function() {
+            clearInterval(this.timer);
+            this.timer = null;
+        }
+    });
+
+
+    /**
+     * blank window
+     *
+     * @param  elems      jQuery HTML Collection Object
+     * @param  options    Object
+     *         toolbar: shown toolbar 'yes' or 'no'
+     *         location: shown location bar 'yes' or 'no'
+     *         directories: shown directories bar 'yes' or 'no'
+     *         status: shown status bar 'yes' or 'no'
+     *         menubar: shown menubar 'yes' or 'no'
+     *         scrollbar: shown scrollbar 'yes' or 'no'
+     *         resizable: window resizable 'yes' or 'no'
+     *         close: shown close button 'yes' or 'no'
+     */
+    $.monogusa.blank = function(elems, options) {
+        elems.each(function(){
+            new blank($(this), options);
+        });
+    };
+    var blank = function(elem, options) {
+        this.init(elem, options);
+    };
+    blank.fn = blank.prototype = {};
+    blank.fn.extend = $.extend;
+    blank.fn.extend({
+        options: {
+            toolbar:     "yes",
+            location:    "yes",
+            directories: "yes",
+            status:      "yes",
+            menubar:     "yes",
+            scrollbar:   "yes",
+            resizable:   "yes",
+            close:       "yes"
+        },
+        init: function(e, o) {
+            var t = this;
+            this.element = e;
+            this.options = this.extend(this.options, o || {});
+
+            var query_string = this.element.attr("href").split(/\?/);
+            this.element.data("query_string", this._parseQuery(query_string[1]));
+            this.element.attr("href", query_string[0]);
+            this.element.bind("click", function(ev){
+                t.open($(this), ev);
+            });
+        },
+        open: function(e, ev) {
+            var size = e.data("query_string"),
+                param = "", i;
+
+            for(i in this.options) {
+                param += i + "=" + this.options[i] + ",";
+            }
+            for(i in size) {
+                param += i + "=" + size[i] + ",";
+            }
+
+            param = param.substr(0, param.length - 1);
+            window.open(e.attr("href"), "monogusa_blank_window", param);
+            ev.preventDefault();
+        },
+        _parseQuery: function(q) {
+            var result = {},
+                params, i;
+
+            if(!q) {
+                return result;
+            }
+
+            params = q.split(/[;&]/);
+            for(i = 0; i < params.length; i++) {
+                var param = params[i].split(/=/);
+                result[param[0]] = param[1];
+            }
+            return result;
+        }
+    });
+
+
+    /**
+     * accordion panel
+     *
+     * @param  elems    jQuery HTML Collection Object
+     * @param  options  Object
+     */
+    $.monogusa.accordion = function(elems, options) {
+        elems.each(function(){
+            new accordion($(this), options);
+        });
+    };
+    var accordion = function(elm, options) {
+        this.init(elm, options);
+    };
+    accordion.fn = accordion.prototype = {};
+    accordion.fn.extend = $.extend;
+    accordion.fn.extend({
+        options: {
+            speed: 600,
+            header_class: "monogusa_accordion_header",
+            content_class: "monogusa_accordion_content",
+            current_class: "active",
+            onHide: function() {},
+            onShow: function() {}
+        },
+        init: function(e, o) {
+            var t = this;
+            this.element = e;
+            this.headers = this.element.find("." + this.options.header_class);
+            this.content = this.element.find("." + this.options.content_class)
+            this.options = $.extend(this.options, o || {});
+
+            this.headers.bind("click", function(ev){
+                t.headers.removeClass(t.options.current_class);
+                $(this).addClass(t.options.current_class);
+                t.show($(this), ev);
+            });
+            this.headers.first().trigger("click");
+        },
+        show: function(e, ev) {
+            var t = this;
+            this.content.not(e.next()).slideUp(this.options.speed, function(){
+                t.options.onHide.call(this);
+            });
+
+            e.next().slideDown(t.options.speed, function(){
+                t.options.onShow.call(this);
+            });
+        }
+    });
+
+
+    /**
+     * tab panel
+     *
+     * @param elems
+     * @param options
+     */
+    $.monogusa.tab = function(elems, options) {
+        elems.each(function(){
+            new tab($(this), options);
+        });
+    };
+    var tab = function(elem, options) {
+        this.init(elem, options);
+    };
+    tab.fn = tab.prototype = {};
+    tab.fn.extend  = $.extend;
+    tab.fn.extend({
+        options: {
+            active_class: "active"
+        },
+        tab: null,
+        tabs: null,
+        panels: null,
+        init: function(e, o) {
+            var t = this;
+            this.element = e;
+            this.options = this.extend(this.options, 0 || {});
+
+            this.tab = this.element.find("ul");
+            this.tabs = this.tab.find("li a");
+
+            this.tabs.each(function(){
+                if(t.panels) {
+                    t.panels = t.panels.add($(this).attr("href"));
+                }
+                else {
+                    t.panels = $($(this).attr("href"));
+                }
+            });
+
+            this.panels.addClass("monogusa-tab-panel");
+            this.tabs.addClass("monogusa-tab");
+
+            this.tabs.bind("click", function(ev){
+                t.showTab(ev);
+            });
+
+            this.tabs.first().trigger("click");
+        },
+        showTab: function(ev) {
+            var target = $(ev.currentTarget),
+                panel = $(target.attr("href"));
+
+            this.panels.hide();
+            this.tabs.removeClass(this.options.active_class);
+            target.addClass(this.options.active_class);
+            panel.show();
+            ev.preventDefault();
+        }
+    });
+
+
+    /**
+     * stripe table
+     *
+     * @param  elems      jQuery HTML Collection Object
+     * @param  options    Object
+     *         even_class: even data row class
+     *         odd_class: odd data row class
+     *         onHover: hover action callback
+     *         onOut: mouseout callback
+     */
+    $.monogusa.stripe = function(elems, options) {
+        var o = $.extend({
+            even_class: "even",
+            odd_class: "odd",
+            onHover: function() {},
+            onOut: function() {}
+        }, options || {});
+        elems.each(function(i){
+            $(this).addClass((i%2 == 0) ? o.even_class: o.odd_class);
+            $.monogusa.hover($(this), options);
+        });
+    };
+
+
+    /**
+     * hover
+     *
+     * @param  elems     jQuery HTMLCollection Object
+     * @param  options   Object
+     *         onHover: hover action callback
+     *         onOut: mouseout callback
+     */
+    $.monogusa.hover = function(elems, options) {
+        var o = $.extend({
+            hover_class: "hover",
+            onHover: function() {},
+            onOut: function() {}
+        }, options || {});
+        elems.each(function(){
+            $(this).hover(function(){
+                o.onHover.call(this);
+                $(this).addClass(o.hover_class);
+            }, function(){
+                o.onOut.call(this);
+                $(this).removeClass(o.hover_class);
+            });
+        });
+    };
+
+
+    /**
+     * font size switcher
+     *
+     * @param  elems    jQuery HTML Collection Object
+     * @param  options  Object
+     */
+    $.monogusa.fss = function(elems, options) {
+        elems.each(function(){
+            new FontSizeSwitcher($(this), options);
+        });
+    };
+    var FontSizeSwitcher = function(elem, options) {
+        this.init(elem, options);
+    };
+    FontSizeSwitcher.fn = FontSizeSwitcher.prototype = {};
+    FontSizeSwitcher.fn.extend = $.extend;
+    FontSizeSwitcher.fn.extend({
+        options: {
+            css_file: "/css/fss.css",
+            onChange: function() {},
+            cookie: {
+                expires: 7, // 1 week
+                path: "/",
+                domain: "",
+                secure: false
+            }
+        },
+        init: function(e, o) {
+            var t = this,
+                path = location.protocol + "//" + location.hostname;
+
+            this.$b = $("body");
+            this.element = e;
+            this.options = $.extend(this.options, o || {});
+
+            this.element.find("a").bind("click", function(ev){
+                t.change($(this), ev);
+                return false;
+            });
+
+            this.classes = $.map(this.element.find("a"), function(e, i){
+                return $(e).attr("href").replace(/#/, "");
+            }).join(" ");
+
+            if($.cookie) {
+                var loaded = $.cookie("monogusa_ffs_selected");
+                if(loaded) {
+                    this.$b.addClass(loaded);
+                }
+            }
+
+            var link = document.createElement("link");
+                link.type = "text/css";
+                link.rel = "stylesheet";
+                link.href = path + this.options.css_file;
+            $(link).appendTo("head");
+        },
+        change: function(e, ev) {
+            var size = e.attr("href").replace(/#/, "");
+            this.$b.removeClass(this.classes);
+            this.$b.addClass(size);
+            this.options.onChange.apply(arguments);
+
+            if($.cookie) {
+                $.cookie("monogusa_ffs_selected", size, this.options.cookie);
+            }
+        }
+    });
+
+    /**
+     * Konami command
+     *
+     * @param  cmd        String    CSV pattern key code
+     * @param  callback   Function  callback function
+     *                              default callback method is MeltDown.js
+     */
+    $.monogusa.konami = function(cmd, callback) {
+        var stack = [];
+        callback = $.isFunction(callback) ? callback: function () {(function(){var s=document.createElement("script");s.charset="UTF-8";var da=new Date();s.src="http://www.rr.iij4u.or.jp/~kazumix/d/javascript/meltdown/meltdown.js?"+da.getTime(); document.body.appendChild(s)})();};
+        cmd = (cmd ? cmd : "38,38,40,40,37,39,37,39,66,65").split(",");
+        $(document).keyup(function(ev){
+            stack.push(ev.keyCode);
+            if(stack.length >= cmd.length) {
+                stack = [];
+            }
+        });
+    };
+})(jQuery);
 
