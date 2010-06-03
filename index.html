@@ -8,7 +8,6 @@
         <script type="text/javascript" src="js/sh_main.min.js"></script>
         <script type="text/javascript" src="js/sh_javascript.min.js"></script>
         <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-        <script type="text/javascript" src="js/jquery.cookie.js"></script>
         <script type="text/javascript" src="js/jquery.monogusa.js"></script>
         <script type="text/javascript">
             $(function(){
@@ -19,10 +18,11 @@
                 $.monogusa.accordion($("#monogusaAccordion"));
                 $.monogusa.tab($("#monogusaTab"));
                 $.monogusa.stripe($("#monogusaStripe table tr"));
-                $.monogusa.hover($("#monogusaStripe table tr"));
+                $.monogusa.hover($("#monogusaHover table tr"));
                 $.monogusa.fss($("#font-switch"), {
-                    css_file: "/test/monogusa/css/fss.css"
+                    css_file: "/monogusa/css/fss.css"
                 });
+                $.monogusa.dropdown($("#dropdown"));
                 $.monogusa.konami();
             });
         </script>
@@ -41,6 +41,28 @@
             <h2>monogusa.jsは、だらけるためのjQueryプラグインです。</h2>
             <p>monogusa.jsは普段からのHTML製作をダラけて、だらけたぶん、他の場所の勉強時間を増やすためのjQueryプラグインです。</p>
             <p>製作でだらけたぶん、別な場所でがんばれる、楽しいプラグインです。</p>
+
+            <ul id="dropdown">
+                <li>Menu1
+                    <ul class="hogehoge">
+                        <li>SubMenu1
+                            <ul class="hogehoge">
+                                <li>SubSubMenu1</li>
+                                <li>SubSubMenu1</li>
+                                <li>SubSubMenu1</li>
+                                <li>SubSubMenu1</li>
+                            </ul>
+                        </li>
+                        <li>SubMenu1</li>
+                        <li>SubMenu1</li>
+                        <li>SubMenu1</li>
+                    </ul>
+                </li>
+                <li>Menu1</li>
+                <li>Menu1</li>
+                <li>Menu1</li>
+            </ul>
+
             <div id="monogosaRoll">
                 <div class="example rollopacity">
                     <ul>
@@ -110,6 +132,34 @@
             </div>
 
             <div id="monogusaStripe" class="example">
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th>Table Header</th>
+                        <td>Table Definition</td>
+                    </tr>
+                    <tr>
+                        <th>Table Header</th>
+                        <td>Table Definition</td>
+                    </tr>
+                    <tr>
+                        <th>Table Header</th>
+                        <td>Table Definition</td>
+                    </tr>
+                    <tr>
+                        <th>Table Header</th>
+                        <td>Table Definition</td>
+                    </tr>
+                    <tr>
+                        <th>Table Header</th>
+                        <td>Table Definition</td>
+                    </tr>
+                    <tr>
+                        <th>Table Header</th>
+                        <td>Table Definition</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="monogusaHover" class="example">
                 <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <th>Table Header</th>
