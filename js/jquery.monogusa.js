@@ -569,6 +569,42 @@
         }
     });
 
+
+    /**
+     * drop down menu
+     *
+     * @param  elems   jQuery HTML Collection Object
+     * @param  options Object
+     */
+    $.monogusa.dropdown = function(elems, options) {
+        elems.each(function(){
+            new dropdown($(this), options);
+        });
+    };
+    var dropdown = function(elem, options) {
+        this.init(elem, options);
+    };
+    dropdown.fn = dropdown.prototype = {};
+    dropdown.fn.extend = $.extend;
+    dropdown.fn.extend({
+        options: {},
+        init: function(e, o) {
+            var t = this;
+            this.element = e;
+            this.options = this.extend(this.options, o || {});
+            this.menus = this.element.filter(function(){
+            });
+            this.menus = this.menus.add(this.menus.find("ul"));
+        },
+        show: function(e, ev) {
+            e.children("ul").stop(true, true).slideDown();
+        },
+        hide: function(e, ev) {
+            e.children("ul").stop(true, true).slideUp();
+        }
+    });
+
+
     /**
      * Konami command
      *
