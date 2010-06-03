@@ -7,22 +7,36 @@
         <link type="text/css" href="css/sh_style.css" media="all" rel="stylesheet" />
         <script type="text/javascript" src="js/sh_main.min.js"></script>
         <script type="text/javascript" src="js/sh_javascript.min.js"></script>
-        <script type="text/javascript" src="js/mootools-1.2.4-core-nc.js"></script>
-        <script type="text/javascript" src="js/mootools.monogusa.js"></script>
+        <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="js/jquery.monogusa.js"></script>
         <script type="text/javascript">
-            window.addEvent("domready", function(){
-                new monogusa("rollopacity", $$("#monogosaRoll .rollopacity a"));
-                new monogusa("rollimage", $$("#monogosaRoll .rollimage img"));
-                new monogusa("ticker", $("ticker"));
-                new monogusa("blank", $$("#monogusaBlank a"));
-                new monogusa("accordion", $("monogusaAccordion"));
-                new monogusa("tab", $$("#monogusaTab"));
+            $(function(){
+                $.monogusa.opacityOver($("#monogosaRoll .rollopacity li a"));
+                $.monogusa.imageOver($("#monogosaRoll .rollimage li img"));
+                $.monogusa.ticker($("#ticker"));
+                $.monogusa.blank($("#monogusaBlank a"));
+                $.monogusa.accordion($("#monogusaAccordion"));
+                $.monogusa.tab($("#monogusaTab"));
+                $.monogusa.stripe($("#monogusaStripe table tr"));
+                $.monogusa.hover($("#monogusaStripe table tr"));
+                $.monogusa.fss($("#font-switch"), {
+                    css_file: "/test/monogusa/css/fss.css"
+                });
+                $.monogusa.konami();
             });
         </script>
     </head>
     <body>
         <div id="container">
-            <div id="font-switch"></div>
+            <div id="font-switch">
+                <dl>
+                    <dt>フォントサイズ</dt>
+                    <dd><a href="#small">小</a></dd>
+                    <dd><a href="#middle">中</a></dd>
+                    <dd><a href="#large">大</a></dd>
+                </dl>
+            </div>
             <h1>monogusa.js</h1>
             <h2>monogusa.jsは、だらけるためのjQueryプラグインです。</h2>
             <p>monogusa.jsは普段からのHTML製作をダラけて、だらけたぶん、他の場所の勉強時間を増やすためのjQueryプラグインです。</p>
@@ -93,6 +107,35 @@
                 <div id="panel1">panel1</div>
                 <div id="panel2">panel2</div>
                 <div id="panel3">panel3</div>
+            </div>
+
+            <div id="monogusaStripe" class="example">
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th>Table Header</th>
+                        <td>Table Definition</td>
+                    </tr>
+                    <tr>
+                        <th>Table Header</th>
+                        <td>Table Definition</td>
+                    </tr>
+                    <tr>
+                        <th>Table Header</th>
+                        <td>Table Definition</td>
+                    </tr>
+                    <tr>
+                        <th>Table Header</th>
+                        <td>Table Definition</td>
+                    </tr>
+                    <tr>
+                        <th>Table Header</th>
+                        <td>Table Definition</td>
+                    </tr>
+                    <tr>
+                        <th>Table Header</th>
+                        <td>Table Definition</td>
+                    </tr>
+                </table>
             </div>
         <!-- End container --></div>
     </body>
