@@ -1,7 +1,5 @@
 nbproject
 design.psd
-<<<<<<< HEAD
 jquery.monogusa_base.js
-=======
 js/jquery.monogusa_base.js
->>>>>>> mootools
+js/jquery.cookie.js
