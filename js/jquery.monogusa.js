@@ -28,22 +28,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-(function(){
-    Array.prototype.inArray = function(value) {
-        for(var i in this) {
-            if(this[i] === value) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    String.prototype.replaceAll = function(o, n) {
-        return this.split(o).join(n);
-    }
-})();
-
-
 (function($){
     // Global object
     $.monogusa = {
