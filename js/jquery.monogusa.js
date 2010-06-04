@@ -520,19 +520,22 @@
         },
         init: function(e, o) {
             var t = this;
-
             this.$b = $("body");
             this.element = e;
             this.options = $.extend(this.options, o || {});
+
+            this.classes = $.map(this.element.find("a"), function(e, i){
+                var p = t.toAbsolute(e.href);
+                if(/#(.*?)/.test(p)) {
+                    $(e).attr("href", "#" + p.split("#").pop());
+                    return p.split("#").pop();
+                }
+            }).join(" ");
 
             this.element.find("a").bind("click", function(ev){
                 t.change($(this), ev);
                 return false;
             });
-
-            this.classes = $.map(this.element.find("a"), function(e, i){
-                return $(e).attr("href").replace(/#/, "");
-            }).join(" ");
 
             this._loadCssFile(this.options.css_file);
 
@@ -553,7 +556,12 @@
                 $.cookie("monogusa_ffs_selected", size, this.options.cookie);
             }
         },
-        loadCssFile: function(css) {
+        toAbsolute: function(p) {
+            var d = document.createElement('span');
+            d.innerHTML = '<a href="'+ p +'">';
+            return d.firstChild.href;
+        },
+        _loadCssFile: function(css) {
             if(css == false) { return; }
             var link = document.createElement("link"),
                 paht = path = location.protocol + "//" + location.hostname;
