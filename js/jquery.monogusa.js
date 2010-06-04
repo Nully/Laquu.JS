@@ -505,6 +505,10 @@
      *
      * @param  elems    jQuery HTML Collection Object
      * @param  options  Object
+     *         css_file: to css file absolute path
+     *         onChange: fon size switched callback
+     *         cookie: if loaded jQuery cookie plugin uses.
+     *                 @see: jQuery.cookie
      */
     $.monogusa.fss = function(elems, options) {
         elems.each(function(){
@@ -575,6 +579,11 @@
      *
      * @param  elems   jQuery HTML Collection Object
      * @param  options Object
+     *         hover_class: on hoverd list item clas
+     *         show_speed: slide down speed
+     *         hide_speed: slide up speed
+     *         onShow: slide down callback
+     *         onHide: slide up callback
      */
     $.monogusa.dropdown = function(elems, options) {
         elems.each(function(){
@@ -587,20 +596,109 @@
     dropdown.fn = dropdown.prototype = {};
     dropdown.fn.extend = $.extend;
     dropdown.fn.extend({
-        options: {},
+        options: {
+            hover_class: "hover",
+            show_speed: 200,
+            hide_speed: 400,
+            onShow: function(){},
+            onHide: function(){}
+        },
         init: function(e, o) {
             var t = this;
             this.element = e;
             this.options = this.extend(this.options, o || {});
-            this.menus = this.element.filter(function(){
+            this.menus   = this.element.find("li").filter(function(){
+                if($(this).children("ul").size()) {
+                    $(this).children("ul").css("display", "none");
+                    return $(this);
+                }
             });
-            this.menus = this.menus.add(this.menus.find("ul"));
+
+            this.menus.hover(function(ev){
+                t.show($(this), ev);
+            }, function(ev){
+                t.hide($(this), ev);
+            });
         },
         show: function(e, ev) {
-            e.children("ul").stop(true, true).slideDown();
+            e.addClass(this.options.hover_class);
+            e.children("ul").stop(true, true).slideDown(this.options.show_speed, this.options.onShow);
         },
         hide: function(e, ev) {
-            e.children("ul").stop(true, true).slideUp();
+            e.removeClass(this.options.hover_class);
+            e.children("ul").stop(true, true).slideUp(this.options.hide_speed, this.options.onHide);
+        }
+    });
+
+
+    /**
+     * tooltip
+     *
+     * @param  elems     jQuery HTML Collection Object
+     * @param  options    Object
+     *         dist_x: mouse x to distance tooltip
+     *         dist_y: mouse y to distance tooltip
+     *         show_speed: tooltip shown speed
+     *         hide_speed: tooltip hide speed
+     *         onShow: show callback function
+     *         onHide: hide callback function
+     */
+    $.monogusa.tooltip = function(elems, options) {
+        elems.each(function(i){
+            new tooltip(i, this, options);
+        });
+    };
+    var tooltip = function(elem, options) {
+        this.init(elem, options);
+    };
+    tooltip.fn = tooltip.prototype = {};
+    tooltip.fn.extend = $.extend;
+    tooltip.fn.extend({
+        options: {
+            dist_x: -10,
+            dist_y: -20,
+            show_speed: 200,
+            onShow: function() {},
+            onHide: function() {},
+            onMove: function() {}
+        },
+        init: function(n, e, o) {
+            var t = this;
+            this.id = n;
+            this.element = e;
+            this.title = this.element.title;
+            this.options = this.extend(this.options, o || {});
+            this.tooltip = $('<p class="monogusa-tooltip-wrap-'+ this.id +'" />');
+
+            $(this.element).hover(function(ev){
+                t.show(this);
+            }, function(ev){
+                t.hide(this);
+            }).mousemove(function(ev){
+                t.move(this, ev);
+            });
+        },
+        show: function(e, ev) {
+            var t = this;
+            e.title = "";
+            this.tooltip
+                .css("display", "none")
+                .stop(true, true)
+                .appendTo("body")
+                .text(this.title).fadeIn(this.options.show_speed, function(){
+                    t.options.onShow(this);
+                });
+        },
+        hide: function(e, ev) {
+            e.title = this.title;
+            this.tooltip.stop(true, true).remove();
+            this.options.onHide.call(e);
+        },
+        move: function(e, ev) {
+            this.tooltip.css({
+                top: ev.pageY + this.options.dist_y + "px",
+                left: ev.pageX + this.options.dist_x + "px"
+            });
         }
     });
 
