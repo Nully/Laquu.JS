@@ -20,9 +20,10 @@
                 $.monogusa.stripe($("#monogusaStripe table tr"));
                 $.monogusa.hover($("#monogusaHover table tr"));
                 $.monogusa.fss($("#font-switch"), {
-                    css_file: "/monogusa/css/fss.css"
+                    css_file: "/test/monogusa/css/fss.css"
                 });
                 $.monogusa.dropdown($("#dropdown"));
+                $.monogusa.tooltip($(".tooltip"));
                 $.monogusa.konami();
             });
         </script>
@@ -186,6 +187,11 @@
                         <td>Table Definition</td>
                     </tr>
                 </table>
+            </div>
+
+            <div class="example">
+                <p><span class="tooltip" title="monogusa tooltip !">over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.over here.</span></p>
+                <p><span class="tooltip" title="second tooltip !">over here.</span></p>
             </div>
         <!-- End container --></div>
     </body>
