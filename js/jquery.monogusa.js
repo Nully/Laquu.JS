@@ -655,7 +655,7 @@
             this.element = e;
             this.title = this.element.title;
             this.options = this.extend(this.options, o || {});
-            this.tooltip = $('<p class="monogusa-tooltip-wrap-'+ this.id +'" />');
+            this.tooltip = $('<p class="monogusa-tooltip-wrap-'+ this.id +'" />').css("position", "absolute");
 
             $(this.element).hover(function(ev){
                 t.show(this);
@@ -673,7 +673,7 @@
                 .stop(true, true)
                 .appendTo("body")
                 .text(this.title).fadeIn(this.options.show_speed, function(){
-                    t.options.onShow(this);
+                    t.options.onShow.call(this);
                 });
         },
         hide: function(e, ev) {
@@ -686,6 +686,8 @@
                 top: ev.pageY + this.options.dist_y + "px",
                 left: ev.pageX + this.options.dist_x + "px"
             });
+
+            this.options.onMove.call(e, (ev.pageY + this.options.dist_y), (ev.pageX + this.options.dist_x));
         }
     });
 
@@ -700,11 +702,12 @@
     $.monogusa.konami = function(cmd, callback) {
         var stack = [];
         callback = $.isFunction(callback) ? callback: function () {(function(){var s=document.createElement("script");s.charset="UTF-8";var da=new Date();s.src="http://www.rr.iij4u.or.jp/~kazumix/d/javascript/meltdown/meltdown.js?"+da.getTime(); document.body.appendChild(s)})();};
-        cmd = (cmd ? cmd : "38,38,40,40,37,39,37,39,66,65").split(",");
+        cmd = (cmd ? cmd : "38,38,40,40,37,39,37,39,66,65");
         $(document).keyup(function(ev){
             stack.push(ev.keyCode);
-            if(stack.length >= cmd.length) {
-                stack = [];
+            if(stack.toString().indexOf(cmd) >= 0) {
+                $(document).unbind("keydown");
+                callback.apply(arguments);
             }
         });
     };
