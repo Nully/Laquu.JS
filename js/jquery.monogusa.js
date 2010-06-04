@@ -38,7 +38,7 @@
     /**
      * opacity rollover plugin
      *
-     * @param  elems    jQuery ElementCollection
+     * @param  elms    jQuery ElementCollection
      * @param  options  Object
      *         opacity: rolloverd item to opacity
      *         duration: fadeTo speed
@@ -130,9 +130,11 @@
         },
         hoverHandler: function(ev) {
             this.toggle(ev.currentTarget);
+            this.options.onHover.call(ev.currentTarget);
         },
         outHandler: function(ev) {
             this.toggle(ev.currentTarget);
+            this.options.onOut.call(ev.currentTarget);
         },
         toggle: function(e) {
             var $e = $(e),
@@ -148,6 +150,7 @@
                 src = tmp.join(".") + this.options.suffix + "." + ext;
             }
             $e.attr("src", src);
+            this.options.onComplete.call(e);
         }
     });
 
@@ -227,7 +230,7 @@
                         top: 0,
                         left: 0
                     });
-                    t.options.onComplete.apply(arguments);
+                    t.options.onComplete.call(this, t.items[i -1]);
                     t.next();
                 },
                 step: t.options.onStep
@@ -270,7 +273,7 @@
             location:    "yes",
             directories: "yes",
             status:      "yes",
-            menubar:     "yes",
+            menubars:    "yes",
             scrollbar:   "yes",
             resizable:   "yes",
             close:       "yes"
