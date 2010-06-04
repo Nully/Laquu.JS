@@ -4,7 +4,7 @@
  * @Auth    Nully
  * @Url     
  * @Make    10/04/26(Mon)
- * Version  1.0
+ * Version  0.11
  * @License MIT Lincense
  * The MIT License
  *
@@ -492,7 +492,7 @@
      *
      * @param  elems    jQuery HTML Collection Object
      * @param  options  Object
-     *         css_file: to css file absolute path
+     *         css_file: to css file absolute path. set to false, not load style file.
      *         onChange: fon size switched callback
      *         cookie: if loaded jQuery cookie plugin uses.
      *                 @see: jQuery.cookie
@@ -519,8 +519,7 @@
             }
         },
         init: function(e, o) {
-            var t = this,
-                path = location.protocol + "//" + location.hostname;
+            var t = this;
 
             this.$b = $("body");
             this.element = e;
@@ -535,18 +534,14 @@
                 return $(e).attr("href").replace(/#/, "");
             }).join(" ");
 
+            this._loadCssFile(this.options.css_file);
+
             if($.cookie) {
                 var loaded = $.cookie("monogusa_ffs_selected");
                 if(loaded) {
                     this.$b.addClass(loaded);
                 }
             }
-
-            var link = document.createElement("link");
-                link.type = "text/css";
-                link.rel = "stylesheet";
-                link.href = path + this.options.css_file;
-            $(link).appendTo("head");
         },
         change: function(e, ev) {
             var size = e.attr("href").replace(/#/, "");
@@ -557,6 +552,15 @@
             if($.cookie) {
                 $.cookie("monogusa_ffs_selected", size, this.options.cookie);
             }
+        },
+        loadCssFile: function(css) {
+            if(css == false) { return; }
+            var link = document.createElement("link"),
+                paht = path = location.protocol + "//" + location.hostname;
+                link.type = "text/css";
+                link.rel = "stylesheet";
+                link.href = path + this.options.css_file;
+            $(link).appendTo("head");
         }
     });
 
