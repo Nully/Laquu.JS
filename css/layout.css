@@ -1,0 +1,94 @@
+@charset "utf-8";
+h1 {}
+h2 {}
+h3 {}
+h4 {}
+
+
+.example {
+    padding: 10px 12px;
+    border: 1px solid #CDCDCD;
+    background: #F9F9F9;
+    margin: 0 0 20px;
+    border-radius: 6px;
+    zoom: 1;
+}
+.example:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    line-height: 0;
+    visibility: hidden;
+}
+
+
+/*-- opacityOver プラグイン */
+
+
+/*-- imageOver プラグイン */
+
+
+/*-- ticker プラグイン */
+
+
+/*-- blank プラグイン */
+
+
+/*-- accordion プラグイン */
+
+
+/*-- tab プラグイン */
+
+
+/*-- stripe プラグイン */
+
+
+/*-- hover プラグイン */
+
+
+/*-- fss プラグイン */
+
+
+/*-- dropdown プラグイン */
+
+
+/*-- tooltip プラグイン */
+
+
+/*-- bubblepop プラグイン */
+
+
+/*-- imgmenu プラグイン */
+
+
+/*-- imgmenu プラグイン（自動スクロール版） */
+
+
+/*-- imgmenu プラグイン */
+.imageMenu {
+    clear: both;
+    height: 200px;
+    margin: 0 0 20px;
+}
+.imageMenu li {
+    width: 100px;
+    float:left;
+    overflow: hidden;
+}
+
+.imageMenuVertical {
+    width: 200px;
+    height: 200px;
+    margin: 0 0 20px;
+}
+.imageMenuVertical li {
+    height: 40px;
+    overflow: hidden;
+}
+
+#monogusaTicker {
+    height: 140px;
+    overflow: hidden;
+}
+
