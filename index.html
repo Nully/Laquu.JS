@@ -10,6 +10,7 @@
         <script type="text/javascript" src="js/sh_main.min.js"></script>
         <script type="text/javascript" src="js/sh_javascript.min.js"></script>
         <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
         <script type="text/javascript" src="js/jquery.monogusa.js"></script>
         <script type="text/javascript">
             $(function(){
@@ -38,6 +39,7 @@
                     selected: 2,
                     auto: true
                 });
+                $.monogusa.scroller($(".pagetop"));
                 $.monogusa.konami();
             });
         </script>
@@ -245,6 +247,7 @@
                     <li>kevindooley（http://www.flickr.com/photos/pagedooley/3500046277/sizes/l/）</li>
                 </ul>
             </div>
+            <p><a href="#container" class="pagetop">PageTop</a></p>
         <!-- End container --></div>
     </body>
 </html>
