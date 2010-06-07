@@ -200,10 +200,13 @@
             this.next();
         },
         next: function() {
+            var t = this;
             ++this.current_item;
             this.rewind();
             if(!this.timer) {
-                this.timer = setInterval(this.tween, (this.options.duration + this.options.speed), this);
+                this.timer = setInterval(function(){
+                    t.tween(t);
+                }, (this.options.duration + this.options.speed));
             }
         },
         rewind: function() {
