@@ -47,8 +47,8 @@
      *         onOut: mouseout callback
      */
     $.monogusa.opacityOver = function(elms, options) {
-        elms.each(function(){
-            new opacityOver($(this));
+        return elms.each(function(){
+            return new opacityOver($(this));
         });
     };
     var opacityOver = function(elm, options) {
@@ -100,8 +100,8 @@
      *         onOut: mouseout callback
      */
     $.monogusa.imageOver= function(elems, options) {
-        elems.each(function(){
-            new imageOver($(this), options);
+        return elems.each(function(){
+            return new imageOver($(this), options);
         });
     };
     var imageOver = function(elm, options) {
@@ -164,8 +164,8 @@
      *         onStep: Function
      */
     $.monogusa.ticker = function(elems, options){
-        elems.each(function(){
-            new ticker($(this), options);
+        return elems.each(function(){
+            return new ticker($(this), options);
         });
     };
     var ticker = function(el, options) {
@@ -255,8 +255,8 @@
      *         close: shown close button 'yes' or 'no'
      */
     $.monogusa.blank = function(elems, options) {
-        elems.each(function(){
-            new blank($(this), options);
+        return elems.each(function(){
+            return new blank($(this), options);
         });
     };
     var blank = function(elem, options) {
@@ -326,8 +326,8 @@
      * @param  options  Object
      */
     $.monogusa.accordion = function(elems, options) {
-        elems.each(function(){
-            new accordion($(this), options);
+        return elems.each(function(){
+            return new accordion($(this), options);
         });
     };
     var accordion = function(elm, options) {
@@ -377,8 +377,8 @@
      * @param options
      */
     $.monogusa.tab = function(elems, options) {
-        elems.each(function(){
-            new tab($(this), options);
+        return elems.each(function(){
+            return new tab($(this), options);
         });
     };
     var tab = function(elem, options) {
@@ -448,7 +448,7 @@
             onHover: function() {},
             onOut: function() {}
         }, options || {});
-        elems.each(function(i){
+        return elems.each(function(i){
             $(this).addClass((i%2 == 0) ? o.even_class: o.odd_class);
             $.monogusa.hover($(this), options);
         });
@@ -469,7 +469,7 @@
             onHover: function() {},
             onOut: function() {}
         }, options || {});
-        elems.each(function(){
+        return elems.each(function(){
             $(this).hover(function(){
                 o.onHover.call(this);
                 $(this).addClass(o.hover_class);
@@ -492,8 +492,8 @@
      *                 @see: jQuery.cookie
      */
     $.monogusa.fss = function(elems, options) {
-        elems.each(function(){
-            new FontSizeSwitcher($(this), options);
+        return elems.each(function(){
+            return new FontSizeSwitcher($(this), options);
         });
     };
     var FontSizeSwitcher = function(elem, options) {
@@ -578,8 +578,8 @@
      *         onHide: slide up callback
      */
     $.monogusa.dropdown = function(elems, options) {
-        elems.each(function(){
-            new dropdown($(this), options);
+        return elems.each(function(){
+            return new dropdown($(this), options);
         });
     };
     var dropdown = function(elem, options) {
@@ -635,8 +635,8 @@
      *         onHide: hide callback function
      */
     $.monogusa.tooltip = function(elems, options) {
-        elems.each(function(i){
-            new tooltip(i, this, options);
+        return elems.each(function(i){
+            return new tooltip(i, this, options);
         });
     };
     var tooltip = function(elem, options) {
@@ -710,7 +710,7 @@
      *         onHideComplete: hidden complete callback
      */
     $.monogusa.bubblepop = function(elems, options) {
-        elems.each(function(){
+        return elems.each(function(){
             return new bubblepop($(this), options);
         });
     };
@@ -824,7 +824,7 @@
      */
     $.monogusa.imgmenu = function(elems, options) {
         return elems.each(function(){
-            new imgMenu($(this), options);
+            return new imgMenu($(this), options);
         });
     };
     var imgMenu = function(elem, options) {
