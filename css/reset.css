@@ -57,8 +57,17 @@ h4 {}
     padding: 10px 12px;
     border: 1px solid #CDCDCD;
     background: #F9F9F9;
-    border-radius: 6px;
     margin: 0 0 20px;
+    border-radius: 6px;
+    zoom: 1;
+}
+.example:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    line-height: 0;
+    visibility: hidden;
 }
 
 
