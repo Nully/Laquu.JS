@@ -939,7 +939,8 @@
             speed: 1500,
             onScrollEnd: function() {},
             onStep: function() {}
-        }, $target = $("html, body");
+        },
+        $target = $.browser.opera ? $("html") : $("html, body");
 
         elems.bind("click", function(){
             var $selector = $($(this).attr("href")),
