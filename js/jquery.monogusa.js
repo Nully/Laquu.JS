@@ -658,7 +658,7 @@
                 onHide: function() {},
                 onMove: function() {}
             }, o || {});
-            this.tooltip = $('<p class="monogusa-tooltip-wrap-'+ this.id +'" />').css("position", "absolute");
+            this.tooltip = $('<p class="tooltip-wrap monogusa-tooltip-wrap-'+ this.id +'" />').css("position", "absolute");
 
             $(this.element).hover(function(ev){
                 t.show(this);
