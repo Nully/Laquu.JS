@@ -705,6 +705,148 @@
 
 
     /**
+     * bubble popup
+     *
+     * @param  elems    jQuery HTML Collection
+     * @param  options  Object
+     *         dist: bubble popup diplay to trigger distance
+     *         hide_delay: after mouseout to delay time
+     *         popup_class: bubble popup class name
+     *         trigger_class: bubble popup trigger class name
+     *         easing: required jQuery.easing plugin. easing type
+     *         onStep: animation on step calback
+     *         onShowComplete: shown complete callback
+     *         onHideComplete: hidden complete callback
+     */
+    $.monogusa.bubblepop = function(elems, options) {
+        elems.each(function(){
+            return new bubblepop($(this), options);
+        });
+    };
+    var bubblepop = function(elem, options) {
+        this.init(elem, options);
+    };
+    bubblepop.fn = bubblepop.prototype = {};
+    bubblepop.fn.extend = $.extend;
+    bubblepop.fn.extend({
+        started: false,
+        isShow: false,
+        timer: null,
+        options: {
+            dist: 10,
+            hide_delay: 2000,
+            popup_class: ".popup",
+            trigger_class: ".trigger",
+            easing: "swing",
+            onStep: function(step, params) {},
+            onShowComplete: function() {},
+            onHideComplete: function() {}
+        },
+        init: function(e, o) {
+            var t = this;
+            this.element = e;
+            this.options = this.extend(this.options, o || {});
+            this.popup   = $(this.options.popup_class, this.element);
+            this.trigger = $(this.options.trigger_class, this.element);
+            this.trigger_pos = "-" + (this.options.dist + this.popup.height() + this.trigger.height());
+
+            this.element.css("position", "relative");
+            this.popup.css({
+                "position": "absolute",
+                "opacity": 0,
+                "display": "none",
+                "top": this.trigger_pos
+            });
+
+            $([this.trigger.get(0), this.popup.get(0)]).hover(function(){
+                t.show($(this));
+            }, function(){
+                t.hide($(this));
+            });
+        },
+        show: function(e) {
+            var t = this;
+
+            this.clearTimer();
+
+            if(this.started || this.isShow) {
+                return;
+            }
+
+            this.started = true;
+            this.popup.stop().css({
+                "top": this.trigger_pos,
+                "display": "block"
+            }).animate({
+                opacity: 1,
+                top: "+=" + this.options.dist
+            },{
+                queue: false,
+                easing: this.options.easing,
+                complete: function(){
+                    t.isShow = true;
+                    t.options.onShowComplete.apply(arguments);
+                },
+                step: this.options.onStep
+            });
+        },
+        hide: function(e) {
+            var t = this;
+
+            this.clearTimer();
+            this.timer = setInterval(function(){
+                t.popup.stop().animate({
+                    opacity: 0,
+                    top: "-=" + t.options.dist
+                },{
+                    queue: false,
+                    easing: t.options.easing,
+                    complete: function() {
+                        t.started = false;
+                        t.isShow = false;
+                        t.clearTimer();
+                        t.options.onShowComplete.apply(arguments);
+                    },
+                    step: t.options.onStep
+                });
+            }, this.options.hide_delay);
+        },
+        clearTimer: function() {
+            if(this.timer) {
+                clearInterval(this.timer);
+            }
+        }
+    });
+
+
+    /**
+     * simple image menu
+     *
+     * @param  elems    jQuery HTML Collection Object
+     * @param  options  Object
+     */
+    $.monogusa.imgmenu = function(elems, options) {
+        return elems.each(function(){
+            new imgMenu($(this), options);
+        });
+    };
+    var imgMenu = function(elem, options) {
+        this.init(elem, options);
+    };
+    imgMenu.fn = imgMenu.prototype = {};
+    imgMenu.fn.extend = $.extend;
+    imgMenu.fn.extend({
+        init: function(e, o) {
+            this.element = e;
+            this.options = this.extend(this.options, o || {});
+
+            console.log(this.element);
+        }
+    });
+
+
+
+    /**
      * Konami command
      *
      * @param  cmd        String    CSV pattern key code
