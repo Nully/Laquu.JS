@@ -70,6 +70,26 @@ h4 {}
     visibility: hidden;
 }
 
+.imageMenu {
+    clear: both;
+    height: 200px;
+    margin: 0 0 20px;
+}
+.imageMenu li {
+    width: 100px;
+    float:left;
+    overflow: hidden;
+}
+
+.imageMenuVertical {
+    width: 200px;
+    height: 200px;
+    margin: 0 0 20px;
+}
+.imageMenuVertical li {
+    height: 40px;
+    overflow: hidden;
+}
 
 #monogusaTicker {
     height: 140px;
