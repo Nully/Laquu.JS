@@ -25,6 +25,17 @@
                 $.monogusa.dropdown($("#dropdown"));
                 $.monogusa.tooltip($(".tooltip"));
                 $.monogusa.bubblepop($(".bubble"));
+                $.monogusa.imgmenu($(".imageMenu"), {
+                    show_size: "200px",
+                    hide_size: "80px"
+                });
+                $.monogusa.imgmenu($(".imageMenuVertical"), {
+                    show_size: "120px",
+                    hide_size: "20px",
+                    is_vertical: true,
+                    selected: 2,
+                    auto: true
+                });
                 $.monogusa.konami();
             });
         </script>
@@ -214,7 +225,7 @@
                 </div>
 
                 <div class="imageMenuWrap">
-                    <ul class="imageMenu">
+                    <ul class="imageMenuVertical">
                         <li><img src="img/land_thumb.jpg" alt="the land." /></li>
                         <li><img src="img/island_thumb.jpg" alt="the island." /></li>
                         <li><img src="img/swamp_thumb.jpg" alt="the swamp." /></li>
