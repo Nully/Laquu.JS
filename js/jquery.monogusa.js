@@ -57,17 +57,16 @@
     opacityOver.fn = opacityOver.prototype = {};
     opacityOver.fn.extend = $.extend;
     opacityOver.fn.extend({
-        options: {
-            opacity: .7,
-            duration: 300,
-            onComplete: function() {},
-            onHover: function() {},
-            onOut: function() {}
-        },
         init: function(elm, options) {
             var t = this;
             this.element = elm;
-            this.options = this.extend(this.options, options || {});
+            this.options = this.extend({
+                opacity: .7,
+                duration: 300,
+                onComplete: function() {},
+                onHover: function() {},
+                onOut: function() {}
+            }, options || {});
 
             // add event
             this.element.hover(function(ev){
@@ -111,16 +110,15 @@
     imageOver.fn = imageOver.prototype = {};
     imageOver.fn.extend = $.extend;
     imageOver.fn.extend({
-        options: {
-            suffix: "_on",
-            onComplete: function() {},
-            onHover: function() {},
-            onOut: function() {}
-        },
         init: function(e, o) {
             var t = this;
             this.element = e;
-            this.options = this.extend(this.options, o || {});
+            this.options = this.extend({
+                suffix: "_on",
+                onComplete: function() {},
+                onHover: function() {},
+                onOut: function() {}
+            }, o || {});
 
             this.element.hover(function(ev){
                 t.hoverHandler(ev);
@@ -176,12 +174,6 @@
     ticker.fn = ticker.prototype = {};
     ticker.fn.extend = $.extend;
     ticker.fn.extend({
-        options: {
-            speed: 1000,
-            duration: 2000,
-            onComplete: function() {},
-            onStep: function() {}
-        },
         current_item: 0,
         timer: null,
         init: function(e, o) {
@@ -189,7 +181,12 @@
             this.element = e;
             this.parent  = e.parent();
             this.items = e.children();
-            this.options = this.extend(this.options, o || {});
+            this.options = this.extend({
+                speed: 1000,
+                duration: 2000,
+                onComplete: function() {},
+                onStep: function() {}
+            }, o || {});
 
             this.parent.css("position", "relative");
             this.element.css("position", "absolute");
@@ -268,20 +265,19 @@
     blank.fn = blank.prototype = {};
     blank.fn.extend = $.extend;
     blank.fn.extend({
-        options: {
-            toolbar:     "yes",
-            location:    "yes",
-            directories: "yes",
-            status:      "yes",
-            menubars:    "yes",
-            scrollbar:   "yes",
-            resizable:   "yes",
-            close:       "yes"
-        },
         init: function(e, o) {
             var t = this;
             this.element = e;
-            this.options = this.extend(this.options, o || {});
+            this.options = this.extend({
+                toolbar:     "yes",
+                location:    "yes",
+                directories: "yes",
+                status:      "yes",
+                menubars:    "yes",
+                scrollbar:   "yes",
+                resizable:   "yes",
+                close:       "yes"
+            }, o || {});
 
             var query_string = this.element.attr("href").split(/\?/);
             this.element.data("query_string", this._parseQuery(query_string[1]));
@@ -340,21 +336,20 @@
     accordion.fn = accordion.prototype = {};
     accordion.fn.extend = $.extend;
     accordion.fn.extend({
-        options: {
-            speed: 600,
-            header_class: "monogusa_accordion_header",
-            content_class: "monogusa_accordion_content",
-            current_class: "active",
-            onHide: function() {},
-            onShow: function() {}
-        },
         init: function(e, o) {
             var t = this;
             this.element = e;
+            this.options = $.extend({
+                speed: 600,
+                header_class: "monogusa_accordion_header",
+                content_class: "monogusa_accordion_content",
+                current_class: "active",
+                onHide: function() {},
+                onShow: function() {}
+            }, o || {});
+
             this.headers = this.element.find("." + this.options.header_class);
             this.content = this.element.find("." + this.options.content_class)
-            this.options = $.extend(this.options, o || {});
-
             this.headers.bind("click", function(ev){
                 t.headers.removeClass(t.options.current_class);
                 $(this).addClass(t.options.current_class);
@@ -392,16 +387,15 @@
     tab.fn = tab.prototype = {};
     tab.fn.extend  = $.extend;
     tab.fn.extend({
-        options: {
-            active_class: "active"
-        },
         tab: null,
         tabs: null,
         panels: null,
         init: function(e, o) {
             var t = this;
             this.element = e;
-            this.options = this.extend(this.options, 0 || {});
+            this.options = this.extend({
+                active_class: "active"
+            }, 0 || {});
 
             this.tab = this.element.find("ul");
             this.tabs = this.tab.find("li a");
@@ -508,21 +502,20 @@
     FontSizeSwitcher.fn = FontSizeSwitcher.prototype = {};
     FontSizeSwitcher.fn.extend = $.extend;
     FontSizeSwitcher.fn.extend({
-        options: {
-            css_file: "/css/fss.css",
-            onChange: function() {},
-            cookie: {
-                expires: 7, // 1 week
-                path: "/",
-                domain: "",
-                secure: false
-            }
-        },
         init: function(e, o) {
             var t = this;
             this.$b = $("body");
             this.element = e;
-            this.options = $.extend(this.options, o || {});
+            this.options = $.extend({
+                css_file: "/css/fss.css",
+                onChange: function() {},
+                cookie: {
+                    expires: 7, // 1 week
+                    path: "/",
+                    domain: "",
+                    secure: false
+                }
+            }, o || {});
 
             this.classes = $.map(this.element.find("a"), function(e, i){
                 var p = t.toAbsolute(e.href);
@@ -595,17 +588,16 @@
     dropdown.fn = dropdown.prototype = {};
     dropdown.fn.extend = $.extend;
     dropdown.fn.extend({
-        options: {
-            hover_class: "hover",
-            show_speed: 200,
-            hide_speed: 400,
-            onShow: function(){},
-            onHide: function(){}
-        },
         init: function(e, o) {
             var t = this;
             this.element = e;
-            this.options = this.extend(this.options, o || {});
+            this.options = this.extend({
+                hover_class: "hover",
+                show_speed: 200,
+                hide_speed: 400,
+                onShow: function(){},
+                onHide: function(){}
+            }, o || {});
             this.menus   = this.element.find("li").filter(function(){
                 if($(this).children("ul").size()) {
                     $(this).children("ul").css("display", "none");
@@ -653,20 +645,19 @@
     tooltip.fn = tooltip.prototype = {};
     tooltip.fn.extend = $.extend;
     tooltip.fn.extend({
-        options: {
-            dist_x: -10,
-            dist_y: -20,
-            show_speed: 200,
-            onShow: function() {},
-            onHide: function() {},
-            onMove: function() {}
-        },
         init: function(n, e, o) {
             var t = this;
             this.id = n;
             this.element = e;
             this.title = this.element.title;
-            this.options = this.extend(this.options, o || {});
+            this.options = this.extend({
+                dist_x: -10,
+                dist_y: -20,
+                show_speed: 200,
+                onShow: function() {},
+                onHide: function() {},
+                onMove: function() {}
+            }, o || {});
             this.tooltip = $('<p class="monogusa-tooltip-wrap-'+ this.id +'" />').css("position", "absolute");
 
             $(this.element).hover(function(ev){
@@ -732,20 +723,19 @@
         started: false,
         isShow: false,
         timer: null,
-        options: {
-            dist: 10,
-            hide_delay: 2000,
-            popup_class: ".popup",
-            trigger_class: ".trigger",
-            easing: "swing",
-            onStep: function(step, params) {},
-            onShowComplete: function() {},
-            onHideComplete: function() {}
-        },
         init: function(e, o) {
             var t = this;
             this.element = e;
-            this.options = this.extend(this.options, o || {});
+            this.options = this.extend({
+                dist: 10,
+                hide_delay: 2000,
+                popup_class: ".popup",
+                trigger_class: ".trigger",
+                easing: "swing",
+                onStep: function(step, params) {},
+                onShowComplete: function() {},
+                onHideComplete: function() {}
+            }, o || {});
             this.popup   = $(this.options.popup_class, this.element);
             this.trigger = $(this.options.trigger_class, this.element);
             this.trigger_pos = "-" + (this.options.dist + this.popup.height() + this.trigger.height());
@@ -802,10 +792,11 @@
                     queue: false,
                     easing: t.options.easing,
                     complete: function() {
+                        $(this).css("display", "none");
                         t.started = false;
                         t.isShow = false;
                         t.clearTimer();
-                        t.options.onShowComplete.apply(arguments);
+                        t.options.onShowComplete.call(this);
                     },
                     step: t.options.onStep
                 });
@@ -824,6 +815,12 @@
      *
      * @param  elems    jQuery HTML Collection Object
      * @param  options  Object
+     *         easing: required jQuery.easing plugin, default swing.
+     *         duration: image slide speed
+     *         show_size: showing image size
+     *         hide_size: hidden image size
+     *         is_vertical: default false. set to 'true', vertical slide images.
+     *         selected:
      */
     $.monogusa.imgmenu = function(elems, options) {
         return elems.each(function(){
@@ -836,11 +833,89 @@
     imgMenu.fn = imgMenu.prototype = {};
     imgMenu.fn.extend = $.extend;
     imgMenu.fn.extend({
+        timer: null,
         init: function(e, o) {
-            this.element = e;
-            this.options = this.extend(this.options, o || {});
+            var t = this;
 
-            console.log(this.element);
+            this.element = e;
+            this.options = this.extend({
+                easing: "swing",
+                duration: 300,
+                show_size: "200px",
+                hide_size: "160px",
+                is_vertical: false,
+                auto: false,
+                auto_duration: 2500
+            }, o || {});
+            this.items = this.element.children();
+
+            this.element.css("overflow", "hidden");
+            this.items.each(function(i){
+                $(this).bind("mouseover", function(ev){ t.showItem(i, ev); })
+                       .bind("mouseout",  function(ev){ t.hideItems(ev); });
+
+                var size;
+                if(t.options.is_vertical) size = $(this).css("height");
+                else size = $(this).css("width");
+
+                $(this).data("base_size", size);
+            });
+
+            this.startAutoSlide();
+        },
+        showItem: function(n, event) {
+            var item, others = [];
+
+            if(event != undefined) {
+                this.stopAutoSlide();
+            }
+
+            this.items.each(function(i){
+
+                if(n == i) item = $(this);
+                else others.push(this);
+
+            });
+
+            $(others).stop().animate(this.getAnimateDirection(this.options.hide_size), { queue: false, duration: this.options.duration });
+            item.stop().animate(this.getAnimateDirection(this.options.show_size), { queue: false, duration: this.options.duration });
+        },
+        hideItems: function(event) {
+            var t = this;
+            this.items.each(function(el){
+                var $t = $(this);
+                $t.stop().animate(t.getAnimateDirection($t.data("base_size")), { queue: false, duration: t.options.duration });
+            });
+
+            this.startAutoSlide();
+        },
+        startAutoSlide: function() {
+            var t = this, current = 0;
+            if(this.options.auto === false) { return; }
+            if(this.timer) { return; }
+
+            this.timer = setInterval(function(){
+                if(current > t.items.size() - 1) {
+                    current = 0;
+                }
+                t.showItem(current);
+                ++current;
+            }, this.options.auto_duration);
+        },
+        stopAutoSlide: function() {
+            if(this.timer) {
+                clearInterval(this.timer);
+                this.timer = null;
+            }
+        },
+        /**
+         * get a animation direction
+         *
+         * @return String
+         */
+        getAnimateDirection: function(size) {
+            if(this.options.is_vertical) { return {"height": size}; }
+            else { return {"width": size}; }
         }
     });
 
