@@ -775,7 +775,7 @@
                 easing: this.options.easing,
                 complete: function(){
                     t.isShow = true;
-                    t.options.onShowComplete.apply(arguments);
+                    t.options.onShowComplete.call(this);
                 },
                 step: this.options.onStep
             });
@@ -796,7 +796,7 @@
                         t.started = false;
                         t.isShow = false;
                         t.clearTimer();
-                        t.options.onShowComplete.call(this);
+                        t.options.onHideComplete.call(this);
                     },
                     step: t.options.onStep
                 });
