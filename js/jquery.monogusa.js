@@ -200,10 +200,13 @@
             this.next();
         },
         next: function() {
+            var t = this;
             ++this.current_item;
             this.rewind();
             if(!this.timer) {
-                this.timer = setInterval(this.tween, (this.options.duration + this.options.speed), this);
+                this.timer = setInterval(function(){
+                    t.tween(t);
+                }, (this.options.duration + this.options.speed));
             }
         },
         rewind: function() {
@@ -919,6 +922,43 @@
         }
     });
 
+
+    /**
+     * page scroller
+     *
+     * @param  elems    jQuery HTML Collection Object
+     * @param  options  Object
+     *          easing: required jQuery.easing plugin. default swing
+     *          speed: scrolling animation speed
+     *          onScrollEnd: scroll complete callback
+     *          onStep: scrolling step callback
+     */
+    $.monogusa.scroller = function(elems, options) {
+        var defaults = {
+            easing: "swing",
+            speed: 1500,
+            onScrollEnd: function() {},
+            onStep: function() {}
+        },
+        $target = $.browser.opera ? $("html") : $("html, body");
+
+        elems.bind("click", function(){
+            var $selector = $($(this).attr("href")),
+                option = $.extend({}, defaults, options || {});
+
+            $target.animate({
+                scrollTop: $selector.offset().top,
+                scrollLeft: $selector.offset().left
+            }, {
+                queue: false,
+                easing: option.easing,
+                duration: option.speed,
+                complete: option.onScrollEnd,
+                onStep: option.onStep
+            });
+            return false;
+        });
+    };
 
 
     /**
