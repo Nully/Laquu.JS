@@ -937,12 +937,12 @@
         var defaults = {
             easing: "swing",
             speed: 1500,
-            onScrollEnd: function() {},
-            onStep: function() {}
+            onScrollEnd: function(obj) {},
+            onStep: function(step, obj) {}
         },
         $target = $.browser.opera ? $("html") : $("html, body");
 
-        elems.bind("click", function(){
+        elems.bind("click", function(ev){
             var $selector = $($(this).attr("href")),
                 option = $.extend({}, defaults, options || {});
 
@@ -953,8 +953,12 @@
                 queue: false,
                 easing: option.easing,
                 duration: option.speed,
-                complete: option.onScrollEnd,
-                onStep: option.onStep
+                complete: function(){
+                    option.onScrollEnd.call(ev.currentTarget, $target);
+                },
+                step: function(step, o) {
+                    option.onStep.call(ev.currentTarget, step, o);
+                }
             });
             return false;
         });
