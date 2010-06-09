@@ -940,7 +940,7 @@
             onScrollEnd: function(obj) {},
             onStep: function(step, obj) {}
         },
-        $target = $.browser.opera ? $("html") : $("html, body");
+        $target = $.browser.webkit ? $("body") : $("html");
 
         elems.bind("click", function(ev){
             var $selector = $($(this).attr("href")),
