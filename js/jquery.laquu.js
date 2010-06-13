@@ -642,8 +642,8 @@
             return new tooltip(i, this, options);
         });
     };
-    var tooltip = function(elem, options) {
-        this.init(elem, options);
+    var tooltip = function(n, elem, options) {
+        this.init(n, elem, options);
     };
     tooltip.fn = tooltip.prototype = {};
     tooltip.fn.extend = $.extend;
@@ -664,9 +664,9 @@
             this.tooltip = $('<p class="tooltip-wrap laquu-tooltip-wrap-'+ this.id +'" />').css("position", "absolute");
 
             $(this.element).hover(function(ev){
-                t.show(this);
+                t.show(this, ev);
             }, function(ev){
-                t.hide(this);
+                t.hide(this, ev);
             }).mousemove(function(ev){
                 t.move(this, ev);
             });
@@ -676,6 +676,10 @@
             e.title = "";
             this.tooltip
                 .css("display", "none")
+                .css({
+                    top: ev.pageY - this.options.dist_y + "px",
+                    left: ev.pageX - this.options.dist_x + "px"
+                })
                 .stop(true, true)
                 .appendTo("body")
                 .text(this.title).fadeIn(this.options.show_speed, function(){
