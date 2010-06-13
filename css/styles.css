@@ -1,63 +1,73 @@
 @charset "utf-8";
 /**
- * accordion style
- *
+ * Laquu jQuery plugin styles
  */
+/*-- opacityOver プラグイン */
 
 
+/*-- imageOver プラグイン */
 
 
-/**
- * highlight style
- *
- */
-.monogusa_hover { background: #FFFFCC; }
+/*-- ticker プラグイン */
 
 
-
-/**
- * stripe style
- *
- */
-.odd { background: #FFF; }
-.even { background: #ECECEC; }
+/*-- blank プラグイン */
 
 
+/*-- accordion プラグイン */
 
-/**
- * ui tab style
- *
- */
-.monogusa-tabs {
-    padding: 0;
-    margin: 0;
-    border-left: 1px solid #CECECE;
-    border-bottom: 1px solid #CECECE;
-    height: 31px;
-}
-.monogusa-tabs li {
-    float: left;
-    margin: 0 0 -1px 0;
-    border: 1px solid #CECECE;
-    border-left: none;
-    line-height: 30px;
-    height: 30px;
-    background: #EFEFEF;
-}
-.monogusa-tabs a {
-    display: block;
-    padding: 0 10px;
-}
-.monogusa-tabs .active {
-    background: #FFF;
-    border-bottom-color: #FFF;
-}
-.monogusa-tab-panel-wrap {
+
+/*-- tab プラグイン */
+
+
+/*-- stripe プラグイン */
+
+
+/*-- hover プラグイン */
+
+
+/*-- fss プラグイン */
+
+
+/*-- dropdown プラグイン */
+
+
+/*-- tooltip プラグイン */
+
+
+/*-- bubblepop プラグイン */
+
+
+/*-- imgmenu プラグイン */
+
+
+/*-- imgmenu プラグイン（自動スクロール版） */
+
+
+/*-- imgmenu プラグイン */
+.imageMenu {
     clear: both;
-    border-left: 1px solid #CECECE;
-    border-bottom: 1px solid #CECECE;
-    border-right: 1px solid #CECECE;
-    padding: 8px;
-    background: #FFF;
+    height: 200px;
+    margin: 0 0 20px;
+}
+.imageMenu li {
+    width: 100px;
+    float:left;
+    overflow: hidden;
+}
+
+.imageMenuVertical {
+    width: 200px;
+    height: 200px;
+    margin: 0 0 20px;
+}
+.imageMenuVertical li {
+    height: 40px;
+    overflow: hidden;
+}
+
+#monogusaTicker {
+    height: 140px;
+    overflow: hidden;
 }
 
