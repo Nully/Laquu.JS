@@ -1,5 +1,5 @@
 /**
- * jQuery plugin monogusa.
+ * jQuery plugin laquu.
  *
  * @Auth    Nully
  * @Url     
@@ -30,7 +30,7 @@
  */
 (function($){
     // Global object
-    $.monogusa = {
+    $.laquu = {
         version: 1.0
     };
 
@@ -46,7 +46,7 @@
      *         onHover: hover callback
      *         onOut: mouseout callback
      */
-    $.monogusa.opacityOver = function(elms, options) {
+    $.laquu.opacityOver = function(elms, options) {
         return elms.each(function(){
             return new opacityOver($(this));
         });
@@ -99,7 +99,7 @@
      *         onHover: hover callback
      *         onOut: mouseout callback
      */
-    $.monogusa.imageOver= function(elems, options) {
+    $.laquu.imageOver= function(elems, options) {
         return elems.each(function(){
             return new imageOver($(this), options);
         });
@@ -163,7 +163,7 @@
      *         onComplete: Function
      *         onStep: Function
      */
-    $.monogusa.ticker = function(elems, options){
+    $.laquu.ticker = function(elems, options){
         return elems.each(function(){
             return new ticker($(this), options);
         });
@@ -257,7 +257,7 @@
      *         resizable: window resizable 'yes' or 'no'
      *         close: shown close button 'yes' or 'no'
      */
-    $.monogusa.blank = function(elems, options) {
+    $.laquu.blank = function(elems, options) {
         return elems.each(function(){
             return new blank($(this), options);
         });
@@ -301,7 +301,7 @@
             }
 
             param = param.substr(0, param.length - 1);
-            window.open(e.attr("href"), "monogusa_blank_window", param);
+            window.open(e.attr("href"), "laquu_blank_window", param);
             ev.preventDefault();
         },
         _parseQuery: function(q) {
@@ -328,7 +328,7 @@
      * @param  elems    jQuery HTML Collection Object
      * @param  options  Object
      */
-    $.monogusa.accordion = function(elems, options) {
+    $.laquu.accordion = function(elems, options) {
         return elems.each(function(){
             return new accordion($(this), options);
         });
@@ -344,8 +344,8 @@
             this.element = e;
             this.options = $.extend({
                 speed: 600,
-                header_class: "monogusa_accordion_header",
-                content_class: "monogusa_accordion_content",
+                header_class: "laquu_accordion_header",
+                content_class: "laquu_accordion_content",
                 current_class: "active",
                 onHide: function() {},
                 onShow: function() {}
@@ -379,7 +379,7 @@
      * @param elems
      * @param options
      */
-    $.monogusa.tab = function(elems, options) {
+    $.laquu.tab = function(elems, options) {
         return elems.each(function(){
             return new tab($(this), options);
         });
@@ -412,8 +412,8 @@
                 }
             });
 
-            this.panels.addClass("monogusa-tab-panel");
-            this.tabs.addClass("monogusa-tab");
+            this.panels.addClass("laquu-tab-panel");
+            this.tabs.addClass("laquu-tab");
 
             this.tabs.bind("click", function(ev){
                 t.showTab(ev);
@@ -444,7 +444,7 @@
      *         onHover: hover action callback
      *         onOut: mouseout callback
      */
-    $.monogusa.stripe = function(elems, options) {
+    $.laquu.stripe = function(elems, options) {
         var o = $.extend({
             even_class: "even",
             odd_class: "odd",
@@ -453,7 +453,7 @@
         }, options || {});
         return elems.each(function(i){
             $(this).addClass((i%2 == 0) ? o.even_class: o.odd_class);
-            $.monogusa.hover($(this), options);
+            $.laquu.hover($(this), options);
         });
     };
 
@@ -466,7 +466,7 @@
      *         onHover: hover action callback
      *         onOut: mouseout callback
      */
-    $.monogusa.hover = function(elems, options) {
+    $.laquu.hover = function(elems, options) {
         var o = $.extend({
             hover_class: "hover",
             onHover: function() {},
@@ -494,7 +494,7 @@
      *         cookie: if loaded jQuery cookie plugin uses.
      *                 @see: jQuery.cookie
      */
-    $.monogusa.fss = function(elems, options) {
+    $.laquu.fss = function(elems, options) {
         return elems.each(function(){
             return new FontSizeSwitcher($(this), options);
         });
@@ -536,7 +536,7 @@
             this._loadCssFile(this.options.css_file);
 
             if($.cookie) {
-                var loaded = $.cookie("monogusa_ffs_selected");
+                var loaded = $.cookie("laquu_ffs_selected");
                 if(loaded) {
                     this.$b.addClass(loaded);
                 }
@@ -549,7 +549,7 @@
             this.options.onChange.apply(arguments);
 
             if($.cookie) {
-                $.cookie("monogusa_ffs_selected", size, this.options.cookie);
+                $.cookie("laquu_ffs_selected", size, this.options.cookie);
             }
         },
         toAbsolute: function(p) {
@@ -580,7 +580,7 @@
      *         onShow: slide down callback
      *         onHide: slide up callback
      */
-    $.monogusa.dropdown = function(elems, options) {
+    $.laquu.dropdown = function(elems, options) {
         return elems.each(function(){
             return new dropdown($(this), options);
         });
@@ -637,7 +637,7 @@
      *         onShow: show callback function
      *         onHide: hide callback function
      */
-    $.monogusa.tooltip = function(elems, options) {
+    $.laquu.tooltip = function(elems, options) {
         return elems.each(function(i){
             return new tooltip(i, this, options);
         });
@@ -661,7 +661,7 @@
                 onHide: function() {},
                 onMove: function() {}
             }, o || {});
-            this.tooltip = $('<p class="tooltip-wrap monogusa-tooltip-wrap-'+ this.id +'" />').css("position", "absolute");
+            this.tooltip = $('<p class="tooltip-wrap laquu-tooltip-wrap-'+ this.id +'" />').css("position", "absolute");
 
             $(this.element).hover(function(ev){
                 t.show(this);
@@ -712,7 +712,7 @@
      *         onShowComplete: shown complete callback
      *         onHideComplete: hidden complete callback
      */
-    $.monogusa.bubblepop = function(elems, options) {
+    $.laquu.bubblepop = function(elems, options) {
         return elems.each(function(){
             return new bubblepop($(this), options);
         });
@@ -825,7 +825,7 @@
      *         is_vertical: default false. set to 'true', vertical slide images.
      *         selected:
      */
-    $.monogusa.imgmenu = function(elems, options) {
+    $.laquu.imgmenu = function(elems, options) {
         return elems.each(function(){
             return new imgMenu($(this), options);
         });
@@ -933,7 +933,7 @@
      *          onScrollEnd: scroll complete callback
      *          onStep: scrolling step callback
      */
-    $.monogusa.scroller = function(elems, options) {
+    $.laquu.scroller = function(elems, options) {
         var defaults = {
             easing: "swing",
             speed: 1500,
@@ -972,7 +972,7 @@
      * @param  callback   Function  callback function
      *                              default callback method is MeltDown.js
      */
-    $.monogusa.konami = function(cmd, callback) {
+    $.laquu.konami = function(cmd, callback) {
         var stack = [];
         callback = $.isFunction(callback) ? callback: function () {(function(){var s=document.createElement("script");s.charset="UTF-8";var da=new Date();s.src="http://www.rr.iij4u.or.jp/~kazumix/d/javascript/meltdown/meltdown.js?"+da.getTime(); document.body.appendChild(s)})();};
         cmd = (cmd ? cmd : "38,38,40,40,37,39,37,39,66,65");
