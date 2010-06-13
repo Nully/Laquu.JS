@@ -4,6 +4,21 @@ h2 {}
 h3 {}
 h4 {}
 
+table {
+    width: 100%;
+    border-top: 1px solid #999;
+    border-right: 1px solid #999;
+    background: #FFF;
+}
+th, td {
+    padding: 4px;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #999;
+}
+th {
+    width: 30%;
+    text-align: left;
+}
 
 .example {
     padding: 10px 12px;
