@@ -734,7 +734,7 @@
             var t = this;
             this.element = e;
             this.options = this.extend({
-                dist: 10,
+                dist: 15,
                 hide_delay: 2000,
                 popup_class: ".popup",
                 trigger_class: ".trigger",
@@ -745,14 +745,14 @@
             }, o || {});
             this.popup   = $(this.options.popup_class, this.element);
             this.trigger = $(this.options.trigger_class, this.element);
-            this.trigger_pos = "-" + (this.options.dist + this.popup.height() + this.trigger.height());
+            this.popup_pos = "-" + (this.options.dist + this.popup.outerHeight()) + "px";
 
             this.element.css("position", "relative");
             this.popup.css({
                 "position": "absolute",
                 "opacity": 0,
                 "display": "none",
-                "top": this.trigger_pos
+                "top": this.popup_pos
             });
 
             $([this.trigger.get(0), this.popup.get(0)]).hover(function(){
@@ -772,7 +772,7 @@
 
             this.started = true;
             this.popup.stop().css({
-                "top": this.trigger_pos,
+                "top": this.popup_pos,
                 "display": "block"
             }).animate({
                 opacity: 1,
