@@ -271,17 +271,7 @@ tabは次のように呼び出して使います。
 タグは以下のような形になります。
 > &lt;div id="laquuAccordion"&gt;
 >    &lt;h4 class="laquu_accordion_header"&gt;accordion header&lt;/h4&gt;
->    &lt;div class="laquu_accordion_content"&lt;
->        aaaaaaaaaaaaaaaaaaaaaaa
->    &lt;/div&gt;
->    &lt;h4 class="laquu_accordion_header"&gt;accordion header&lt;/h4&gt;
->    &lt;div class="laquu_accordion_content"&gt;
->        aaaaaaaaaaaaaaaaaaaaaaa
->    &lt;/div&gt;
->    &lt;h4 class="laquu_accordion_header"&gt;accordion header&lt;/h4&gt;
->    &lt;div class="laquu_accordion_content"&gt;
->        aaaaaaaaaaaaaaaaaaaaaaa
->    &lt;/div&gt;
+>    &lt;div class="laquu_accordion_content"&lt;aaaaaaaaaaaaaaaaaaaaaaa&lt;/div&gt;
 > &lt;/div&gt;
 
 
