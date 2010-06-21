@@ -398,7 +398,7 @@
             this.element = e;
             this.options = this.extend({
                 active_class: "active"
-            }, 0 || {});
+            }, o || {});
 
             this.tab = this.element.find("ul");
             this.tabs = this.tab.find("li a");
@@ -511,7 +511,7 @@
             this.element = e;
             this.options = $.extend({
                 css_file: "/css/fss.css",
-                onChange: function() {},
+                onChange: function(element, event) {},
                 cookie: {
                     expires: 7, // 1 week
                     path: "/",
@@ -546,7 +546,7 @@
             var size = e.attr("href").replace(/#/, "");
             this.$b.removeClass(this.classes);
             this.$b.addClass(size);
-            this.options.onChange.apply(arguments);
+            this.options.onChange.apply(null, arguments);
 
             if($.cookie) {
                 $.cookie("laquu_ffs_selected", size, this.options.cookie);
@@ -984,7 +984,7 @@
             stack.push(ev.keyCode);
             if(stack.toString().indexOf(cmd) >= 0) {
                 $(document).unbind("keydown");
-                callback.apply(arguments);
+                callback.apply(null, arguments);
             }
         });
     };
