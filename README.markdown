@@ -153,6 +153,172 @@ _onStep_
 これは、jQueryに存在するanimate()メソッドの引数を受け取ります。
 
 
+#### _新規ウィンドウ blank_
+
+##### 機能
+
+(X)HTMLでは非推奨となった「target="_blank"」の代替となるプラグインです。
+
+##### 使い方
+
+blankは次のように呼び出して使います。
+> $.laquu.blank($("jQuery selector")[,{options}]);
+
+"jQuery Selector"はtickerを適用したい要素のセレクタを記述します。
+
+タグは以下のような形になります。
+> <a href="http://example.com/" class="blank">Goto Example.com !</a>
+
+また、リンクに以下のように指定することで、ウィンドウのサイズを指定することが出来ます。
+> <a href="http://example.com/?width=800&amp;height=600" class="blank">Goto Example.com !</a>
+
+
+##### 指定可能なオプション
+
+オプションはすべて'yes'か'no'で指定します。
+
+_toolbar_
+ツールバーの可否
+
+_location_
+アドレスバーの可否
+
+_directories_
+ユーザー設定のツールバーの可否
+
+_status_
+ステータスバーの可否
+
+_menubar_
+メニューバーの可否
+
+_scrollbar_
+スクロールバーの可否
+
+_resizable_
+リサイズの可否
+
+_close_
+閉じるボタンの可否
+
+
+#### _シンプルなアコーディオン accordion_
+
+##### 機能
+
+シンプルなアコーディオンを提供します。
+
+##### 使い方
+
+accrodionは次のように呼び出して使います。
+> $.laquu.accordioin($("jQuery selector")[,{options}]);
+
+"jQuery Selector"はaccordionを適用したい要素のセレクタを記述します。
+
+タグは以下のような形になります。
+> &gt;div id="laquuAccordion"&lt;
+>    &gt;h4 class="laquu_accordion_header">accordion header</h4&lt;
+>    &gt;div class="laquu_accordion_content"&lt;
+>        aaaaaaaaaaaaaaaaaaaaaaa
+>    &gt;/div&lt;
+>    &gt;h4 class="laquu_accordion_header">accordion header</h4&lt;
+>    &gt;div class="laquu_accordion_content"&lt;
+>        aaaaaaaaaaaaaaaaaaaaaaa
+>    &gt;/div&lt;
+>    &gt;h4 class="laquu_accordion_header"&lt;accordion header</h4&lt;
+>    &gt;div class="laquu_accordion_content"&lt;
+>        aaaaaaaaaaaaaaaaaaaaaaa
+>    &gt;/div&lt;
+> &gt;/div&lt;
+
+
+##### 指定可能なオプション
+
+_speed_
+アコーディオンの開閉スピードを指定します。デフォルトは「600」ミリ秒です。
+
+_header_class_
+アコーディオンのトリガとなる、ヘッダーのクラス名を指定します。デフォルトは「laquu_accordion_header」です。
+
+_content_class_
+アコーディオンのトリガとなる、ヘッダーのクラス名を指定します。デフォルトは「laquu_accordion_header」です。
+
+_status_
+アコーディオンタブがアクティブ時に付加されるクラス名を指定します。デフォルトは「active」です。
+
+_onHide_
+アコーディオンパネルが非表示になった際に呼び出されるコールバック関数です。
+「this」キーワードを利用することで、指定した要素へのアクセスが可能です。
+
+_onShow_
+アコーディオンパネルが表示にされた際に呼び出されるコールバック関数です。
+「this」キーワードを利用することで、指定した要素へのアクセスが可能です。
+
+
+#### _シンプルなタブパネル tab_
+
+##### 機能
+
+シンプルなタブパネルを実装します。
+
+##### 使い方
+
+tabは次のように呼び出して使います。
+> $.laquu.tab($("jQuery selector")[,{options}]);
+
+"jQuery Selector"はaccordionを適用したい要素のセレクタを記述します。
+
+タグは以下のような形になります。
+> &gt;div id="laquuAccordion"&lt;
+>    &gt;h4 class="laquu_accordion_header">accordion header</h4&lt;
+>    &gt;div class="laquu_accordion_content"&lt;
+>        aaaaaaaaaaaaaaaaaaaaaaa
+>    &gt;/div&lt;
+>    &gt;h4 class="laquu_accordion_header">accordion header</h4&lt;
+>    &gt;div class="laquu_accordion_content"&lt;
+>        aaaaaaaaaaaaaaaaaaaaaaa
+>    &gt;/div&lt;
+>    &gt;h4 class="laquu_accordion_header"&lt;accordion header</h4&lt;
+>    &gt;div class="laquu_accordion_content"&lt;
+>        aaaaaaaaaaaaaaaaaaaaaaa
+>    &gt;/div&lt;
+> &gt;/div&lt;
+
+
+> <div id="laquuTab">
+>     <ul>
+>         <li><a href="#panel1">show panel 1</a></li>
+>         <li><a href="#panel2">show panel 2</a></li>
+>         <li><a href="#panel3">show panel 3</a></li>
+>     </ul>
+>     <div id="panel1">panel1</div>
+>     <div id="panel2">panel2</div>
+>     <div id="panel3">panel3</div>
+> </div>
+
+##### 指定可能なオプション
+
+_speed_
+アコーディオンの開閉スピードを指定します。デフォルトは「600」ミリ秒です。
+
+_header_class_
+アコーディオンのトリガとなる、ヘッダーのクラス名を指定します。デフォルトは「laquu_accordion_header」です。
+
+_content_class_
+アコーディオンのトリガとなる、ヘッダーのクラス名を指定します。デフォルトは「laquu_accordion_header」です。
+
+_status_
+アコーディオンタブがアクティブ時に付加されるクラス名を指定します。デフォルトは「active」です。
+
+_onHide_
+アコーディオンパネルが非表示になった際に呼び出されるコールバック関数です。
+「this」キーワードを利用することで、指定した要素へのアクセスが可能です。
+
+_onShow_
+アコーディオンパネルが表示にされた際に呼び出されるコールバック関数です。
+「this」キーワードを利用することで、指定した要素へのアクセスが可能です。
+
+
 
 
 
