@@ -93,8 +93,9 @@ imageOverは次のように呼び出して使います。
 
 
 タグは以下のような形になります。
-> <img src="/path/to/image.gif" />
-
+>
+>    <img src="/path/to/image.gif" />
+>
 
 ##### 指定可能なオプション
 _suffix_
@@ -216,20 +217,16 @@ accrodionは次のように呼び出して使います。
 "jQuery Selector"はaccordionを適用したい要素のセレクタを記述します。
 
 タグは以下のような形になります。
-> &gt;div id="laquuAccordion"&lt;
->    &gt;h4 class="laquu_accordion_header">accordion header</h4&lt;
->    &gt;div class="laquu_accordion_content"&lt;
->        aaaaaaaaaaaaaaaaaaaaaaa
->    &gt;/div&lt;
->    &gt;h4 class="laquu_accordion_header">accordion header</h4&lt;
->    &gt;div class="laquu_accordion_content"&lt;
->        aaaaaaaaaaaaaaaaaaaaaaa
->    &gt;/div&lt;
->    &gt;h4 class="laquu_accordion_header"&lt;accordion header</h4&lt;
->    &gt;div class="laquu_accordion_content"&lt;
->        aaaaaaaaaaaaaaaaaaaaaaa
->    &gt;/div&lt;
-> &gt;/div&lt;
+> <div id="laquuAccordion" class="example">
+>     <h4 class="laquu_accordion_header">コンテンツ1</h4>
+>     <div class="laquu_accordion_content">
+>         コンテンツ1
+>     </div>
+>     <h4 class="laquu_accordion_header">コンテンツ2</h4>
+>     <div class="laquu_accordion_content">
+>         コンテンツ2
+>     </div>
+> </div>
 
 
 ##### 指定可能なオプション
@@ -269,22 +266,6 @@ tabは次のように呼び出して使います。
 "jQuery Selector"はaccordionを適用したい要素のセレクタを記述します。
 
 タグは以下のような形になります。
-> <div id="laquuAccordion" class="example">
->     <h4 class="laquu_accordion_header">accordion header</h4>
->     <div class="laquu_accordion_content">
->         aaaaaaaaaaaaaaaaaaaaaaa
->     </div>
->     <h4 class="laquu_accordion_header">accordion header</h4>
->     <div class="laquu_accordion_content">
->         aaaaaaaaaaaaaaaaaaaaaaa
->     </div>
->     <h4 class="laquu_accordion_header">accordion header</h4>
->     <div class="laquu_accordion_content">
->         aaaaaaaaaaaaaaaaaaaaaaa
->     </div>
-> </div>
-
-
 > <div id="laquuTab">
 >     <ul>
 >         <li><a href="#panel1">show panel 1</a></li>
