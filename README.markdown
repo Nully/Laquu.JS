@@ -94,7 +94,7 @@ imageOverは次のように呼び出して使います。
 
 タグは以下のような形になります。
 >
->    <img src="/path/to/image.gif" />
+>     <img src="/path/to/image.gif" />
 >
 
 ##### 指定可能なオプション
