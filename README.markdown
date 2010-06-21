@@ -269,10 +269,20 @@ tabは次のように呼び出して使います。
 "jQuery Selector"はaccordionを適用したい要素のセレクタを記述します。
 
 タグは以下のような形になります。
-> &lt;div id="laquuAccordion"&gt;
->    &lt;h4 class="laquu_accordion_header"&gt;accordion header&lt;/h4&gt;
->    &lt;div class="laquu_accordion_content"&lt;aaaaaaaaaaaaaaaaaaaaaaa&lt;/div&gt;
-> &lt;/div&gt;
+> <div id="laquuAccordion" class="example">
+>     <h4 class="laquu_accordion_header">accordion header</h4>
+>     <div class="laquu_accordion_content">
+>         aaaaaaaaaaaaaaaaaaaaaaa
+>     </div>
+>     <h4 class="laquu_accordion_header">accordion header</h4>
+>     <div class="laquu_accordion_content">
+>         aaaaaaaaaaaaaaaaaaaaaaa
+>     </div>
+>     <h4 class="laquu_accordion_header">accordion header</h4>
+>     <div class="laquu_accordion_content">
+>         aaaaaaaaaaaaaaaaaaaaaaa
+>     </div>
+> </div>
 
 
 > <div id="laquuTab">
