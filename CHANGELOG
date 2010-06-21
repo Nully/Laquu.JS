@@ -1,20 +1,13 @@
-CHANGELOG
---------------------------------------------------------------------------------
-ver 2.0
- sub support MooTools
+Change Log
+---
+- ver 0.13
+  new support imgmenu.
+  commit README.markdown text.
 
 
---
-ver 1.0
- change to monogusa plugin namespace
-   '$.fn.monogusa'
- to
-   '$.monogusa'
- method namespace.
+- ver 0.12
+  new support dropdown, tooltip, bubblepop.
 
 
---
-ver 0.8
- add plugin space 'blank' window.
-
-
+- ver 0.1
+  Create laquu.js
