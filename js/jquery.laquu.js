@@ -230,7 +230,7 @@
                         top: 0,
                         left: 0
                     });
-                    t.options.onComplete.call(this, t.items[i -1]);
+                    t.options.onComplete.call(t.items[i -1]);
                     t.next();
                 },
                 step: t.options.onStep
