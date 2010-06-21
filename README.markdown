@@ -294,7 +294,7 @@ _active_class_
 stripeは次のように呼び出して使います。
 > $.laquu.stripe($("jQuery selector")[,{options}]);
 
-"jQuery Selector"はaccordionを適用したい要素のセレクタを記述します。
+"jQuery Selector"はstripeを適用したい要素のセレクタを記述します。
 
 タグは以下のような形になります。
 >     <table border="0" cellpadding="0" cellspacing="0">
