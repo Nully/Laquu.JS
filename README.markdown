@@ -20,7 +20,7 @@ laquu.jsを使う事で、きっと「楽に作業を軽減」することがで
 
 使い方は、scriptタグで読み込むだけで使う準備が整います。
 
-<script type="text/javascript" src="/path/to/jquery.laquu.js"></script>
+>     <script type="text/javascript" src="/path/to/jquery.laquu.js"></script>
 
 
 ### 機能一覧
@@ -57,7 +57,7 @@ laquu.jsでサポートしている機能は次の14機能です。
 ##### 使い方
 
 opacityOverは次のように呼び出して使います。
-> $.laquu.opacityOver($("jQuery selector")[,{options}]);
+>     $.laquu.opacityOver($("jQuery selector")[,{options}]);
 
 "jQuery Selector"は透明度を変更したい要素のセレクタを記述します。
 
@@ -93,7 +93,7 @@ _onOut_
 画像を2枚用意し、名前を「image.gif」と「image_on.gif」のような形で用意します。
 
 imageOverは次のように呼び出して使います。
-> $.laquu.imageOver($("jQuery selector")[,{options}]);
+>     $.laquu.imageOver($("jQuery selector")[,{options}]);
 
 "jQuery Selector"は画像を変更したい要素のセレクタを記述します。
 
@@ -131,7 +131,7 @@ _onOut_
 ##### 使い方
 
 tickerは次のように呼び出して使います。
-> $.laquu.ticker($("jQuery selector")[,{options}]);
+>     $.laquu.ticker($("jQuery selector")[,{options}]);
 
 "jQuery Selector"はtickerを適用したい要素のセレクタを記述します。
 
@@ -169,7 +169,7 @@ _onStep_
 ##### 使い方
 
 blankは次のように呼び出して使います。
-> $.laquu.blank($("jQuery selector")[,{options}]);
+>     $.laquu.blank($("jQuery selector")[,{options}]);
 
 "jQuery Selector"はtickerを適用したい要素のセレクタを記述します。
 
@@ -218,7 +218,7 @@ _close_
 ##### 使い方
 
 accrodionは次のように呼び出して使います。
-> $.laquu.accordioin($("jQuery selector")[,{options}]);
+>     $.laquu.accordioin($("jQuery selector")[,{options}]);
 
 "jQuery Selector"はaccordionを適用したい要素のセレクタを記述します。
 
@@ -267,7 +267,7 @@ _onShow_
 ##### 使い方
 
 tabは次のように呼び出して使います。
-> $.laquu.tab($("jQuery selector")[,{options}]);
+>     $.laquu.tab($("jQuery selector")[,{options}]);
 
 "jQuery Selector"はtabを適用したい要素のセレクタを記述します。
 
@@ -298,7 +298,7 @@ _active_class_
 ##### 使い方
 
 stripeは次のように呼び出して使います。
-> $.laquu.stripe($("jQuery selector")[,{options}]);
+>     $.laquu.stripe($("jQuery selector")[,{options}]);
 
 "jQuery Selector"はstripeを適用したい要素のセレクタを記述します。
 
@@ -348,7 +348,7 @@ IE6以下のブラウザでは「:hover」擬似クラスが特定要素以外�
 ##### 使い方
 
 hoverは次のように呼び出して使います。
-> $.laquu.hover($("jQuery selector")[,{options}]);
+>     $.laquu.hover($("jQuery selector")[,{options}]);
 
 "jQuery Selector"はhoverを適用したい要素のセレクタを記述します。
 
@@ -381,7 +381,7 @@ _onOut_
 ##### 使い方
 
 fssは次のように呼び出して使います。
-> $.laquu.fss($("jQuery selector")[,{options}]);
+>     $.laquu.fss($("jQuery selector")[,{options}]);
 
 "jQuery Selector"はfssを適用したい要素のセレクタを記述します。
 
@@ -422,7 +422,7 @@ jQuery.cookieプラグインが必須です。
 ##### 使い方
 
 dropdownは次のように呼び出して使います。
-> $.laquu.dropdown($("jQuery selector")[,{options}]);
+>     $.laquu.dropdown($("jQuery selector")[,{options}]);
 
 "jQuery Selector"はdropdownを適用したい要素のセレクタを記述します。
 
@@ -471,7 +471,7 @@ _onHide_
 ##### 使い方
 
 tooltipは次のように呼び出して使います。
-> $.laquu.tooltip($("jQuery selector")[,{options}]);
+>     $.laquu.tooltip($("jQuery selector")[,{options}]);
 
 "jQuery Selector"はtooltipを適用したい要素のセレクタを記述します。
 
@@ -512,7 +512,7 @@ _onMove_
 ##### 使い方
 
 bubblepopは次のように呼び出して使います。
-> $.laquu.bubblepop($("jQuery selector")[,{options}]);
+>     $.laquu.bubblepop($("jQuery selector")[,{options}]);
 
 "jQuery Selector"はbubblepopを適用したい要素のセレクタを記述します。
 
@@ -564,7 +564,7 @@ _onHideComplete_
 ##### 使い方
 
 imgmenuは次のように呼び出して使います。
-> $.laquu.imgmenu($("jQuery selector")[,{options}]);
+>     $.laquu.imgmenu($("jQuery selector")[,{options}]);
 
 "jQuery Selector"imgmenuを適用したい要素のセレクタを記述します。
 
@@ -616,7 +616,7 @@ autoがtrueの場合に指定します。
 ##### 使い方
 
 scrollerは次のように呼び出して使います。
-> $.laquu.scroller($("jQuery selector")[,{options}]);
+>     $.laquu.scroller($("jQuery selector")[,{options}]);
 
 "jQuery Selector"はscrollerを適用したい要素のセレクタを記述します。
 
