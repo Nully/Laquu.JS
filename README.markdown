@@ -131,11 +131,11 @@ tickerは次のように呼び出して使います。
 
 
 タグは以下のような形になります。
-> <div class="ticker">
-> <ul>
-> <li>好きなタグを記述出来ます。</li>
-> </ul>
-> </div>
+>     <div class="ticker">
+>         <ul>
+>             <li>好きなタグを記述出来ます。</li>
+>         </ul>
+>     </div>
 
 
 ##### 指定可能なオプション
@@ -168,10 +168,10 @@ blankは次のように呼び出して使います。
 "jQuery Selector"はtickerを適用したい要素のセレクタを記述します。
 
 タグは以下のような形になります。
-> <a href="http://example.com/" class="blank">Goto Example.com !</a>
+>     <a href="http://example.com/" class="blank">Goto Example.com !</a>
 
 また、リンクに以下のように指定することで、ウィンドウのサイズを指定することが出来ます。
-> <a href="http://example.com/?width=800&amp;height=600" class="blank">Goto Example.com !</a>
+>     <a href="http://example.com/?width=800&amp;height=600" class="blank">Goto Example.com !</a>
 
 
 ##### 指定可能なオプション
@@ -217,16 +217,16 @@ accrodionは次のように呼び出して使います。
 "jQuery Selector"はaccordionを適用したい要素のセレクタを記述します。
 
 タグは以下のような形になります。
-> <div id="laquuAccordion" class="example">
->     <h4 class="laquu_accordion_header">コンテンツ1</h4>
->     <div class="laquu_accordion_content">
->         コンテンツ1
+>     <div id="laquuAccordion" class="example">
+>         <h4 class="laquu_accordion_header">コンテンツ1</h4>
+>         <div class="laquu_accordion_content">
+>             コンテンツ1
+>         </div>
+>         <h4 class="laquu_accordion_header">コンテンツ2</h4>
+>         <div class="laquu_accordion_content">
+>             コンテンツ2
+>         </div>
 >     </div>
->     <h4 class="laquu_accordion_header">コンテンツ2</h4>
->     <div class="laquu_accordion_content">
->         コンテンツ2
->     </div>
-> </div>
 
 
 ##### 指定可能なオプション
@@ -266,38 +266,110 @@ tabは次のように呼び出して使います。
 "jQuery Selector"はaccordionを適用したい要素のセレクタを記述します。
 
 タグは以下のような形になります。
-> <div id="laquuTab">
->     <ul>
->         <li><a href="#panel1">show panel 1</a></li>
->         <li><a href="#panel2">show panel 2</a></li>
->         <li><a href="#panel3">show panel 3</a></li>
->     </ul>
->     <div id="panel1">panel1</div>
->     <div id="panel2">panel2</div>
->     <div id="panel3">panel3</div>
-> </div>
+>     <div id="laquuTab">
+>         <ul>
+>             <li><a href="#panel1">show panel 1</a></li>
+>             <li><a href="#panel2">show panel 2</a></li>
+>             <li><a href="#panel3">show panel 3</a></li>
+>         </ul>
+>         <div id="panel1">panel1</div>
+>         <div id="panel2">panel2</div>
+>         <div id="panel3">panel3</div>
+>     </div>
 
 ##### 指定可能なオプション
 
-_speed_
-アコーディオンの開閉スピードを指定します。デフォルトは「600」ミリ秒です。
+_active_class_
+アクティブなタブに付加されるクラス名です。デフォルトは「active」です。
 
-_header_class_
-アコーディオンのトリガとなる、ヘッダーのクラス名を指定します。デフォルトは「laquu_accordion_header」です。
 
-_content_class_
-アコーディオンのトリガとなる、ヘッダーのクラス名を指定します。デフォルトは「laquu_accordion_header」です。
+#### _ストライプテーブル stripe_
 
-_status_
-アコーディオンタブがアクティブ時に付加されるクラス名を指定します。デフォルトは「active」です。
+##### 機能
 
-_onHide_
-アコーディオンパネルが非表示になった際に呼び出されるコールバック関数です。
+よくあるストライプテーブルを複雑なコードを書かずに実装します。
+
+##### 使い方
+
+stripeは次のように呼び出して使います。
+> $.laquu.stripe($("jQuery selector")[,{options}]);
+
+"jQuery Selector"はaccordionを適用したい要素のセレクタを記述します。
+
+タグは以下のような形になります。
+>     <table border="0" cellpadding="0" cellspacing="0">
+>         <tr>
+>             <th>テーブルヘッダ</th>
+>             <td>定義済み内容</td>
+>         </tr>
+>         <tr>
+>             <th>テーブルヘッダ</th>
+>             <td>定義済み内容</td>
+>         </tr>
+>         <tr>
+>             <th>テーブルヘッダ</th>
+>             <td>定義済み内容</td>
+>         </tr>
+>     </table>
+
+
+##### 指定可能なオプション
+
+_even_class_
+偶数行に付加されるクラス名を指定します。デフォルトは「even」
+
+_odd_class_
+奇数行に付加されるクラス名を指定します。デフォルトは「odd」
+
+_onHover_
+行にマウスがホバーした際に呼び出されるコールバック関数です。
 「this」キーワードを利用することで、指定した要素へのアクセスが可能です。
 
-_onShow_
-アコーディオンパネルが表示にされた際に呼び出されるコールバック関数です。
+_onOut_
+行からマウスが外れた際に呼び出されるコールバック関数です。
 「this」キーワードを利用することで、指定した要素へのアクセスが可能です。
+
+
+#### _フォントサイズスウィッチャ fss_
+
+##### 機能
+
+フォントサイズを切り替えるためのボタンを実装します。
+フォントサイズはユーザー定義CSSで変更がかのう。
+
+##### 使い方
+
+fssは次のように呼び出して使います。
+> $.laquu.fss($("jQuery selector")[,{options}]);
+
+"jQuery Selector"はaccordionを適用したい要素のセレクタを記述します。
+
+タグは以下のような形になります。
+>     <div id="font-switch">
+>         <dl>
+>             <dt>フォントサイズ</dt>
+>             <dd><a href="#small">小</a></dd>
+>             <dd><a href="#middle">中</a></dd>
+>             <dd><a href="#large">大</a></dd>
+>         </dl>
+>     </div>
+
+* 注意 * リンク属性はフォントサイズを切り替える際に、bodyへと追加されるクラス名です。
+ユーザー定義CSSでサイズを定義する時は、「.リンク属性値」という形でサイズを定義してください。
+
+##### 指定可能なオプション
+
+_css_file_
+ユーザーが定義したCSSファイル名を指定します。デフォルトは「/css/fss.css」です。
+
+_onChange_
+フォントサイズが切り替わった際に呼び出されるコールバック関数です。
+引数は、jQueryHTMLCollection、jQueryEventです。
+
+_cookie_
+jQuery.cookieプラグインが必須です。
+クッキーを利用することで、以前閲覧したフォントサイズを保存します。
+
 
 
 
