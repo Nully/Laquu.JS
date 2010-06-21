@@ -31,7 +31,18 @@
 (function($){
     // Global object
     $.laquu = {
-        version: 1.0
+        version: 1.0,
+        error: function(msg) {
+            if($.isFunction(console.log)) {
+                console.error(msg);
+            }
+            return false;
+        },
+        debug: function(a) {
+            if($.isFunction(console.log)) {
+                console.log(a);
+            }
+        }
     };
 
 
@@ -47,46 +58,47 @@
      *         onOut: mouseout callback
      */
     $.laquu.opacityOver = function(elms, options) {
-        return elms.each(function(){
-            return new opacityOver($(this));
-        });
-    };
-    var opacityOver = function(elm, options) {
-        this.init(elm, options);
-    };
-    opacityOver.fn = opacityOver.prototype = {};
-    opacityOver.fn.extend = $.extend;
-    opacityOver.fn.extend({
-        init: function(elm, options) {
-            var t = this;
-            this.element = elm;
-            this.options = this.extend({
+        var setting = $.extend({}, {
                 opacity: .7,
                 duration: 300,
                 onComplete: function() {},
                 onHover: function() {},
                 onOut: function() {}
-            }, options || {});
+            }, options || {}),
+            fn = {
+                /**
+                 * on mouse over handler
+                 *
+                 * @param event    jQuery Event Object
+                 */
+                hoverHandler: function(event) {
+                    setting.onHover.call(this);
+                    fn.doTween(this, setting.opacity);
+                },
+                /**
+                 * on mouse over handler
+                 *
+                 * @param event    jQuery Event Object
+                 */
+                outHandler: function(event) {
+                    setting.onOut.call(this);
+                    fn.doTween(this, 1);
+                },
+                /**
+                 * on mouse over handler
+                 *
+                 * @param elm     HTMLNode
+                 * @param opacity Int
+                 */
+                doTween: function(elm, opacity) {
+                    $(elm).stop(true, true).fadeTo(setting.duration, opacity, setting.onComplete);
+                }
+            };
 
-            // add event
-            this.element.hover(function(ev){
-                t.hoverHandler(ev);
-            }, function(ev){
-                t.outHandler(ev);
-            });
-        },
-        hoverHandler: function(ev) {
-            this.options.onHover.call(ev.currentTarget);
-            this.doTween(ev.currentTarget, this.options.opacity);
-        },
-        outHandler: function(ev) {
-            this.options.onOut.call(ev.currentTarget);
-            this.doTween(ev.currentTarget, 1);
-        },
-        doTween: function(e, o) {
-            $(e).stop(true, true).fadeTo(this.options.duration, o, this.options.onComplete);
-        }
-    });
+        return elms.each(function(){
+            $(this).hover(fn.hoverHandler, fn.outHandler);
+        });
+    };
 
 
     /**
@@ -100,57 +112,46 @@
      *         onOut: mouseout callback
      */
     $.laquu.imageOver= function(elems, options) {
-        return elems.each(function(){
-            return new imageOver($(this), options);
-        });
-    };
-    var imageOver = function(elm, options) {
-        this.init(elm, options);
-    };
-    imageOver.fn = imageOver.prototype = {};
-    imageOver.fn.extend = $.extend;
-    imageOver.fn.extend({
-        init: function(e, o) {
-            var t = this;
-            this.element = e;
-            this.options = this.extend({
+        var setting = $.extend({}, {
                 suffix: "_on",
                 onComplete: function() {},
                 onHover: function() {},
                 onOut: function() {}
-            }, o || {});
+            }, options || {}),
+            fn = {
+                hoverHandler: function(elm) {
+                    setting.onHover.call(elm);
+                    fn.toggle(elm, $(elm).data("laquu_imgrollover_on"));
+                },
+                outHandler: function(elm) {
+                    setting.onOut.call(elm);
+                    fn.toggle(elm, $(elm).data("laquu_imgrollover_out"));
+                },
+                toggle: function(e, src) {
+                    $(e).attr("src", src);
+                }
+            };
 
-            this.element.hover(function(ev){
-                t.hoverHandler(ev);
-            }, function(ev){
-                t.outHandler(ev);
-            });
-        },
-        hoverHandler: function(ev) {
-            this.toggle(ev.currentTarget);
-            this.options.onHover.call(ev.currentTarget);
-        },
-        outHandler: function(ev) {
-            this.toggle(ev.currentTarget);
-            this.options.onOut.call(ev.currentTarget);
-        },
-        toggle: function(e) {
-            var $e = $(e),
-                base_src = $e.attr("src"),
-                src, tmp, ext, exp = new RegExp(this.options.suffix);
-
-            if(exp.test(base_src)) {
-                src = base_src.replace(exp, "");
-            }
-            else {
-                tmp = base_src.split(".");
+        return elems.each(function(){
+            var $t = $(this),
+                src = $t.attr("src"),
+                _on = "",
+                tmp = src.split("."),
                 ext = tmp.pop();
-                src = tmp.join(".") + this.options.suffix + "." + ext;
-            }
-            $e.attr("src", src);
-            this.options.onComplete.call(e);
-        }
-    });
+
+            tmp[tmp.length] = setting.suffix;
+            _on = tmp.join("") + "." + ext;
+
+            $t.data("laquu_imgrollover_out", src);
+            $t.data("laquu_imgrollover_on", _on);
+
+            $t.hover(function(){
+                fn.hoverHandler(this);
+            }, function() {
+                fn.outHandler(this);
+            });
+        });
+    };
 
 
     /**
@@ -258,20 +259,7 @@
      *         close: shown close button 'yes' or 'no'
      */
     $.laquu.blank = function(elems, options) {
-        return elems.each(function(){
-            return new blank($(this), options);
-        });
-    };
-    var blank = function(elem, options) {
-        this.init(elem, options);
-    };
-    blank.fn = blank.prototype = {};
-    blank.fn.extend = $.extend;
-    blank.fn.extend({
-        init: function(e, o) {
-            var t = this;
-            this.element = e;
-            this.options = this.extend({
+        var setting = $.extend({}, {
                 toolbar:     "yes",
                 location:    "yes",
                 directories: "yes",
@@ -280,46 +268,60 @@
                 scrollbar:   "yes",
                 resizable:   "yes",
                 close:       "yes"
-            }, o || {});
+            }),
+            fn = {
+                parse_query: function(s) {
+                    var result = {
+                        query: "?",
+                        size: {
+                            width: 800, height: 600
+                        }
+                    }, params = s.split(/[;&]/), i, j;
 
-            var query_string = this.element.attr("href").split(/\?/);
-            this.element.data("query_string", this._parseQuery(query_string[1]));
-            this.element.attr("href", query_string[0]);
-            this.element.bind("click", function(ev){
-                t.open($(this), ev);
-            });
-        },
-        open: function(e, ev) {
-            var size = e.data("query_string"),
+                    if(1 >= params.length) return result;
+
+                    for(i = 0; i < params.length; i++) {
+                        var param = params[i].split("=");
+                        if(param[0] == "width" || param[0] == "height") {
+                            result.size[param[0]] = parseInt(param[1]);
+                        }
+                        else {
+                            result.query += params[i] + "&";
+                        }
+                    }
+
+                    result.query = result.query.replace(/(&)$/, "");
+                    return result;
+                },
+                open: function(e) {
+                    var $e = $(e);
+                    window.open($e.attr("href"), "laquu_blank_window", $e.data("laquu_blank_param"));
+                }
+            };
+
+        return elems.each(function(){
+            var $t = $(this),
+                src = $t.attr("href").split(/\?/),
+                params = fn.parse_query(src[src.length - 1]),
+                window_param = $.extend({}, setting, params.size),
                 param = "", i;
 
-            for(i in this.options) {
-                param += i + "=" + this.options[i] + ",";
+            for(i in window_param) {
+                if(window_param[i]) {
+                    param += i + "=" + window_param[i] + ","
+                }
             }
-            for(i in size) {
-                param += i + "=" + size[i] + ",";
-            }
-
             param = param.substr(0, param.length - 1);
-            window.open(e.attr("href"), "laquu_blank_window", param);
-            ev.preventDefault();
-        },
-        _parseQuery: function(q) {
-            var result = {},
-                params, i;
 
-            if(!q) {
-                return result;
-            }
+            $t.attr("href", src[0] + params.query);
+            $t.data("laquu_blank_param", param);
 
-            params = q.split(/[;&]/);
-            for(i = 0; i < params.length; i++) {
-                var param = params[i].split(/=/);
-                result[param[0]] = param[1];
-            }
-            return result;
-        }
-    });
+            $t.bind("click", function(){
+                fn.open(this);
+                return false;
+            });
+        });
+    };
 
 
     /**
