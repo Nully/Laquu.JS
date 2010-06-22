@@ -382,58 +382,37 @@
      * @param options
      */
     $.laquu.tab = function(elems, options) {
+        var setting = $.extend({}, {
+                active_class: "active"
+            });
+
         return elems.each(function(){
-            return new tab($(this), options);
+            var $t = $(this), tabs = $t.find("li a"), panels;
+
+            tabs.each(function(){
+                if(panels)
+                    panels = panels.add($($(this).attr("href"), $t));
+                else
+                    panels = $($(this).attr("href"), $t);
+            });
+
+
+            panels.addClass("laquu-tab-panel");
+            tabs.addClass("laquu-tab").bind("click", function(){
+                var $e = $(this),
+                    panel = $e.attr("href");
+
+                tabs.not($e).removeClass(setting.active_class);
+                panels.hide();
+
+                $e.addClass(setting.active_class);
+                $(panel).show();
+
+                return false;
+            });
+            tabs.first().trigger("click");
         });
     };
-    var tab = function(elem, options) {
-        this.init(elem, options);
-    };
-    tab.fn = tab.prototype = {};
-    tab.fn.extend  = $.extend;
-    tab.fn.extend({
-        tab: null,
-        tabs: null,
-        panels: null,
-        init: function(e, o) {
-            var t = this;
-            this.element = e;
-            this.options = this.extend({
-                active_class: "active"
-            }, o || {});
-
-            this.tab = this.element.find("ul");
-            this.tabs = this.tab.find("li a");
-
-            this.tabs.each(function(){
-                if(t.panels) {
-                    t.panels = t.panels.add($(this).attr("href"));
-                }
-                else {
-                    t.panels = $($(this).attr("href"));
-                }
-            });
-
-            this.panels.addClass("laquu-tab-panel");
-            this.tabs.addClass("laquu-tab");
-
-            this.tabs.bind("click", function(ev){
-                t.showTab(ev);
-            });
-
-            this.tabs.first().trigger("click");
-        },
-        showTab: function(ev) {
-            var target = $(ev.currentTarget),
-                panel = $(target.attr("href"));
-
-            this.panels.hide();
-            this.tabs.removeClass(this.options.active_class);
-            target.addClass(this.options.active_class);
-            panel.show();
-            ev.preventDefault();
-        }
-    });
 
 
     /**
@@ -497,78 +476,54 @@
      *                 @see: jQuery.cookie
      */
     $.laquu.fss = function(elems, options) {
-        return elems.each(function(){
-            return new FontSizeSwitcher($(this), options);
-        });
-    };
-    var FontSizeSwitcher = function(elem, options) {
-        this.init(elem, options);
-    };
-    FontSizeSwitcher.fn = FontSizeSwitcher.prototype = {};
-    FontSizeSwitcher.fn.extend = $.extend;
-    FontSizeSwitcher.fn.extend({
-        init: function(e, o) {
-            var t = this;
-            this.$b = $("body");
-            this.element = e;
-            this.options = $.extend({
+        var setting = $.extend({}, {
                 css_file: "/css/fss.css",
-                onChange: function(element, event) {},
-                cookie: {
-                    expires: 7, // 1 week
-                    path: "/",
-                    domain: "",
-                    secure: false
-                }
-            }, o || {});
+                onChange: function(element, options) {},
+                cookie: { expires: 7, path: "/", domain: "", secure: false }
+            }, options || {}),
+            fn = {
+                change: function(el){
+                    var size = $(el).attr("href").replace(/#/, "");
+                    $("body").removeClass(classes).addClass(size);
 
-            this.classes = $.map(this.element.find("a"), function(e, i){
-                var p = t.toAbsolute(e.href);
-                if(/#(.*?)/.test(p)) {
-                    $(e).attr("href", "#" + p.split("#").pop());
-                    return p.split("#").pop();
+                    if($.isFunction($.cookie)) {
+                        $.cookie("laquu_fss_selected", size, setting.cookie);
+                    }
+                },
+                toAbsolute: function(p) {
+                    var a = document.createElement("span");
+                    a.innerHTML = '<a href="'+ p +'"></a>';
+                    return a.firstChild.href;
+                },
+                addCssFile: function(p) {
+                    var l = document.createElement("link");
+                    l.type = "text/css";
+                    l.rel  = "stylesheet";
+                    l.href = p;
+                    $(l).appendTo("head");
+                }
+            },
+            classes = $.map(elems.find("a"), function(el){
+                var href = fn.toAbsolute($(el).attr("href"));
+                if(/#/.test(href)) {
+                    return href.split("#").pop();
                 }
             }).join(" ");
 
-            this.element.find("a").bind("click", function(ev){
-                t.change($(this), ev);
+        fn.addCssFile(fn.toAbsolute(setting.css_file));
+        elems.each(function(){
+            $("a", this).bind("click", function(){
+                fn.change(this);
                 return false;
             });
+        });
 
-            this._loadCssFile(this.options.css_file);
-
-            if($.cookie) {
-                var loaded = $.cookie("laquu_ffs_selected");
-                if(loaded) {
-                    this.$b.addClass(loaded);
-                }
-            }
-        },
-        change: function(e, ev) {
-            var size = e.attr("href").replace(/#/, "");
-            this.$b.removeClass(this.classes);
-            this.$b.addClass(size);
-            this.options.onChange.apply(null, arguments);
-
-            if($.cookie) {
-                $.cookie("laquu_ffs_selected", size, this.options.cookie);
-            }
-        },
-        toAbsolute: function(p) {
-            var d = document.createElement('span');
-            d.innerHTML = '<a href="'+ p +'">';
-            return d.firstChild.href;
-        },
-        _loadCssFile: function(css) {
-            if(css == false) { return; }
-            var link = document.createElement("link"),
-                paht = path = location.protocol + "//" + location.hostname;
-                link.type = "text/css";
-                link.rel = "stylesheet";
-                link.href = path + this.options.css_file;
-            $(link).appendTo("head");
+        if($.isFunction($.cookie)) {
+            elems.filter(function(){
+                $("a[href=#"+ $.cookie("laquu_fss_selected") +"]").trigger("click");
+            });
         }
-    });
+    };
 
 
     /**
@@ -583,48 +538,39 @@
      *         onHide: slide up callback
      */
     $.laquu.dropdown = function(elems, options) {
-        return elems.each(function(){
-            return new dropdown($(this), options);
-        });
-    };
-    var dropdown = function(elem, options) {
-        this.init(elem, options);
-    };
-    dropdown.fn = dropdown.prototype = {};
-    dropdown.fn.extend = $.extend;
-    dropdown.fn.extend({
-        init: function(e, o) {
-            var t = this;
-            this.element = e;
-            this.options = this.extend({
+        var setting = $.extend({}, {
                 hover_class: "hover",
                 show_speed: 200,
                 hide_speed: 400,
-                onShow: function(){},
-                onHide: function(){}
-            }, o || {});
-            this.menus   = this.element.find("li").filter(function(){
+                onShow: function() {},
+                onHide: function() {}
+            }, options || {}),
+            fn = {
+                show: function($e, ev) {
+                    $e.addClass(setting.hover_class)
+                        .children("ul").stop(true, true)
+                        .slideDown(setting.show_speed, setting.onShow);
+                },
+                hide: function($e, ev) {
+                    $e.removeClass(setting.hover_class)
+                        .children("ul").stop(true, true)
+                        .slideUp(setting.hide_speed, setting.onHide);
+                }
+            };
+
+        return elems.each(function(){
+            $(this).find("li").filter(function(){
                 if($(this).children("ul").size()) {
                     $(this).children("ul").css("display", "none");
                     return $(this);
                 }
+            }).hover(function(event){
+                fn.show($(this), event);
+            }, function(event){
+                fn.hide($(this), event);
             });
-
-            this.menus.hover(function(ev){
-                t.show($(this), ev);
-            }, function(ev){
-                t.hide($(this), ev);
-            });
-        },
-        show: function(e, ev) {
-            e.addClass(this.options.hover_class);
-            e.children("ul").stop(true, true).slideDown(this.options.show_speed, this.options.onShow);
-        },
-        hide: function(e, ev) {
-            e.removeClass(this.options.hover_class);
-            e.children("ul").stop(true, true).slideUp(this.options.hide_speed, this.options.onHide);
-        }
-    });
+        });
+    };
 
 
     /**
@@ -640,68 +586,59 @@
      *         onHide: hide callback function
      */
     $.laquu.tooltip = function(elems, options) {
-        return elems.each(function(i){
-            return new tooltip(i, this, options);
-        });
-    };
-    var tooltip = function(n, elem, options) {
-        this.init(n, elem, options);
-    };
-    tooltip.fn = tooltip.prototype = {};
-    tooltip.fn.extend = $.extend;
-    tooltip.fn.extend({
-        init: function(n, e, o) {
-            var t = this;
-            this.id = n;
-            this.element = e;
-            this.title = this.element.title;
-            this.options = this.extend({
+        var setting = $.extend({}, {
                 dist_x: -10,
                 dist_y: -20,
                 show_speed: 200,
                 onShow: function() {},
                 onHide: function() {},
                 onMove: function() {}
-            }, o || {});
-            this.tooltip = $('<p class="tooltip-wrap laquu-tooltip-wrap-'+ this.id +'" />').css("position", "absolute");
+            }, options || {}),
+            fn = {
+                uid: function() {
+                    var id = 0;
+                    return function(){ return ++id; }
+                }(),
+                createTooltip: function() {
+                    return $('<p id="laquu-tooltip-'+ fn.uid() +'" class="laquu-tooltip-wrap"></p>')
+                                .appendTo("body").css({
+                                    position: "absolute", display: "none"
+                                });
+                },
+                show: function(title, event) {
+                    fn.createTooltip().css({
+                        top: (event.pageY + setting.dist_y) + "px",
+                        left: (event.pageX + setting.dist_x) + "px"
+                    })
+                    .stop(true, true).text(title)
+                    .fadeIn(setting.show_speed, function(){
+                        setting.onShow.call(this);
+                    });
 
-            $(this.element).hover(function(ev){
-                t.show(this, ev);
-            }, function(ev){
-                t.hide(this, ev);
-            }).mousemove(function(ev){
-                t.move(this, ev);
-            });
-        },
-        show: function(e, ev) {
-            var t = this;
-            e.title = "";
-            this.tooltip
-                .css("display", "none")
-                .css({
-                    top: ev.pageY - this.options.dist_y + "px",
-                    left: ev.pageX - this.options.dist_x + "px"
-                })
-                .stop(true, true)
-                .appendTo("body")
-                .text(this.title).fadeIn(this.options.show_speed, function(){
-                    t.options.onShow.call(this);
-                });
-        },
-        hide: function(e, ev) {
-            e.title = this.title;
-            this.tooltip.stop(true, true).remove();
-            this.options.onHide.call(e);
-        },
-        move: function(e, ev) {
-            this.tooltip.css({
-                top: ev.pageY + this.options.dist_y + "px",
-                left: ev.pageX + this.options.dist_x + "px"
-            });
+                    setting.onShow.call(elm);
+                },
+                hide: function(elm) {
+                    $(".laquu-tooltip-wrap").stop(true, true).remove();
+                    setting.onHide.call(elm);
+                },
+                move: function(e, ev) {
+                    $(".laquu-tooltip-wrap").css({
+                        top: (ev.pageY + setting.dist_y) + "px",
+                        left: (ev.pageX + setting.dist_x) + "px"
+                    })
+                }
+            };
 
-            this.options.onMove.call(e, (ev.pageY + this.options.dist_y), (ev.pageX + this.options.dist_x));
-        }
-    });
+        return elems.each(function(i){
+            $(this).hover(function(event){
+                fn.show($(this).attr("title"), event);
+            }, function(){
+                fn.hide(this);
+            }).mousemove(function(event){
+                fn.move(this, event);
+            });
+        });
+    };
 
 
     /**
@@ -719,104 +656,75 @@
      *         onHideComplete: hidden complete callback
      */
     $.laquu.bubblepop = function(elems, options) {
-        return elems.each(function(){
-            return new bubblepop($(this), options);
-        });
-    };
-    var bubblepop = function(elem, options) {
-        this.init(elem, options);
-    };
-    bubblepop.fn = bubblepop.prototype = {};
-    bubblepop.fn.extend = $.extend;
-    bubblepop.fn.extend({
-        started: false,
-        isShow: false,
-        timer: null,
-        init: function(e, o) {
-            var t = this;
-            this.element = e;
-            this.options = this.extend({
+        var setting = $.extend({}, {
                 dist: 15,
                 hide_delay: 2000,
                 popup_class: ".popup",
                 trigger_class: ".trigger",
                 easing: "swing",
-                onStep: function(step, params) {},
+                onStep: function(step, options) {},
                 onShowComplete: function() {},
                 onHideComplete: function() {}
-            }, o || {});
-            this.popup   = $(this.options.popup_class, this.element);
-            this.trigger = $(this.options.trigger_class, this.element);
-            this.popup_pos = "-" + (this.options.dist + this.popup.outerHeight()) + "px";
+            }, options || {});
 
-            this.element.css("position", "relative");
-            this.popup.css({
-                "position": "absolute",
-                "opacity": 0,
-                "display": "none",
-                "top": this.popup_pos
-            });
+        return elems.each(function(){
+            var $t = $(this).css("position", "relative"),
+                popup = $(setting.popup_class, this), trigger = $(setting.trigger_class, this),
+                popup_pos = "-" + (setting.dist + popup.outerHeight()) + "px",
+                isShow = false, isStarted = false, hideTimer = null;
 
-            $([this.trigger.get(0), this.popup.get(0)]).hover(function(){
-                t.show($(this));
-            }, function(){
-                t.hide($(this));
-            });
-        },
-        show: function(e) {
-            var t = this;
-
-            this.clearTimer();
-
-            if(this.started || this.isShow) {
-                return;
-            }
-
-            this.started = true;
-            this.popup.stop().css({
-                "top": this.popup_pos,
-                "display": "block"
-            }).animate({
-                opacity: 1,
-                top: "+=" + this.options.dist
-            },{
-                queue: false,
-                easing: this.options.easing,
-                complete: function(){
-                    t.isShow = true;
-                    t.options.onShowComplete.call(this);
-                },
-                step: this.options.onStep
-            });
-        },
-        hide: function(e) {
-            var t = this;
-
-            this.clearTimer();
-            this.timer = setInterval(function(){
-                t.popup.stop().animate({
+                popup.css({
+                    position: "absolute",
                     opacity: 0,
-                    top: "-=" + t.options.dist
-                },{
-                    queue: false,
-                    easing: t.options.easing,
-                    complete: function() {
-                        $(this).css("display", "none");
-                        t.started = false;
-                        t.isShow = false;
-                        t.clearTimer();
-                        t.options.onHideComplete.call(this);
-                    },
-                    step: t.options.onStep
+                    display: "none",
+                    top: popup_pos
                 });
-            }, this.options.hide_delay);
-        },
-        clearTimer: function() {
-            if(this.timer) {
-                clearInterval(this.timer);
+
+            function clear_hide_timer() {
+                if(hideTimer) {
+                    clearTimeout(hideTimer);
+                    hideTimer = null;
+                }
             }
-        }
-    });
+
+            function show_popup(ev) {
+                clear_hide_timer();
+                if(isShow || isStarted) {
+                    return;
+                }
+
+                isStarted = true;
+                popup.stop().css({ top: popup_pos, display: "block" })
+                    .animate(
+                        { opacity: 1, top: "+=" + setting.dist },
+                        { queue: false, easing: setting.easing, complete: function(){
+                            isShow = true;
+                            isStarted = false;
+                            setting.onShowComplete.call(this);
+                        }, step: setting.onStep }
+                    );
+            }
+
+            function hide_popup(ev) {
+                clear_hide_timer();
+                hideTimer = setTimeout(function(){
+                    popup.stop().animate(
+                        { opacity: 0, top: "-=" + setting.dist },
+                        { queue: false, easing: setting.easing, complete: function() {
+                            $(this).css("display", "none");
+                            isStarted = false;
+                            isShow = false;
+                            clear_hide_timer();
+                            setting.onHideComplete.call(this);
+                        }, step: setting.onStep }
+                    );
+                }, setting.hide_delay);
+            }
+
+            $([popup.get(0), trigger.get(0)]).hover(show_popup, hide_popup);
+            return true;
+        });
+    };
 
 
     /**
@@ -949,21 +857,15 @@
         $target = $.browser.webkit ? $("body") : $("html");
 
         elems.bind("click", function(ev){
-            var $selector = $($(this).attr("href")),
+            var offset = $($(this).attr("href")).offset(),
                 option = $.extend({}, defaults, options || {});
 
-            $target.animate({
-                scrollTop: $selector.offset().top,
-                scrollLeft: $selector.offset().left
-            }, {
-                queue: false,
-                easing: option.easing,
-                duration: option.speed,
-                complete: function(){
-                    option.onScrollEnd.call(ev.currentTarget, $target);
-                },
-                step: function(step, o) {
-                    option.onStep.call(ev.currentTarget, step, o);
+            $target.animate(
+                { scrollTop: offset.top, scrollLeft: offset.left },
+                { "queue": false, "easing": option.easing, "duration": option.speed, "complete": function(){
+                      option.onScrollEnd.call(ev.currentTarget, $target);
+                }, "step": function(step, o) {
+                      option.onStep.call(ev.currentTarget, step, o);
                 }
             });
             return false;
