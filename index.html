@@ -5,6 +5,7 @@
         <title>laquu Mootools Plugin</title>
         <link type="text/css" href="css/reset.css" media="all" rel="stylesheet" />
         <link type="text/css" href="css/styles.css" media="all" rel="stylesheet" />
+        <link type="text/css" href="css/laquu.mordal.css" media="all" rel="stylesheet" />
         <link type="text/css" href="css/sh_style.css" media="all" rel="stylesheet" />
         <link type="text/css" href="css/layout.css" media="all" rel="stylesheet" />
         <script type="text/javascript" src="js/sh_main.min.js"></script>
@@ -41,6 +42,8 @@
                     selected: 2,
                     auto: true
                 });
+
+                $.laquu.simplebox($(".mordal"));
                 $.laquu.scroller($(".pagetop"));
                 $.laquu.konami();
             });
@@ -252,6 +255,14 @@
                     <li>*Edu Alarcon* Nuevo Photostream!（http://www.flickr.com/photos/acidxedz/3820561569/sizes/o/）</li>
                     <li>kevindooley（http://www.flickr.com/photos/pagedooley/3500046277/sizes/l/）</li>
                 </ul>
+            </div>
+
+            <div class="example">
+                <p><a href="img/land.jpeg" rel="group1" class="mordal"><img src="img/land_thumb.jpg" alt="the land." /></a></p>
+                <p><a href="img/island.jpeg" rel="group2" class="mordal"><img src="img/island_thumb.jpg" alt="the island." /></a></p>
+                <p><a href="img/swamp.jpeg" rel="group1" class="mordal"><img src="img/swamp_thumb.jpg" alt="the swamp." /></a></p>
+                <p><a href="img/mountain.jpeg" rel="group2" class="mordal"><img src="img/mountain_thumb.jpg" alt="the mountain." /></a></p>
+                <p><a href="img/forest.jpeg" class="mordal"><img src="img/forest_thumb.jpg" alt="the forest." /></a></p>
             </div>
             <p><a href="#container" class="pagetop">PageTop</a></p>
         <!-- End container --></div>
