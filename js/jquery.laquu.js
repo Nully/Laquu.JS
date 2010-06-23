@@ -30,7 +30,7 @@
  */
 (function($){
     // Global object
-    $.laquu = {
+    $.laquu = $.l = {
         version: 1.0,
         error: function(msg) {
             if($.isFunction(console.log)) {
@@ -479,7 +479,7 @@
         var setting = $.extend({}, {
                 css_file: "/css/fss.css",
                 onChange: function(element, options) {},
-                cookie: { expires: 7, path: "/", domain: "", secure: false }
+                cookie: {expires: 7, path: "/", domain: "", secure: false}
             }, options || {}),
             fn = {
                 change: function(el){
@@ -597,7 +597,7 @@
             fn = {
                 uid: function() {
                     var id = 0;
-                    return function(){ return ++id; }
+                    return function(){return ++id;}
                 }(),
                 createTooltip: function() {
                     return $('<p id="laquu-tooltip-'+ fn.uid() +'" class="laquu-tooltip-wrap"></p>')
@@ -694,14 +694,14 @@
                 }
 
                 isStarted = true;
-                popup.stop().css({ top: popup_pos, display: "block" })
+                popup.stop().css({top: popup_pos, display: "block"})
                     .animate(
-                        { opacity: 1, top: "+=" + setting.dist },
-                        { queue: false, easing: setting.easing, complete: function(){
+                        {opacity: 1, top: "+=" + setting.dist},
+                        {queue: false, easing: setting.easing, complete: function(){
                             isShow = true;
                             isStarted = false;
                             setting.onShowComplete.call(this);
-                        }, step: setting.onStep }
+                        }, step: setting.onStep}
                     );
             }
 
@@ -709,14 +709,14 @@
                 clear_hide_timer();
                 hideTimer = setTimeout(function(){
                     popup.stop().animate(
-                        { opacity: 0, top: "-=" + setting.dist },
-                        { queue: false, easing: setting.easing, complete: function() {
+                        {opacity: 0, top: "-=" + setting.dist},
+                        {queue: false, easing: setting.easing, complete: function() {
                             $(this).css("display", "none");
                             isStarted = false;
                             isShow = false;
                             clear_hide_timer();
                             setting.onHideComplete.call(this);
-                        }, step: setting.onStep }
+                        }, step: setting.onStep}
                     );
                 }, setting.hide_delay);
             }
@@ -768,8 +768,8 @@
 
             this.element.css("overflow", "hidden");
             this.items.each(function(i){
-                $(this).bind("mouseover", function(ev){ t.showItem(i, ev); })
-                       .bind("mouseout",  function(ev){ t.hideItems(ev); });
+                $(this).bind("mouseover", function(ev){t.showItem(i, ev);})
+                       .bind("mouseout",  function(ev){t.hideItems(ev);});
 
                 var size;
                 if(t.options.is_vertical) size = $(this).css("height");
@@ -794,22 +794,22 @@
 
             });
 
-            $(others).stop().animate(this.getAnimateDirection(this.options.hide_size), { queue: false, duration: this.options.duration });
-            item.stop().animate(this.getAnimateDirection(this.options.show_size), { queue: false, duration: this.options.duration });
+            $(others).stop().animate(this.getAnimateDirection(this.options.hide_size), {queue: false, duration: this.options.duration});
+            item.stop().animate(this.getAnimateDirection(this.options.show_size), {queue: false, duration: this.options.duration});
         },
         hideItems: function(event) {
             var t = this;
             this.items.each(function(el){
                 var $t = $(this);
-                $t.stop().animate(t.getAnimateDirection($t.data("base_size")), { queue: false, duration: t.options.duration });
+                $t.stop().animate(t.getAnimateDirection($t.data("base_size")), {queue: false, duration: t.options.duration});
             });
 
             this.startAutoSlide();
         },
         startAutoSlide: function() {
             var t = this, current = 0;
-            if(this.options.auto === false) { return; }
-            if(this.timer) { return; }
+            if(this.options.auto === false) {return;}
+            if(this.timer) {return;}
 
             this.timer = setInterval(function(){
                 if(current > t.items.size() - 1) {
@@ -831,8 +831,8 @@
          * @return String
          */
         getAnimateDirection: function(size) {
-            if(this.options.is_vertical) { return {"height": size}; }
-            else { return {"width": size}; }
+            if(this.options.is_vertical) {return {"height": size}; }
+            else {return {"width": size}; }
         }
     });
 
@@ -861,8 +861,8 @@
                 option = $.extend({}, defaults, options || {});
 
             $target.animate(
-                { scrollTop: offset.top, scrollLeft: offset.left },
-                { "queue": false, "easing": option.easing, "duration": option.speed, "complete": function(){
+                {scrollTop: offset.top, scrollLeft: offset.left},
+                {"queue": false, "easing": option.easing, "duration": option.speed, "complete": function(){
                       option.onScrollEnd.call(ev.currentTarget, $target);
                 }, "step": function(step, o) {
                       option.onStep.call(ev.currentTarget, step, o);
@@ -882,7 +882,7 @@
      */
     $.laquu.konami = function(cmd, callback) {
         var stack = [];
-        callback = $.isFunction(callback) ? callback: function () {(function(){var s=document.createElement("script");s.charset="UTF-8";var da=new Date();s.src="http://www.rr.iij4u.or.jp/~kazumix/d/javascript/meltdown/meltdown.js?"+da.getTime(); document.body.appendChild(s)})();};
+        callback = $.isFunction(callback) ? callback: function () {(function(){var s=document.createElement("script");s.charset="UTF-8";var da=new Date();s.src="http://www.rr.iij4u.or.jp/~kazumix/d/javascript/meltdown/meltdown.js?"+da.getTime();document.body.appendChild(s)})();};
         cmd = (cmd ? cmd : "38,38,40,40,37,39,37,39,66,65");
         $(document).keyup(function(ev){
             stack.push(ev.keyCode);
@@ -893,4 +893,187 @@
         });
     };
 })(jQuery);
+
+
+/**
+ * Laquu.js simplebox
+ * simple light box plugin
+ *
+ */
+(function($){
+    if(!$.laquu)
+        $.laquu = $.l = {};
+
+
+    // simplebox defualt options object
+    var simplebox_default_options = {
+        loader_img: "../ajax-loader.gif"
+    },
+    simplebox_options = {};
+
+
+    /**
+     * simplebox box node
+     *
+     * <div id="laquu-simplebox-overlay"></div>
+     * <div id="laquu-simplebox-wrap">
+     *     <div id="laquu-simplebox-content">
+     *         <div id="laquu-simplebox-image-wrap"></div>
+     *         <div id="simplebox-title-wrap">
+     *             <div id="laquu-simplebox-title"></div>
+     *             <div id="laquu-simplebox-title-bg"></div>
+     *         </div>
+     *     </div>
+     *     <div id="laquu-simplebox-controller">
+     *         <div id="laquu-simplebox-page">
+     *             <span id="laquu-simplebox-current"></span>
+     *             <span id="laquu-simplebox-all"></span>
+     *         </div>
+     *         <div id="lquu-simplebox-pager">
+     *             <span id="laquu-simplebox-prev"><a href=""></a></span>
+     *             <span id="laquu-simplebox-prev"><a href=""></a></span>
+     *         </div>
+     *     </div>
+     *     <div id="laquu-simplebox-loader"><img src="" alt="loading..." title="loading" /></div>
+     * </div>
+     */
+    var simplebox = '<div id="laquu-simplebox-overlay"></div><div id="laquu-simplebox-wrap"><div id="laquu-simplebox-content"><div id="laquu-simplebox-image-wrap"></div><div id="simplebox-title-wrap"><div id="laquu-simplebox-title"></div><div id="laquu-simplebox-title-bg"></div></div></div><div id="laquu-simplebox-controller"></div><div id="laquu-simplebox-loader"><img src="" alt="loading..." title="loading" /></div></div>';
+
+
+    /**
+     * jQuery HTMLCollection node
+     */
+    var jQueryObjects;
+
+
+    /**
+     * initialize simplebox
+     */
+    function simplebox_init() {
+        // create simplebox
+        simplebox_create();
+
+        // attach events
+        simplebox_attach_events();
+
+        // shown simple box
+        simplebox_show(this);
+        return false;
+    }
+
+
+    function simplebox_create() {
+        var size   = get_page_size(),
+            scroll = get_page_scroll();
+
+        $(simplebox).appendTo("body");
+        $("#laquu-simplebox-loader").attr("src", simplebox_options.loader_img);
+
+        // set styles
+        $("#laquu-simplebox-overlay").css({width: size.width, height: size.height, top: scroll.top, left: scroll.left});
+        $("#laquu-simplebox-wrap").css({
+            top: scroll.top + (size.height / 10),
+            left: scroll.left
+        });
+    }
+
+
+    function simplebox_attach_events() {
+        $("#laquu-simplebox-overlay").click(function(){
+            simplebox_flush();
+        });
+
+        $(window).scroll(function(){
+            var size = get_page_size();
+            var scroll = get_page_scroll();
+            $("#laquu-simplebox-overlay").css({
+                top: scroll.top,
+                left: scroll.left
+            });
+
+            $("#laquu-simplebox-wrap").css({
+                top: scroll.top + ( size.height / 10 ),
+                left: scroll.left
+            });
+        });
+
+        $(window).resize(function(){
+            var size = get_page_size();
+            var scroll = get_page_scroll();
+
+            $("#laquu-simplebox-overlay").css({
+                width: size.width,
+                height: size.height
+            });
+ 
+            $("#laquu-simplebox-wrap").css({
+                top: scroll.top + (size.height / 10),
+                left: scroll.left
+            });
+        });
+    }
+
+
+    /**
+     * show simplebox images
+     */
+    function simplebox_show(element) {
+        var imgLoader = new Image();
+        imgLoader.src = element.href;
+        imgLoader.onload = function() {
+            $("#laquu-simplebox-loader").hide();
+            $("#laquu-simplebox-image-wrap").append(this);
+            $(this).click(simplebox_flush);
+        };
+
+        return false;
+    }
+
+
+    /**
+     * flush simplebox images
+     */
+    function simplebox_flush() {
+        $("#laquu-simplebox-wrap").remove();
+        $("#laquu-simplebox-overlay").fadeOut(function(){
+            $(this).remove();
+        });
+    }
+
+
+    /**
+     * get page size
+     *
+     * @return Object
+     */
+    function get_page_size() {
+        var de = document.documentElement;
+        var w = window.innerWidth || self.innerWidth || (de&&de.clientWidth) || document.body.clientWidth;
+        var h = window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight;
+        return  {
+            width: w,
+            height: h
+        };
+    }
+
+
+    function get_page_scroll() {
+        var de = document.documentElement;
+        var t = window.pageYOffset || self.pageYOffset || (de && de.scrollTop)  || document.body.scrollTop;
+        var l = window.pageXOffset || self.pageXOffset || (de && de.scrollLeft) || document.body.scrollLeft;
+        return {
+            top: t,
+            left: l
+        };
+    }
+
+
+
+    $.laquu.simplebox = function(element, options){
+        simplebox_options = $.extend(simplebox_options, simplebox_default_options, options || {});
+
+        element.click(simplebox_init);
+    };
+})(jQuery);
+
 
