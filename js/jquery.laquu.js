@@ -354,7 +354,7 @@
             }, o || {});
 
             this.headers = this.element.find("." + this.options.header_class);
-            this.content = this.element.find("." + this.options.content_class)
+            this.content = this.element.find("." + this.options.content_class);
             this.headers.bind("click", function(ev){
                 t.headers.removeClass(t.options.current_class);
                 $(this).addClass(t.options.current_class);
@@ -874,6 +874,307 @@
 
 
     /**
+     * lightbox type simplebox plugin
+     *
+     * @param element jQueryHTMLCollection
+     * @param options Object
+     *        loader_img: ajax loading image
+     *        prev_text: previous link text
+     *        next_text: next link text
+     */
+    $.laquu.simplebox = function(element, options){
+        // simplebox defualt options object
+        var simplebox_default_options = {
+            loader_img: "img/ajax-loader.gif",
+            prev_text: "&laquo; prev",
+            next_text: "next &raquo;"
+        },
+
+
+        /**
+         * Merged simplebox options Object
+         */
+        simplebox_options = {},
+
+
+        /**
+         * current showd image number
+         */
+        simpleboxSelectedImage = 0;
+
+
+        /**
+         * simplebox box node
+         *
+         * <div id="laquu-simplebox-overlay"></div>
+         * <div id="laquu-simplebox">
+         *     <div id="laquu-simplebox-content">
+         *         <div id="laquu-simplebox-loader"><img src="" /></div>
+         *         <div id="laquu-simplebox-image"></div>
+         *         <div id="laquu-simplebox-controller">
+         *             <div id="laquu-simplebox-title"></div>
+         *             <div id="laquu-simplebox-pager">
+         *                 <span id="laquu-simplebox-prev"><a href="#"></a></span>
+         *                 <span id="laquu-simplebox-next"><a href="#"></a></span>
+         *             </div>
+         *         </div>
+         *     </div>
+         * </div>
+         */
+        var simplebox = '<div id="laquu-simplebox-overlay"></div><div id="laquu-simplebox"><div id="laquu-simplebox-content"><div id="laquu-simplebox-loader"><img src="" /></div><div id="laquu-simplebox-image"></div><div id="laquu-simplebox-controller"><div id="laquu-simplebox-title"></div><div id="laquu-simplebox-pager"><span id="laquu-simplebox-prev"><a href="#"></a></span><span id="laquu-simplebox-next"><a href="#"></a></span></div></div></div></div>';
+
+
+        /**
+         * jQuery HTMLCollection node
+         */
+        var jQueryObjects;
+
+
+        /**
+         * initialize simplebox
+         *
+         * @return false
+         */
+        function simplebox_init() {
+            while(this.href != simplebox_options.simpleboxElements.get(simpleboxSelectedImage).href) {
+                simpleboxSelectedImage++;
+            }
+
+            // create simplebox Element
+            simplebox_create_box.call(this);
+            return false;
+        }
+
+
+        /**
+         * Create simplebox image box & overlay
+         * reference by clicked anchor Element
+         *
+         */
+        function simplebox_create_box() {
+            var t = this, box = $(simplebox).appendTo("body"),
+                size = get_page_size(), scroll = get_page_scroll();
+
+            // do attach events
+            simplebox_attach_events();
+
+            // loading image
+            $("#laquu-simplebox-loader > img").attr("src", simplebox_options.loader_img);
+
+            // overlay
+            $("#laquu-simplebox-overlay").fadeIn("fast", function(){
+                $("#laquu-simplebox").fadeIn(function(){
+                    simplebox_show_image.call(t);
+                }).css({ top: ( scroll.top + 50), left: scroll.left });
+            }).css({
+                height: size.height, width: size.width
+            });
+        }
+
+
+        /**
+         * simplebox attachment Events
+         *
+         */
+        function simplebox_attach_events() {
+            var overlay = $("#laquu-simplebox-overlay"),
+                box     = $("#laquu-simplebox-image");
+
+            // click events
+            $([overlay.get(0), box.get(0)]).click(function(){ simplebox_flush(); });
+
+            // window events
+            // $(window).scroll(simplebox_scroll_window);
+            $(window).resize(simplebox_resize_window);
+
+            // key events
+            $(document).keyup(simplebox_keyevent_doc);
+
+            // anchor events
+            $("#laquu-simplebox-prev > a").click(simplebox_show_prev_image);
+            $("#laquu-simplebox-next > a").click(simplebox_show_next_image);
+        }
+
+
+        /**
+         * shown simplebox in image
+         */
+        function simplebox_show_image() {
+            var imgLoader = new Image(),
+                loader    = $("#laquu-simplebox-loader"),
+                image_content = $("#laquu-simplebox-image"),
+                controller = $("#laquu-simplebox-controller"),
+                next_btn = $("#laquu-simplebox-next > a", controller).text(""),
+                prev_btn = $("#laquu-simplebox-prev > a", controller).text("");
+
+
+            if(image_content.children("img").size()) { image_content.children("img").remove(); }
+            if(loader.is(":hidden")) { loader.show(); }
+
+            imgLoader.src = this.href;
+            imgLoader.alt = this.title || this.href.split("/").pop();
+            imgLoader.onload = function() {
+                var i = this;
+
+                this.style.display = "none";
+                this.onload = function() {};
+
+                loader.hide();
+                controller.hide();
+
+                // user setting link text
+                if(simpleboxSelectedImage > 0) {
+                    prev_btn.html(simplebox_options.prev_text);
+                }
+                if(simpleboxSelectedImage < (simplebox_options.simpleboxElements.size() - 1)) {
+                    next_btn.html(simplebox_options.next_text);
+                }
+
+                // append image to #laquu-simplebox-image
+                image_content.append(this);
+                $("#laquu-simplebox-title").text(this.alt);
+                $("#laquu-simplebox-content").animate({ width: this.width, height: this.height + controller.innerHeight() }, {
+                    complete: function(){
+                        $("#laquu-simplebox-image > img", this).fadeIn(function(){
+                            controller.slideDown();
+                        });
+                    }
+                });
+            };
+        }
+
+
+        /**
+         * show previous image
+         */
+        function simplebox_show_prev_image() {
+            if(simplebox_options.simpleboxElements[simpleboxSelectedImage -1]) {
+                --simpleboxSelectedImage;
+                simplebox_show_image.call(simplebox_options.simpleboxElements.get(simpleboxSelectedImage));
+            }
+            return false;
+        }
+
+
+        /**
+         * show previous image
+         */
+        function simplebox_show_next_image() {
+            if(simplebox_options.simpleboxElements[simpleboxSelectedImage + 1]) {
+                ++simpleboxSelectedImage;
+                simplebox_show_image.call(simplebox_options.simpleboxElements.get(simpleboxSelectedImage));
+            }
+            return false;
+        }
+
+
+        /**
+         * flush out simplebox Elements
+         *
+         */
+        function simplebox_flush() {
+            // flush selected image number
+            simpleboxSelectedImage = 0;
+
+            $("#laquu-simplebox").remove();
+            $("#laquu-simplebox-overlay").fadeOut(function(){
+                $(this).remove();
+            });
+
+            // unbind events
+            $(window).unbind("resize", simplebox_resize_window);
+            $(document).unbind("keyup", simplebox_keyevent_doc);
+            $("#laquu-simplebox-prev > a").unbind("click", simplebox_show_prev_image);
+            $("#laquu-simplebox-next > a").unbind("click", simplebox_show_next_image);
+        }
+
+
+        /**
+         * simplebox Scroll event
+         */
+        function simplebox_scroll_window() {
+            var scroll = get_page_scroll();
+            $("#laquu-simplebox").css({ top: scroll.top + 50, left: scroll.left });
+        }
+
+
+        /**
+         * window resize event
+         *
+         */
+        function simplebox_resize_window() {
+            var size = get_page_size();
+            $("#laquu-simplebox-overlay").css({ width: size.width, height: size.height });
+        }
+
+
+        /**
+         * document event for keyEvents
+         *
+         * @param event    jQuery EventObject
+         */
+        function simplebox_keyevent_doc(event) {
+            switch(event.keyCode) {
+                // ESC key
+                case 27: simplebox_flush(); break;
+                // left cursor key
+                case 37: simplebox_show_prev_image(); break;
+                // right cursor key
+                case 39: simplebox_show_next_image(); break;
+            }
+        }
+
+
+        /**
+         * get page size
+         *
+         * @return Object
+         */
+        function get_page_size() {
+            var de = document.documentElement,
+                db = document.body;
+            var w, h;
+
+            if(window.innerHeight && window.ScrollMaxY) {
+                // for Mozilla
+                h = window.innerHeight + window.ScrollMaxY;
+                w = window.innerWidth + window.ScrollMaxX;
+            }
+            else {
+                h = (db.scrollHeight > db.offsetHeight) ? db.scrollHeight : db.offsetHeight;
+                w = db.offsetWidth;
+            }
+            return  {
+                width: w,
+                height: h
+            };
+        }
+
+
+        /**
+         * get Document scroll size
+         *
+         */
+        function get_page_scroll() {
+            var de = document.documentElement;
+            var t = window.pageYOffset || self.pageYOffset || (de && de.scrollTop)  || document.body.scrollTop;
+            var l = window.pageXOffset || self.pageXOffset || (de && de.scrollLeft) || document.body.scrollLeft;
+            return {
+                top: t,
+                left: l
+            };
+        }
+
+        // extended simple box Options
+        simplebox_options = $.extend(simplebox_options, simplebox_default_options, options || {}, {
+            simpleboxElements: element
+        });
+
+        element.click(simplebox_init);
+    };
+
+
+    /**
      * Konami command
      *
      * @param  cmd        String    CSV pattern key code
@@ -895,185 +1196,6 @@
 })(jQuery);
 
 
-/**
- * Laquu.js simplebox
- * simple light box plugin
- *
- */
-(function($){
-    if(!$.laquu)
-        $.laquu = $.l = {};
 
-
-    // simplebox defualt options object
-    var simplebox_default_options = {
-        loader_img: "../ajax-loader.gif"
-    },
-    simplebox_options = {};
-
-
-    /**
-     * simplebox box node
-     *
-     * <div id="laquu-simplebox-overlay"></div>
-     * <div id="laquu-simplebox-wrap">
-     *     <div id="laquu-simplebox-content">
-     *         <div id="laquu-simplebox-image-wrap"></div>
-     *         <div id="simplebox-title-wrap">
-     *             <div id="laquu-simplebox-title"></div>
-     *             <div id="laquu-simplebox-title-bg"></div>
-     *         </div>
-     *     </div>
-     *     <div id="laquu-simplebox-controller">
-     *         <div id="laquu-simplebox-page">
-     *             <span id="laquu-simplebox-current"></span>
-     *             <span id="laquu-simplebox-all"></span>
-     *         </div>
-     *         <div id="lquu-simplebox-pager">
-     *             <span id="laquu-simplebox-prev"><a href=""></a></span>
-     *             <span id="laquu-simplebox-prev"><a href=""></a></span>
-     *         </div>
-     *     </div>
-     *     <div id="laquu-simplebox-loader"><img src="" alt="loading..." title="loading" /></div>
-     * </div>
-     */
-    var simplebox = '<div id="laquu-simplebox-overlay"></div><div id="laquu-simplebox-wrap"><div id="laquu-simplebox-content"><div id="laquu-simplebox-image-wrap"></div><div id="simplebox-title-wrap"><div id="laquu-simplebox-title"></div><div id="laquu-simplebox-title-bg"></div></div></div><div id="laquu-simplebox-controller"></div><div id="laquu-simplebox-loader"><img src="" alt="loading..." title="loading" /></div></div>';
-
-
-    /**
-     * jQuery HTMLCollection node
-     */
-    var jQueryObjects;
-
-
-    /**
-     * initialize simplebox
-     */
-    function simplebox_init() {
-        // create simplebox
-        simplebox_create();
-
-        // attach events
-        simplebox_attach_events();
-
-        // shown simple box
-        simplebox_show(this);
-        return false;
-    }
-
-
-    function simplebox_create() {
-        var size   = get_page_size(),
-            scroll = get_page_scroll();
-
-        $(simplebox).appendTo("body");
-        $("#laquu-simplebox-loader").attr("src", simplebox_options.loader_img);
-
-        // set styles
-        $("#laquu-simplebox-overlay").css({width: size.width, height: size.height, top: scroll.top, left: scroll.left});
-        $("#laquu-simplebox-wrap").css({
-            top: scroll.top + (size.height / 10),
-            left: scroll.left
-        });
-    }
-
-
-    function simplebox_attach_events() {
-        $("#laquu-simplebox-overlay").click(function(){
-            simplebox_flush();
-        });
-
-        $(window).scroll(function(){
-            var size = get_page_size();
-            var scroll = get_page_scroll();
-            $("#laquu-simplebox-overlay").css({
-                top: scroll.top,
-                left: scroll.left
-            });
-
-            $("#laquu-simplebox-wrap").css({
-                top: scroll.top + ( size.height / 10 ),
-                left: scroll.left
-            });
-        });
-
-        $(window).resize(function(){
-            var size = get_page_size();
-            var scroll = get_page_scroll();
-
-            $("#laquu-simplebox-overlay").css({
-                width: size.width,
-                height: size.height
-            });
- 
-            $("#laquu-simplebox-wrap").css({
-                top: scroll.top + (size.height / 10),
-                left: scroll.left
-            });
-        });
-    }
-
-
-    /**
-     * show simplebox images
-     */
-    function simplebox_show(element) {
-        var imgLoader = new Image();
-        imgLoader.src = element.href;
-        imgLoader.onload = function() {
-            $("#laquu-simplebox-loader").hide();
-            $("#laquu-simplebox-image-wrap").append(this);
-            $(this).click(simplebox_flush);
-        };
-
-        return false;
-    }
-
-
-    /**
-     * flush simplebox images
-     */
-    function simplebox_flush() {
-        $("#laquu-simplebox-wrap").remove();
-        $("#laquu-simplebox-overlay").fadeOut(function(){
-            $(this).remove();
-        });
-    }
-
-
-    /**
-     * get page size
-     *
-     * @return Object
-     */
-    function get_page_size() {
-        var de = document.documentElement;
-        var w = window.innerWidth || self.innerWidth || (de&&de.clientWidth) || document.body.clientWidth;
-        var h = window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight;
-        return  {
-            width: w,
-            height: h
-        };
-    }
-
-
-    function get_page_scroll() {
-        var de = document.documentElement;
-        var t = window.pageYOffset || self.pageYOffset || (de && de.scrollTop)  || document.body.scrollTop;
-        var l = window.pageXOffset || self.pageXOffset || (de && de.scrollLeft) || document.body.scrollLeft;
-        return {
-            top: t,
-            left: l
-        };
-    }
-
-
-
-    $.laquu.simplebox = function(element, options){
-        simplebox_options = $.extend(simplebox_options, simplebox_default_options, options || {});
-
-        element.click(simplebox_init);
-    };
-})(jQuery);
 
 
