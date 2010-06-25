@@ -41,6 +41,7 @@ laquu.jsでサポートしている機能は次の14機能です。
 + バブルポップアップ
 + シンプルなイメージメニュー
 + スムーススクローラ
++ シンプルなlightbox simplebox
 
 
 ### 各機能の使い方
@@ -642,5 +643,52 @@ _onStep_
 引数は「現在までに完了したstep数」と「対象となった要素を含んだオブジェクト」です。
 また、「this」キーワードを利用することで、指定した要素へのアクセスが可能です。
 
+
+
+#### _シンプルなlightbox simplebox_
+
+##### 機能
+
+jQuery Lightboxでもすでに実装されている、画像表示エフェクトを実装します。
+極めてシンプル（ほとんど装飾は無し）なsimpleboxですが、CSSでの後日装飾が可能です。
+また、画像ページャもついていて、キーボードによるページ遷移も可能です。
+
+
+##### 使い方
+
+simpleboxは次のように呼び出して使います。
+>     $.laquu.simplebox($("jQuery selector")[,{options}]);
+
+"jQuery Selector"はsimpleboxを適用したい要素のセレクタを記述します。
+
+タグは以下のような形になります。
+>     <ul>
+>         <li><a href="path/to/img01.jpg" class="simplebox"><img src="path/to/img01.jpg" /></a></li>
+>         <li><a href="path/to/img02.jpg" class="simplebox"><img src="path/to/img02.jpg" /></a></li>
+>         <li><a href="path/to/img03.jpg" class="simplebox"><img src="path/to/img03.jpg" /></a></li>
+>     </ul>
+
+また、グルーピングを行うことも可能です。
+>     <ul>
+>         <li><a href="path/to/img01.jpg" rel="group1"><img src="path/to/img01.jpg" /></a></li>
+>         <li><a href="path/to/img02.jpg" rel="group2"><img src="path/to/img02.jpg" /></a></li>
+>         <li><a href="path/to/img03.jpg" rel="group1"><img src="path/to/img03.jpg" /></a></li>
+>         <li><a href="path/to/img04.jpg" rel="group2"><img src="path/to/img04.jpg" /></a></li>
+>     </ul>
+
+また、グルーピングを行う際は、以下のように指定して抽出する必要があります。
+>     jQuery("a[rel='gropu1']")
+
+
+##### 指定可能なオプション
+
+_loader_img_
+画像を読み込んでいる最中のローディングアイコンを指定します。デフォルトは「img/ajax-loader.gif」です。
+
+_prev_text_
+画像ページャの次へ進むためのリンクテキストを指定します。デフォルトは「next&laquo;」です。
+
+_next_text_: 
+画像ページャの前へ進むためのリンクテキストを指定します。デフォルトは「next &raquo;」です。
 
 
