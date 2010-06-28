@@ -941,7 +941,9 @@
             }
 
             // create simplebox Element
-            simplebox_create_box.call(this);
+            simplebox_create_box();
+
+            simplebox_show_image.call(this);
             return false;
         }
 
@@ -952,7 +954,7 @@
          *
          */
         function simplebox_create_box() {
-            var t = this, box = $(simplebox).appendTo("body"),
+            var box = $(simplebox).appendTo("body"),
                 size = get_page_size(), scroll = get_page_scroll();
 
             // do attach events
@@ -962,13 +964,8 @@
             $("#laquu-simplebox-loader > img").attr("src", simplebox_options.loader_img);
 
             // overlay
-            $("#laquu-simplebox-overlay").fadeIn("fast", function(){
-                $("#laquu-simplebox").fadeIn(function(){
-                    simplebox_show_image.call(t);
-                }).css({ top: ( scroll.top + 50), left: scroll.left });
-            }).css({
-                height: size.height, width: size.width
-            });
+            $("#laquu-simplebox-overlay").show().css({ height: size.height, width: size.width });
+            $("#laquu-simplebox").show().css({ top: scroll.top + 50, left: scroll.left });
         }
 
 
@@ -1016,9 +1013,6 @@
             imgLoader.onload = function() {
                 var i = this;
 
-                this.style.display = "none";
-                this.onload = function() {};
-
                 loader.hide();
                 controller.hide();
 
@@ -1031,15 +1025,10 @@
                 }
 
                 // append image to #laquu-simplebox-image
-                image_content.append(this);
                 $("#laquu-simplebox-title").text(this.alt);
-                $("#laquu-simplebox-content").animate({ width: this.width, height: this.height + controller.innerHeight() }, {
-                    complete: function(){
-                        $("#laquu-simplebox-image > img", this).fadeIn(function(){
-                            controller.slideDown();
-                        });
-                    }
-                });
+                $("#laquu-simplebox-content").css({ width: this.width, height: this.height + controller.innerHeight() });
+                image_content.append(this);
+                controller.show();
             };
         }
 
@@ -1076,10 +1065,7 @@
             // flush selected image number
             simpleboxSelectedImage = 0;
 
-            $("#laquu-simplebox").remove();
-            $("#laquu-simplebox-overlay").fadeOut(function(){
-                $(this).remove();
-            });
+            $("#laquu-simplebox-overlay, #laquu-simplebox").remove();
 
             // unbind events
             $(window).unbind("resize", simplebox_resize_window);
@@ -1194,8 +1180,3 @@
         });
     };
 })(jQuery);
-
-
-
-
-
