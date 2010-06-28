@@ -166,82 +166,66 @@
      */
     $.laquu.ticker = function(elems, options){
         return elems.each(function(){
-            return new ticker($(this), options);
+            var $self = $(this), current_item = 0, timer = null, parent = null,
+                items = null, item = null, isStarted = false,
+                setting = $.extend({}, {
+                    speed: 1000,
+                    duration: 2000,
+                    onComplete: function() {},
+                    onStep: function() {}
+                }, options || {});
+
+
+            // rewind iteration
+            function rewind() {
+                if(current_item >= items.length) { current_item = 0; }
+            }
+
+            function next() {
+                current_item++;
+                rewind();
+                item = items.get(current_item);
+            }
+
+            function tween() {
+                next();
+                $self.animate({ top: -item.offsetTop, left: item.offsetLeft }, {
+                    duration: setting.duration,
+                    queue: false,
+                    step: setting.onStep,
+                    complete: function() {
+                        var i = (current_item === 0) ? items.length : current_item;
+                        $self.css({ top: 0, left: 0 });
+                        $(items[i -1]).appendTo($self);
+                        setting.onComplete.call(items[i -1]);
+                    }
+                });
+            }
+
+            // start animation
+            function start() {
+                isStarted = true;
+                timer = setInterval(function(){
+                    tween();
+                }, setting.speed + setting.duration);
+            }
+
+            // stop animation
+            function stop() {
+                clearInterval(timer);
+                timer = null;
+                isStarted = false;
+            }
+
+            parent = $self.parent();
+            items  = $self.children();
+
+            parent.css("position", "relative");
+            $self.css("position", "absolute").hover(stop, start);
+
+            if(!isStarted) { start(); }
         });
     };
-    var ticker = function(el, options) {
-        this.init(el, options);
-    };
-    ticker.fn = ticker.prototype = {};
-    ticker.fn.extend = $.extend;
-    ticker.fn.extend({
-        current_item: 0,
-        timer: null,
-        init: function(e, o) {
-            var t = this;
-            this.element = e;
-            this.parent  = e.parent();
-            this.items = e.children();
-            this.options = this.extend({
-                speed: 1000,
-                duration: 2000,
-                onComplete: function() {},
-                onStep: function() {}
-            }, o || {});
-
-            this.parent.css("position", "relative");
-            this.element.css("position", "absolute");
-            this.element.hover(function(){
-                t.clearTimer();
-            }, function(){
-                --t.current_item;
-                t.next();
-            });
-
-            this.next();
-        },
-        next: function() {
-            var t = this;
-            ++this.current_item;
-            this.rewind();
-            if(!this.timer) {
-                this.timer = setInterval(function(){
-                    t.tween(t);
-                }, (this.options.duration + this.options.speed));
-            }
-        },
-        rewind: function() {
-            if(this.current_item >= this.items.length) {
-                this.current_item = 0;
-            }
-        },
-        tween: function(caller) {
-            var t = caller;
-            var item = t.items.get(t.current_item);
-            t.element.animate({
-                top: -item.offsetTop,
-                left: -item.offsetLeft
-            }, {
-                duration: t.options.speed,
-                queue: false,
-                complete: function() {
-                    var i = (t.current_item === 0) ? t.items.length : t.current_item;
-                    $(t.items[i -1]).appendTo(t.element);
-                    t.element.css({
-                        top: 0,
-                        left: 0
-                    });
-                    t.options.onComplete.call(t.items[i -1]);
-                    t.next();
-                },
-                step: t.options.onStep
-            });
-        },
-        clearTimer: function() {
-            clearInterval(this.timer);
-            this.timer = null;
-        }
-    });
 
 
     /**
