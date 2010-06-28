@@ -4,7 +4,7 @@
  * @Auth    Nully
  * @Url     
  * @Make    10/04/26(Mon)
- * Version  0.14
+ * Version  0.15
  * @License MIT Lincense
  * The MIT License
  *
@@ -316,47 +316,37 @@
      */
     $.laquu.accordion = function(elems, options) {
         return elems.each(function(){
-            return new accordion($(this), options);
+            var $self = $(this),
+                setting = $.extend({}, {
+                    speed: 600,
+                    header_class: "laquu_accordion_header",
+                    content_class: "laquu_accordion_content",
+                    current_class: "active",
+                    onHide: function() {},
+                    onShow: function() {}
+                }, options || {});
+
+            var headers = $self.find("." + setting.header_class),
+                content = $self.find("." + setting.content_class);
+
+            function show(e, ev) {
+                content.not($(e).next()).slideUp(setting.speed, function(){
+                    setting.onHide.call(this);
+                });
+                $(e).next().slideDown(setting.speed, function(){
+                    setting.onShow.call(this);
+                });
+            }
+
+            headers.bind("click", function(ev){
+                headers.removeClass(setting.current_class);
+                $(this).addClass(setting.current_class);
+                show(this, ev);
+                ev.preventDefault();
+            });
+            $(headers.get(0)).trigger("click");
         });
     };
-    var accordion = function(elm, options) {
-        this.init(elm, options);
-    };
-    accordion.fn = accordion.prototype = {};
-    accordion.fn.extend = $.extend;
-    accordion.fn.extend({
-        init: function(e, o) {
-            var t = this;
-            this.element = e;
-            this.options = $.extend({
-                speed: 600,
-                header_class: "laquu_accordion_header",
-                content_class: "laquu_accordion_content",
-                current_class: "active",
-                onHide: function() {},
-                onShow: function() {}
-            }, o || {});
-
-            this.headers = this.element.find("." + this.options.header_class);
-            this.content = this.element.find("." + this.options.content_class);
-            this.headers.bind("click", function(ev){
-                t.headers.removeClass(t.options.current_class);
-                $(this).addClass(t.options.current_class);
-                t.show($(this), ev);
-            });
-            this.headers.first().trigger("click");
-        },
-        show: function(e, ev) {
-            var t = this;
-            this.content.not(e.next()).slideUp(this.options.speed, function(){
-                t.options.onHide.call(this);
-            });
-
-            e.next().slideDown(t.options.speed, function(){
-                t.options.onShow.call(this);
-            });
-        }
-    });
 
 
     /**
