@@ -4,7 +4,7 @@
  * @Auth    Nully
  * @Url     
  * @Make    10/04/26(Mon)
- * Version  0.15
+ * Version  0.16
  * @License MIT Lincense
  * The MIT License
  *
@@ -129,18 +129,26 @@
                 },
                 toggle: function(e, src) {
                     $(e).attr("src", src);
-                }
+                },
+				/* Added */
+				toAbsolute: function (path) {
+					var span = document.createElement("span");
+					span.innerHTML = '<a href="'+ path +'"></a>';
+					return span.firstChild.href;
+				}
             };
 
         return elems.each(function(){
             var $t = $(this),
-                src = $t.attr("src"),
+                src = fn.toAbsolute($t.attr("src")),
                 _on = "",
                 tmp = src.split("."),
                 ext = tmp.pop();
 
-            tmp[tmp.length] = setting.suffix;
-            _on = tmp.join("") + "." + ext;
+			_on = tmp.join(".") + setting.suffix + "." + ext;
+
+			//tmp[tmp.length] = setting.suffix;
+            //_on = tmp.join("") + "." + ext;
 
             $t.data("laquu_imgrollover_out", src);
             $t.data("laquu_imgrollover_on", _on);
