@@ -1,0 +1,145 @@
+@charset "utf-8";
+/**
+ * Laquu jQuery plugin styles
+ */
+/*-- opacityOver プラグイン */
+
+
+/*-- imageOver プラグイン */
+
+
+/*-- ticker プラグイン */
+#laquuTicker {
+    overflow: hidden;
+    height: 280px;
+    border: 1px solid #999;
+    width: 300px;
+}
+#laquuTicker ul {
+    background: #FFF;
+}
+#laquuTicker li {
+    border-bottom: 1px solid #999;
+    padding: 5px;
+}
+
+
+/*-- blank プラグイン */
+
+
+/*-- accordion プラグイン */
+#laquuAccordion {}
+#laquuAccordion .laquu_accordion_header {
+    cursor: pointer;
+    border-bottom: 1px solid #999;
+    padding: 3px;
+}
+#laquuAccordion .laquu_accordion_header.active {}
+#laquuAccordion .laquu_accordion_content {
+    padding: 5px;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #999;
+    background: #FFF;
+}
+
+
+/*-- tab プラグイン */
+#laquuTab { width: 310px; }
+#laquuTab ul {
+    zoom: 1;
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+}
+#laquuTab ul:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    line-height: 0;
+    visibility: hidden;
+}
+#laquuTab li { float: left; }
+#laquuTab li a {
+    display: block;
+    padding: 5px 8px;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    background: #EEE;
+    color: #CC6666  ;
+}
+#laquuTab li a.active {
+    border-bottom: none;
+    background: #FFF;
+    color: #333;
+}
+#laquuTab .laquu-tab-panel {
+    background: #FFF;
+    margin-top: -1px;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #999;
+    padding: 5px;
+}
+
+
+/*-- stripe プラグイン */
+.odd  { background: #CCC; }
+.even { background: #EFEFEF; }
+
+
+/*-- hover プラグイン */
+table .hover { background: #FFFFCC; }
+
+
+/*-- fss プラグイン */
+
+
+/*-- dropdown プラグイン */
+
+
+/*-- tooltip プラグイン */
+.tooltip-wrap {
+    background: #FFF;
+    padding: 3px 8px;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
+
+/*-- bubblepop プラグイン */
+.popup {
+    background: #FFF;
+    padding: 3px;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+
+
+/*-- imgmenu プラグイン */
+.imageMenuWrap {
+    margin: 0 0 20px;
+}
+.imageMenu {
+    clear: both;
+    height: 180px;
+    border: 1px solid #999;
+    width: 500px;
+}
+.imageMenu li {
+    width: 100px;
+    float:left;
+    overflow: hidden;
+}
+
+/*-- imgmenu プラグイン（自動スクロール版） */
+.imageMenuVertical {
+    border: 1px solid #999;
+    width: 200px;
+    height: 200px;
+}
+.imageMenuVertical li {
+    height: 40px;
+    overflow: hidden;
+}
+

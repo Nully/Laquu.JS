@@ -1,0 +1,86 @@
+@charset "utf-8";
+
+/*-- オーバーレイ（スカしたやつ） */
+#laquu-simplebox-overlay {
+    position: absolute;
+    background: #000;
+    opacity: .7;
+    filter: opacity("alpha=70");
+    -moz-opacity: .7;
+    -webkit-opacity: .7;
+    -khtml-opacity: .7;
+	top: 0;
+	left: 0;
+    z-index: 50;
+}
+
+
+/*-- simpleboxの全体枠組み */
+#laquu-simplebox {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    z-index: 55;
+    top: 20px;
+    display: none;
+}
+
+
+/*-- simpleboxの画像などが入る枠組み */
+#laquu-simplebox-content {
+    background: #FFF;
+    padding: 10px;
+    margin: 0 auto;
+    width: 120px;
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+
+/*-- 画像本体 */
+#laquu-simplebox-image img {
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+
+/*-- 画像キャプションなどを囲む枠組み */
+#laquu-simplebox-controller {}
+
+
+/*-- 画像キャプション */
+#laquu-simplebox-title {
+    padding: 10px 0;
+    font-size: 12px;
+    text-align: left;
+    line-height: 1.3;
+    color: #333;
+}
+
+/*-- ページコントローラの枠組み */
+#laquu-simplebox-pager {
+    zoom: 1;
+    font-size: 11px;
+}
+#laquu-simplebox-pager:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    line-height: 0;
+    visibility: hidden;
+}
+
+
+/*-- ページャの色設定 */
+#laquu-simplebox-pager a { color: #555; }
+#laquu-simplebox-pager a:hover { color: #999; }
+#laquu-simplebox-pager a:visited { color: #555; }
+
+
+/*-- ページャの設定 */
+#laquu-simplebox-prev { float: left; }
+#laquu-simplebox-next { float: right; }
+
+
+
