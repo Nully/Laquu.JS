@@ -1,0 +1,12 @@
+@charet "utf-8";
+/**
+ * -- Bubble popup plugin styles.
+ *
+ * Author: Nully
+ */
+#popup1 p, #popup2 p {
+}
+.trigger {
+    font-size: 1.6em;
+}
+
