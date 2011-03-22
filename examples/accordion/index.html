@@ -5,14 +5,78 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Accordion | Examples | Laquu.js</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../layout.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../src/css/sh_style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />
 </head>
-<body>
+<body onload="sh_highlightDocument();">
 
 <div id="container">
-<h1></h1>
+<h1>Laquu.js accordion example</h1>
+
+<div id="accordion1">
+<h2>Default accordion</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+$(function(){
+    laquu("#acordion1").accordion();
+});
+</pre>
+</div>
+
+<dl>
+    <dt><a href="#content1" class="accordion_trigger">Show Content1</a></dt>
+    <dd id="content1"><p>Content 1</p></dd>
+    <dt><a href="#content2" class="accordion_trigger">Show Content2</a></dt>
+    <dd id="content2"><p>Content 2</p></dd>
+    <dt><a href="#content3" class="accordion_trigger">Show Content3</a></dt>
+    <dd id="content3"><p>Content 3</p></dd>
+</dl>
+</div>
+
+<div id="accordion2">
+<h2>Callback seted accordion</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+$(function(){
+    laquu("#acordion2").accordion({
+        onHide: function() { alert("on hide " + this.id); },
+        onShow: function() { $(this).addClass("show"); }
+    });
+});
+</pre>
+</div>
+
+<dl>
+    <dt><a href="#content4" class="accordion_trigger">Show Content4</a></dt>
+    <dd id="content4"><p>Content 4</p></dd>
+    <dt><a href="#content5" class="accordion_trigger">Show Content5</a></dt>
+    <dd id="content5"><p>Content 5</p></dd>
+    <dt><a href="#content6" class="accordion_trigger">Show Content6</a></dt>
+    <dd id="content6"><p>Content 6</p></dd>
+</dl>
+</div>
+
 
 <!-- End container --></div>
 
+<script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    laquu("#accordion1").accordion();
+    laquu("#accordion2").accordion({
+        onHide: function(){ alert("on hide " + this.id); },
+        onShow: function(){ $(this).addClass("show"); }
+    });
+});
+</script>
 </body>
 </html>
 
