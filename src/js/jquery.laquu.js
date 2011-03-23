@@ -28,7 +28,220 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+// jQuery subClass laquu !
+if(!laquu) var laquu = jQuery.sub();
+
 (function($){
+    $.laquu = {
+        empty: function() {},
+        error: function(e) {
+            if(window.console && console.log)
+                console.log.aplly(arguments);
+            else
+                throw e;
+        }
+    };
+
+    /**
+     * Accordion plugin
+     *
+     * paramaters:
+     *   triggerSelector: accordion trigger selector.
+     *   currentClass: accordion current panel class.
+     *   speed: animation speed:
+     *   onHide: on slideup callback method.
+     *   onShow:  on slidedown callback method.
+     */
+    laquu.fn.accordion = function(settings) {
+        var defaults = {
+            triggerSelector: ".accordion_trigger",
+            currentClass: "current",
+            speed: 400,
+            onHide: $.laquu.empty,
+            onShow: $.laquu.empty
+        };
+
+        return this.each(function(i, e){
+            var box = this,
+                opts = laquu.extend({}, defaults, settings || {}),
+                triggers = laquu(opts.triggerSelector, this),
+                contents;
+
+            if(triggers.size() == 0)
+                return;
+
+            triggers.each(function(){
+                var target = laquu(laquu(this).attr("href"));
+                target.hide();
+                if(!contents) contents = target;
+                else contents = contents.add(target);
+            });
+
+            triggers.bind("click", function(e){
+                triggers.removeClass(opts.currentClass)
+                    .filter("[href="+ e.currentTarget.hash +"]")
+                    .addClass(opts.currentClass);
+                contents.slideUp(opts.speed, function(){
+                    if($.isFunction(opts.onHide))
+                        opts.onHide.call(this);
+                }).filter(e.currentTarget.hash)
+                .slideDown(opts.speed, function(){
+                    if($.isFunction(opts.onShow))
+                        opts.onShow.apply(this);
+                });
+                return false;
+            });
+            laquu(triggers.get(0)).trigger("click");
+        });
+    };
+
+
+    /**
+     * Blank plugin
+     *
+     * paramaters
+     *   toolbar: display toolbar.
+     *   location: shown location bar.
+     *   directories: shown direcotries.
+     *   status: show status bar.
+     *   menubars: shown menu bars.
+     *   scrollbar: shown scroll bar.
+     *   resizable: browser resizable.
+     *   close: shown close button.
+     */
+    laquu.fn.blank = function(settings) {
+        var defaults = {
+            toolbar:     "yes", location:    "yes", directories: "yes",
+            status:      "yes", menubars:    "yes", scrollbar:   "yes",
+            resizable:   "yes", close:       "yes"
+        };
+
+        return this.each(function(){
+            var params = (function(sizes){
+                var opts = $.extend({}, defaults, settings || {}),
+                    _param = "";
+                for(var k in opts) {
+                    _param += k + "=" + opts[k] + ", ";
+                }
+                _param = _param.substr(0, _param.length - 2);
+                if(sizes) {
+                    sizes = sizes.split(",");
+                    _param += ", width=" + sizes[0];
+                    _param += ", height=" + sizes[0];
+                }
+                return _param;
+            })(laquu(this).attr("data-windowsize"));
+
+            laquu(this).bind("click", function(e){
+                e.preventDefault();
+                window.open(this.href, "laquu_blank", params);
+            });
+        });
+    };
+
+
+    /**
+     * Bubblepopup plugin
+     *
+     * paramaters
+     *   easing: jQuery animation type.
+     *   distance: trigger popup animation distance.
+     *   hideDelay: popup window hide delay time.
+     *   popupClass: popup selector class.
+     *   triggerClass: popup trigger selector class.
+     *   onShow: popup on show callback method.
+     *   onHide: popup on hide callback method.
+     *   onStep: popup on step callback method.
+     */
+    laquu.fn.bubblepopup = function(settings) {
+        var defaults = {
+            easing: "swing",
+            distance: 15,
+            hideDelay: 1800,
+            popupClass: ".popup",
+            triggerClass: ".trigger",
+            onShow: $.laquu.empty,
+            onHide: $.laquu.empty,
+            onStep: $.laquu.empty
+        };
+
+        return this.each(function(){
+            var opts = $.extend({}, defaults, settings || {}),
+                t= $(this),
+                popup = t.find(opts.popupClass),
+                trigger = t.find(opts.triggerClass),
+                popupPos = "-" + (opts.distance + popup.outerHeight()) + "px",
+                isShow = false,
+                isStarted = false,
+                hideTimer = null,
+                triggerWidthHalf = trigger.outerWidth({ margin: true }) / 2,
+                triggerPosLeft = trigger.position().left,
+                popupWidthHalf = popup.outerWidth({ margin: true }) / 2;
+
+            function clearTimer() {
+                if(hideTimer) {
+                    clearTimeout(hideTimer);
+                    hideTimer = null;
+                }
+            }
+
+            function show() {
+                clearTimer();
+                if(isShow || isStarted) return;
+                isStarted = true;
+
+                popup.stop(true, true).css({
+                    top: popupPos, display: "block"
+                }).animate({
+                    opacity: 1, top: "+=" + opts.distance,
+                }, {
+                    queue: false,
+                    easing: opts.easing,
+                    complete: function() {
+                        isShow = true;
+                        isStarted = false;
+                        if($.isFunction(opts.onShow))
+                            opts.onShow.call(this, this);
+                    },
+                    step: opts.onStep
+                });
+            }
+
+            function hide() {
+                clearTimer();
+                hideTimer = setTimeout(function(){
+                    popup.stop().animate({
+                        opacity: 0,
+                        top: "-=" + opts.distance
+                    }, {
+                        queue: false,
+                        easing: opts.easing,
+                        complete: function() {
+                            $(this).css("display", "none");
+                            isStarted = false;
+                            isShow = false;
+                            if($.isFunction(opts.onHide))
+                                opts.onHide.call(this, this);
+                        },
+                        step: opts.onStep
+                    });
+                }, opts.hideDelay);
+            }
+
+            t.css("position", "relative");
+            popup.css({
+                position: "absolute",
+                opacity: 0,
+                display: "none",
+                top: popupPos
+            });
+
+            $([popup.get(0), trigger.get(0)]).hover(show, hide);
+        });
+    };
+
+
     // Global object
     $.laquu = $.l = {
         version: 1.0,
