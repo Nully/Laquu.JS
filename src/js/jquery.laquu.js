@@ -278,6 +278,46 @@ if(!laquu) var laquu = jQuery.sub();
                     });
                 }
             });
+    };
+
+
+    /**
+     * Fontsize plugin
+     *
+     * paramaters
+     *   onChange: font size on change callback
+     *   cookie: jQuery.cookie plugin options
+     */
+    laquu.fn.fontsize = function(settings) {
+        var defaults = {
+            onChange: $.laquu.empty,
+            cookie: {expires: 7, path: "/", domain: "", secure: false},
+            target: "#container"
+        };
+
+        return this.each(function(){
+                elements = $("a", this),
+                body = $(opts.target),
+                classes = $.map(elements, function(e, i){
+                    return $(e).attr("href").replace("#", "");
+                }).join(" ");
+
+            elements.bind("click", function(ev){
+                var size = $(this).attr("href").replace("#", "");
+                body.removeClass(classes);
+                body.addClass(size);
+
+                if($.isFunction(opts.onChange))
+                    opts.onChange.call(body, body, size);
+
+                if($.cookie)
+                    $.cookie("laquu_font-size", size, opts.cookie);
+
+                ev.preventDefault();
+            });
+
+            if($.cookie)
+                body.addClass($.cookie("laquu_font-size"));
         });
     };
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Examples | Laquu.js</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<link type="text/css" rel="stylesheet" href="reset.css" media="all" />
+<link type="text/css" rel="stylesheet" href="layout.css" media="all" />
+<style type="text/css">
+ul {
+}
+li {
+    float: left;
+    margin-right: 10px;
+    width: 280px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+li a {
+    font-size: 1.6em;
+}
+.no-margin { margin-right: 0 !important; }
+</style>
+<script type="text/javascript">
+jQuery(function(){
+    jQuery("li").each(function(i){
+        if(i %3 == 2)
+            $(this).addClass("no-margin");
+    });
+});
+</script>
+</head>
+<body>
+
+<div id="container">
+<h1>Examples Laquu.js plugins</h1>
+<ul>
+<li><a href="accordion/index.html">Accordion</a></li>
+<li><a href="blank/index.html">Blank</a></li>
+<li><a href="bubblepopup/index.html">Bubblepopup</a></li>
+<li><a href="dropdown/index.html">Dropdown</a></li>
+<li><a href="fontsize/index.html">Fontsize</a></li>
+<li><a href="hover/index.html">Hover</a></li>
+<li><a href="kotanmi/index.html">Konami</a></li>
+<li><a href="picmenu/index.html">Picmenu</a></li>
+<li><a href="rollover/index.html">Rollover</a></li>
+<li><a href="scroller/index.html">Scroller</a></li>
+<li><a href="simplebox/index.html">Simplebox</a></li>
+<li><a href="stripe/index.html">Stripe</a></li>
+<li><a href="tab/index.html">Tab</a></li>
+<li><a href="ticker/index.html">Ticker</a></li>
+<li><a href="tooltip/index.html">Tooltip</a></li>
+</ul>
+<!-- End container --></div>
+</body>
+</html>
+

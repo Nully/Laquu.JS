@@ -15,17 +15,72 @@
 <body onload="sh_highlightDocument();">
 
 <div id="container">
-<h1></h1>
+<h1>Laquu.js Fontsize plugin example.</h1>
 
-<div id="">
-<h2></h2>
+<div id="example1">
+<h2>Default example</h2>
 
 <div class="code">
 <p>Code</p>
 <pre class="sh_javascript">
+jQuery(function(){
+    laquu("#switch1").fontsize();
+});
+</pre>
+</div>
+<dl id="switch1">
+<dt>Change Fontsize</dt>
+<dd><a href="#small">Small</a></dd>
+<dd><a href="#middle">Default</a></dd>
+<dd><a href="#large">Large</a></dd>
+</dl>
+
+</div>
+
+<div id="example2">
+<h2>has onChange callback example</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("#switch2").fontsize({
+        onChange: function(elem, size) {
+            alert("on changed fnot size " + size + " !");
+        }
+    });
+});
+</pre>
+</div>
+<dl id="switch2">
+<dt>Change Fontsize</dt>
+<dd><a href="#small">Small</a></dd>
+<dd><a href="#middle">Default</a></dd>
+<dd><a href="#large">Large</a></dd>
+</dl>
+</div>
+
+<div id="example3">
+<h2>Font size change target example</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("#switch3").fontsize({
+        target: "changeTarget"
+    });
+});
 </pre>
 </div>
 
+<p id="changeTarget">this text font size change target !</p>
+<dl id="switch3">
+<dt>Change Fontsize</dt>
+<dd><a href="#small">Small</a></dd>
+<dd><a href="#middle">Default</a></dd>
+<dd><a href="#large">Large</a></dd>
+</dl>
 </div>
 
 <!-- End container --></div>
@@ -33,6 +88,15 @@
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    laquu("#switch1").fontsize();
+    laquu("#switch2").fontsize({
+        onChange: function(elem, size) {
+            alert("on changed fnot size " + size + " !");
+        }
+    });
+    laquu("#switch3").fontsize({
+        target: "#changeTarget"
+    });
 });
 </script>
 </body>
