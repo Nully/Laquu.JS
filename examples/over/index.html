@@ -15,24 +15,123 @@
 <body onload="sh_highlightDocument();">
 
 <div id="container">
-<h1></h1>
+<h1>Laquu.js over plugin examples</h1>
 
-<div id="">
-<h2></h2>
+<div id="over1" class="container">
+<h2>Default over example</h2>
 
 <div class="code">
 <p>Code</p>
 <pre class="sh_javascript">
+jQuery(function(){
+    laquu("#over1 tr").over();
+});
 </pre>
 </div>
 
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<th>Table head</th>
+	<td>Table data</td>
+</tr>
+<tr>
+	<th>Table head</th>
+	<td>Table data</td>
+</tr>
+<tr>
+	<th>Table head</th>
+	<td>Table data</td>
+</tr>
+</table>
+
 </div>
+
+<div id="over2" class="container">
+<h2>Default over example</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("#over2 tr").over({
+        hoverClass: "on"
+    });
+});
+</pre>
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<th>Table head</th>
+	<td>Table data</td>
+</tr>
+<tr>
+	<th>Table head</th>
+	<td>Table data</td>
+</tr>
+<tr>
+	<th>Table head</th>
+	<td>Table data</td>
+</tr>
+</table>
+
+</div>
+
+
+<div id="over3" class="container">
+<h2>has Calback over example</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("#over3 tr").over({
+        onHover: function() {
+            $("th, td", this).text("hove !!");
+        },
+        onOut: function() {
+            $("th, td", this).text("out.");
+        }
+    });
+});
+</pre>
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<th>out.</th>
+	<td>out.</td>
+</tr>
+<tr>
+	<th>out.</th>
+	<td>out.</td>
+</tr>
+<tr>
+	<th>out.</th>
+	<td>out.</td>
+</tr>
+</table>
+
+</div>
+
 
 <!-- End container --></div>
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    laquu("#over1 tr").over();
+    laquu("#over2 tr").over({
+        hoverClass: "on"
+    });
+    laquu("#over3 tr").over({
+        onHover: function() {
+            $("th, td", this).text("hove !!");
+        },
+        onOut: function() {
+            $("th, td", this).text("out.");
+        }
+    });
 });
 </script>
 </body>
