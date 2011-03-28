@@ -388,6 +388,37 @@ if(!laquu) var laquu = jQuery.sub();
     };
 
 
+    /**
+     * Picmenu plugin
+     * paramaters
+     *  easing: animation easing. optional jQuery.easing plugin.
+     *  duration: image animation speed
+     *  showSize: shown image size
+     *  hideSize: hide image size
+     *  isVertical: animate direction. set true change direction vertical.
+     *  auto: animation automaticaly. set true animate auto.
+     *  autoDuration: auto animate duration.
+     */
+    laquu.fn.picmenu = function(settings) {
+        var defaults = {
+            easing: "swing",
+            duration: 300,
+            showSize: "200px",
+            hideSize: "160px",
+            isVertical: false,
+            auto: false,
+            autoDuration: 2500
+        };
+
+        return this.each(function(i, e){
+            var opts = $.extend({}, defaults, settings || {}),
+                timer = null,
+                $t = $(this),
+                items = $t.children();
+        });
+    };
+
+
     // Global object
     $.laquu = $.l = {
         version: 1.0,
