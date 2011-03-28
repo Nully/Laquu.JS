@@ -242,6 +242,46 @@ if(!laquu) var laquu = jQuery.sub();
     };
 
 
+    /**
+     * Dropdown menu plugin
+     *
+     */
+    laquu.fn.dropdown = function(settings) {
+        var defaults = {
+            hoverClass: "hover",
+            showSpeed: 200,
+            hideSpeed: 400,
+            hideTime: 500,
+            hasSubIcon: '&raquo;',
+            onShow: $.laquu.empty,
+            onHide: $.laquu.empty
+        },
+        css = {
+            display: "none",
+            position: "absolute"
+        };
+
+        return this.each(function(){
+            var opts = $.extend({}, defaults, settings || {}),
+                root =$(this);
+            $(this).find("li").filter(function(){
+                var ul = $("ul", this),
+                    $t = $(this);
+                if(ul.size()) {
+                    ul.css({ /*display: "none"*/ }).parent("li").hover(function(){
+                        $(this).children("ul").slideDown();
+                    }, function(){
+                        var t = $(this);
+                        setTimeout(function() {
+                            t.children("ul").slideUp();
+                        }, opts.hideTime);
+                    });
+                }
+            });
+        });
+    };
+
+
     // Global object
     $.laquu = $.l = {
         version: 1.0,
