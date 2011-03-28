@@ -15,16 +15,27 @@
 <body onload="sh_highlightDocument();">
 
 <div id="container">
-<h1></h1>
+<h1>Laquu.js picmenu plugin examples</h1>
 
-<div id="" class="container">
-<h2></h2>
+<div id="picmenu1" class="container">
+<h2>Default picmenu example</h2>
 
 <div class="code">
 <p>Code</p>
 <pre class="sh_javascript">
+jQuery(function(){
+    laquu("#picmenu1 ul").picmenu();
+});
 </pre>
 </div>
+
+<ul>
+	<li><a href="#"><img src="img/forest_thumb.jpg" /></a></li>
+	<li><a href="#"><img src="img/island_thumb.jpg" /></a></li>
+	<li><a href="#"><img src="img/land_thumb.jpg" /></a></li>
+	<li><a href="#"><img src="img/mountain_thumb.jpg" /></a></li>
+	<li><a href="#"><img src="img/swamp_thumb.jpg" /></a></li>
+</ul>
 
 </div>
 
@@ -33,6 +44,7 @@
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    laquu("#picmenu1 ul").picmenu();
 });
 </script>
 </body>
