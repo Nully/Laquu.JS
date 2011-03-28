@@ -15,7 +15,6 @@ dt {
 }
 dl {
     zoom: 1;
-    margin-bottom: 40px;
 }
 dl:after {
     content: ".";
