@@ -252,7 +252,6 @@ if(!laquu) var laquu = jQuery.sub();
             showSpeed: 200,
             hideSpeed: 400,
             hideTime: 500,
-            hasSubIcon: '&raquo;',
             onShow: $.laquu.empty,
             onHide: $.laquu.empty
         },
@@ -268,16 +267,17 @@ if(!laquu) var laquu = jQuery.sub();
                 var ul = $("ul", this),
                     $t = $(this);
                 if(ul.size()) {
-                    ul.css({ /*display: "none"*/ }).parent("li").hover(function(){
-                        $(this).children("ul").slideDown();
+                    ul.hide().parent("li").hover(function(){
+                        $(this).children("ul").slideDown(opts.showSpeed);
                     }, function(){
                         var t = $(this);
                         setTimeout(function() {
-                            t.children("ul").slideUp();
+                            t.children("ul").slideUp(opts.hideSpeed);
                         }, opts.hideTime);
                     });
                 }
             });
+        });
     };
 
 
@@ -296,6 +296,7 @@ if(!laquu) var laquu = jQuery.sub();
         };
 
         return this.each(function(){
+            var opts = $.extend({}, defaults, settings || {}),
                 elements = $("a", this),
                 body = $(opts.target),
                 classes = $.map(elements, function(e, i){
