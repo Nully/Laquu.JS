@@ -15,17 +15,39 @@
 <body onload="sh_highlightDocument();">
 
 <div id="container">
-<h1></h1>
+<h1>Laquu.js Konami plugin</h1>
 
-<div id="" class="container">
-<h2></h2>
+<div id="konami1" class="container">
+<h2>Default konami plugin</h2>
 
 <div class="code">
 <p>Code</p>
 <pre class="sh_javascript">
+jQuery(function(){
+    laquu(document).konami();
+});
 </pre>
 </div>
+<p class="commands">type key command:[up up down down left right left right b a]</p>
+</div>
 
+<div id="konami2" class="container">
+<h2>Default konami plugin</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu(document).konami({
+        cmd: "38,38,40,40,66,65",
+        callback: function(el, ev, stack) {
+            alert("push commands " + stack.toString() + " pushed !");
+        }
+    });
+});
+</pre>
+</div>
+<p class="commands">type key command:[up up down down b a]</p>
 </div>
 
 <!-- End container --></div>
@@ -33,6 +55,13 @@
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    laquu(document).konami();
+    laquu(document).konami({
+        cmd: "38,38,40,40,66,65",
+        callback: function(el, ev, stack) {
+            alert("push commands " + stack.toString() + " pushed !");
+        }
+    });
 });
 </script>
 </body>
