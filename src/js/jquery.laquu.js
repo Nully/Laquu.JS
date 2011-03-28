@@ -323,6 +323,35 @@ if(!laquu) var laquu = jQuery.sub();
     };
 
 
+    /**
+     * Hover plugin (over plugin name space)
+     * paramaters
+     *   hoverClass: mouse over additional class name
+     *   onHover: hover callback method
+     *   onOut: mouseout callback method
+     */
+    laquu.fn.over = function(settings) {
+        var defaults = {
+            hoverClass: "hover",
+            onHover: $.laquu.empty,
+            onOut: $.laquu.empty
+        };
+
+        return this.each(function(i, e){
+            var opts = $.extend({}, defaults, settings || {});
+            $(this).hover(function(ev){
+                $(this).addClass(opts.hoverClass);
+                if($.isFunction(opts.onHover))
+                    opts.onHover.call(this, this, ev);
+            }, function(ev){
+                $(this).removeClass(opts.hoverClass);
+                if($.isFunction(opts.onOut))
+                    opts.onOut.call(this, this, ev);
+            });
+        });
+    };
+
+
     // Global object
     $.laquu = $.l = {
         version: 1.0,
