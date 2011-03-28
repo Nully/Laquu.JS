@@ -15,16 +15,38 @@
 <body onload="sh_highlightDocument();">
 
 <div id="container">
-<h1></h1>
+<h1>Laquu.js dropdown menu example</h1>
 
-<div id="">
-<h2></h2>
+<div id="dropdown">
+<h2>Default example</h2>
 
 <div class="code">
 <p>Code</p>
 <pre class="sh_javascript">
+$(function(){
+    laquu("#menu").dropdown();
+});
 </pre>
 </div>
+
+<ul id="menu">
+    <li><a href="#">Menu 1</a></li>
+    <li><a href="#">Menu 2</a><ul>
+        <li><a href="#">Menu 2-1</a></li>
+        <li><a href="#">Menu 2-2</a></li>
+        <li><a href="#">Menu 2-3</a></li>
+    </ul></li>
+    <li><a href="#">Menu 3</a><ul>
+        <li><a href="#">Menu 3-1</a></li>
+        <li><a href="#">Menu 3-2</a><ul>
+            <li><a href="#">Menu3-2-1</a></li>
+            <li><a href="#">Menu3-2-2</a></li>
+            <li><a href="#">Menu3-2-3</a></li>
+        </ul></li>
+        <li><a href="#">Menu 3-3</a></li>
+    </ul></li>
+    <li><a href="#">Menu 4</a></li>
+</ul>
 
 </div>
 
@@ -33,6 +55,7 @@
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    laquu("#menu").dropdown();
 });
 </script>
 </body>
