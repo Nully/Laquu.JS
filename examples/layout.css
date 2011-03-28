@@ -35,4 +35,6 @@ pre {
     padding: 20px 0 0;
     margin: 0 auto 30px;
 }
-
+.container {
+    margin-bottom: 60px;
+}
