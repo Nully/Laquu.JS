@@ -365,8 +365,9 @@
      */
     $.laquu.tab = function(elems, options) {
         var setting = $.extend({}, {
-                active_class: "active"
-            });
+                active_class: "active",
+                current_tab: 0
+            }, options || {});
 
         return elems.each(function(){
             var $t = $(this), tabs = $t.find("li a"), panels;
@@ -392,7 +393,8 @@
 
                 return false;
             });
-            tabs.first().trigger("click");
+            // tabs.first().trigger("click");
+            $(tabs.get(setting.current_tab)).trigger("click");
         });
     };
 
