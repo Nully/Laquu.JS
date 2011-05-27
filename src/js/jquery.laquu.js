@@ -188,9 +188,12 @@ if(!laquu) var laquu = jQuery.sub();
                     },
                     self = $(this);
 
-                    if(o.isVertical && self.prev().size() != 0) {
-                        var left = self.prev().css("left").replace("px", "");
-                        p.left = self.prev().outerWidth({ margin: true }) + parseInt(left);
+                    if(o.isVertical) {
+                        var left = 0;
+                        if(self.prev().size() != 0) {
+                            left = self.prev().outerWidth({ margin: true }) + parseInt(self.prev().css("left").replace("px", ""));
+                        }
+                        p.left = left;
                         p.top = "-" + _this.outerHeight() + "px";
                     }
                     self.addClass("breadcrumb-items breadcrumb-item"+i).css(p);
@@ -207,7 +210,8 @@ if(!laquu) var laquu = jQuery.sub();
                 o.timer = o.timer + o.animTime;
 
                 timer = setInterval(function(){
-                    var params = opts = {},
+                    var params = {},
+                        opts = {},
                         current_item = $(items.get(current - 1));
 
                     params.queue = false;
@@ -215,7 +219,7 @@ if(!laquu) var laquu = jQuery.sub();
                     opts.duration = o.animTime;
 
                     if(o.isVertical) {
-                        isStop = (current - itemSize);
+                        isStop = (current - itemSize) > 0;
                     }
                     else {
                         var beforeLeft = current_item.prev().css("left");
