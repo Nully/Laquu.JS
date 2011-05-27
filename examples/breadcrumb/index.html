@@ -17,7 +17,7 @@
 <div id="container">
 <h1>Laquu.js Breadcrumb plugin</h1>
 
-<div id="" class="container">
+<div id="breadcrumb1" class="container">
 <h2>Default Breadcrumb plugin.</h2>
 
 <ul id="breadcrumb">
@@ -36,12 +36,38 @@ jQuery(function(){
 </div>
 </div>
 
+
+<div id="breadcrumb2" class="container">
+<h2>Vertical Breadcrumb plugin.</h2>
+
+<ul id="vcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Category</a></li>
+    <li><em>CurrentPage</em></li>
+</ul>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("#breadcrumb").breadcrumb({
+        isVertical: true
+    });
+});
+</pre>
+</div>
+</div>
+
 <!-- End container --></div>
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
     laquu("#breadcrumb").breadcrumb();
+    laquu("#vcrumb").breadcrumb({
+        isVertical: true,
+        animTime: 500
+    });
 });
 </script>
 </body>
