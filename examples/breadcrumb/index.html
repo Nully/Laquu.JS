@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Breadcrumb | Examples | Laquu.js</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../layout.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../src/css/sh_style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+</head>
+<body onload="sh_highlightDocument();">
+
+<div id="container">
+<h1>Laquu.js Breadcrumb plugin</h1>
+
+<div id="" class="container">
+<h2>Default Breadcrumb plugin.</h2>
+
+<ul id="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Category</a></li>
+    <li><em>CurrentPage</em></li>
+</ul>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("#breadcrumb").breadcrumb();
+});
+</pre>
+</div>
+</div>
+
+<!-- End container --></div>
+
+<script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    laquu("#breadcrumb").breadcrumb();
+});
+</script>
+</body>
+</html>
