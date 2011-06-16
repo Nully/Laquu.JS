@@ -79,6 +79,7 @@ laquu.error = function(msg) {
 
 		return this.each(function(i, elm){
 			var o = $l.extend({}, defaults, options || {}),
+				self = $l(this),
 				t = $l(this).find("a[href^=#]"),
 				c = null;
 
@@ -87,10 +88,10 @@ laquu.error = function(msg) {
 
 			t.each(function(){
 				var tr = $l($l(this).attr("href")).hide();
-				if(c === null)
-					c = tr;
-				else
+				if(c)
 					c = c.add(tr);
+				else
+					c = tr;
 			});
 
 			t.bind("click", function(ev){
@@ -119,6 +120,27 @@ laquu.error = function(msg) {
 				$l(t.get(o.selected)).trigger("click");
 			else
 				$l(t.get(0)).trigger("click");
+		});
+	};
+})(laquu);
+
+
+/**
+ * blackout scroller plugin
+ * blackout warp scroll.
+ * parametes
+ *   overlayColor: blackout overlay color.
+ *   speed: fade in/out speed.
+ * 
+ */
+(function($l){
+	var defaults = {
+		overlayColor: "#000000",
+		speed: 300
+	};
+
+	$l.fn.blackoutScroll = function(options) {
+		return this.each(function(i, elm){
 		});
 	};
 })(laquu);
@@ -171,27 +193,6 @@ laquu.error = function(msg) {
 		window.open(this.href, "", params);
 		ev.preventDefault();
 	}
-})(laquu);
-
-
-/**
- * blackout scroller plugin
- * blackout warp scroll.
- * parametes
- *   overlayColor: blackout overlay color.
- *   speed: fade in/out speed.
- * 
- */
-(function($l){
-	var defaults = {
-		overlayColor: "#000000",
-		speed: 300
-	};
-
-	$l.fn.blackoutScroll = function(options) {
-		return this.each(function(i, elm){
-		});
-	};
 })(laquu);
 
 
