@@ -31,11 +31,37 @@ $(function(){
 
 <dl>
     <dt><a href="#content1" class="accordion_trigger">Show Content1</a></dt>
-    <dd id="content1"><p>Content 1</p></dd>
+    <dd id="content1">
+		<p>Content 1</p>
+		<p>Content 1</p>
+		<p>Content 1</p>
+		<p>Content 1</p>
+		<p>Content 1</p>
+		<p>Content 1</p>
+		<p>Content 1</p>
+    </dd>
     <dt><a href="#content2" class="accordion_trigger">Show Content2</a></dt>
-    <dd id="content2"><p>Content 2</p></dd>
+    <dd id="content2">
+    	<p>Content 2</p>
+    	<p>Content 2</p>
+    	<p>Content 2</p>
+    	<p>Content 2</p>
+    	<p>Content 2</p>
+    	<p>Content 2</p>
+    	<p>Content 2</p>
+    	<p>Content 2</p>
+	</dd>
     <dt><a href="#content3" class="accordion_trigger">Show Content3</a></dt>
-    <dd id="content3"><p>Content 3</p></dd>
+    <dd id="content3">
+    	<p>Content 3</p>
+    	<p>Content 3</p>
+    	<p>Content 3</p>
+    	<p>Content 3</p>
+    	<p>Content 3</p>
+    	<p>Content 3</p>
+    	<p>Content 3</p>
+    	<p>Content 3</p>
+	</dd>
 </dl>
 </div>
 
@@ -56,11 +82,44 @@ $(function(){
 
 <dl>
     <dt><a href="#content4" class="accordion_trigger">Show Content4</a></dt>
-    <dd id="content4"><p>Content 4</p></dd>
+    <dd id="content4">
+		<p>Content 4</p>
+		<p>Content 4</p>
+		<p>Content 4</p>
+		<p>Content 4</p>
+		<p>Content 4</p>
+		<p>Content 4</p>
+		<p>Content 4</p>
+		<p>Content 4</p>
+		<p>Content 4</p>
+		<p>Content 4</p>
+	</dd>
     <dt><a href="#content5" class="accordion_trigger">Show Content5</a></dt>
-    <dd id="content5"><p>Content 5</p></dd>
+    <dd id="content5">
+    	<p>Content 5</p>
+    	<p>Content 5</p>
+    	<p>Content 5</p>
+    	<p>Content 5</p>
+    	<p>Content 5</p>
+    	<p>Content 5</p>
+    	<p>Content 5</p>
+    	<p>Content 5</p>
+    	<p>Content 5</p>
+    	<p>Content 5</p>
+	</dd>
     <dt><a href="#content6" class="accordion_trigger">Show Content6</a></dt>
-    <dd id="content6"><p>Content 6</p></dd>
+    <dd id="content6">
+    	<p>Content 6</p>
+    	<p>Content 6</p>
+    	<p>Content 6</p>
+    	<p>Content 6</p>
+    	<p>Content 6</p>
+    	<p>Content 6</p>
+    	<p>Content 6</p>
+    	<p>Content 6</p>
+    	<p>Content 6</p>
+    	<p>Content 6</p>
+	</dd>
 </dl>
 </div>
 
@@ -68,13 +127,15 @@ $(function(){
 <!-- End container --></div>
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.easing.1.3.js"></script>
 <script type="text/javascript">
 jQuery(function(){
-    laquu("#accordion1").accordion();
+	laquu("#accordion1 dl").accordion();
+/*    laquu("#accordion1").accordion();
     laquu("#accordion2").accordion({
         onHide: function(){ alert("on hide " + this.id); },
         onShow: function(){ $(this).addClass("show"); }
-    });
+    });*/
 });
 </script>
 </body>
