@@ -24,7 +24,7 @@
 <p>Code</p>
 <pre class="sh_javascript">
 $(function(){
-    laquu("#acordion1").accordion();
+	laquu("#accordion1 dl").accordion();
 });
 </pre>
 </div>
@@ -72,10 +72,14 @@ $(function(){
 <p>Code</p>
 <pre class="sh_javascript">
 $(function(){
-    laquu("#acordion2").accordion({
-        onHide: function() { alert("on hide " + this.id); },
-        onShow: function() { $(this).addClass("show"); }
-    });
+	laquu("#accordion2 dl").accordion({
+		onHide: function() {
+			$(".debug").append("&lt;p&gt;hide " + this.id + "&lt;/p&gt;");
+		},
+		onShow: function() {
+			$(".debug").append("&lt;p&gt;show " + this.id + "&lt;/p&gt;");
+		}
+	});
 });
 </pre>
 </div>
@@ -121,6 +125,9 @@ $(function(){
     	<p>Content 6</p>
 	</dd>
 </dl>
+
+<div class="debug">
+</div>
 </div>
 
 
@@ -131,11 +138,14 @@ $(function(){
 <script type="text/javascript">
 jQuery(function(){
 	laquu("#accordion1 dl").accordion();
-/*    laquu("#accordion1").accordion();
-    laquu("#accordion2").accordion({
-        onHide: function(){ alert("on hide " + this.id); },
-        onShow: function(){ $(this).addClass("show"); }
-    });*/
+	laquu("#accordion2 dl").accordion({
+		onHide: function() {
+			$(".debug").append("<p>hide " + this.id + "</p>");
+		},
+		onShow: function() {
+			$(".debug").append("<p>show " + this.id + "</p>");
+		}
+	});
 });
 </script>
 </body>

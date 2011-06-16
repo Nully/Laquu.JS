@@ -24,3 +24,10 @@ dt a {
 .show {
     border-color: #C00;
 }
+.debug {
+	font-size: 1.3em;
+	height: 130px;
+	overflow: auto;
+	border: 1px solid #666;
+	padding: 15px;
+}
