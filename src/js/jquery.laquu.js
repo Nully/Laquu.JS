@@ -136,12 +136,50 @@ laquu.error = function(msg) {
 (function($l){
 	var defaults = {
 		overlayColor: "#000000",
-		speed: 300
-	};
+		speed: 300,
+		easing: "easeOutQuad",
+		onShow: $l.empty,
+		onHide: $l.empty
+	}, d = $(document), w = $(window), b;
 
 	$l.fn.blackoutScroll = function(options) {
-		return this.each(function(i, elm){
+		var o = $l.extend({}, defaults, options || {});
+		if(!b) {
+			b = $('<div id="laquu_blackout_scroller_overlay" />')
+				.appendTo("body").hide().css({
+					position: "absolute",
+					top: 0,
+					left: 0,
+					zIndex: 100000
+				});
+		}
+
+		this.bind("click", function(ev){
+			var _t = $l($l(this).attr("href"));
+
+			if(_t.size() < 1) return true;
+
+			b.css({
+				background: "#000",
+				width: d.width(),
+				height: d.height()
+			}).fadeIn(o.speed, o.easing, function(){
+				$.isFunction(o.onShow) ? o.onShow.call(_t, _t, b): $l.empty();
+
+				var _o = _t.offset();
+				w.scrollTop(_o.top).scrollLeft(_o.left);
+
+				b.fadeOut(o.speed, o.easing, function(){
+					$.isFunction(o.onHide) ? o.onHide.call(_t, _t, b): $l.empty();
+
+					b.hide().css({ top: 0, left: 0, width: 0, height: 0 });
+				});
+			});
+
+			ev.preventDefault();
 		});
+
+		return this;
 	};
 })(laquu);
 
