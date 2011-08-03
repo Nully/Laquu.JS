@@ -572,78 +572,15 @@ laquu.error = function(msg) {
 			 ext = b.pop();
 			 b = b.join(".") + o.suffix + "." + ext;
 
-			$(this).hover(function(ev){
-				swap.call(this, this, a, $.isFunction(o.onHover) ? o.onHover: $l.empty);
-			}, function(ev){
-				swap.call(this, this, b, $.isFunction(o.onOut) ? o.onOut: $l.empty);
+			$l(this).over({
+			    onHover: function(ev){
+    				swap.call(this, this, b, $.isFunction(o.onHover) ? o.onHover: $l.empty);
+			    },
+			    onOut: function(ev){
+	    			swap.call(this, this, a, $.isFunction(o.onOut) ? o.onOut: $l.empty);
+    			}
 			});
 		});
-    };
-})(laquu);
-
-
-/**
- * opacity rollover plugin
- *
- * @param  elms    jQuery ElementCollection
- * @param  options  Object
- *         opacity: rolloverd item to opacity
- *         duration: fadeTo speed
- *         onComplete: complete callback
- *         onHover: hover callback
- *         onOut: mouseout callback
- */
-(function($l){
-    $l.fn.opacityOver = function(options) {
-    	var defaults = {
-            opacity: .7,
-            speed: 300,
-            onComplete: $l.empty,
-            onHover: $l.empty,
-            onOut: $l.empty
-       };
-
-        return this.each(function(){
-			var o = $.extend({}, defaults, options || {});
-			$l(this).hover(function(ev){
-				$.isFunction(o.onHover) ? o.onHover.call(this, this, ev): $l.empty;
-				$(this).fadeTo(o.speed, o.opacity, o.onComplete ? o.onComplete : $l.empty);
-			}, function(ev){
-				$.isFunction(o.onOut) ? o.onOut.call(this, this, ev): $l.empty;
-				$(this).fadeTo(o.speed, 1, o.onComplete ? o.onComplete : $l.empty);
-			});
-        });
-    };
-})(laquu);
-
-
-/**
- * Hover plugin (over plugin name space)
- * paramaters
- *   hoverClass: mouse over additional class name
- *   onHover: hover callback method
- *   onOut: mouseout callback method
- */
-(function($l){
-    $l.fn.over = function(settings) {
-        var defaults = {
-            hoverClass: "hover",
-            onHover: $l.empty,
-            onOut: $l.empty
-        };
-
-        return this.each(function(i, e){
-            var opts = $.extend({}, defaults, settings || {});
-            $(this).hover(function(ev){
-                $(this).addClass(opts.hoverClass);
-                if($.isFunction(opts.onHover))
-                    opts.onHover.call(this, this, ev);
-            }, function(ev){
-                $(this).removeClass(opts.hoverClass);
-                if($.isFunction(opts.onOut))
-                    opts.onOut.call(this, this, ev);
-            });
-        });
     };
 })(laquu);
 
@@ -687,42 +624,181 @@ laquu.error = function(msg) {
 
 
 /**
- * tab panel
+ * opacity rollover plugin
  *
- * @param elems
- * @param options
+ * @param  elms    jQuery ElementCollection
+ * @param  options  Object
+ *         opacity: rolloverd item to opacity
+ *         duration: fadeTo speed
+ *         onComplete: complete callback
+ *         onHover: hover callback
+ *         onOut: mouseout callback
  */
 (function($l){
-    $l.fn.tab = function(elems, options) {
-        var setting = $.extend({}, {
-                active_class: "active"
-            });
+    $l.fn.opacityOver = function(options) {
+    	var defaults = {
+            opacity: .7,
+            speed: 300,
+            onComplete: $l.empty,
+            onHover: $l.empty,
+            onOut: $l.empty
+       };
 
-        return elems.each(function(){
-            var $t = $(this), tabs = $t.find("li a"), panels;
+        return this.each(function(){
+			var o = $.extend({}, defaults, options || {});
+
+            $l(this).over({
+                onHover: function(ev){
+                    $.isFunction(o.onHover) ? o.onHover.call(this, this, ev): $l.empty;
+                    $(this).fadeTo(o.speed, o.opacity, o.onComplete ? o.onComplete : $l.empty);
+                },
+                onOut: function(ev) {
+                    $.isFunction(o.onOut) ? o.onOut.call(this, this, ev): $l.empty;
+                    $(this).fadeTo(o.speed, 1, o.onComplete ? o.onComplete : $l.empty);
+                }
+            });
+        });
+    };
+})(laquu);
+
+
+/**
+ * Hover plugin (over plugin name space)
+ * paramaters
+ *   hoverClass: mouse over additional class name
+ *   onHover: hover callback method
+ *   onOut: mouseout callback method
+ */
+(function($l){
+    $l.fn.over = function(settings) {
+        var defaults = {
+            hoverClass: "hover",
+            onHover: $l.empty,
+            onOut: $l.empty
+        };
+
+        return this.each(function(i, e){
+            var opts = $.extend({}, defaults, settings || {});
+            $(this).hover(function(ev){
+                $(this).addClass(opts.hoverClass);
+                if($.isFunction(opts.onHover))
+                    opts.onHover.call(this, this, ev);
+            }, function(ev){
+                $(this).removeClass(opts.hoverClass);
+                if($.isFunction(opts.onOut))
+                    opts.onOut.call(this, this, ev);
+            });
+        });
+    };
+})(laquu);
+
+
+/**
+ * page scroller
+ *
+ * @param  options  Object
+ *          easing: required jQuery.easing plugin. default swing
+ *          speed: scrolling animation speed
+ *          onScrollEnd: scroll complete callback
+ *          onStep: scrolling step callback
+ */
+(function($l){
+    $l.fn.scroller = function(settings) {
+        var scrollElement = $.browser.webkit ? $("body"): $("html");
+
+        return this.each(function(){
+            var o = $.extend({}, {
+                easing: "swing",
+                speed: 1500
+            }, settings || {});
+            $(this).bind("click", function(ev){
+                var self = $(this),
+                    of = $(self.attr("href")).offset();
+
+                scrollElement.animate({
+                    scrollTop: of.top,
+                    scrollLeft: of.left
+                }, {
+                    queue: false,
+                    easing: o.easing,
+                    duration: o.speed
+                });
+
+                ev.preventDefault();
+            });
+        });
+    };
+})(laquu);
+
+
+/**
+ * stripe table
+ *
+ * @param  elems      jQuery HTML Collection Object
+ * @param  options    Object
+ *         even_class: even data row class
+ *         odd_class: odd data row class
+ *         onHover: hover action callback
+ *         onOut: mouseout callback
+ */
+(function($l){
+    $l.fn.stripe = function(elems, options) {
+        var o = $.extend({
+            even_class: "even",
+            odd_class: "odd",
+            onHover: $l.empty,
+            onOut: $l.empty
+        }, options || {});
+
+        return elems.each(function(i){
+            $(this).addClass((i%2 == 0) ? o.even_class: o.odd_class);
+            $.laquu.hover($(this), options);
+        });
+    };
+})(laquu);
+
+
+/**
+ * simple tab panel
+ *
+ * @param settings   Object
+ *          activeTabClass: active tab panel class attribute
+ *          onChange: tab on change call back
+ *          triggerTabNum; triggerd tab number
+ */
+(function($l){
+    $l.fn.tab = function(settings) {
+        var defaults = {
+            activeTabClass: "active",
+            onChange: $l.empty,
+            triggerTabNum: 0
+        };
+
+        return this.each(function(){
+            var self = $(this), tabs = self.find("li"), panels,
+                o = $.extend({}, defaults, settings || {});
 
             tabs.each(function(){
+                var i = $($("a", this).attr("href"), self);
                 if(panels)
-                    panels = panels.add($($(this).attr("href"), $t));
+                    panels = panels.add(i);
                 else
-                    panels = $($(this).attr("href"), $t);
+                    panels = i;
+            }).find("a[href*=#]").bind("click", function(ev){
+                tabs.removeClass(o.activeTabClass).find("a[href="+ev.target.hash+"]").parent().addClass(o.activeTabClass);
+                var p = panels.hide().parent().find(ev.target.hash);
+                p.show();
+
+                if($.isFunction(o.onChange))
+                    o.onChange.call(this, this, p);
+
+                ev.preventDefault();
             });
 
+            if(tabs.size() < o.triggerTabNum)
+                o.triggerTabNum = 0;
 
-            panels.addClass("laquu-tab-panel");
-            tabs.addClass("laquu-tab").bind("click", function(){
-                var $e = $(this),
-                    panel = $e.attr("href");
-
-                tabs.not($e).removeClass(setting.active_class);
-                panels.hide();
-
-                $e.addClass(setting.active_class);
-                $(panel).show();
-
-                return false;
-            });
-            tabs.first().trigger("click");
+            $("a", tabs.get(o.triggerTabNum)).trigger("click");
         });
     };
 })(laquu);
@@ -873,67 +949,4 @@ laquu.error = function(msg) {
     };
 })(laquu);
 
-
-/**
- * page scroller
- *
- * @param  elems    jQuery HTML Collection Object
- * @param  options  Object
- *          easing: required jQuery.easing plugin. default swing
- *          speed: scrolling animation speed
- *          onScrollEnd: scroll complete callback
- *          onStep: scrolling step callback
- */
-(function($l){
-    $l.fn.scroller = function(elems, options) {
-        var defaults = {
-            easing: "swing",
-            speed: 1500,
-            onScrollEnd: function(obj) {},
-            onStep: function(step, obj) {}
-        },
-        $target = $.browser.webkit ? $("body") : $("html");
-
-        elems.bind("click", function(ev){
-            var offset = $($(this).attr("href")).offset(),
-                option = $.extend({}, defaults, options || {});
-
-            $target.animate(
-                {scrollTop: offset.top, scrollLeft: offset.left},
-                {"queue": false, "easing": option.easing, "duration": option.speed, "complete": function(){
-                      option.onScrollEnd.call(ev.currentTarget, $target);
-                }, "step": function(step, o) {
-                      option.onStep.call(ev.currentTarget, step, o);
-                }
-            });
-            return false;
-        });
-    };
-})(laquu);
-
-
-/**
- * stripe table
- *
- * @param  elems      jQuery HTML Collection Object
- * @param  options    Object
- *         even_class: even data row class
- *         odd_class: odd data row class
- *         onHover: hover action callback
- *         onOut: mouseout callback
- */
-(function($l){
-    $l.fn.stripe = function(elems, options) {
-        var o = $.extend({
-            even_class: "even",
-            odd_class: "odd",
-            onHover: $l.empty,
-            onOut: $l.empty
-        }, options || {});
-        return elems.each(function(i){
-            $(this).addClass((i%2 == 0) ? o.even_class: o.odd_class);
-            $.laquu.hover($(this), options);
-        });
-    };
-})(laquu);
 
