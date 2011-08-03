@@ -507,8 +507,7 @@ laquu.error = function(msg) {
     $l.fn.fontsize = function(settings) {
         var defaults = {
             onChange: $l.empty,
-            cookie: {expires: 7, path: "/", domain: "", secure: false},
-            target: "#container"
+            cookie: {expires: 7, path: "/", domain: "", secure: false}
         };
 
         return this.each(function(){
@@ -521,8 +520,7 @@ laquu.error = function(msg) {
 
             elements.bind("click", function(ev){
                 var size = $(this).attr("href").replace("#", "");
-                body.removeClass(classes);
-                body.addClass(size);
+                $("body").removeClass(classes).addClass(size);
 
                 if($.isFunction(opts.onChange))
                     opts.onChange.call(body, body, size);
@@ -736,23 +734,25 @@ laquu.error = function(msg) {
  *
  * @param  elems      jQuery HTML Collection Object
  * @param  options    Object
- *         even_class: even data row class
- *         odd_class: odd data row class
+ *         stripeCount: stripe display show count
+ *         stripeClass: stripe class array
  *         onHover: hover action callback
  *         onOut: mouseout callback
  */
 (function($l){
-    $l.fn.stripe = function(elems, options) {
+    $l.fn.stripe = function(settings) {
         var o = $.extend({
-            even_class: "even",
-            odd_class: "odd",
+            stripeCount: 2,
+            stripeClass: ["even", "odd"],
             onHover: $l.empty,
             onOut: $l.empty
-        }, options || {});
+        }, settings || {});
 
-        return elems.each(function(i){
-            $(this).addClass((i%2 == 0) ? o.even_class: o.odd_class);
-            $.laquu.hover($(this), options);
+        return this.each(function(i){
+            $l(this).addClass(o.stripeClass[i%o.stripeCount]).over({
+                onHover: o.onHover,
+                onOut: o.onOut
+            });
         });
     };
 })(laquu);
@@ -805,6 +805,85 @@ laquu.error = function(msg) {
 
 
 /**
+ * news ticker plugin
+ *
+ * @param  elems    jQuery HTML Collection Object
+ * @param  options  Object
+ *         speed: animate speed
+ *         duration: interval speed ( call real time is speed + duration)
+ *         onComplete: Function
+ *         onStep: Function
+ */
+(function($l){
+    $l.fn.ticker = function(settings){
+        return this.each(function(){
+            var self = $(this), isStarted = false, current = 0, timer = null, items = self.children();
+            var o = $l.extend({}, {
+                speed: 1000,
+                duration: 2000,
+                onShow: $l.empty
+            }, settings || {});
+
+
+            function tween() {
+                ++current;
+    
+                if(current >= items.size()) {
+                    current = 0;
+                }
+    
+                // 次の要素を取得する
+                var item = items.get(current);
+                self.animate({
+                    top: "-" + item.offsetTop,
+                    left: item.offsetLeft
+                }, {
+                    queue: false,
+                    duration: o.speed,
+                    complete: function() {
+                         var i = (current === 0) ? items.size(): current;
+                        $l(items[i -1]).appendTo(self);
+                        self.css({ top: 0, left: 0 });
+
+                        if($l.isFunction(o.onShow))
+                            o.onShow.call(items[i -1], items[i -1]);
+                    }
+                });
+            }
+
+    
+            function start() {
+                if(!isStarted) {
+                    isStarted = true;
+                    timer = setInterval(function(){
+                        tween();
+                    }, o.duration + o.speed);
+                }
+            }
+
+
+            function stop() {
+                if(isStarted) {
+                    isStarted = false;
+                    clearInterval(timer);
+                    timer = null;
+                }
+            }
+
+
+            self.parent().css("position", "relative").end().css({
+                position: "absolute",
+                top: 0,
+                left: 0,
+            }).hover(stop, start);
+
+            start();
+        });
+    };
+})(laquu);
+
+
+/**
  * tooltip
  *
  * @param  elems     jQuery HTML Collection Object
@@ -817,136 +896,67 @@ laquu.error = function(msg) {
  *         onHide: hide callback function
  */
 (function($l){
-    $l.fn.tooltip = function(elems, options) {
-        var setting = $.extend({}, {
-                dist_x: -10,
-                dist_y: -20,
-                show_speed: 200,
-                onShow: function() {},
-                onHide: function() {},
-                onMove: function() {}
-            }, options || {}),
-            fn = {
-                uid: function() {
-                    var id = 0;
-                    return function(){return ++id;}
-                }(),
-                createTooltip: function() {
-                    return $('<p id="laquu-tooltip-'+ fn.uid() +'" class="laquu-tooltip-wrap"></p>')
-                                .appendTo("body").css({
-                                    position: "absolute", display: "none"
-                                });
-                },
-                show: function(title, event) {
-                    fn.createTooltip().css({
-                        top: (event.pageY + setting.dist_y) + "px",
-                        left: (event.pageX + setting.dist_x) + "px"
-                    })
-                    .stop(true, true).text(title)
-                    .fadeIn(setting.show_speed, function(){
-                        setting.onShow.call(this);
+    var uuid = function() {
+        var uid = 0;
+        return function(){ return ++uid; };
+    }();
+
+
+    $l.fn.tooltip = function(settings) {
+        this.each(function(){
+            var o = $.extend({}, {
+                distX: 0,
+                distY: -20,
+                onShow: $l.empty,
+                onHide: $l.empty,
+                onMove: $l.empty
+            }, settings || {});
+
+            function createTooltipContainer() {
+                return $l('<div id="laquu-tooltip-container'+ uuid() +'" class="laquu-tooltip-container"></div>')
+                            .appendTo("body")
+                            .css({ position: "absolute", display: "none", top: 0, left: 0 });
+            }
+        
+        
+            function showTooltip(ev) {
+                var container = createTooltipContainer(),
+                    self = $(this),
+                    outerHeigh,
+                    outerWidth;
+
+                container.text(self.attr("title"));
+                containerHeight = o.distY - Math.floor(container.outerHeight() / 2);
+                containerWidth  = o.distX - Math.floor(container.outerWidth() / 2);
+
+                container.css({
+                    top: ev.pageY - Math.floor(self.outerHeight() / 2) + ( o.distY - Math.floor(container.outerHeight() / 2) ),
+                    left: ev.pageX - Math.floor(self.outerWidth() / 2) + ( o.distX - Math.floor(container.outerWidth() / 2) )
+                }).stop(true, true).fadeIn("fast", function(){
+                    if($.isFunction(o.onShow))
+                        o.onShow.call(this, this);
+                });
+
+                self.mousemove(function(ev){
+                    container.css({
+                        top: ev.pageY - Math.floor(self.outerHeight() / 2) + ( o.distY - Math.floor(container.outerHeight() / 2) ),
+                        left: ev.pageX - Math.floor(self.outerWidth() / 2) + ( o.distX - Math.floor(container.outerWidth() / 2) )
                     });
-
-                    setting.onShow.call(elm);
-                },
-                hide: function(elm) {
-                    $(".laquu-tooltip-wrap").stop(true, true).remove();
-                    setting.onHide.call(elm);
-                },
-                move: function(e, ev) {
-                    $(".laquu-tooltip-wrap").css({
-                        top: (ev.pageY + setting.dist_y) + "px",
-                        left: (ev.pageX + setting.dist_x) + "px"
-                    })
-                }
-            };
-
-        return elems.each(function(i){
-            $(this).hover(function(event){
-                fn.show($(this).attr("title"), event);
-            }, function(){
-                fn.hide(this);
-            }).mousemove(function(event){
-                fn.move(this, event);
-            });
-        });
-    };
-})(laquu);
-
-
-/**
- * news ticker plugin
- *
- * @param  elems    jQuery HTML Collection Object
- * @param  options  Object
- *         speed: animate speed
- *         duration: interval speed ( call real time is speed + duration)
- *         onComplete: Function
- *         onStep: Function
- */
-(function($l){
-    $l.fn.ticker = function(elems, options){
-        return elems.each(function(){
-            var $self = $(this), current_item = 0, timer = null, parent = null,
-                items = null, item = null, isStarted = false,
-                setting = $.extend({}, {
-                    speed: 1000,
-                    duration: 2000,
-                    onComplete: function() {},
-                    onStep: function() {}
-                }, options || {});
-
-
-            // rewind iteration
-            function rewind() {
-                if(current_item >= items.length) { current_item = 0; }
-            }
-
-            function next() {
-                current_item++;
-                rewind();
-                item = items.get(current_item);
-            }
-
-            function tween() {
-                next();
-                $self.animate({ top: -item.offsetTop, left: item.offsetLeft }, {
-                    duration: setting.duration,
-                    queue: false,
-                    step: setting.onStep,
-                    complete: function() {
-                        var i = (current_item === 0) ? items.length : current_item;
-                        $self.css({ top: 0, left: 0 });
-                        $(items[i -1]).appendTo($self);
-                        setting.onComplete.call(items[i -1]);
-                    }
                 });
             }
 
-            // start animation
-            function start() {
-                isStarted = true;
-                timer = setInterval(function(){
-                    tween();
-                }, setting.speed + setting.duration);
+
+            function hideTooltip(ev) {
+                $(this).unbind("mousemove");
+                $(".laquu-tooltip-container").fadeOut("fast", function(){
+                    $(this).remove();
+
+                    if($.isFunction(o.onHide))
+                        o.onHide.call(this, this);
+                });
             }
 
-            // stop animation
-            function stop() {
-                clearInterval(timer);
-                timer = null;
-                isStarted = false;
-            }
-
-            parent = $self.parent();
-            items  = $self.children();
-
-            parent.css("position", "relative");
-            $self.css("position", "absolute").hover(stop, start);
-
-            if(!isStarted) { start(); }
+            $(this).hover(showTooltip, hideTooltip);
         });
     };
 })(laquu);
-
-
