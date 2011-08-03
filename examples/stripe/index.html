@@ -15,24 +15,134 @@
 <body onload="sh_highlightDocument();">
 
 <div id="container">
-<h1></h1>
+<h1>Laquu.JS ストライププラグイン</h1>
 
-<div id="" class="container">
-<h2></h2>
+
+<div id="stripe1" class="container">
+<h2>シンプルなストライプテーブル</h2>
 
 <div class="code">
 <p>Code</p>
 <pre class="sh_javascript">
+jQuery(function(){
+    laquu("table tr").stripe();
+});
 </pre>
 </div>
 
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+</table>
+
 </div>
+
+
+<div id="stripe2" class="container">
+<h2>オプション付きストライプテーブル</h2>
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("table tr").strip({
+        stripeCount: 4,
+        stripeClass: ["first", "second", "third", "fource"],
+        onHover: function() {},
+        onOut: function() {}
+    });
+});
+</pre>
+</div>
+<table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+    <tr>
+        <th>テーブルヘッダ</th>
+        <td>テーブルデータ</td>
+    </tr>
+</table>
+</div>
+
+
+<div id="options">
+<h2>利用可能オプション</h2>
+<dl>
+    <dt>stripeCount</dt>
+    <dd>ストライプ表示にする個数</dd>
+    <dt>stripeClass</dt>
+    <dd>ストライプ表示の際に付与するクラスの配列</dd>
+    <dt>onHover</dt>
+    <dd>マウスオーバー時のコールバック関数</dd>
+    <dt>onOut</dt>
+    <dd>マウスアウト時のコールバック関数</dd>
+</dl>
+<!-- End options --></div>
 
 <!-- End container --></div>
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    laquu("#stripe1 table tr").stripe();
+
+    laquu("#stripe2 table tr").stripe({
+        stripeCount: 4,
+        stripeClass: ["first", "second", "third", "fource"],
+        onHover: function() {},
+        onOut: function() {}
+    });
 });
 </script>
 </body>
