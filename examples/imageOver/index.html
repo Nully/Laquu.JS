@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Hover | Examples | Laquu.js</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../layout.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../src/css/sh_style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+</head>
+<body onload="sh_highlightDocument();">
+
+<div id="container">
+<h1>Laquu.js opacityOverプラグイン</h1>
+
+<div id="imageOver1" class="container">
+<h2>シンプルなイメージオーバー</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("img").imageOver();
+});
+</pre>
+</div>
+
+<p><img src="menu.gif" alt="メニュー" /></p>
+
+</div>
+
+<div id="imageOver2" class="container">
+<h2>オプション付きイメージオーバー</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("img").imageOver({
+        suffix: "_over",
+        onHover: function() {},
+        onOut: function() {}
+    });
+});
+</pre>
+</div>
+
+<p><img src="menu02.gif" alt="メニュー" /></p>
+
+</div>
+
+<div id="options">
+<dl>
+    <dt>suffix</dt>
+    <dd>マウスオーバー時の画像のサフィックスを指定します。</dd>
+    <dt>onHover</dt>
+    <dd>マウスオーバー時のコールバック関数です。</dd>
+    <dt>onComplete</dt>
+    <dd>マウスアウト時のコールバック関数です。</dd>
+</dl>
+<!-- End options --></div>
+
+
+
+<!-- End container --></div>
+
+<script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    laquu("#imageOver1 img").imageOver();
+    laquu("#imageOver2 img").imageOver({
+        suffix: "_over"
+    });
+});
+</script>
+</body>
+</html>
