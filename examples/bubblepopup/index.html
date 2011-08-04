@@ -15,15 +15,15 @@
 <body onload="sh_highlightDocument();">
 
 <div id="container">
-<h1>Laquu.js Bubblepopup plugin.</h1>
+<h1>Laquu.JS バブルポップアップ</h1>
 
-<div class="bubble1" class="container">
-<h2>Default bubble popup</h2>
+<div id="bubble1" class="container">
+<h2>シンプルなバブルポップアップ</h2>
 <div class="code">
 <p>Code</p>
 <pre class="sh_javascript">
 $(function(){
-    laquu("bubble1").bubblepopup();
+    laquu("#bubble1").bubblepopup();
 });
 </pre>
 </div>
@@ -31,19 +31,90 @@ $(function(){
 <div id="popup1">
 <p><em class="trigger">Bubblepopup trigger.</em></p>
 <div class="popup">
-<h3>Popup !</h3>
-<p>Popup content.</p>
+<h3>これがバブルポップアップ</h3>
+<p>邪魔なコンテンツを整理することが出来ます。</p>
 </div>
 </div>
 </div>
 
+
+
+<div id="bubble2" class="container">
+<h2>オプション付きバブルポップアップ</h2>
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+$(function(){
+    laquu("#bubble2").bubblepopup({
+        easing: "easeInOutBack",
+        distance: 50,
+        distanceStep: 10,
+        hideDelay: 600,
+        popupClass: ".popup",
+        triggerClass: ".trigger",
+        onShow: function(popup, trigger) {
+            popup.animate({ fontSize: "2.4em" });
+        },
+        onHide: function(popup, trigger) {
+            popup.animate({ fontSize: "100%" });
+        }
+    });
+});
+</pre>
+</div>
+
+<div id="popup2">
+<p><em class="trigger">Bubblepopup trigger.</em></p>
+<div class="popup">
+<h3>これがバブルポップアップ</h3>
+<p>邪魔なコンテンツを整理することが出来ます。</p>
+</div>
+</div>
+</div>
+
+<div id="options">
+<h2>利用可能オプション</h2>
+<dl>
+    <dt>easing</dt>
+    <dd>ポップアップのアニメーションイージングを指定します</dd>
+    <dt>distance</dt>
+    <dd>ポップアップとトリガーの距離を指定します</dd>
+    <dt>step</dt>
+    <dd>ポップアップの移動値を指定します</dd>
+    <dt>hideDelay</dt>
+    <dd>マウスがトリガーから離れてポップアップが消えるまでの遅延時間を指定します</dd>
+    <dt>popupClass</dt>
+    <dd>ポップアップとして動作させる要素のクラスを指定します</dd>
+    <dt>triggerClass</dt>
+    <dd>トリガーとして動作させる要素のクラスを指定します</dd>
+    <dt>onShow</dt>
+    <dd>ポップアップが表示された後に実行されるコールバック関数です</dd>
+    <dt>onHide</dt>
+    <dd>ポップアップが消えた後に実行されるコールバック関数です</dd>
+</dl>
+<!-- End options --></div>
 
 <!-- End container --></div>
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.easing.1.3.js"></script>
 <script type="text/javascript">
 jQuery(function(){
     laquu("#popup1").bubblepopup();
+    laquu("#popup2").bubblepopup({
+        easing: "easeInOutBack",
+        distance: 50,
+        step: 10,
+        hideDelay: 600,
+        popupClass: ".popup",
+        triggerClass: ".trigger",
+        onShow: function(popup, trigger) {
+            popup.animate({ fontSize: "2.4em" });
+        },
+        onHide: function(popup, trigger) {
+            popup.animate({ fontSize: "100%" });
+        }
+    });
 });
 </script>
 </body>
