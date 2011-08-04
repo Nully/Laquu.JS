@@ -192,45 +192,9 @@ laquu.error = function(msg) {
  */
 (function($l){
 	$l.fn.blank = function(options) {
-	    var defaults = {
-	    	extensions: false,
-	    	width: null,
-	    	height: null
-	    },
-	    s = null,
-	    o = $l.extend({}, defaults, options || {}),
-	    i;
-
-		if(o.extensions) {
-			s = [];
-			var l = o.extensions.split(",");
-			for(i in l) {
-				s.push('[href$="'+ l[i] +'"]');
-			}
-			s = s.join(",");
-		}
-
-		if(s != null)
-			this.not(s).attr("target", "_blank");
-		else if(o.width || o.height) {
-			this.bind("click", o, open);
-		}
-		else {
-			this.attr("target", "_blank");
-		}
-
-		return this;
-	};
-
-	function open(ev) {
-		var d = ev.data,
-			params = "toolbar=yes, location=yes, directories=yes, status=yes, menubar=yes, scrollbars=yes, resizable=yes, close=yes",
-			w;
-
-		params += ",width=300";
-		window.open(this.href, "", params);
-		ev.preventDefault();
-	}
+        return this.each(function(){
+            $(this).attr("target", "_blank");
+        });
 })(laquu);
 
 
