@@ -855,34 +855,6 @@ laquu.error = function(msg) {
                 onShow: $l.empty
             }, settings || {});
 
-
-            function tween() {
-                ++current;
-    
-                if(current >= items.size()) {
-                    current = 0;
-                }
-    
-                // 次の要素を取得する
-                var item = items.get(current);
-                self.animate({
-                    top: "-" + item.offsetTop,
-                    left: item.offsetLeft
-                }, {
-                    queue: false,
-                    duration: o.speed,
-                    complete: function() {
-                         var i = (current === 0) ? items.size(): current;
-                        $l(items[i -1]).appendTo(self);
-                        self.css({ top: 0, left: 0 });
-
-                        if($l.isFunction(o.onShow))
-                            o.onShow.call(items[i -1], items[i -1]);
-                    }
-                });
-            }
-
-    
             function start() {
                 if(!isStarted) {
                     isStarted = true;
@@ -892,7 +864,6 @@ laquu.error = function(msg) {
                 }
             }
 
-
             function stop() {
                 if(isStarted) {
                     isStarted = false;
@@ -901,12 +872,34 @@ laquu.error = function(msg) {
                 }
             }
 
-
+            function tween() {
+                ++current;
+    
+                if(current >= items.size()) {
+                    current = 0;
+                }
+    
+                var item = items.get(current);
+                self.animate({
+                    top: parseInt("-" + item.offsetTop),
+                    left: item.offsetLeft
+                }, {
+                    queue: false,
+                    duration: o.speed,
+                    complete: function() {
+                         var i = (current === 0) ? items.size(): current;
+                        $l(items[i -1]).appendTo(self);
+                        self.css({ top: 0, left: 0 });
+                        o.onShow.call(items[i -1], items[i -1]);
+                    }
+                });
+            }
+    
             self.parent().css("position", "relative").end().css({
                 position: "absolute",
                 top: 0,
                 left: 0,
-            }).hover(stop, start);
+            }).bind("mouseover", stop).bind("mouseout", start);
 
             start();
         });
@@ -937,7 +930,7 @@ laquu.error = function(msg) {
         this.each(function(){
             var o = $l.extend({}, {
                 distX: 0,
-                distY: -20,
+                distY: -30,
                 onShow: $l.empty,
                 onHide: $l.empty,
                 onMove: $l.empty
@@ -948,8 +941,7 @@ laquu.error = function(msg) {
                             .appendTo("body")
                             .css({ position: "absolute", display: "none", top: 0, left: 0 });
             }
-        
-        
+                
             function showTooltip(ev) {
                 var container = createTooltipContainer(),
                     self = $l(this),
@@ -957,22 +949,22 @@ laquu.error = function(msg) {
                     outerWidth;
 
                 container.text(self.attr("title"));
-                containerHeight = o.distY - Math.floor(container.outerHeight() / 2);
-                containerWidth  = o.distX - Math.floor(container.outerWidth() / 2);
+                containerHeight = Math.floor(self.outerHeight() / 2) + Math.floor(container.outerHeight() / 2) + Math.abs(o.distY);
+                containerWidth  = Math.floor(self.outerWidth() / 2) + Math.floor(container.outerWidth() / 2) + Math.abs(o.distX);
 
                 container.css({
-                    top: ev.pageY - Math.floor(self.outerHeight() / 2) + ( o.distY - Math.floor(container.outerHeight() / 2) ),
-                    left: ev.pageX - Math.floor(self.outerWidth() / 2) + ( o.distX - Math.floor(container.outerWidth() / 2) )
+                    top: ev.pageY - containerHeight,
+                    left: ev.pageX - containerWidth
                 }).stop(true, true).fadeIn("fast", function(){
-                    if($l.isFunction(o.onShow))
-                        o.onShow.call(this, this);
+                    o.onShow.call(this, this, self);
                 });
 
                 self.mousemove(function(ev){
                     container.css({
-                        top: ev.pageY - Math.floor(self.outerHeight() / 2) + ( o.distY - Math.floor(container.outerHeight() / 2) ),
-                        left: ev.pageX - Math.floor(self.outerWidth() / 2) + ( o.distX - Math.floor(container.outerWidth() / 2) )
+                        top: ev.pageY - containerHeight,
+                        left: ev.pageX - containerWidth
                     });
+                    o.onMove.call(this, container, self);
                 });
             }
 
@@ -981,9 +973,7 @@ laquu.error = function(msg) {
                 $l(this).unbind("mousemove");
                 $l(".laquu-tooltip-container").fadeOut("fast", function(){
                     $l(this).remove();
-
-                    if($l.isFunction(o.onHide))
-                        o.onHide.call(this, this);
+                    o.onHide.call(this, container, self);
                 });
             }
 
