@@ -195,6 +195,7 @@ laquu.error = function(msg) {
         return this.each(function(){
             $(this).attr("target", "_blank");
         });
+    };
 })(laquu);
 
 
