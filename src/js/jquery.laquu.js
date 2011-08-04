@@ -657,6 +657,79 @@ laquu.error = function(msg) {
 
 
 /**
+ * Picture menu plugin
+ *
+ */
+(function($l){
+    var defaults = {
+        showSize: 240,
+        hideSize: 90,
+        speed: 400,
+        duration: 2000,
+        easing: "easeInQuad",
+        auto: false,
+        isVertical: false
+    };
+
+    $l.fn.picMenu = function(settings) {
+        return this.each(function(){
+            var o = $l.extend({}, defaults, settings || {}),
+                self = $(this), items = null, current = 0;
+
+            function startTimer() {
+                timer = setInterval(function(){
+                    autoRotate();
+                }, o.duration + o.speed);
+            }
+
+            function stopTimer() {
+                clearInterval(timer);
+                timer = null;
+            }
+
+            function autoRotate() {
+                if(current >= items.size()) {
+                    current = 0;
+                }
+
+                var prev = (current === 0) ? items.size() : current;
+                $l(items.get(current)).trigger("mouseover");
+                $l(items.get(prev - 1)).trigger("mouseout");
+                ++current;
+            }
+
+            function showImage(ev) {
+                $(this).addClass("active").stop().animate( o.isVertical ? { height: o.showSize }: { width: o.showSize }, {
+                    easing: o.easing,
+                    queue: false,
+                    duration: o.speed,
+                    complete: o.complete
+                });
+            }
+
+            function hideImage(ev) {
+                $(this).removeClass("active").stop().animate( o.isVertical ? { height: o.hideSize }: { width: o.hideSize }, {
+                    easing: o.easing,
+                    queue: false,
+                    duration: o.speed - 100,
+                    complete: o.complete
+                });
+            }
+
+            items = self.find("a").css("overflow", "hidden");
+            items.bind("mouseover", showImage).bind("mouseout", hideImage);
+            items.trigger("mouseout");
+
+            if(o.auto) {
+                startTimer();
+                self.find("img").bind("mouseover", stopTimer).bind("mouseout", startTimer)
+            }
+        });
+    };
+})(laquu);
+
+
+/**
  * page scroller
  *
  * @param  options  Object
