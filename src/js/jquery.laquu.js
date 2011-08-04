@@ -140,12 +140,12 @@ laquu.error = function(msg) {
 		easing: "easeOutQuad",
 		onShow: $l.empty,
 		onHide: $l.empty
-	}, d = $(document), w = $(window), b;
+	}, d = $l(document), w = $l(window), b;
 
 	$l.fn.blackoutScroll = function(options) {
 		var o = $l.extend({}, defaults, options || {});
 		if(!b) {
-			b = $('<div id="laquu_blackout_scroller_overlay" />')
+			b = $l('<div id="laquu_blackout_scroller_overlay" />')
 				.appendTo("body").hide().css({
 					position: "absolute",
 					top: 0,
@@ -164,13 +164,13 @@ laquu.error = function(msg) {
 				width: d.width(),
 				height: d.height()
 			}).fadeIn(o.speed, o.easing, function(){
-				$.isFunction(o.onShow) ? o.onShow.call(_t, _t, b): $l.empty();
+				$l.isFunction(o.onShow) ? o.onShow.call(_t, _t, b): $l.empty();
 
 				var _o = _t.offset();
 				w.scrollTop(_o.top).scrollLeft(_o.left);
 
 				b.fadeOut(o.speed, o.easing, function(){
-					$.isFunction(o.onHide) ? o.onHide.call(_t, _t, b): $l.empty();
+					$l.isFunction(o.onHide) ? o.onHide.call(_t, _t, b): $l.empty();
 
 					b.hide().css({ top: 0, left: 0, width: 0, height: 0 });
 				});
@@ -193,7 +193,7 @@ laquu.error = function(msg) {
 (function($l){
 	$l.fn.blank = function(options) {
         return this.each(function(){
-            $(this).attr("target", "_blank");
+            $l(this).attr("target", "_blank");
         });
     };
 })(laquu);
@@ -226,8 +226,8 @@ laquu.error = function(msg) {
 
     $l.fn.breadcrumb = function(options) {
         return this.each(function(){
-            var o = $.extend({}, defaults, options || {}),
-                _this = $(this),
+            var o = $l.extend({}, defaults, options || {}),
+                _this = $l(this),
                 items = _this.children(),
                 itemSize = items.size(),
                 current = 1,
@@ -297,14 +297,14 @@ laquu.error = function(msg) {
                     else
                         current_item.css("left", params.left);
 
-                    if($.isFunction(o.onComplete))
+                    if($l.isFunction(o.onComplete))
                         o.onComplete.apply(current_item);
                 };
 
-                if($.isFunction(o.onStep))
+                if($l.isFunction(o.onStep))
                     opts.onStep = o.onStep;
 
-                if($.easing && o.easing && $.easing[o.easing])
+                if($l.easing && o.easing && $l.easing[o.easing])
                     opts.easing = o.easing;
 
                 current_item.show().animate(params, opts);
@@ -334,87 +334,80 @@ laquu.error = function(msg) {
     $l.fn.bubblepopup = function(settings) {
         var defaults = {
             easing: "swing",
-            distance: 15,
-            hideDelay: 1800,
+            distance: 40,
+            step: 30,
+            hideDelay: 1500,
             popupClass: ".popup",
             triggerClass: ".trigger",
             onShow: $l.empty,
-            onHide: $l.empty,
-            onStep: $l.empty
+            onHide: $l.empty
         };
 
         return this.each(function(){
-            var opts = $.extend({}, defaults, settings || {}),
-                t= $(this),
-                popup = t.find(opts.popupClass),
-                trigger = t.find(opts.triggerClass),
-                popupPos = "-" + (opts.distance + popup.outerHeight()) + "px",
+            var o = $l.extend({}, defaults, settings || {}),
+                self = $l(this),
+                popup = self.find(o.popupClass),
+                trigger = self.find(o.triggerClass),
                 isShow = false,
                 isStarted = false,
-                hideTimer = null,
-                triggerWidthHalf = trigger.outerWidth({ margin: true }) / 2,
-                triggerPosLeft = trigger.position().left,
-                popupWidthHalf = popup.outerWidth({ margin: true }) / 2;
+                timer = null;
 
-            function clearTimer() {
-                if(hideTimer) {
-                    clearTimeout(hideTimer);
-                    hideTimer = null;
+            function stopTimer() {
+                if(timer) {
+                    clearTimeout(timer);
+                    timer = null;
                 }
             }
 
-            function show() {
-                clearTimer();
+            function showBubble() {
+                stopTimer();
                 if(isShow || isStarted) return;
-                isStarted = true;
 
-                popup.stop(true, true).css({
-                    top: popupPos, display: "block"
-                }).animate({
-                    opacity: 1, top: "+=" + opts.distance,
+                isStarted = true;
+                popup.stop(true, true).css({ display: "block" }).animate({
+                    opacity: 1,
+                    top: "+=" + o.step
                 }, {
                     queue: false,
-                    easing: opts.easing,
+                    easing: o.easign,
+                    duration: o.duration,
                     complete: function() {
                         isShow = true;
                         isStarted = false;
-                        if($.isFunction(opts.onShow))
-                            opts.onShow.call(this, this);
-                    },
-                    step: opts.onStep
+                        o.onShow.call(this, popup, trigger);
+                    }
                 });
             }
 
-            function hide() {
-                clearTimer();
-                hideTimer = setTimeout(function(){
-                    popup.stop().animate({
-                        opacity: 0,
-                        top: "-=" + opts.distance
+            function hideBubble() {
+                stopTimer();
+                timer = setTimeout(function(){
+                    popup.stop(true, true).animate({
+                        top: "-=" + o.step,
+                        opacity: 0
                     }, {
                         queue: false,
-                        easing: opts.easing,
+                        easing: o.easing,
+                        duration: o.duration,
                         complete: function() {
-                            $(this).css("display", "none");
-                            isStarted = false;
                             isShow = false;
-                            if($.isFunction(opts.onHide))
-                                opts.onHide.call(this, this);
-                        },
-                        step: opts.onStep
+                            isStarted = false;
+                            popup.hide();
+                            o.onHide.call(this, popup, trigger);
+                        }
                     });
-                }, opts.hideDelay);
+                }, o.hideDelay);
             }
 
-            t.css("position", "relative");
-            popup.css({
-                position: "absolute",
+            self.css("position", "relative");
+            popup.hide().css({
                 opacity: 0,
-                display: "none",
-                top: popupPos
+                position: "absolute",
+            }).css({
+                left: ( Math.floor(trigger.outerWidth() / 2) - Math.floor(popup.outerWidth() / 2)),
+                top: parseInt("-" + (o.distance + popup.outerHeight()))
             });
-
-            $([popup.get(0), trigger.get(0)]).hover(show, hide);
+            trigger.add(popup).bind("mouseover", showBubble).bind("mouseout", hideBubble);
         });
     };
 })(laquu);
@@ -440,16 +433,16 @@ laquu.error = function(msg) {
         };
 
         return this.each(function(){
-            var opts = $.extend({}, defaults, settings || {}),
-                root =$(this);
+            var opts = $l.extend({}, defaults, settings || {}),
+                root =$l(this);
             $(this).find("li").filter(function(){
-                var ul = $("ul", this),
-                    $t = $(this);
+                var ul = $l("ul", this),
+                    $t = $l(this);
                 if(ul.size()) {
                     ul.hide().parent("li").hover(function(){
-                        $(this).children("ul").slideDown(opts.showSpeed);
+                        $l(this).children("ul").slideDown(opts.showSpeed);
                     }, function(){
-                        var t = $(this);
+                        var t = $l(this);
                         setTimeout(function() {
                             t.children("ul").slideUp(opts.hideSpeed);
                         }, opts.hideTime);
@@ -476,28 +469,28 @@ laquu.error = function(msg) {
         };
 
         return this.each(function(){
-            var opts = $.extend({}, defaults, settings || {}),
-                elements = $("a", this),
-                body = $(opts.target),
-                classes = $.map(elements, function(e, i){
-                    return $(e).attr("href").replace("#", "");
+            var opts = $l.extend({}, defaults, settings || {}),
+                elements = $l("a", this),
+                body = $l(opts.target),
+                classes = $l.map(elements, function(e, i){
+                    return $l(e).attr("href").replace("#", "");
                 }).join(" ");
 
             elements.bind("click", function(ev){
-                var size = $(this).attr("href").replace("#", "");
-                $("body").removeClass(classes).addClass(size);
+                var size = $l(this).attr("href").replace("#", "");
+                $l("body").removeClass(classes).addClass(size);
 
-                if($.isFunction(opts.onChange))
+                if($l.isFunction(opts.onChange))
                     opts.onChange.call(body, body, size);
 
-                if($.cookie)
-                    $.cookie("laquu_font-size", size, opts.cookie);
+                if($l.cookie)
+                    $l.cookie("laquu_font-size", size, opts.cookie);
 
                 ev.preventDefault();
             });
 
-            if($.cookie)
-                body.addClass($.cookie("laquu_font-size"));
+            if($l.cookie)
+                body.addClass($l.cookie("laquu_font-size"));
         });
     };
 })(laquu);
@@ -537,10 +530,10 @@ laquu.error = function(msg) {
 
 			$l(this).over({
 			    onHover: function(ev){
-    				swap.call(this, this, b, $.isFunction(o.onHover) ? o.onHover: $l.empty);
+    				swap.call(this, this, b, $l.isFunction(o.onHover) ? o.onHover: $l.empty);
 			    },
 			    onOut: function(ev){
-	    			swap.call(this, this, a, $.isFunction(o.onOut) ? o.onOut: $l.empty);
+	    			swap.call(this, this, a, $l.isFunction(o.onOut) ? o.onOut: $l.empty);
     			}
 			});
 		});
@@ -573,11 +566,11 @@ laquu.error = function(msg) {
 
         return this.each(function(){
             var stack = [],
-                opts = $.extend({}, defaults, settings || {});
-            $(this).bind("keydown", function(ev){
+                opts = $l.extend({}, defaults, settings || {});
+            $l(this).bind("keydown", function(ev){
                 stack.push(ev.keyCode);
                 if(stack.toString().indexOf(opts.cmd) >= 0) {
-                    $(this).unbind("keydown");
+                    $l(this).unbind("keydown");
                     opts.callback.call(this, this, ev, stack);
                 }
             });
@@ -608,16 +601,16 @@ laquu.error = function(msg) {
        };
 
         return this.each(function(){
-			var o = $.extend({}, defaults, options || {});
+			var o = $l.extend({}, defaults, options || {});
 
             $l(this).over({
                 onHover: function(ev){
-                    $.isFunction(o.onHover) ? o.onHover.call(this, this, ev): $l.empty;
-                    $(this).fadeTo(o.speed, o.opacity, o.onComplete ? o.onComplete : $l.empty);
+                    $l.isFunction(o.onHover) ? o.onHover.call(this, this, ev): $l.empty;
+                    $l(this).fadeTo(o.speed, o.opacity, o.onComplete ? o.onComplete : $l.empty);
                 },
                 onOut: function(ev) {
-                    $.isFunction(o.onOut) ? o.onOut.call(this, this, ev): $l.empty;
-                    $(this).fadeTo(o.speed, 1, o.onComplete ? o.onComplete : $l.empty);
+                    $l.isFunction(o.onOut) ? o.onOut.call(this, this, ev): $l.empty;
+                    $l(this).fadeTo(o.speed, 1, o.onComplete ? o.onComplete : $l.empty);
                 }
             });
         });
@@ -641,14 +634,14 @@ laquu.error = function(msg) {
         };
 
         return this.each(function(i, e){
-            var opts = $.extend({}, defaults, settings || {});
-            $(this).hover(function(ev){
+            var opts = $l.extend({}, defaults, settings || {});
+            $l(this).hover(function(ev){
                 $(this).addClass(opts.hoverClass);
-                if($.isFunction(opts.onHover))
+                if($l.isFunction(opts.onHover))
                     opts.onHover.call(this, this, ev);
             }, function(ev){
-                $(this).removeClass(opts.hoverClass);
-                if($.isFunction(opts.onOut))
+                $l(this).removeClass(opts.hoverClass);
+                if($l.isFunction(opts.onOut))
                     opts.onOut.call(this, this, ev);
             });
         });
@@ -674,7 +667,7 @@ laquu.error = function(msg) {
     $l.fn.picMenu = function(settings) {
         return this.each(function(){
             var o = $l.extend({}, defaults, settings || {}),
-                self = $(this), items = null, current = 0;
+                self = $l(this), items = null, current = 0;
 
             function startTimer() {
                 timer = setInterval(function(){
@@ -699,7 +692,7 @@ laquu.error = function(msg) {
             }
 
             function showImage(ev) {
-                $(this).addClass("active").stop().animate( o.isVertical ? { height: o.showSize }: { width: o.showSize }, {
+                $l(this).addClass("active").stop().animate( o.isVertical ? { height: o.showSize }: { width: o.showSize }, {
                     easing: o.easing,
                     queue: false,
                     duration: o.speed,
@@ -708,7 +701,7 @@ laquu.error = function(msg) {
             }
 
             function hideImage(ev) {
-                $(this).removeClass("active").stop().animate( o.isVertical ? { height: o.hideSize }: { width: o.hideSize }, {
+                $l(this).removeClass("active").stop().animate( o.isVertical ? { height: o.hideSize }: { width: o.hideSize }, {
                     easing: o.easing,
                     queue: false,
                     duration: o.speed - 100,
@@ -740,16 +733,16 @@ laquu.error = function(msg) {
  */
 (function($l){
     $l.fn.scroller = function(settings) {
-        var scrollElement = $.browser.webkit ? $("body"): $("html");
+        var scrollElement = $.browser.webkit ? $l("body"): $l("html");
 
         return this.each(function(){
-            var o = $.extend({}, {
+            var o = $l.extend({}, {
                 easing: "swing",
                 speed: 1500
             }, settings || {});
-            $(this).bind("click", function(ev){
-                var self = $(this),
-                    of = $(self.attr("href")).offset();
+            $l(this).bind("click", function(ev){
+                var self = $l(this),
+                    of = $l(self.attr("href")).offset();
 
                 scrollElement.animate({
                     scrollTop: of.top,
@@ -779,7 +772,7 @@ laquu.error = function(msg) {
  */
 (function($l){
     $l.fn.stripe = function(settings) {
-        var o = $.extend({
+        var o = $l.extend({
             stripeCount: 2,
             stripeClass: ["even", "odd"],
             onHover: $l.empty,
@@ -813,11 +806,11 @@ laquu.error = function(msg) {
         };
 
         return this.each(function(){
-            var self = $(this), tabs = self.find("li"), panels,
-                o = $.extend({}, defaults, settings || {});
+            var self = $l(this), tabs = self.find("li"), panels,
+                o = $l.extend({}, defaults, settings || {});
 
             tabs.each(function(){
-                var i = $($("a", this).attr("href"), self);
+                var i = $l($l("a", this).attr("href"), self);
                 if(panels)
                     panels = panels.add(i);
                 else
@@ -827,7 +820,7 @@ laquu.error = function(msg) {
                 var p = panels.hide().parent().find(ev.target.hash);
                 p.show();
 
-                if($.isFunction(o.onChange))
+                if($l.isFunction(o.onChange))
                     o.onChange.call(this, this, p);
 
                 ev.preventDefault();
@@ -855,7 +848,7 @@ laquu.error = function(msg) {
 (function($l){
     $l.fn.ticker = function(settings){
         return this.each(function(){
-            var self = $(this), isStarted = false, current = 0, timer = null, items = self.children();
+            var self = $l(this), isStarted = false, current = 0, timer = null, items = self.children();
             var o = $l.extend({}, {
                 speed: 1000,
                 duration: 2000,
@@ -942,7 +935,7 @@ laquu.error = function(msg) {
 
     $l.fn.tooltip = function(settings) {
         this.each(function(){
-            var o = $.extend({}, {
+            var o = $l.extend({}, {
                 distX: 0,
                 distY: -20,
                 onShow: $l.empty,
@@ -959,7 +952,7 @@ laquu.error = function(msg) {
         
             function showTooltip(ev) {
                 var container = createTooltipContainer(),
-                    self = $(this),
+                    self = $l(this),
                     outerHeigh,
                     outerWidth;
 
@@ -971,7 +964,7 @@ laquu.error = function(msg) {
                     top: ev.pageY - Math.floor(self.outerHeight() / 2) + ( o.distY - Math.floor(container.outerHeight() / 2) ),
                     left: ev.pageX - Math.floor(self.outerWidth() / 2) + ( o.distX - Math.floor(container.outerWidth() / 2) )
                 }).stop(true, true).fadeIn("fast", function(){
-                    if($.isFunction(o.onShow))
+                    if($l.isFunction(o.onShow))
                         o.onShow.call(this, this);
                 });
 
@@ -985,16 +978,16 @@ laquu.error = function(msg) {
 
 
             function hideTooltip(ev) {
-                $(this).unbind("mousemove");
-                $(".laquu-tooltip-container").fadeOut("fast", function(){
-                    $(this).remove();
+                $l(this).unbind("mousemove");
+                $l(".laquu-tooltip-container").fadeOut("fast", function(){
+                    $l(this).remove();
 
-                    if($.isFunction(o.onHide))
+                    if($l.isFunction(o.onHide))
                         o.onHide.call(this, this);
                 });
             }
 
-            $(this).hover(showTooltip, hideTooltip);
+            $l(this).hover(showTooltip, hideTooltip);
         });
     };
 })(laquu);
