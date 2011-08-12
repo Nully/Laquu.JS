@@ -200,6 +200,32 @@ laquu.error = function(msg) {
 
 
 /**
+ * simple Blink plugin
+ *
+ */
+(function($l){
+    var defaults = {
+        opacity: .65,
+        onComplete: $l.empty,
+        onMouseOver: $l.empty
+    };
+
+    $l.fn.blink = function(settings) {
+        var o = $l.extend({}, defaults, settings || {});
+        return this.each(function(){
+            $(this).bind("mouseover", function(ev){
+                $l.onMouseOver.call(this, this, ev);
+                $(this).stop(true, true).css("opacity", o.opacity).animate({ opacity: 1 }, {
+                    queue: false,
+                    conplete: o.onComplete
+                });
+            });
+        });
+    };
+})(laquu);
+
+
+/**
  * breadcrumb plugin
  * simple animation for breadcrumb.
  * paramaters
