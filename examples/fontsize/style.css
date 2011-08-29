@@ -5,9 +5,9 @@
  * Author: 
  * Make: 
  */
-.small  { font-size: 1.1em !important; }
-.middle { font-size: 1.3em !important; }
-.large  { font-size: 1.7em !important; }
+.small  { font-size: 50% !important; }
+.middle { font-size: 62.5% !important; }
+.large  { font-size: 95% !important; }
 
 dt {
     font-size: 1.4em;
