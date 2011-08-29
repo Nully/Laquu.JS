@@ -1,0 +1,37 @@
+@charet "utf-8";
+/**
+ * -- Comment here
+ *
+ * Author: 
+ * Make: 
+ */
+.small  { font-size: 50% !important; }
+.middle { font-size: 62.5% !important; }
+.large  { font-size: 95% !important; }
+
+dt {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+dl {
+    zoom: 1;
+}
+dl:after {
+    content: ".";
+    line-height: 0;
+    height: 0;
+    display: block;
+    clear: both;
+    visibility: hidden;
+}
+dd {
+    float: left;
+    margin-right: 10px;
+}
+dd a {
+    font-size: 1.3em;
+}
+#changeTarget {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}

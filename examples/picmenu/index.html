@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Picmenu | Examples | Laquu.js</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../layout.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../src/css/sh_style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+</head>
+<body onload="sh_highlightDocument();">
+
+<div id="container">
+<h1>Laquu.JS ピックメニュー</h1>
+
+<div id="picMenu1" class="container">
+<h2>シンプルなピックメニュー</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu(".pickmenu").picmenu();
+});
+</pre>
+</div>
+
+<ul class="pickmenu">
+	<li><a href="#"><img src="img/forest_thumb.jpg" /></a></li>
+	<li><a href="#"><img src="img/island_thumb.jpg" /></a></li>
+	<li><a href="#"><img src="img/land_thumb.jpg" /></a></li>
+	<li><a href="#"><img src="img/mountain_thumb.jpg" /></a></li>
+	<li><a href="#"><img src="img/swamp_thumb.jpg" /></a></li>
+</ul>
+
+</div>
+
+<div id="picMenu2" class="container">
+<h2>オプション付きピックメニュー</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu(".pickmenu").picmenu({
+        showSize: 180,
+        hideSize: 40,
+        speed: 600,
+        easing: "easeInOutExpo",
+        isVertical: true,
+        auto: true
+    });
+});
+</pre>
+</div>
+
+<ul class="pickmenu">
+	<li><a href="#"><img src="img/forest_thumb.jpg" /></a></li>
+	<li><a href="#"><img src="img/island_thumb.jpg" /></a></li>
+	<li><a href="#"><img src="img/land_thumb.jpg" /></a></li>
+	<li><a href="#"><img src="img/mountain_thumb.jpg" /></a></li>
+	<li><a href="#"><img src="img/swamp_thumb.jpg" /></a></li>
+</ul>
+
+</div>
+
+
+<!-- End container --></div>
+
+<script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    laquu("#picMenu1 .pickmenu").picMenu();
+    laquu("#picMenu2 .pickmenu").picMenu({
+        showSize: 180,
+        hideSize: 40,
+        speed: 600,
+        easing: "easeInOutExpo",
+        isVertical: true,
+        auto: true
+    });
+});
+</script>
+</body>
+</html>

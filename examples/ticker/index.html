@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Ticker | Examples | Laquu.js</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../layout.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../src/css/sh_style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+</head>
+<body onload="sh_highlightDocument();">
+
+<div id="container">
+<h1>Laquu.JS ティッカープラグイン</h1>
+
+<div id="ticker1" class="container">
+<h2>シンプルなティッカー</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu(".ticker").ticker();
+});
+</pre>
+</div>
+
+
+<div class="tickerWrapper">
+    <ul class="ticker">
+        <li>
+        <img src="image01.jpg" alt="アネモネ" />
+        アネモネは交響詩篇エウレカセブンに登場する敵キャラクタです。
+        </li>
+        <li>
+        <img src="image02.jpg" alt="アネモネ" />
+        エウレカと同じ人型コーラリアンで、ホランド・ノヴァクの兄、デューイ・ノヴァクによって作られた人型コーラリアンです。
+        </li>
+        <li>
+        <img src="image03.jpg" alt="アネモネ" />
+        アネモネはエウレカたちと戦いを繰り返していく内に、自分のドミニクへ対する感情が現れていきます。
+        </li>
+    </ul>
+<!-- End tickerWrapper --></div>
+
+
+</div>
+
+
+<div id="ticker2" class="container">
+<h2>オプション付きティッカー</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu(".ticker").ticker();
+});
+</pre>
+</div>
+
+<div class="tickerWrapper">
+<div class="ticker">
+    <div class="item"><img src="image01.jpg" alt="アネモネ" />
+    アネモネは交響詩篇エウレカセブンに登場する敵キャラクタです。</div>
+    <div class="item"><img src="image02.jpg" alt="アネモネ" />
+    エウレカと同じ人型コーラリアンで、ホランド・ノヴァクの兄、デューイ・ノヴァクによって作られた人型コーラリアンです。</div>
+    <div class="item"><img src="image03.jpg" alt="アネモネ" />
+    アネモネはエウレカたちと戦いを繰り返していく内に、自分のドミニクへ対する感情が現れていきます。</div>
+</div>
+<!-- End tickerWrapper --></div>
+
+</div>
+
+
+<div id="options">
+<h2>利用可能オプション</h2>
+<dl>
+    <dt>speed</dt>
+    <dd>ティッカーのアニメーション速度を指定します</dd>
+    <dt>duration</dt>
+    <dd>アニメーションを開始するまでの時間を指定します</dd>
+    <dt>onShow</dt>
+    <dd>ティッカーが表示（アニメーション完了）後に呼び出されるコールバック関数です</dd>
+</dl>
+<p class="red bold size12">※ 画像サイズ及び、各要素にはCSSなどで高さを指定してください。</p>
+<!-- End options --></div>
+
+<!-- End container --></div>
+
+<script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    laquu("#ticker1 .ticker").ticker();
+    laquu("#ticker2 .ticker").ticker({
+        speed: 300,
+        duration: 2700
+    });
+});
+</script>
+</body>
+</html>

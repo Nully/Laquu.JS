@@ -1,0 +1,63 @@
+@charet "utf-8";
+/**
+ * -- Comment here
+ *
+ * Author: 
+ * Make: 
+ */
+.tabs {}
+.tabs ul {
+    zoom: 1;
+    padding: 0 0 0 15px;
+}
+.tabs ul:after {
+    content: ".";
+    display: block;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+    clear: both;
+}
+.tabs li {
+    float: left;
+    background: #EFEFEF;
+    position: relative;
+    margin: 0 15px 0 0;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+.tabs li.active, .tabs li.current {
+    top: 1px;
+    background: #EBF5FE;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(25%,#EBF5FE), color-stop(80%,#FFF));
+    background: -moz-linear-gradient(top, #EBF5FE 48%, #FFF 100%);
+}
+.tabs li a {
+    display: block;
+    float: left;
+    padding: 8px 15px;
+    font-size: 1.6em;
+}
+.tabs div {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.tabs div p {
+    font-size: 1.5em;
+}
+
+
+dl {
+    font-size: 1.5em;
+}
+
+dt {
+    font-weight: bold;
+    margin: 0 0 5px;
+}
+
+dd {
+    margin: 0 0 10px 30px;
+}

@@ -1,0 +1,42 @@
+@charet "utf-8";
+/**
+ * -- Bubble popup plugin styles.
+ *
+ * Author: Nully
+ */
+#popup1 p, #popup2 p {
+}
+.trigger {
+    font-size: 1.6em;
+}
+.popup {
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid #CCC;
+    -webkit-box-shadow: rgba(40, 40, 40, .75) 0px 1px 3px;
+    -moz-box-shadow: rgba(40, 40, 40, .75) 0px 1px 3px;
+    background: #FFF;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(25%, #FFF), color-stop(65%, #EEE));
+    font-size: 1.4em;
+}
+.popup h3 {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.popup p {}
+
+
+.container {
+    margin: 0 0 40px;
+}
+dl {
+    font-size: 1.5em;
+}
+dt {
+    font-weight: bold;
+    margin: 0 0 5px;
+}
+dd {
+    margin: 0 0 15px 20px;
+}

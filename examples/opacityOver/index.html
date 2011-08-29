@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Hover | Examples | Laquu.js</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../layout.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../src/css/sh_style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+</head>
+<body onload="sh_highlightDocument();">
+
+<div id="container">
+<h1>Laquu.js opacityOverプラグイン</h1>
+
+<div id="opacityOver1" class="container">
+<h2>シンプルなオパシティオーバー</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("a").opacityOver();
+});
+</pre>
+</div>
+
+<p><a href="#">リンク1</a>&nbsp;<a href="#">リンク2</a>&nbsp;<a href="#">リンク3</a></p>
+
+</div>
+
+
+<div id="opacityOver2" class="container">
+<h2>オプション付きオパシティオーバー</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("a").opacityOver({
+        opacity: .4,
+        speed: 200,
+        onComplete: function(){
+            $(this).css("border", "1px solid #F00");
+        },
+        onHover: funciton(){
+            $(this).text("オン！");
+        },
+        onOut: function(){
+            $(this).text("リンク");
+            $(this).css("border", "none");
+        }
+    });
+});
+</pre>
+</div>
+
+<p><a href="#">リンク1</a>&nbsp;<a href="#">リンク2</a>&nbsp;<a href="#">リンク3</a></p>
+
+</div>
+
+
+<div id="options">
+<dl>
+    <dt>opacity</dt>
+    <dd>透明度を指定します。</dd>
+    <dt>speed</dt>
+    <dd>アニメーション速度を指定します。<br />最低値は50で、50に指定することですぐに変わるロールオーバーを実現できます。</dd>
+    <dt>onComplete</dt>
+    <dd>アニメーションが完了した際に呼び出されるコールバック関数です。<br />マウスオーバー・マウスアウト時の両方で呼び出されます。</dd>
+    <dt>onHover</dt>
+    <dd>マウスオーバー時に呼び出されるコールバック関数を指定します。</dd>
+    <dt>onOut</dt>
+    <dd>マウスアウト時に呼び出されるコールバック関数を指定します。</dd>
+</dl>
+<!-- End options --></div>
+
+
+
+<!-- End container --></div>
+
+<script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    laquu("#opacityOver1 a").opacityOver();
+    laquu("#opacityOver2 a").opacityOver({
+        opacity: .4,
+        speed: 200,
+        onComplete: function(){},
+        onHover: function(){
+            $(this).css("border", "1px solid #900");
+        },
+        onOut: function(){
+            $(this).css("border", "none");
+        }
+    });
+});
+</script>
+</body>
+</html>

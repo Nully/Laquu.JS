@@ -1,0 +1,33 @@
+@charet "utf-8";
+/**
+ * -- Laquu.js plugin Accordion styles
+ */
+dl {
+    margin-bottom: 40px;
+}
+dt {
+    font-size: 1.3em;
+}
+dd {
+    font-size: 1.3em;
+    margin: 0 0 12px;
+    padding: 10px;
+    border: 1px solid #999;
+}
+dt a {
+    padding: 4px 10px;
+    display: block;
+}
+.current {
+    background: #F0F0F0;
+}
+.show {
+    border-color: #C00;
+}
+.debug {
+	font-size: 1.3em;
+	height: 130px;
+	overflow: auto;
+	border: 1px solid #666;
+	padding: 15px;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Tab | Examples | Laquu.js</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../layout.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../src/css/sh_style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+</head>
+<body onload="sh_highlightDocument();">
+
+<div id="container">
+<h1></h1>
+
+<div id="tab01" class="container">
+<h2>シンプルなタブ</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("#tabs01").tab();
+});
+</pre>
+</div>
+
+<div id="tabs01" class="tabs">
+<ul>
+    <li><a href="#panel1">タブ1</a></li>
+    <li><a href="#panel2">タブ2</a></li>
+    <li><a href="#panel3">タブ3</a></li>
+</ul>
+
+<div id="panel1"><p>タブ1の内容です。</p></div>
+<div id="panel2"><p>タブ2の内容です。</p></div>
+<div id="panel3"><p>タブ3の内容です。</p></div>
+
+<!-- End tabs --></div>
+
+</div>
+
+
+<div id="tab02" class="container">
+<h2>オプション付きタブ</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("#tabs02").tab({
+        activeTabClass: "current",
+        onChange: function(tab, panel){
+            alert("タブが変わりました！");
+        },
+        triggerTabNum: 1
+    });
+});
+</pre>
+</div>
+
+
+<div id="tabs02" class="tabs">
+<ul>
+    <li><a href="#panel1">タブ1</a></li>
+    <li><a href="#panel2">タブ2</a></li>
+    <li><a href="#panel3">タブ3</a></li>
+</ul>
+
+<div id="panel1"><p>タブ1の内容です。</p></div>
+<div id="panel2"><p>タブ2の内容です。</p></div>
+<div id="panel3"><p>タブ3の内容です。</p></div>
+
+<!-- End tabs --></div>
+</div>
+
+
+<div id="options">
+<h2>利用可能なオプションについて</h2>
+<dl>
+    <dt>activeTabClass</dt>
+    <dd>タブがアクティブな状態につくクラス名</dd>
+    <dt>onChange</dt>
+    <dd>タブが切り替わった際に呼び出されるコールバック関数<br />引数は1個で、クリックされたa要素です</dd>
+    <dt>triggerTabNum</dt>
+    <dd>初期表示するための番号を指定します。<br /></dd>
+</dl>
+<!-- End options --></div>
+
+
+<!-- End container --></div>
+
+<script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    laquu("#tab01 #tabs01").tab();
+    laquu("#tabs02").tab({
+        activeTabClass: "current",
+        onChange: function(tab, panel){
+            alert("タブが変わりました！");
+        },
+        triggerTabNum: 1
+    });
+});
+</script>
+</body>
+</html>
