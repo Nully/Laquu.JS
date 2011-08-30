@@ -4,7 +4,7 @@
  * @Auth    Nully
  * @Url     
  * @Make    10/04/26(Mon)
- * Version  1.0
+ * Version  1.0.1
  * @License MIT Lincense
  * The MIT License
  *
@@ -72,7 +72,7 @@ laquu.error = function(msg) {
             selected: false,
             currentClass: "current",
             speed: 300,
-            easing: "easeOutQuad",
+            easing: "swing",
             onHide: $l.empty,
             onShow: $l.empty,
 		};
@@ -137,7 +137,7 @@ laquu.error = function(msg) {
 	var defaults = {
 		overlayColor: "#000000",
 		speed: 300,
-		easing: "easeOutQuad",
+		easing: "swing",
 		onShow: $l.empty,
 		onHide: $l.empty
 	}, d = $l(document), w = $l(window), b;
@@ -685,7 +685,7 @@ laquu.error = function(msg) {
         hideSize: 90,
         speed: 400,
         duration: 2000,
-        easing: "easeInQuad",
+        easing: "swing",
         auto: false,
         isVertical: false
     };
