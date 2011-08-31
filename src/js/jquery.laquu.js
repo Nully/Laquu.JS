@@ -4,7 +4,7 @@
  * @Auth    Nully
  * @Url     
  * @Make    10/04/26(Mon)
- * Version  1.0.1
+ * Version  1.0.2
  * @License MIT Lincense
  * The MIT License
  *
@@ -74,7 +74,7 @@ laquu.error = function(msg) {
             speed: 300,
             easing: "swing",
             onHide: $l.empty,
-            onShow: $l.empty,
+            onShow: $l.empty
 		};
 
 		return this.each(function(i, elm){
@@ -428,7 +428,7 @@ laquu.error = function(msg) {
             self.css("position", "relative");
             popup.hide().css({
                 opacity: 0,
-                position: "absolute",
+                position: "absolute"
             }).css({
                 left: ( Math.floor(trigger.outerWidth() / 2) - Math.floor(popup.outerWidth() / 2)),
                 top: parseInt("-" + (o.distance + popup.outerHeight()))
@@ -464,6 +464,7 @@ laquu.error = function(msg) {
             $(this).find("li").filter(function(){
                 var ul = $l("ul", this),
                     $t = $l(this);
+
                 if(ul.size()) {
                     ul.hide().parent("li").hover(function(){
                         $l(this).children("ul").slideDown(opts.showSpeed);
@@ -924,7 +925,7 @@ laquu.error = function(msg) {
             self.parent().css("position", "relative").end().css({
                 position: "absolute",
                 top: 0,
-                left: 0,
+                left: 0
             }).bind("mouseover", stop).bind("mouseout", start);
 
             start();
