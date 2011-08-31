@@ -1,6 +1,23 @@
 Change Log
 ---
 
+- ver 1.0.3
+  fix bubblepop plugin, opacityOver plugin bugs.
+  example index.html broken links fix.
+
+
+- ver 1.0.2
+  fix bubble IE bugs.
+
+
+- ver 1.0.1
+  fix more bugs.
+
+
+- ver 1.0.0
+  new release Laquu.JS.
+
+
 - ver 0.14
   source code diet.
 
