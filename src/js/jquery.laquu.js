@@ -4,7 +4,7 @@
  * @Auth    Nully
  * @Url     
  * @Make    10/04/26(Mon)
- * Version  1.0.2
+ * Version  1.0.3
  * @License MIT Lincense
  * The MIT License
  *
@@ -374,9 +374,11 @@ laquu.error = function(msg) {
                 self = $l(this),
                 popup = self.find(o.popupClass),
                 trigger = self.find(o.triggerClass),
+                popupPos = "-" + (o.distance + popup.outerHeight()) + "px",
                 isShow = false,
                 isStarted = false,
                 timer = null;
+
 
             function stopTimer() {
                 if(timer) {
@@ -390,7 +392,7 @@ laquu.error = function(msg) {
                 if(isShow || isStarted) return;
 
                 isStarted = true;
-                popup.stop(true, true).css({ display: "block" }).animate({
+                popup.stop(true, true).css({ top: popupPos, display: "block" }).animate({
                     opacity: 1,
                     top: "+=" + o.step
                 }, {
@@ -429,10 +431,13 @@ laquu.error = function(msg) {
             popup.hide().css({
                 opacity: 0,
                 position: "absolute"
-            }).css({
-                left: ( Math.floor(trigger.outerWidth() / 2) - Math.floor(popup.outerWidth() / 2)),
-                top: parseInt("-" + (o.distance + popup.outerHeight()))
             });
+
+            popup.css({
+                left: ( Math.floor(trigger.outerWidth() / 2) - Math.floor(popup.outerWidth() / 2)),
+                top: popupPos
+            });
+
             trigger.add(popup).bind("mouseover", showBubble).bind("mouseout", hideBubble);
         });
     };
@@ -633,11 +638,11 @@ laquu.error = function(msg) {
             $l(this).over({
                 onHover: function(ev){
                     $l.isFunction(o.onHover) ? o.onHover.call(this, this, ev): $l.empty;
-                    $l(this).fadeTo(o.speed, o.opacity, o.onComplete ? o.onComplete : $l.empty);
+                    $l(this).stop(true, true).fadeTo(o.speed, o.opacity, o.onComplete ? o.onComplete : $l.empty);
                 },
                 onOut: function(ev) {
                     $l.isFunction(o.onOut) ? o.onOut.call(this, this, ev): $l.empty;
-                    $l(this).fadeTo(o.speed, 1, o.onComplete ? o.onComplete : $l.empty);
+                    $l(this).stop(true, true).fadeTo(o.speed, 1, o.onComplete ? o.onComplete : $l.empty);
                 }
             });
         });
