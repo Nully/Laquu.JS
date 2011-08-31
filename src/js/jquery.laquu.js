@@ -805,14 +805,13 @@ laquu.error = function(msg) {
 (function($l){
     $l.fn.stripe = function(settings) {
         var o = $l.extend({
-            stripeCount: 2,
             stripeClass: ["even", "odd"],
             onHover: $l.empty,
             onOut: $l.empty
         }, settings || {});
 
         return this.each(function(i){
-            $l(this).addClass(o.stripeClass[i%o.stripeCount]).over({
+            $l(this).addClass(o.stripeClass[i%o.stripeClass.length]).over({
                 onHover: o.onHover,
                 onOut: o.onOut
             });
