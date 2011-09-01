@@ -4,7 +4,7 @@
  * @Auth    Nully
  * @Url     
  * @Make    10/04/26(Mon)
- * Version  1.0.3
+ * Version  1.0.4
  * @License MIT Lincense
  * The MIT License
  *
@@ -213,9 +213,9 @@ laquu.error = function(msg) {
     $l.fn.blink = function(settings) {
         var o = $l.extend({}, defaults, settings || {});
         return this.each(function(){
-            $(this).bind("mouseover", function(ev){
+            $l(this).bind("mouseover", function(ev){
                 $l.onMouseOver.call(this, this, ev);
-                $(this).stop(true, true).css("opacity", o.opacity).animate({ opacity: 1 }, {
+                $l(this).stop(true, true).css("opacity", o.opacity).animate({ opacity: 1 }, {
                     queue: false,
                     conplete: o.onComplete
                 });
@@ -271,7 +271,7 @@ laquu.error = function(msg) {
                 var p = {
                     position: "absolute", top: 0, left: 0, zIndex: itemSize - i
                 },
-                self = $(this);
+                self = $l(this);
 
                 if(o.isVertical) {
                     var left = 0;
@@ -297,7 +297,7 @@ laquu.error = function(msg) {
             timer = setInterval(function(){
                 var params = {},
                     opts = {},
-                    current_item = $(items.get(current - 1));
+                    current_item = $l(items.get(current - 1));
 
                 params.queue = false;
                 params.top = 0;
@@ -466,7 +466,7 @@ laquu.error = function(msg) {
         return this.each(function(){
             var opts = $l.extend({}, defaults, settings || {}),
                 root =$l(this);
-            $(this).find("li").filter(function(){
+            $l(this).find("li").filter(function(){
                 var ul = $l("ul", this),
                     $t = $l(this);
 
@@ -668,7 +668,7 @@ laquu.error = function(msg) {
         return this.each(function(i, e){
             var opts = $l.extend({}, defaults, settings || {});
             $l(this).hover(function(ev){
-                $(this).addClass(opts.hoverClass);
+                $l(this).addClass(opts.hoverClass);
                 if($l.isFunction(opts.onHover))
                     opts.onHover.call(this, this, ev);
             }, function(ev){
@@ -860,7 +860,7 @@ laquu.error = function(msg) {
             if(tabs.size() < o.triggerTabNum)
                 o.triggerTabNum = 0;
 
-            $("a", tabs.get(o.triggerTabNum)).trigger("click");
+            $l("a", tabs.get(o.triggerTabNum)).trigger("click");
         });
     };
 })(laquu);
