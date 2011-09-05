@@ -4,7 +4,7 @@
  * @Auth    Nully
  * @Url     
  * @Make    10/04/26(Mon)
- * Version  1.0.5
+ * Version  1.0.6
  * @License MIT Lincense
  * The MIT License
  *
@@ -137,7 +137,6 @@ laquu.error = function(msg) {
 	var defaults = {
 		overlayColor: "#000000",
 		speed: 300,
-		easing: "swing",
 		onShow: $l.empty,
 		onHide: $l.empty
 	}, d = $l(document), w = $l(window), b;
@@ -160,16 +159,16 @@ laquu.error = function(msg) {
 			if(_t.size() < 1) return true;
 
 			b.css({
-				background: "#000",
+				background: o.overlayColor,
 				width: d.width(),
 				height: d.height()
-			}).fadeIn(o.speed, o.easing, function(){
+			}).fadeIn(o.speed, function(){
 				$l.isFunction(o.onShow) ? o.onShow.call(_t, _t, b): $l.empty();
 
 				var _o = _t.offset();
 				w.scrollTop(_o.top).scrollLeft(_o.left);
 
-				b.fadeOut(o.speed, o.easing, function(){
+				b.fadeOut(o.speed, function(){
 					$l.isFunction(o.onHide) ? o.onHide.call(_t, _t, b): $l.empty();
 
 					b.hide().css({ top: 0, left: 0, width: 0, height: 0 });
