@@ -454,7 +454,7 @@ laquu.error = function(msg) {
             hoverClass: "hover",
             showSpeed: 200,
             hideSpeed: 400,
-            hideTime: 500,
+            hideTime: 100,
             onShow: $l.empty,
             onHide: $l.empty
         },
@@ -554,11 +554,18 @@ laquu.error = function(msg) {
 			var o = $l.extend({}, defaults, options || {}),
 				a = this.src,
 				b,
-				ext;
+				ext,
+				overImage = new Image();
 
-			 b = this.src.split(".");
-			 ext = b.pop();
-			 b = b.join(".") + o.suffix + "." + ext;
+            b = this.src.split(".");
+            ext = b.pop();
+            b = b.join(".") + o.suffix + "." + ext;
+
+            // プリロード
+            overImage.src = b;
+            /* 次回バージョンで画像のプリロード後のコールバックを指定する予定 */
+            overImage.onLoad = function() {};
+
 
 			$l(this).over({
 			    onHover: function(ev){
@@ -965,21 +972,23 @@ laquu.error = function(msg) {
                 onShow: $l.empty,
                 onHide: $l.empty,
                 onMove: $l.empty
-            }, settings || {});
+            }, settings || {}),
+            defaultText = $(this).attr("title");
 
             function createTooltipContainer() {
                 return $l('<div id="laquu-tooltip-container'+ uuid() +'" class="laquu-tooltip-container"></div>')
                             .appendTo("body")
                             .css({ position: "absolute", display: "none", top: 0, left: 0 });
             }
-                
+
             function showTooltip(ev) {
                 var container = createTooltipContainer(),
                     self = $l(this),
                     outerHeigh,
                     outerWidth;
 
-                container.text(self.attr("title"));
+                self.attr("title", null);
+                container.text(defaultText);
                 containerHeight = Math.floor(self.outerHeight() / 2) + Math.floor(container.outerHeight() / 2) + Math.abs(o.distY);
                 containerWidth  = Math.floor(self.outerWidth() / 2) + Math.floor(container.outerWidth() / 2) + Math.abs(o.distX);
 
@@ -995,16 +1004,17 @@ laquu.error = function(msg) {
                         top: ev.pageY - containerHeight,
                         left: ev.pageX - containerWidth
                     });
-                    o.onMove.call(this, container, self);
+                    o.onMove.call(this, container.get(0), self);
                 });
             }
 
 
             function hideTooltip(ev) {
                 $l(this).unbind("mousemove");
+                $l(this).attr("title", defaultText);
                 $l(".laquu-tooltip-container").fadeOut("fast", function(){
                     $l(this).remove();
-                    o.onHide.call(this, container, self);
+                    o.onHide.call(this, this, self);
                 });
             }
 
