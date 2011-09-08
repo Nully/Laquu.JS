@@ -24,6 +24,7 @@ li {
 a {
     padding: 0 0 0 18px;
     display: block;
+    float: left;
     font-size: 1.4em;
     height: 22px;
     line-height: 22px;
