@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Fontsize | Examples | Laquu.js</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../layout.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../src/css/sh_style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+</head>
+<body onload="sh_highlightDocument();">
+
+<div id="container">
+<h1>Laquu.js Exticon plugin example.</h1>
+
+<div id="example1" class="container">
+<h2>Default example</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu(".exticon").exticon();
+});
+</pre>
+</div>
+<ul>
+    <li><a href="item/laquu.jpg" class="exticon">JPEG Image</a></li>
+    <li><a href="item/laquu.gif" class="exticon">GIF Image</a></li>
+    <li><a href="item/laquu.png" class="exticon">PNG Image</a></li>
+    <li><a href="item/laquu.pdf" class="exticon">PDF File</a></li>
+</ul>
+</div>
+
+<div id="example2" class="container">
+<h2>has onChange callback example</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu(".exticon").exticon({
+        prefix: "i_"
+    });
+});
+</pre>
+</div>
+<ul>
+    <li><a href="item/laquu.jpg" class="exticon2">JPEG Image</a></li>
+    <li><a href="item/laquu.gif" class="exticon2">GIF Image</a></li>
+    <li><a href="item/laquu.png" class="exticon2">PNG Image</a></li>
+    <li><a href="item/laquu.pdf" class="exticon2">PDF File</a></li>
+</ul>
+</div>
+
+<!-- End container --></div>
+
+<script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    laquu(".exticon").exticon();
+    laquu(".exticon2").exticon({
+        prefix: "i_"
+    });
+});
+</script>
+</body>
+</html>
