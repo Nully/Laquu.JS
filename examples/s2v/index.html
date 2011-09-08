@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Fontsize | Examples | Laquu.js</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../layout.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../src/css/sh_style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+</head>
+<body onload="sh_highlightDocument();" style="position: relative;">
+
+<div id="container">
+<h1>Laquu.js ScrollToView (s2v) plugin example.</h1>
+
+<div id="example1" class="container">
+<h2>Default example</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("#scroller").s2v();
+});
+</pre>
+</div>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<p id="scroller" style="position: fixed; top: 50px; left: 200px;"><a href="#container"><img src="images/btn.gif" alt="Scrol top" /></a></p>
+</div>
+<!-- End container --></div>
+
+<script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    laquu("#scroller").s2v({
+        detectTop: 300,
+        fadeSpeed: 200,
+        scrollType: "default",
+        scrollOptions: {
+        }
+    });
+});
+</script>
+</body>
+</html>
