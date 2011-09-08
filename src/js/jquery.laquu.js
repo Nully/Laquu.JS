@@ -797,6 +797,52 @@ laquu.error = function(msg) {
 
 
 /**
+ * Scrol to View plugin.
+ *
+ * paramaters
+ *  detectTop:
+ *  fadeSpeed:
+ *  scrollType:
+ *  scrollOptions:
+ */
+(function($l){
+    $l.fn.s2v = function(options) {
+        var o = $l.extend({}, {
+            detectTop: 300,
+            fadeSpeed: 200,
+            scrollType: "default",
+            scrollOptions: {
+            }
+        }, options || {});
+        return this.each(function(){
+            var $t = $l(this), trigger;;
+
+            $t.hide();
+            trigger = $t.find("a");
+            if(trigger.size()) {
+                if(o.scrollType === "blackout") {
+                    trigger.blackoutScroll(o.scrollOptions);
+                }
+                else {
+                    trigger.scroller(o.scrollOptions);
+                }
+            }
+
+            $l(window).scroll(function(){
+                var $w = $l(this);
+                if($w.scrollTop() > o.detectTop) {
+                    $t.fadeIn(o.fadeSpeed);
+                }
+                else {
+                    $t.fadeOut(o.fadeSpeed);
+                }
+            });
+        });
+    };
+})(laquu);
+
+
+/**
  * page scroller
  *
  * @param  options  Object
