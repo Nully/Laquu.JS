@@ -1,5 +1,18 @@
 Change Log
 ---
+- ver1.1.0
+  add plugins.
+    - exticon: href extension icon plugin.
+    - innerslide: inner sliding plugin.
+    - s2v: scroll to view target plugin.
+  bug fix.
+    - merge ver1.0.7 bug fixes.
+
+
+- ver 1.0.7
+  bug fix.
+    - tooltip plugin tooltip position bug fix.
+
 
 - ver 1.0.3
   fix bubblepop plugin, opacityOver plugin bugs.
