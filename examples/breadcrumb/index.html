@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Breadcrumb | Examples | Laquu.js</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.menubuilder.js"></script>
 <script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
 <script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
@@ -14,11 +15,17 @@
 </head>
 <body onload="sh_highlightDocument();">
 
-<div id="container">
-<h1>Laquu.js Breadcrumb plugin</h1>
+<div id="header">
+<h1>パンくずプラグイン｜Laquu.JS</h1>
+<!-- End header --></div>
 
+
+<div id="container" class="clearfix">
+
+
+<div id="contents">
 <div id="breadcrumb1" class="container">
-<h2>Default Breadcrumb plugin.</h2>
+<h2>シンプルな動作例</h2>
 
 <ul id="breadcrumb">
     <li><a href="#">Home</a></li>
@@ -38,7 +45,7 @@ jQuery(function(){
 
 
 <div id="breadcrumb2" class="container">
-<h2>Vertical Breadcrumb plugin.</h2>
+<h2>縦アニメーション動作例</h2>
 
 <ul id="vcrumb">
     <li><a href="#">Home</a></li>
@@ -57,12 +64,20 @@ jQuery(function(){
 </pre>
 </div>
 </div>
-
+<!-- End contents --></div>
+<div id="menu"></div>
 <!-- End container --></div>
+
+
+<div id="footer">
+<address>Copyright Laquu.JS all reserved. Author Nully.</address>
+<!-- End footer --></div>
+
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    jQuery("#menu").menuBuilder();
     laquu("#breadcrumb").breadcrumb();
     laquu("#vcrumb").breadcrumb({
         isVertical: true,

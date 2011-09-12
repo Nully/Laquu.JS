@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Stripe | Examples | Laquu.js</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.menubuilder.js"></script>
 <script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
 <script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
@@ -14,10 +15,15 @@
 </head>
 <body onload="sh_highlightDocument();">
 
-<div id="container">
-<h1>Laquu.JS ストライププラグイン</h1>
+<div id="header">
+<h1>ストライププラグイン｜Laquu.JS</h1>
+<!-- End header --></div>
 
 
+<div id="container" class="clearfix">
+
+
+<div id="contents">
 <div id="stripe1" class="container">
 <h2>シンプルなストライプテーブル</h2>
 
@@ -116,27 +122,22 @@ jQuery(function(){
 </div>
 
 
-<div id="options">
-<h2>利用可能オプション</h2>
-<dl>
-    <dt>stripeCount</dt>
-    <dd>ストライプ表示にする個数</dd>
-    <dt>stripeClass</dt>
-    <dd>ストライプ表示の際に付与するクラスの配列</dd>
-    <dt>onHover</dt>
-    <dd>マウスオーバー時のコールバック関数</dd>
-    <dt>onOut</dt>
-    <dd>マウスアウト時のコールバック関数</dd>
-</dl>
-<!-- End options --></div>
-
 <!-- End container --></div>
+<div id="menu"></div>
+</div>
+
+
+<div id="footer">
+<address>Copyright Laquu.JS all reserved. Author Nully.</address>
+<!-- End footer --></div>
+
+
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    jQuery("#menu").menuBuilder();
     laquu("#stripe1 table tr").stripe();
-
     laquu("#stripe2 table tr").stripe({
         stripeCount: 4,
         stripeClass: ["first", "second", "third", "fource"],

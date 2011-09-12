@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Fontsize | Examples | Laquu.js</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.menubuilder.js"></script>
 <script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
 <script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
@@ -14,11 +15,17 @@
 </head>
 <body onload="sh_highlightDocument();">
 
-<div id="container">
-<h1>Laquu.js Fontsize plugin example.</h1>
+<div id="header">
+<h1>フォントサイズプラグイン｜Laquu.JS</h1>
+<!-- End header --></div>
 
+
+<div id="container" class="clearfix">
+
+
+<div id="contents">
 <div id="example1" class="container">
-<h2>Default example</h2>
+<h2>シンプルな動作例</h2>
 
 <div class="code">
 <p>Code</p>
@@ -29,16 +36,16 @@ jQuery(function(){
 </pre>
 </div>
 <dl id="switch1">
-<dt>Change Fontsize</dt>
-<dd><a href="#small">Small</a></dd>
-<dd><a href="#middle">Default</a></dd>
-<dd><a href="#large">Large</a></dd>
+<dt>フォントサイズの変更</dt>
+<dd><a href="#small">小</a></dd>
+<dd><a href="#middle">中</a></dd>
+<dd><a href="#large">大</a></dd>
 </dl>
 
 </div>
 
 <div id="example2" class="container">
-<h2>has onChange callback example</h2>
+<h2>オプション付き動作例</h2>
 
 <div class="code">
 <p>Code</p>
@@ -53,49 +60,33 @@ jQuery(function(){
 </pre>
 </div>
 <dl id="switch2">
-<dt>Change Fontsize</dt>
-<dd><a href="#small">Small</a></dd>
-<dd><a href="#middle">Default</a></dd>
-<dd><a href="#large">Large</a></dd>
+<dt>フォントサイズの変更</dt>
+<dd><a href="#small">小</a></dd>
+<dd><a href="#middle">中</a></dd>
+<dd><a href="#large">大</a></dd>
 </dl>
 </div>
 
-<div id="example3">
-<h2>Font size change target example</h2>
+<!-- End contents --></div>
 
-<div class="code">
-<p>Code</p>
-<pre class="sh_javascript">
-jQuery(function(){
-    laquu("#switch3").fontsize({
-        target: "changeTarget"
-    });
-});
-</pre>
-</div>
-
-<p id="changeTarget">this text font size change target !</p>
-<dl id="switch3">
-<dt>Change Fontsize</dt>
-<dd><a href="#small">Small</a></dd>
-<dd><a href="#middle">Default</a></dd>
-<dd><a href="#large">Large</a></dd>
-</dl>
-</div>
-
+<div id="menu"></div>
 <!-- End container --></div>
+
+
+<div id="footer">
+<address>Copyright Laquu.JS all reserved. Author Nully.</address>
+<!-- End footer --></div>
+
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    jQuery("#menu").menuBuilder();
     laquu("#switch1").fontsize();
     laquu("#switch2").fontsize({
         onChange: function(elem, size) {
             alert("on changed fnot size " + size + " !");
         }
-    });
-    laquu("#switch3").fontsize({
-        target: "#changeTarget"
     });
 });
 </script>

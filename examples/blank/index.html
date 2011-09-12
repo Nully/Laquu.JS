@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Blank | Examples | Laquu.js</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.menubuilder.js"></script>
 <script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
 <script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
@@ -13,20 +14,25 @@
 <link rel="stylesheet" type="text/css" href="style.css" media="all" />
 </head>
 <body onload="sh_highlightDocument();">
+<div id="header">
+<h1>ブランクプラグイン｜Laquu.JS</h1>
+<!-- End header --></div>
 
-<div id="container">
-<h1>Laquu.js blank example</h1>
 
-<h2>Blank examples</h2>
+<div id="container" class="clearfix">
 
+
+<div id="contents">
+<h2>動作例</h2>
 <div class="code">
 <p>Code</p>
 <pre class="sh_javascript">
-$(function(){
+jQuery(function(){
     laquu(".blank").blank();
 });
 </pre>
 </div>
+
 <p>
 <a href="http://yahoo.co.jp/" class="blank">Yahoo</a>
 <a href="http://google.co.jp" class="blank">Google</a>
@@ -34,14 +40,21 @@ $(function(){
 <a href="img/penguin.gif" class="blank">Image File</a>
 </p>
 
+<!-- End contents --></div>
+<div id="menu"></div>
 <!-- End container --></div>
+
+
+<div id="footer">
+<address>Copyright Laquu.JS all reserved. Author Nully.</address>
+<!-- End footer --></div>
+
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
-    laquu(".blank").blank({
-    	width: 100
-    });
+    jQuery("#menu").menuBuilder();
+    laquu(".blank").blank();
 });
 </script>
 </body>

@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Scroller | Examples | Laquu.js</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.menubuilder.js"></script>
 <script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
 <script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
@@ -14,9 +15,15 @@
 </head>
 <body onload="sh_highlightDocument();">
 
-<div id="container">
-<h1></h1>
+<div id="header">
+<h1>スクローラープラグイン｜Laquu.JS</h1>
+<!-- End header --></div>
 
+
+<div id="container" class="clearfix">
+
+
+<div id="contents">
 <div id="scroller1" class="container">
 <h2>シンプルなページスクローラー</h2>
 
@@ -28,37 +35,35 @@
     });
 </pre>
 </div>
-
-<p><a href="#scroller2" class="pagetop">ページ下部へ</a></p>
-
+<p><a href="#footer" class="pagetop">ページ下部へ</a></p>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<p><a href="#header" class="pagetop">ページ上部へ</a></p>
 </div>
 
-
-<div id="scroller2" class="container">
-<h2>オプション付きページスクローラー</h2>
-
-<div class="code">
-<p>Code</p>
-<pre class="sh_javascript">
-    jQuery(function(){
-        laquu("#scroller2 .pagetop").scroller({
-            easing: "",
-            speed: 800
-        });
-    });
-</pre>
-</div>
-
-<p><a href="#scroller1" class="pagetop">ページ上部へ</a></p>
-
-</div>
 
 <!-- End container --></div>
+<div id="menu"></div>
+</div>
+
+
+<div id="footer">
+<address>Copyright Laquu.JS all reserved. Author Nully.</address>
+<!-- End footer --></div>
+
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript" src="../../src/js/jquery.easing.1.3.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    jQuery("#menu").menuBuilder();
     laquu("#scroller1 .pagetop").scroller();
     laquu("#scroller2 .pagetop").scroller({
         easing: "easeInOutQuint",

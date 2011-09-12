@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Tooltip | Examples | Laquu.js</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.menubuilder.js"></script>
 <script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
 <script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
@@ -14,10 +15,15 @@
 </head>
 <body onload="sh_highlightDocument();">
 
-<div id="container">
-<h1></h1>
+<div id="header">
+<h1>ツールチッププラグイン｜Laquu.JS</h1>
+<!-- End header --></div>
 
 
+<div id="container" class="clearfix">
+
+
+<div id="contents">
 <div id="tooltip1" class="container">
 <h2>シンプルなツールチップ</h2>
 
@@ -54,27 +60,20 @@ jQuery(function(){
 </div>
 
 
-<div id="options">
-    <h2>指定可能オプション</h2>
-    <dl>
-        <dt>distX</dt>
-        <dd>X軸の表示位置を調整する値です</dd>
-        <dt>distY</dt>
-        <dd>Y軸の表示位置を調整する値です</dd>
-        <dt>onShow</dt>
-        <dd>ツールチップが表示された際に呼び出されるコールバック関数です</dd>
-        <dt>onHide</dt>
-        <dd>ツールチップが消えた際に呼び出されるコールバック関数です</dd>
-        <dt>onMove</dt>
-        <dd>ツールチップが移動するたびに呼び出されるコールバック関数です</dd>
-    </dl>
-<!-- End options --></div>
-
 <!-- End container --></div>
+<div id="menu"></div>
+</div>
+
+
+<div id="footer">
+<address>Copyright Laquu.JS all reserved. Author Nully.</address>
+<!-- End footer --></div>
+
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    jQuery("#menu").menuBuilder();
     laquu("#tooltip1 .tooltip").tooltip();
     laquu("#tooltip2 .tooltip").tooltip({
         distX: -20,

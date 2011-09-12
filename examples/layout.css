@@ -4,37 +4,85 @@
  *
  * Author: Nully
  */
-h1 {
-    font-size: 3em;
-    font-weight: bold;
-    margin-bottom: 20px;
+body {
+    background: #FCFCFC;
 }
-h2 {
-    font-size: 2.2em;
-    font-weight: bold;
-    margin-bottom: 18px;
-    border: 1px solid #666;
-    border-left-width: 5px;
-    padding: 4px;
+#header {
+    /* For WebKit (Safari, Google Chrome etc) */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #eee6ce), to(#cec6ac));
+    /* For Mozilla/Gecko (Firefox etc) */
+    background: -moz-linear-gradient(top, #eee6ce, #cec6ac);
+    /* For Internet Explorer 5.5 - 7 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#FFeee6ce, endColorstr=#FFcec6ac);
+    /* For Internet Explorer 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#FFeee6ce, endColorstr=#FFcec6ac)";
+    box-shadow: inset 0 -1px 2px rgba(30, 30, 30, .4);
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #666;
 }
-.code {
-    margin: 0 30px 0;
+#header h1 {
+    color: #444;
+    font-size: 1.8em;
 }
-.code p {
-    text-align: right;
+#menu {
+    float: left;
+    width: 160px;
+    padding: 20px 0 0 0;
 }
-pre {
-    font-size: 1.6em;
+#menu li {
+    list-style: disc;
     line-height: 1.4;
-    padding: 10px;
-    margin: 0 0 20px;
-    border: 1px solid #CCC;
+    font-size: 1.5em;
+    margin: 0 0 5px;
+}
+#menu a:link, #menu a:visited {
+    color: #444;
+    text-decoration: none;
+}
+#menu a:hover {
+    color: #c1752e;
+    text-decoration: underline;
 }
 #container {
-    width: 860px;
-    padding: 20px 0 0;
-    margin: 0 auto 30px;
+    width: 800px;
+    margin: 0 auto 40px;
 }
-.container {
-    margin-bottom: 60px;
+#contents {
+    float: right;
+    width: 600px;
 }
+#footer {
+    font-size: 1.4em;
+    text-align: center;
+    padding: 15px 0;
+    margin: 0;
+    background: #EEE;
+    border-top: 1px solid #666;
+}
+h2 {
+    font-size: 2em;
+    margin:  0 0 16px 0;
+    border-bottom: 1px solid #c1752e;
+    border-left: 5px solid #c1752e;
+    padding: 10px 0 10px 10px;
+    margin: 20px 0 0 0;
+}
+div.code {
+    font-size: 1.6em;
+    margin: 20px 0;
+}
+.code pre {
+    border: 1px solid #333;
+    padding: 10px 5px;
+}
+div.code p {
+    text-align: right;
+    font-style: italic;
+    font-size: .6em;
+}
+
+
+
+.clearfix { zoom: 1; }
+.clearfix:after { content: "."; display: block; clear: both; height: 0; line-height: 0; visibility: hidden; }

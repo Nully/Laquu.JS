@@ -3,8 +3,9 @@
 <html xmlns="http://www.w3c.org/1999/xhtml" xml:lang="ja" lang="ja">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Hover | Examples | Laquu.js</title>
+<title>Over | Examples | Laquu.js</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.menubuilder.js"></script>
 <script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
 <script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
@@ -14,11 +15,17 @@
 </head>
 <body onload="sh_highlightDocument();">
 
-<div id="container">
-<h1>Laquu.js over plugin examples</h1>
+<div id="header">
+<h1>オーバープラグイン｜Laquu.JS</h1>
+<!-- End header --></div>
 
+
+<div id="container" class="clearfix">
+
+
+<div id="contents">
 <div id="over1" class="container">
-<h2>Default over example</h2>
+<h2>シンプルな動作例</h2>
 
 <div class="code">
 <p>Code</p>
@@ -54,43 +61,14 @@ jQuery(function(){
 <pre class="sh_javascript">
 jQuery(function(){
     laquu("#over2 tr").over({
-        hoverClass: "on"
-    });
-});
-</pre>
-</div>
-
-<table border="0" cellpadding="0" cellspacing="0">
-<tr>
-	<th>Table head</th>
-	<td>Table data</td>
-</tr>
-<tr>
-	<th>Table head</th>
-	<td>Table data</td>
-</tr>
-<tr>
-	<th>Table head</th>
-	<td>Table data</td>
-</tr>
-</table>
-
-</div>
-
-
-<div id="over3" class="container">
-<h2>has Calback over example</h2>
-
-<div class="code">
-<p>Code</p>
-<pre class="sh_javascript">
-jQuery(function(){
-    laquu("#over3 tr").over({
+        hoverClass: "on",
         onHover: function() {
-            $("th, td", this).text("hove !!");
+            laquu("th", this).text("Hello");
+            laquu("td", this).text("World!");
         },
         onOut: function() {
-            $("th, td", this).text("out.");
+            laquu("th", this).text("Table head");
+            laquu("td", this).text("Table data");
         }
     });
 });
@@ -99,37 +77,46 @@ jQuery(function(){
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
-	<th>out.</th>
-	<td>out.</td>
+	<th>Table head</th>
+	<td>Table data</td>
 </tr>
 <tr>
-	<th>out.</th>
-	<td>out.</td>
+	<th>Table head</th>
+	<td>Table data</td>
 </tr>
 <tr>
-	<th>out.</th>
-	<td>out.</td>
+	<th>Table head</th>
+	<td>Table data</td>
 </tr>
 </table>
 
 </div>
 
 
+<!-- End contents --></div>
+<div id="menu"></div>
 <!-- End container --></div>
+
+
+<div id="footer">
+<address>Copyright Laquu.JS all reserved. Author Nully.</address>
+<!-- End footer --></div>
+
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    jQuery("#menu").menuBuilder();
     laquu("#over1 tr").over();
     laquu("#over2 tr").over({
-        hoverClass: "on"
-    });
-    laquu("#over3 tr").over({
+        hoverClass: "on",
         onHover: function() {
-            $("th, td", this).text("hove !!");
+            laquu("th", this).text("Hello");
+            laquu("td", this).text("World!");
         },
         onOut: function() {
-            $("th, td", this).text("out.");
+            laquu("th", this).text("Table head");
+            laquu("td", this).text("Table data");
         }
     });
 });

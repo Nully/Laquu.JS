@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>BlackoutScroller | Examples | Laquu.js</title>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.menubuilder.js"></script>
 <script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
 <script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
@@ -12,24 +13,29 @@
 <link rel="stylesheet" type="text/css" href="../../src/css/sh_style.css" media="all" />
 <link rel="stylesheet" type="text/css" href="style.css" media="all" />
 </head>
-<body onload="sh_highlightDocument();">
 
-<div id="container">
-<h1>Laquu.js BlackoutScroller example</h1>
+<body onload="sh_highlightDocument();">
+<div id="header">
+<h1>ブラックアウトスクロール｜Laquu.JS</h1>
+<!-- End header --></div>
+
+
+<div id="container" class="clearfix">
+<div id="contents">
 
 <div id="accordion1" class="container">
-<h2>Default accordion</h2>
+<h2>動作例</h2>
 
 <div class="code">
 <p>Code</p>
 <pre class="sh_javascript">
-$(function(){
+jQuery(function(){
 	laquu(".blackout").blackoutScroll();
 });
 </pre>
 </div>
 
-<a id="header" class="blackout1" href="#footer">Blackout go to page bottom</a>
+<a class="blackout1" href="#footer">ページ下部へ（シンプルな動作例）</a>
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -40,19 +46,28 @@ $(function(){
 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
 
-<a id="footer" class="blackout2" href="#header">back to page top !(Use easing.)</a>
+<a class="blackout2" href="#header">ページ上部へ（オプション有り）</a>
+</div>
 </div>
 
 
+<div id="menu"></div>
 <!-- End container --></div>
+
+
+<div id="footer">
+<address>Copyright Laquu.JS all reserved. Author Nully.</address>
+<!-- End footer --></div>
+
 
 <script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
 <script type="text/javascript" src="../../src/js/jquery.easing.1.3.js"></script>
 <script type="text/javascript">
 jQuery(function(){
+    jQuery("#menu").menuBuilder();
 	laquu(".blackout1").blackoutScroll();
 	laquu(".blackout2").blackoutScroll({
-		easing: ""
+	    overlayColor: "#CCC"
 	});
 });
 </script>
