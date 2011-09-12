@@ -16,7 +16,7 @@ Laquu.JSを使う事で、きっと「楽に作業を軽減」することがで
 
 ## 機能一覧
 
-Laquu.JSでサポートしている機能は次の17機能です。
+Laquu.JSでサポートしている機能は次の20機能です。
 
 + シンプルなアコーディオンパネル（accordion）
 + ブラックアウトスクロール（blackoutscroll）
@@ -24,12 +24,15 @@ Laquu.JSでサポートしている機能は次の17機能です。
 + パンくず（breadcrumb）
 + バブルポップアップ（bubblepopup）
 + ドロップダウン（dropdown）
++ 拡張子アイコン（exticon）
 + フォントサイズ（fontsize）
 + イメージオーバー（imageOver）
++ インナースライド（innerslide）
 + コナミ（konami）
 + オパシティオーバー（opacityOver）
 + オーバー（over）
 + ピックメニュー（picMenu）
++ スクロールtoビュー（s2v）
 + スクローラー（scroller）
 + ストライプ（stripe）
 + タブ（tab）
