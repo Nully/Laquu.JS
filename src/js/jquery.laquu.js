@@ -988,8 +988,8 @@ laquu.error = function(msg) {
 
                 self.attr("title", null);
                 container.text(defaultText);
-                containerHeight = Math.floor(self.outerHeight() / 2) + Math.floor(container.outerHeight() / 2) + Math.abs(o.distY);
-                containerWidth  = Math.floor(self.outerWidth() / 2) + Math.floor(container.outerWidth() / 2) + Math.abs(o.distX);
+                containerHeight = Math.floor(container.outerHeight() / 2) + Math.abs(o.distY);
+                containerWidth  = Math.floor(container.outerWidth() / 2) + Math.abs(o.distX);
 
                 container.css({
                     top: ev.pageY - containerHeight,
