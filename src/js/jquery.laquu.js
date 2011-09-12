@@ -907,7 +907,6 @@ laquu.error = function(msg) {
                     trigger.blackoutScroll(o.scrollOptions);
                 }
                 else {
-                    console.log(o.scrollOptions);
                     trigger.scroller(o.scrollOptions);
                 }
             }
