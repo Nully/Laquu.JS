@@ -898,7 +898,7 @@ laquu.error = function(msg) {
             }
         }, options || {});
         return this.each(function(){
-            var $t = $l(this), trigger;;
+            var $t = $l(this), trigger;
 
             $t.hide();
             trigger = $t.find("a");
@@ -907,6 +907,7 @@ laquu.error = function(msg) {
                     trigger.blackoutScroll(o.scrollOptions);
                 }
                 else {
+                    console.log(o.scrollOptions);
                     trigger.scroller(o.scrollOptions);
                 }
             }
