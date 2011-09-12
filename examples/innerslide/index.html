@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Konami | Examples | Laquu.js</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../layout.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../src/css/sh_style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+</head>
+<body onload="sh_highlightDocument();">
+
+<div id="container">
+<h1>インナースライドプラグイン</h1>
+
+<div id="inner1" class="container">
+<h2>シンプルな動作例</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("#slide li").innerSlide();
+});
+</pre>
+<!-- End code --></div>
+
+<ul id="slide1">
+    <li>スライダー1
+    <div class="laquu-innerslide">ここの内容がスライドします。</div>
+    </li>
+    <li>スライダー2
+    <div class="laquu-innerslide">ここの内容がスライドします。</div>
+    </li>
+    <li>スライダー3
+    <div class="laquu-innerslide">ここの内容がスライドします。</div>
+    </li>
+</ul>
+
+<!-- End container --></div>
+
+
+<div id="inner1" class="container">
+<h2>シンプルな動作例</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("#slide2 li").innerSlide();
+});
+</pre>
+<!-- End code --></div>
+
+<ul id="slide2">
+    <li id="slider1">スライダー1
+    <div class="laquu-innerslide">ここの内容がスライドします。</div>
+    </li>
+    <li id="slider2">スライダー2
+    <div class="laquu-innerslide">ここの内容がスライドします。</div>
+    </li>
+    <li id="slider3">スライダー3
+    <div class="laquu-innerslide">ここの内容がスライドします。</div>
+    </li>
+</ul>
+
+<!-- End container --></div>
+
+
+<!-- End container --></div>
+
+<script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    laquu("#slide1 li").innerSlide();
+    laquu("#slide2 li").innerSlide();
+});
+</script>
+</body>
+</html>

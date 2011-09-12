@@ -1,0 +1,37 @@
+@charet "utf-8";
+/**
+ * -- Comment here
+ *
+ * Author: 
+ * Make: 
+ */
+ul {
+    zoom: 1;
+}
+ul:after {
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+ul li {
+    width: 180px;
+    height: 180px;
+    border: 1px solid #666;
+    float: left;
+    margin: 0 20px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+ul li .laquu-innerslide {
+    position: absolute;
+    background: #000;
+    background: rgba(30, 30, 30, .5);
+    color: #EEE;
+    padding: 10px;
+    width: 89%;
+    height: 100%;
+}
