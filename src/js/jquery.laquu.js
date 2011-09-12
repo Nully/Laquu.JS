@@ -649,7 +649,7 @@ laquu.error = function(msg) {
                         break;
                     case "bottom":
                         _over = { top: 0, left: 0 };
-                        _out  = { top: parseInt(slider.outerHeight()), left: 0 }
+                        _out  = { top: parseInt(slider.outerHeight()), left: 0 };
                         break;
                     case "left":
                         _over = { top: 0, right: 0 };
