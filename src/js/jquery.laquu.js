@@ -818,7 +818,8 @@ laquu.error = function(msg) {
         duration: 2000,
         easing: "swing",
         auto: false,
-        isVertical: false
+        isVertical: false,
+        current: 1
     };
 
     $l.fn.picMenu = function(settings) {
@@ -849,6 +850,7 @@ laquu.error = function(msg) {
             }
 
             function showImage(ev) {
+	            items.not(ev.currentTarget).trigger("mouseout");
                 $l(this).addClass("active").stop().animate( o.isVertical ? { height: o.showSize }: { width: o.showSize }, {
                     easing: o.easing,
                     queue: false,
