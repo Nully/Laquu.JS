@@ -876,6 +876,10 @@ laquu.error = function(msg) {
                 startTimer();
                 self.find("img").bind("mouseover", stopTimer).bind("mouseout", startTimer)
             }
+			else if (o.current >= 1 && items.size() > 1) {
+				o.current = (o.current > items.size() ? items.size(): o.current);
+				$l(items.get(o.current - 1)).trigger("mouseover");
+			}
         });
     };
 })(laquu);
