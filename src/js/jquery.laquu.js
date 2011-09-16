@@ -819,7 +819,7 @@ laquu.error = function(msg) {
         easing: "swing",
         auto: false,
         isVertical: false,
-        current: 1
+        current: 0
     };
 
     $l.fn.picMenu = function(settings) {
