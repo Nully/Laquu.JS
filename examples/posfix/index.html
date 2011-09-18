@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3c.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Posfix | Examples | Laquu.js</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.menubuilder.js"></script>
+<script type="text/javascript" src="../../src/js/sh_main.min.js"></script>
+<script type="text/javascript" src="../../src/js/sh_javascript.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../layout.css" media="all" />
+<link rel="stylesheet" type="text/css" href="../../src/css/sh_style.css" media="all" />
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+</head>
+<body onload="sh_highlightDocument();" style="position: relative;">
+
+<div id="header">
+<h1>ポスフィックスプラグイン｜Laquu.JS</h1>
+<!-- End header --></div>
+
+
+<div id="container" class="clearfix">
+
+
+<div id="contents">
+<div id="example1" class="container">
+<h2>動作例</h2>
+
+<div class="code">
+<p>Code</p>
+<pre class="sh_javascript">
+jQuery(function(){
+    laquu("#posfix1").posfix();
+    laquu("#posfix2").posfix({});
+});
+</pre>
+</div>
+<p>下にスクロールしてください。</p>
+<div id="posfix3" class="posfix">もじがはいるよーーーーーん！！</div>
+<p id="posfix1" class="posfix"><a href="#"><img src="images/no_opt.gif" alt="オプション無し" /></a></p>
+<p id="posfix2" class="posfix"><a href="#"><img src="images/yes_opt.gif" alt="オプション有り" /></a></p>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</div>
+<!-- End container --></div>
+
+<div id="menu"></div>
+
+</div>
+
+<div id="footer">
+<address>Copyright Laquu.JS all reserved. Author Nully.</address>
+<!-- End footer --></div>
+
+
+
+<script type="text/javascript" src="../../src/js/jquery.laquu.js"></script>
+<script type="text/javascript" src="../../src/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    jQuery("#menu").menuBuilder();
+    laquu("#posfix1").posfix();
+    laquu("#posfix2").posfix();
+	laquu("#posfix3").posfix();
+});
+</script>
+</body>
+</html>
