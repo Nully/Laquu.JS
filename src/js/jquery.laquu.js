@@ -4,7 +4,7 @@
  * @Auth    Nully
  * @Url     
  * @Make    10/04/26(Mon)
- * Version  1.1.1
+ * Version  1.2.0
  * @License MIT Lincense
  * The MIT License
  *
