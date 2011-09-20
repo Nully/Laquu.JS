@@ -1,48 +1,55 @@
 Change Log
 ---
+-- ver1.1.1
+  バグ修正
+    - ピックメニューの自動開閉時に他の要素にマウスオーバー時に閉じないバグを修正
+  機能追加
+    - ピックメニューのオプションにcurrentを追加
+      - currentに数値で開いておきたいパネルの番号を設定することでデフォルトで開いた状態にすることが出来ます。
+
 - ver1.1.0
-  add plugins.
-    - exticon: href extension icon plugin.
-    - innerslide: inner sliding plugin.
-    - s2v: scroll to view target plugin.
-  bug fix.
-    - merge ver1.0.7 bug fixes.
+  プラグイン追加
+    - exticon: href属性から拡張子を切り出し、アイコンを付けるためのクラス属性を付与します。
+    - innerslide: 指定要素の中でスライダーが表示されます。
+    - s2v: 指定した位置までスクロールすると表示されるようになるプラグインです。
+  バグ修正
+    - ver1.0.7のバグフィックスをマージ
 
 
 - ver 1.0.7
-  bug fix.
-    - tooltip plugin tooltip position bug fix.
+  バグ修正
+    - ツールチッププラグインの表示位置のバグを修正
 
 
 - ver 1.0.3
-  fix bubblepop plugin, opacityOver plugin bugs.
-  example index.html broken links fix.
+  バブルポップ、クリアオーバープラグインのバグを修正
+  exampleディレクトリのindex.htmlのリンク切れを修正
 
 
 - ver 1.0.2
-  fix bubble IE bugs.
+  IEでのバブルポッププラグインのバグを修正
 
 
 - ver 1.0.1
-  fix more bugs.
+  幾つかのバグを修正
 
 
 - ver 1.0.0
-  new release Laquu.JS.
+  Laquu.JSをリリース！
 
 
 - ver 0.14
-  source code diet.
+  ソースコードを軽量化
 
 
 - ver 0.13
-  new support imgmenu.
-  commit README.markdown text.
+  ピックメニューをサポート
+  README.markdownを変更
 
 
 - ver 0.12
-  new support dropdown, tooltip, bubblepop.
+  ドロップダウン、ツールチップ、バブルポップをサポート
 
 
 - ver 0.1
-  Create laquu.js
+  Laquu.JSを公開
