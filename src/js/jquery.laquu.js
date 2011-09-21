@@ -742,16 +742,16 @@ laquu.isUnderIE6 = !!(laquu.browser.msie && Math.abs(laquu.browser.version) <= 6
 /**
  * opacity rollover plugin
  *
- * @param  elms    jQuery ElementCollection
- * @param  options  Object
- *         opacity: rolloverd item to opacity
- *         duration: fadeTo speed
- *         onComplete: complete callback
- *         onHover: hover callback
- *         onOut: mouseout callback
+ * paramaters:
+ *
+ * opacity: rolloverd item to opacity
+ * speed: fadeTo speed
+ * onComplete: complete callback
+ * onHover: hover callback
+ * onOut: mouseout callback
  */
 (function($l){
-    $l.fn.opacityOver = function(options) {
+    $l.fn.clearOver = function(options) {
     	var defaults = {
             opacity: .7,
             speed: 300,
