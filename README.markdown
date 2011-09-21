@@ -51,13 +51,13 @@ Laquu.JSはver1.2.0から、Google ClosureCompilerを利用し、min構成を作
 
 build.sh（bash）を実行することで自動的に最小構成ファイルの全入りと、各プラグインの最小構成ファイルを書き出します。
 
->     cd Laquu.JS
->     chmod 0755 build.sh
->     ./build.sh
+>     $ cd Laquu.JS
+>     $ chmod 0755 build.sh
+>     $ ./build.sh
 >     :
 >     : いっぱいログが出ます
 >     :
->     // 書き出し完了のメッセージが表示されれば完了です。
+>     $ // 書き出し完了のメッセージが表示されれば完了です。
 
 ## ライセンスについて
 
