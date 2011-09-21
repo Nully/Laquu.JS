@@ -32,28 +32,41 @@
 // jQuery subClass laquu !
 if(!laquu) var laquu = jQuery.sub();
 
-// Empty method alias.
-laquu.empty = function() {};
+laquu = laquu.extend({
+    // 読み込み済みプラグイン一覧
+    loadedPlugins: [],
 
-// Debug alias
-laquu.debug = function() {
-	if(window.console && console.log)
-		console.log(arguments);
-	else
-		this.error(arguments);
-};
+    // IEのバージョンチェック
+    isUnderIE6: !!(laquu.browser.msie && Math.abs(laquu.browser.version) <= 6),
 
-// path to Absolute.
-laquu.toAbsolute = function(p) {
-	var _ = document.createElement("span").innerHTML = '<a href="'+ p +'"></a>';
-	return _.firstChild.href;
-};
+    // 空関数
+    empty: function() {},
 
-// Error alias
-laquu.error = function(msg) {
-	throw msg;
-};
+    // デバッグ
+    debug: function() {
+        if(window.console && console.log)
+            console.log(arguments);
+        else
+            this.error(arguments.slice(0, 1));
+    },
 
-// Under the IE version 6
-laquu.isUnderIE6 = !!(laquu.browser.msie && Math.abs(laquu.browser.version) <= 6);
+    // 絶対パスへ変換
+    toAbstolute: function() {
+        var _ = document.createElement("span").innerHTML = '<a href="'+ p +'"></a>';
+        return _.firstChild.href;
+    },
 
+    // エラーを投げる
+    error: function(msg) {
+        throw msg;
+    },
+
+    // プラグインのロードを行う
+    load: function() {},
+
+    // 指定されたQueryStringをパース
+    _parseQuery: function() {}
+});
+
+// ロード
+laquu.load();
