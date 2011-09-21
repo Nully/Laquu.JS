@@ -16,7 +16,7 @@
             var o = $l.extend({}, {
                 easing: "swing",
                 speed: 1500,
-                onComplete.: $l.empty,
+                onComplete: $l.empty,
                 onStep: $l.empty
             }, settings || {});
             $l(this).bind("click", function(ev){
