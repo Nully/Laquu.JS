@@ -154,6 +154,7 @@
 #dropdown2 {}
 
 
+
 /* エクストアイコン
  --------------------------------------------------------------------------- */
 #exticon {}
@@ -184,23 +185,97 @@
 
 
 
-/*
+/* インナースライド
  --------------------------------------------------------------------------- */
+#innerslide {}
+#innerslide h3 {
+	padding: 0;
+	margin: 0;
+}
+#innerslide p {
+	padding: 0;
+	margin: 0;
+}
+#innerslide .is-panel { zoom: 1; }
+#innerslide .is-panel:after { content: " "; display: block; clear: both; }
+#innerslide .sliderpanel {
+	position: relative;
+	width: 160px;
+	height: 140px;
+	overflow: hidden;
+	padding: 10px;
+	border: 1px solid #666;
+	float: left;
+	margin: 0 10px 10px 0;
+}
+#innerslide .innerslide {
+	position: absolute;
+	padding: 10px;
+	width: 160px;
+	height: 140px;
+	background: rgba(50, 50, 50, .7);
+	color: #FFF;
+}
+#innerslide1 .innerslide { top: 0; left: 0; }
+#innerslide2 .pos-right { top:  0; right: 0; }
+#innerslide2 .pos-bottom { bottom: 0; left: 0; }
+#innerslide2 .pos-left { top: 0; left: 0; }
 
 
 
-/*
+/* オーバー
  --------------------------------------------------------------------------- */
+#over .hover {
+	border: 1px solid #C09;
+	padding: 0 5px;
+}
+#over .over {
+	border: 1px solid #09C;
+	padding: 0 5px;
+}
 
 
 
-/*
+/* ピックメニュー
  --------------------------------------------------------------------------- */
+#picmenu {}
+#picmenu .picmenu-panel {
+	overflow: hidden;
+	width: 600px;
+}
+#picmenu .last-item {
+	min-width: 240px;
+}
+#picmenu ul {
+	list-style-type: none;
+	zoom: 1;
+	margin: 0;
+	padding: 0;
+	width: 900px;
+}
+#picmenu ul:after {
+	content: " ";
+	display: block;
+	clear: both;
+}
+#picmenu li {
+	margin: 0;
+	padding: 0;
+}
+#picmenu1 li {
+	float: left;
+}
 
 
 
-/*
+/* ポスフィックス
  --------------------------------------------------------------------------- */
+#posfix {}
+#posfix #fix {
+	position: fixed;
+	bottom: 50px;
+	left: 120px;
+}
 
 
 
