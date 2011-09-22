@@ -101,7 +101,7 @@
                 };
 
                 if($l.isFunction(o.onStep))
-                    opts.onStep = o.onStep;
+                    opts.step = o.onStep;
 
                 if($l.easing && o.easing && $l.easing[o.easing])
                     opts.easing = o.easing;
