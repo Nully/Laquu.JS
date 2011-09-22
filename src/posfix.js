@@ -6,7 +6,7 @@
  *   オプションはありません。
  */
 (function($l){
-	$l.fn.posfix = function(options) {
+	$l.fn.posfix = function() {
 		if($l.isUnderIE6 === false) {
 			return this;
 		}
