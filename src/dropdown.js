@@ -24,9 +24,11 @@
             position: "absolute"
         };
 
+        // 要素が１つの場合のみ適用したい...
         return this.each(function(){
             var o = $l.extend({}, defaults, settings || {}),
                 root =$l(this);
+
             $l(this).find("li").filter(function(){
                 var ul = $l("ul", this),
                     $t = $l(this);
@@ -35,12 +37,12 @@
                     ul.hide().parent("li").over({
                         hoverClass: o.hoverClass,
                         onHover: function(){
-                            $l(this).children("ul").slideDown(o.showSpeed, o.onShow);
+                            $l(this).children("ul:not(:animated)").slideDown(o.showSpeed, o.onShow);
                         },
                         onOut: function() {
                             var t = $l(this);
                             setTimeout(function(){
-                                t.children("ul").slideUp(o.hideSpeed, o.onHide);
+                                t.children("ul:not(:animated)").slideUp(o.hideSpeed, o.onHide);
                             }, o.hideTime);
                         }
                     });
