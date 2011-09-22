@@ -37,7 +37,11 @@
 					c = tr;
 			});
 
+
 			t.bind("click", function(ev){
+			    if($l(ev.currentTarget.hash).is(":visible"))
+			        return ev.preventDefault();
+
 				t.removeClass(o.currentClass)
 					.filter("[href="+ ev.currentTarget.hash +"]")
 					.addClass(o.currentClass).end();
