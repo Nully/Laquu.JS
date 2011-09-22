@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" href="styles.css" media="all" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../src/laquu.js"></script>
+<script type="text/javascript" src="../src/over.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    var debug = jQuery("#debug");
+    laquu("#over1 a").over();
+    laquu("#over2 a").over({
+    	hoverClass: "over",
+    	onHover: function() {
+    		debug.append("マウスが乗っかりました<br />");
+    	},
+    	onOut: function() {
+    		debug.append("マウスが離れました<br />");
+    	}
+    });
+});
+</script>
+</head>
+<body id="over">
+<h1>オーバープラグイン</h1>
+
+<div id="over1" class="over-panel">
+<p><a href="javascript: void(0);">オーバー！</a></p>
+<!-- End over1 --></div>
+
+
+<div id="over2" class="over-panel">
+<p><a href="javascript: void(0);">オーバー！</a></p>
+<!-- End over2 --></div>
+
+<div id="debug"></div>
+
+</body>
+</html>

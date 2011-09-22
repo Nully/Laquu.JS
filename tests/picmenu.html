@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" href="styles.css" media="all" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../src/laquu.js"></script>
+<script type="text/javascript" src="../src/picmenu.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    var debug = jQuery("#debug");
+    laquu("#picmenu1 ul li:last-child a").addClass("last-item");
+    laquu("#picmenu1 ul").picMenu();
+    laquu("#picmenu2 ul").picMenu({
+		showSize: 120,
+		hideSize: 40,
+		speed: 1200,
+		duration: 2000,
+		easing: "easeOutBounce",
+		auto: true,
+		isVertical: true,
+		current: 0
+    });
+});
+</script>
+</head>
+<body id="picmenu">
+<h1>オーバープラグイン</h1>
+
+
+<h2>オプション無し</h2>
+<div id="picmenu1" class="picmenu-panel">
+<ul>
+<li><a href="javascript: void(0);"><img src="../externals/photo_plain.jpg" alt="plain" /></a></li>
+<li><a href="javascript: void(0);"><img src="../externals/photo_forest.jpg" alt="forest" /></a></li>
+<li><a href="javascript: void(0);"><img src="../externals/photo_swamp.jpg" alt="swamp" /></a></li>
+<li><a href="javascript: void(0);"><img src="../externals/photo_mountain.jpg" alt="mountain" /></a></li>
+<li><a href="javascript: void(0);"><img src="../externals/photo_island.jpg" alt="island" /></a></li>
+</ul>
+<!-- End picmenu1 --></div>
+
+
+<h2>オプション有り</h2>
+<div id="picmenu2" class="picmenu-panel">
+<ul>
+<li><a href="javascript: void(0);"><img src="../externals/photo_plain.jpg" alt="plain" /></a></li>
+<li><a href="javascript: void(0);"><img src="../externals/photo_forest.jpg" alt="forest" /></a></li>
+<li><a href="javascript: void(0);"><img src="../externals/photo_swamp.jpg" alt="swamp" /></a></li>
+<li><a href="javascript: void(0);"><img src="../externals/photo_mountain.jpg" alt="mountain" /></a></li>
+<li><a href="javascript: void(0);"><img src="../externals/photo_island.jpg" alt="island" /></a></li>
+</ul>
+<!-- End picmenu2 --></div>
+
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" href="styles.css" media="all" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../src/laquu.js"></script>
+<script type="text/javascript" src="../src/over.js"></script>
+<script type="text/javascript" src="../src/innerslide.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    var debug = jQuery("#debug");
+    laquu("#innerslide1 .sliderpanel").innerSlide();
+
+	laquu.each([ "right", "bottom", "left", "top-right", "top-left", "bottom-right", "bottom-left" ], function(i, e){
+		laquu("#innerslide2 .sliderpanel").addClass("pos-" + e).eq(i).innerSlide({
+			innerSlideClass: ".innerslide",
+			showSpeed: 800,
+			hideSpeed: 600,
+			easing: "easeOutBounce",
+			slideIn:e,
+			onShowComplete: function() {
+				debug.append(i + "番目のパネルが表示されました<br />");
+			},
+			onHideComplete: function() {
+				debug.append(i + "番目のパネルが非表示になりました<br />");
+			}
+		});
+	});
+});
+</script>
+</head>
+<body id="innerslide">
+<h1>インナースライドプラグイン</h1>
+
+
+<h2>オプション無し</h2>
+<div id="innerslide1" class="is-panel">
+<div class="sliderpanel">
+<p>マウスを乗せると...</p>
+<div class="innerslide laquu-innerslide">
+<h3>スライドタイトル</h3>
+<p>スライド文章スライド文章スライド文章スライド文章スライド文章スライド文章スライド文章スライド文章</p>
+<p>スライド文章スライド文章スライド文章スライド文章スライド文章スライド文章スライド文章スライド文章</p>
+<!-- End innerslide --></div>
+<!-- End sliderpanel --></div>
+<!-- End innerslide1 --></div>
+
+
+<h2>オプション有り</h2>
+<div id="innerslide2" class="is-panel">
+<div class="sliderpanel">
+<p>マウスを乗せると...</p>
+<div class="innerslide">
+<h3>スライドタイトル</h3>
+<p>右から</p>
+<!-- End innerslide --></div>
+<!-- End sliderpanel --></div>
+
+
+<div class="sliderpanel">
+<p>マウスを乗せると...</p>
+<div class="innerslide">
+<h3>スライドタイトル</h3>
+<p>下から</p>
+<!-- End innerslide --></div>
+<!-- End sliderpanel --></div>
+
+
+<div class="sliderpanel">
+<p>マウスを乗せると...</p>
+<div class="innerslide">
+<h3>スライドタイトル</h3>
+<p>左から</p>
+<!-- End innerslide --></div>
+<!-- End sliderpanel --></div>
+
+
+<div class="sliderpanel">
+<p>マウスを乗せると...</p>
+<div class="innerslide">
+<h3>スライドタイトル</h3>
+<p>右上から</p>
+<!-- End innerslide --></div>
+<!-- End sliderpanel --></div>
+
+
+<div class="sliderpanel">
+<p>マウスを乗せると...</p>
+<div class="innerslide">
+<h3>スライドタイトル</h3>
+<p>左上から</p>
+<!-- End innerslide --></div>
+<!-- End sliderpanel --></div>
+
+
+<div class="sliderpanel">
+<p>マウスを乗せると...</p>
+<div class="innerslide">
+<h3>スライドタイトル</h3>
+<p>右下から</p>
+<!-- End innerslide --></div>
+<!-- End sliderpanel --></div>
+
+
+<div class="sliderpanel">
+<p>マウスを乗せると...</p>
+<div class="innerslide">
+<h3>スライドタイトル</h3>
+<p>左下から</p>
+<p>J( 'ｰ`)し &lt; ﾀｶｼ...</p>
+<!-- End innerslide --></div>
+<!-- End sliderpanel --></div>
+
+<!-- End innerslide2 --></div>
+
+<div id="debug"></div>
+
+
+</body>
+</html>
