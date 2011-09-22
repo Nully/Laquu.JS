@@ -19,7 +19,7 @@
             $l(this).bind("mouseover", o.onMouseOver).bind("mouseover", function(ev){
                 $l(this).stop(true, true).css("opacity", o.opacity).animate({ opacity: 1 }, {
                     queue: false,
-                    conplete: o.onComplete
+                    complete: o.onComplete
                 });
             });
         });
