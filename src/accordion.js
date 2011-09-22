@@ -48,14 +48,14 @@
 
 				c.not(ev.currentTarget.hash)
 					.slideUp({
-						speed: o.speed,
+						duration: o.speed,
 						easing: o.easing,
 						complete: $l.isFunction(o.onHide) ? o.onHide: $l.empty
 					})
 					.end()
 					.filter(ev.currentTarget.hash)
 					.slideDown({
-						speed: o.speed,
+						duration: o.speed,
 						easing: o.easing,
 						complete: $l.isFunction(o.onShow) ? o.onShow: $l.empty
 					});
