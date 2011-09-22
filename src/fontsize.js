@@ -26,7 +26,7 @@
                 $l("body").removeClass(classes).addClass(size);
 
                 if($l.isFunction(opts.onChange))
-                    opts.onChange.call(body, body, size);
+                    opts.onChange.call(this, elements, size);
 
                 if($l.cookie)
                     $l.cookie("laquu_font-size", size, opts.cookie);
