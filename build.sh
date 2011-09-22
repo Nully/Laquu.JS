@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Laquu.JSのコンパイル準備をしています"
+echo "Laquu.JSのコンパイル準備をしています..."
 
 # 吐き出すファイル名
 LAQUU=laquu.js
@@ -15,11 +15,18 @@ COMPILED_DIR=compiled
 # テンポラリディレクトリ
 MIN_DIR=min
 
+# ビルドディレクトリ
+BUILD_DIR=build
+
+
 # プラグインの配列
 PLUGINS=`ls ${SRC_DIR} | grep -v 'core.js'`
 
+
 #Google Closure Compiler
-G_COMPILER=build/google-javascript-compiler_20110921.jar
+G_COMPILER_NAME=google-javascript-compiler_20110921.jar
+G_COMPILER=${BUILD_DIR}/$G_COMPILER_NAME
+G_COMPILER_URL="http://code.google.com/intl/ja/closure/compiler/"
 
 
 # 書き出しディレクトリの作成
@@ -38,11 +45,21 @@ then
 fi
 
 
+# ClosureCompilerが存在するかチェック
+if [ ! -d $BUILD_DIR ] || [ ! -f $G_COMPILER ]; then
+    echo 'Closure Compilerが見つかりません'
+    echo "${G_COMPILER_URL}\
+からClosure Compilerをダウンロードして\
+ファイル名を${G_COMPILER_NAME}として${BUILD_DIR}に置いてください"
+    exit
+fi
+
+
 # 書き出し済みかチェック
 if [ -f $COMPILED_DIR/$LAQUU ] && [ -f $COMPILED_DIR/$LAQUU_MIN ]
 then
-    echo $LAQUU 'はすでに存在しています。'
-    echo 'コンパイル作業を中断します。'
+    echo "${LAQUU}及び${LAQUU_MIN}はすでに存在しています。"
+    echo 'コンパイル作業を中断します...'
     exit
 fi
 
