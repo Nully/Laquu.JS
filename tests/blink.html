@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" href="styles.css" media="all" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../src/laquu.js"></script>
+<script type="text/javascript" src="../src/blink.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    var debug = jQuery("#debug");
+    laquu("#blink1 .blink").blink();
+    laquu("#blink2 .blink").blink({
+        opacity: .1,
+        onComplete: function() {
+            debug.append(jQuery(this).text() + "のアニメーションが完了しました。<br />");
+        },
+        onMouseOver: function(ev) {
+            debug.append(jQuery(this).text() + "にマウスが乗りました。<br />");
+        }
+    });
+});
+</script>
+</head>
+<body id="blink">
+<h1>ブリンクプラグイン</h1>
+
+<div id="blink1" class="blink-panel">
+<p><a href="http://www.yahoo.co.jp" class="blink">Yahoo!Japan</a></p>
+<p><a href="http://www.google.com/" class="blink">Google</a></p>
+<p><a href="http://www.bing.com/" class="blink">Bing</a></p>
+<!-- End blink1 --></div>
+
+
+<div id="blink2" class="blink-panel">
+<p><a href="http://www.yahoo.co.jp" class="blink">Yahoo!Japan</a></p>
+<p><a href="http://www.google.com/" class="blink">Google</a></p>
+<p><a href="http://www.bing.com/" class="blink">Bing</a></p>
+
+<div id="debug"></div>
+
+<!-- End blink2 --></div>
+
+
+</body>
+</html>

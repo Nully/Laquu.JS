@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" href="styles.css" media="all" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../src/laquu.js"></script>
+<script type="text/javascript" src="../src/bubblepop.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    var debug = jQuery("#debug");
+    laquu("#bubblepop1").bubblepopup();
+    laquu("#bubblepop2").bubblepopup({
+        easing: "swing",
+        distance: -160,
+        step: 40,
+        hideDelay: 300,
+        popupClass: ".test-bubble",
+        triggerClass: ".test-trigger",
+        onShow: function() {
+            debug.append("ｶｰﾁｬﾝが表示されました。<br />");
+        },
+        onHide: function() {
+            debug.append("('A`) &lt; ｶｰﾁｬﾝ...<br />");
+        }
+    });
+});
+</script>
+</head>
+<body id="bubblepop">
+<h1>バブルポップラグイン</h1>
+
+<h2>オプション無し</h2>
+<div id="bubblepop1" class="bubble-panel">
+<div class="popup">
+<p>ゆるふわガーリーなバブルポップが表示される☆彡</p>
+<p>今年の年末はこのバブルポップのようなゆるふわ系で決まり♪</p>
+<!-- End popup --></div>
+<p class="trigger">マウスを乗せると...</p>
+<!-- End bubblepop1 --></div>
+
+
+<h2>オプション有り</h2>
+<div id="bubblepop2" class="bubble-panel">
+<div class="test-bubble">
+<p>J( 'ｰ`)し &lt; ﾀｶｼ...</p>
+<!-- End test bubble --></div>
+<p class="test-trigger">マウスを乗せると...</p>
+<div id="debug"></div>
+<!-- End bubblepop2 --></div>
+
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" href="styles.css" media="all" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../src/laquu.js"></script>
+<script type="text/javascript" src="../src/blackoutscroll.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    var debug = jQuery("#debug");
+    laquu("#blackout1 a").blackoutScroll();
+    laquu("#blackout2 a").blackoutScroll({
+        overlayColor: "#666",
+        speed: 600,
+        onShow: function(target, overlay) {
+            debug.append("オーバーレイが表示されました。色は" + overlay.css("backgroundColor") + "です。<br />");
+        },
+        onHide: function() {
+            debug.append("オーバーレイが非表示になりました。<br />");
+        }
+    });
+});
+</script>
+</head>
+<body id="blackoutscroll">
+<h1>ブラックアウトスクロールプラグイン</h1>
+
+<h2>オプション無し</h2>
+<div id="blackout1" class="blackout-panel">
+<p>下にスクロールしてください。</p>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<p><a href="#blackoutscroll">ページ上部へ</a></p>
+<!-- End blackout1 --></div>
+
+
+<h2>オプション有り</h2>
+<div id="blackout2" class="blackout-panel">
+<p>下にスクロールしてください。</p>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<p><a href="#blackoutscroll">ページ上部へ</a></p>
+
+<div id="debug"></div>
+
+<!-- End blackout2 --></div>
+
+
+</body>
+</html>
