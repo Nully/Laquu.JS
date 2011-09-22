@@ -35,7 +35,7 @@
             // プリロード
             overImage.src = b;
             if($l.isFunction(o.onImageLoaded)) {
-                overImage.onLoad = o.onImageLoaded;
+                overImage.onload = o.onImageLoaded;
             }
 
 			$l(this).over({
