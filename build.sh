@@ -33,8 +33,8 @@ fi
 # テンポラリディレクトリの作成
 if [ ! -d $MIN_DIR ]
 then
-    echo 'テンポラリディレクトリを作成します'
-    mkdir $TMP_DIR
+    echo '最小構成保存ディレクトリを作成します'
+    mkdir $MIN_DIR
 fi
 
 
