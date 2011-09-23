@@ -40,8 +40,8 @@
 
                 self.attr("title", null);
                 container.text(defaultText);
-                containerHeight = Math.floor(container.outerHeight() / 2) + Math.abs(o.distY);
-                containerWidth  = Math.floor(container.outerWidth() / 2) + Math.abs(o.distX);
+                containerHeight = Math.floor(container.outerHeight() / 2) + o.distY;
+                containerWidth  = Math.floor(container.outerWidth() / 2) + o.distX;
 
                 container.css({
                     top: ev.pageY - containerHeight,
