@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" href="styles.css" media="all" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../src/laquu.js"></script>
+<script type="text/javascript" src="../src/scroller.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    var debug = jQuery("#debug");
+    laquu("#scroller1 a").scroller();
+    laquu("#scroller2 a").scroller({
+		easing: "easeOutBounce",
+		speed: 1500,
+		onComplete: function() {
+			debug.append("スクロールが完了しました。<br />");
+		},
+		onStep: function(pos, params) {
+			debug.append("現在のウィンドウ位置は" + Math.floor(pos) + "です<br />");
+		}
+    });
+});
+</script>
+</head>
+<body id="scroller">
+<h1>スクローラープラグイン</h1>
+<p>下にスクロール</p>
+
+<div id="debug"></div>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+<h2>オプション無し</h2>
+<div id="scroller1" class="scroller-panel">
+<p><a href="#scroller2">オプション有りへ移動</a></p>
+<!-- End scroller1 --></div>
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+
+<h2>オプション有り</h2>
+<div id="scroller2" class="scroller-panel">
+<p><a href="#scroller">ページ上部へ移動</a></p>
+<!-- End scroller2 --></div>
+
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" href="styles.css" media="all" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../src/laquu.js"></script>
+<script type="text/javascript" src="../src/s2v.js"></script>
+<script type="text/javascript" src="../src/scroller.js"></script>
+<script type="text/javascript" src="../src/blackoutscroll.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    var debug = jQuery("#debug");
+    laquu("#s2v1").s2v();
+    laquu("#s2v2").s2v({
+    	detectTop: 400,
+    	fadeSpeed: 100,
+    	scrollType: "blackout",
+    	scrollOptions: {
+			overlayColor: "#CCC",
+			speed: 200,
+			onShow: function() {
+				debug.append("ブラックアウトオーバーレイが表示されました。<br />");
+			},
+			onHide: function() {
+				debug.append("ブラックアウトオーバーレイが非表示になりました。<br />");
+			}
+    	}
+    });
+});
+</script>
+</head>
+<body id="s2v">
+<h1>スクロール2ビュープラグイン</h1>
+<p>下にスクロール</p>
+
+<div id="debug"></div>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+<div id="s2v1">
+<a href="#s2v">ボタンです。</a>
+<!-- End fix --></div>
+
+
+<div id="s2v2">
+<a href="#s2v">また別なボタンです。</a>
+<!-- End fix --></div>
+
+
+</body>
+</html>

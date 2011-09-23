@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" href="styles.css" media="all" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../src/laquu.js"></script>
+<script type="text/javascript" src="../src/ticker.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    var debug = jQuery("#debug");
+    laquu("#ticker1 ul").ticker();
+    laquu("#ticker2 ul").ticker({
+		speed: 600,
+		duration: 2400,
+		onShow: function(el) {
+			debug.append(laquu(el).find("img").attr("src").split("/").pop() + "を含むティッカーが表示されました。<br />");
+		},
+		onHide: function(el) {
+			debug.append(laquu(el).find("img").attr("src").split("/").pop() + "を含むティッカーが非表示になりまた。<br />");
+		}
+	});
+});
+</script>
+</head>
+<body id="ticker">
+<h1>ティッカープラグイン</h1>
+
+<h2>オプション無し</h2>
+<div id="ticker1" class="ticker-panel">
+<ul>
+<li><div class="ticker">
+<img src="../externals/ticker01.jpg" alt="" />
+アネモネは交響詩篇エウレカセブンに登場する女性キャラクタです。<br />
+人形コーラリアンになるべくして作られた人間です。
+</div></li>
+<li><div class="ticker">
+<img src="../externals/ticker02.jpg" alt="" />
+アネモネはエウレカと戦っていくことで、人としての思い、女性としての感情を培ってゆきます。
+</div></li>
+<li><div class="ticker">
+<img src="../externals/ticker03.jpg" alt="" />
+アネモネのような女性を私は待っております。
+</div></li>
+</ul>
+<!-- End ticker1 --></div>
+
+
+<h2>オプション無し</h2>
+<div id="ticker2" class="ticker-panel">
+<ul>
+<li><div class="ticker">
+<img src="../externals/ticker01.jpg" alt="" />
+アネモネは交響詩篇エウレカセブンに登場する女性キャラクタです。<br />
+人形コーラリアンになるべくして作られた人間です。
+</div></li>
+<li><div class="ticker">
+<img src="../externals/ticker02.jpg" alt="" />
+アネモネはエウレカと戦っていくことで、人としての思い、女性としての感情を培ってゆきます。
+</div></li>
+<li><div class="ticker">
+<img src="../externals/ticker03.jpg" alt="" />
+僕にはアネモネちゃんがいる！！やったよエウレカ！！ひとりでできるもん！！！あ、コミックのアネモネちゃああああああああああああああん！！いやぁあああああああああああああああ！！！！あっあんああっああんあアネモネ様ぁあ！！エ、エウレカ！！ドミニクううぅうぅぅうぅぅう！！！エウレカああぁああぁぁああああ！！ううっうぅうう！！俺の想いよアネモネへ届け！！エウレカセブンのアネモネへ届け！ 
+</div></li>
+</ul>
+<!-- End ticker2 --></div>
+
+<div id="debug"></div>
+
+</body>
+</html>
