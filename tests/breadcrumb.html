@@ -22,7 +22,6 @@ jQuery(function(){
             debug.append(jQuery(this).text() + "のアニメーションが完了しました。<br />");
         },
         onStep: function() {
-            console.log(this);
             var s = jQuery(this);
             debug.append(s.text() + "の縦位置は" + s.css("top") + "です。<br />");
         }
