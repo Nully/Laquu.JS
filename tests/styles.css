@@ -279,9 +279,125 @@
 
 
 
-/*
+/* スクロール2ビュー
  --------------------------------------------------------------------------- */
+#s2v {}
+#s2v a {
+	display: block;
+	padding: 5px;
+	text-decoration: none;
+}
+#s2v #s2v1 {
+	position: fixed;
+	bottom: 40px;
+	left: 120px;
+	border: 1px solid #999;
+}
+#s2v #s2v2 {
+	position: fixed;
+	bottom: 40px;
+	right: 120px;
+	border: 1px solid #999;
+}
 
+
+
+/* ストライプ
+ --------------------------------------------------------------------------- */
+#stripe {}
+#stripe table {
+	border-top: 1px solid #333;
+	border-left: 1px solid #333;
+}
+#stripe table th, #stripe table td {
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999;
+	padding: 4px;
+}
+#stripe .even th, #stripe .even td { background: #FFF; }
+#stripe .odd th, #stripe .odd td { background: #EEE; }
+
+#stripe .one th, #stripe .one td { background: #CCC; }
+#stripe .two th, #stripe .two td { background: #DDD; }
+#stripe .three th, #stripe .three td { background: #EEE; }
+#stripe .four th, #stripe .four td { background: #FFF; }
+
+#stripe2 .hover th, #stripe2 .hover td {
+	background: #FCC;
+}
+
+
+/* タブ
+ --------------------------------------------------------------------------- */
+#tab {}
+#tab .tab-panel {}
+#tab .tab-panel ul {
+	margin: 0;
+	padding: 0;
+	zoom: 1;
+}
+#tab .tab-panel ul:after {
+	content: " ";
+	display: block;
+	clear: both;
+}
+#tab .tab-panel li {
+	float: left;
+	list-style-type: none;
+	margin: 0 10px 0 0;
+}
+#tab .tab-panel li a {
+	display: block;
+	float: left;
+	padding: 5px 12px;
+	border: 1px solid #CCC;
+	border-bottom: none;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+}
+#tab .tab-panel li.active a {
+	background: #FFC;
+	position: relative;
+	top: 1px;
+	cursor: default;
+	color: #660;
+	font-weight: bold;
+}
+#tab .tab-panel .panel {
+	border: 1px solid #CCC;
+	background: #FFC;
+}
+
+
+
+/* ティッカー
+ --------------------------------------------------------------------------- */
+#ticker {}
+#ticker .ticker-panel {
+	width: 500px;
+	height: 104px;
+	overflow: hidden;
+}
+#ticker .ticker-panel ul {
+	list-style-type: none;
+	font-size: 12px;
+	padding: 0;
+	margin: 0;
+}
+#ticker .ticker-panel li {
+	padding: 0;
+	margin: 0;
+	zoom: 1;
+}
+#ticker .ticker-panel li:after {
+	content: " ";
+	display: block;
+	clear: both;
+}
+#ticker .ticker-panel li img {
+	float: left;
+	margin: 0 15px 0 0;
+}
 
 
 /*
