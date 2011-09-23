@@ -244,8 +244,12 @@
 	overflow: hidden;
 	width: 600px;
 }
+#picmenu li a {
+	border: none;
+}
 #picmenu .last-item {
 	min-width: 240px;
+	_width: 240px;
 }
 #picmenu ul {
 	list-style-type: none;
