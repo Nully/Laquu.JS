@@ -53,8 +53,8 @@
                          var i = (current === 0) ? items.size(): current;
                         $l(items[i -1]).appendTo(self);
                         self.css({ top: 0, left: 0 });
+                        o.onShow.call(item, item);
                         o.onHide.call(items[i -1], items[i -1]);
-                        o.onShow.call(items[i], items[i]);
                     }
                 });
             }
