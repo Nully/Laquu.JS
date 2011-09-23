@@ -42,7 +42,7 @@
                         onOut: function() {
                             var t = $l(this);
                             setTimeout(function(){
-                                t.children("ul").stop(true, true).slideUp(o.hideSpeed, o.onHide);
+                                t.children("ul").slideUp(o.hideSpeed, o.onHide);
                             }, o.hideTime);
                         }
                     });
