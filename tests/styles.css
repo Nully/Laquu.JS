@@ -400,8 +400,15 @@
 }
 
 
-/*
+/* ツールチップ
  --------------------------------------------------------------------------- */
+#tooltip {}
+#tooltip .laquu-tooltip-container {
+	background: #FCFCFC;
+	border: 1px solid #666;
+	padding: 4px 12px;
+	border-radius: 3px;
+}
 
 
 
