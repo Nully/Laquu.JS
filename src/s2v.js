@@ -34,12 +34,12 @@
 
             $l(window).scroll(function(){
                 var $w = $l(this);
-                if($w.scrollTop() > o.detectTop) {
-                    $t.fadeIn(o.fadeSpeed);
-                }
-                else {
-                    $t.fadeOut(o.fadeSpeed);
-                }
+				if($w.scrollTop() > o.detectTop) {
+				    $t.filter(":not(:visible)").fadeIn(o.fadeSpeed);
+				}
+				else {
+				    $t.filter(":visible").fadeOut(o.fadeSpeed);
+				}
             });
         });
     };
