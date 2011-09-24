@@ -114,38 +114,60 @@
 /* ドロップダウン
  --------------------------------------------------------------------------- */
 #dropdown {}
-#dropdown ul { zoom: 1; }
+#dropdown ul {
+	position: relative;
+	display: block;
+	zoom: 1;
+}
 #dropdown ul:after {
     content: " ";
     display: block;
     clear: both;
 }
 #dropdown ul li {
+    position: relative;
+    display: block;
     float: left;
     list-style-type: none;
-    margin: 0 5px 0 0;
-    position: relative;
-    border: 1px solid #00F;
     text-align: center;
+	margin: 0 5px 1px 0;
+	border: 1px solid #666;
 }
 #dropdown ul li a {
     padding: 6px;
-    width: 120px;
-    color: #FFF;
-    background: #39F;
+    color: #666;
+    background: #E9E9E9;
     display: block;
+    padding: 5px 12px;
+    width: 120px;
+    text-decoration: none;
+}
+#dropdown ul li a:hover {
+	color: #FFF;
+	background: #666;
 }
 #dropdown ul li ul {
     margin: 0;
     padding: 0;
-    z-index: 100;
     position: absolute;
     left: -1px;
     top: 34px;
+    _top: 29px;
 }
-#dropdown ul li ul ul {
-    left: 134px;
-    top: 0;
+#dropdown ul li ul li {
+	float: none;
+	width: auto;
+	margin: 0 0 1px 0;
+	padding: 0;
+}
+#dropdown ul li ul li ul {
+    left: 144px;
+    top: -1px;
+    _top: 0px;
+    margin: 0;
+    padding: 0;
+}
+#dropdown ul li ul li ul li {
 }
 #dropdown .dropdown-panel {
     margin: 0 0 200px;
