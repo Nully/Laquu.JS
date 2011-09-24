@@ -27,7 +27,7 @@
         // 要素が１つの場合のみ適用したい...
         return this.each(function(){
             var o = $l.extend({}, defaults, settings || {}),
-                root =$l(this);
+                root =$l(this), zIndex = 1000;
 
             $l(this).find("li").filter(function(){
                 var ul = $l("ul", this),
@@ -37,12 +37,23 @@
                     ul.hide().parent("li").over({
                         hoverClass: o.hoverClass,
                         onHover: function(){
-                            $l(this).children("ul:not(:animated)").slideDown(o.showSpeed, o.onShow);
+                        	var _s = $l(this);
+                            _s.children("ul:not(:animated)").css("z-index", ++zIndex).slideDown(o.showSpeed, function(){
+                            	if($l.isFunction(o.onShow))
+                            		o.onShow.call(this);
+
+								$l(this).css("overflow", "visible");
+                            });
                         },
                         onOut: function() {
-                            var t = $l(this);
+                            var _t = $l(this);
                             setTimeout(function(){
-                                t.children("ul").slideUp(o.hideSpeed, o.onHide);
+                                _t.children("ul").slideUp(o.hideSpeed, function(){
+	                                if($l.isFunction(o.onHide))
+	                                	o.onHide.call(this);
+
+									$l(this).css("overflow", "hidden");
+                                });
                             }, o.hideTime);
                         }
                     });
