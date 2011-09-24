@@ -177,6 +177,26 @@
 
 
 
+/* イーキューヘイト
+ --------------------------------------------------------------------------- */
+#eqheight {}
+#eqheight .eqHeight {
+	border: 1px solid #666;
+	padding: 3px;
+	line-height: 1.5;
+	float: left;
+	margin: 0 5px 10px 0;
+	width: 180px;
+}
+#eqheight1, #eqheight2 { zoom: 1; }
+#eqheight1:after, #eqheight2:after {
+	content: " ";
+	display: block;
+	clear: both;
+}
+
+
+
 /* エクストアイコン
  --------------------------------------------------------------------------- */
 #exticon {}
