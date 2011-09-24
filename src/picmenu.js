@@ -69,18 +69,22 @@
                 });
             }
 
+			// 各画像要素（Aタグ）にイベントをバインド
             items = self.find("a").css("overflow", "hidden");
             items.bind("mouseover", showImage).bind("mouseout", hideImage);
             items.trigger("mouseout");
 
+			// カレントが1以上であるなら、loopIndexの値として入れる
+			if (o.current >= 1 && items.size() > 1) {
+				current = (o.current > items.size() ? items.size(): o.current);
+				$l(items.get(current - 1)).trigger("mouseover");
+			}
+
+			// autoがあるならば、自動めくりを実行
             if(o.auto) {
                 startTimer();
                 self.find("img").bind("mouseover", stopTimer).bind("mouseout", startTimer)
             }
-			else if (o.current >= 1 && items.size() > 1) {
-				o.current = (o.current > items.size() ? items.size(): o.current);
-				$l(items.get(o.current - 1)).trigger("mouseover");
-			}
         });
     };
 })(laquu);
