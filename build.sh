@@ -20,7 +20,7 @@ BUILD_DIR=build
 
 
 # プラグインの配列
-PLUGINS=`ls ${SRC_DIR} | grep -v 'core.js'`
+PLUGINS=`ls ${SRC_DIR} | grep -v 'laquu.js'`
 
 
 #Google Closure Compiler
