@@ -14,21 +14,29 @@
 		var $w = $l(window);
 		this.css("position", "absolute");
 		return this.each(function(){
-			var $t = $l(this);
-			o = {
-				top: parseInt($t.css("top")) || null,
-				right: parseInt($t.css("right")) || null,
-				bottom: parseInt($t.css("bottom")) || null,
-				left: ($t.css("left") == "auto" ? null: parseInt($t.css("left")))
-			};
+			var $t = $l(this),
+    			o = {};
+
+            function isUndefined(n) {
+                return typeof n == "undefined";
+            }
+
+            $.each([ "top", "right", "bottom", "left" ], function(i, prop){
+                if($t.css(prop) != "auto") {
+                    o[prop] = parseInt($t.css(prop));
+                }
+            });
 
 			$w.bind("scroll", function(ev){
-				$t.css("top", (
-					o.top ? $w.scrollTop() + o.top:
-						o.bottom ? ($w.scrollTop() + $w.height() - $t.outerHeight({ margin: true }) - o.bottom):
-							0
-				));
-				$t.css((o.left ? "left": "right"), (o.left ? o.left: o.right ? o.right: 0));
+			    var pos = 0;
+			    if(!isUndefined(o.top)) {
+			        pos = $w.scrollTop() + o.top;
+			    }
+			    else if(!isUndefined(o.bottom)) {
+			        pos = $w.scrollTop() + $w.height() - $t.outerHeight({ margin: true }) - o.bottom;
+			    }
+
+			    $t.css("top", pos);
 			}).scrollTop(1).scrollTop(0);
 		});
 	};
