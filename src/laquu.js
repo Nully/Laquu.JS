@@ -32,10 +32,9 @@
 // jQuery subClass laquu !
 if(!laquu) var laquu = jQuery.sub();
 
-laquu = laquu.extend({
-    // 読み込み済みプラグイン一覧
-    loadedPlugins: [],
 
+// Laquu.JSのベースクラス
+laquu = laquu.extend({
     // IEのバージョンチェック
     isUnderIE6: !!(laquu.browser.msie && Math.abs(laquu.browser.version) <= 6),
 
@@ -59,14 +58,5 @@ laquu = laquu.extend({
     // エラーを投げる
     error: function(msg) {
         throw msg;
-    },
-
-    // プラグインのロードを行う
-    load: function() {},
-
-    // 指定されたQueryStringをパース
-    _parseQuery: function() {}
+    }
 });
-
-// ロード
-laquu.load();
