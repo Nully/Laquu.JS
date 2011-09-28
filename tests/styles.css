@@ -323,6 +323,13 @@
 	bottom: 50px;
 	left: 120px;
 }
+#posfix .fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #999;
+    width: 100%;
+}
 
 
 
