@@ -35,6 +35,14 @@
             }
 
             function stopTimer() {
+                var t = $l(this).parent();
+                items.each(function(i){
+                    if($l(this).hasClass(t.data("tag"))) {
+                        current = (i+1);
+                        return true;
+                    }
+                });
+
                 clearInterval(timer);
                 timer = null;
             }
@@ -73,6 +81,12 @@
             items = self.find("a").css("overflow", "hidden");
             items.bind("mouseover", showImage).bind("mouseout", hideImage);
             items.trigger("mouseout");
+            items.each(function(i){
+                i ++;
+                var name = "laquu-picmenu-item" + i;
+                $l(this).data("tag", name).addClass(name);
+            });
+
 
 			// カレントが1以上であるなら、loopIndexの値として入れる
 			if (o.current >= 1 && items.size() > 1) {
@@ -83,7 +97,7 @@
 			// autoがあるならば、自動めくりを実行
             if(o.auto) {
                 startTimer();
-                self.find("img").bind("mouseover", stopTimer).bind("mouseout", startTimer)
+                self.find("img").bind("mouseover", stopTimer).bind("mouseout", startTimer);
             }
         });
     };
