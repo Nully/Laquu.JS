@@ -16,28 +16,31 @@ Laquu.JSを使う事で、きっと「楽に作業を軽減」することがで
 
 ## 機能一覧
 
-Laquu.JSでサポートしている機能は次の20機能です。
+Laquu.JSでサポートしている機能は次の23機能です。
 
-+ シンプルなアコーディオンパネル（accordion）
-+ ブラックアウトスクロール（blackoutscroll）
-+ ブランク（blank）
-+ パンくず（breadcrumb）
-+ バブルポップアップ（bubblepopup）
-+ ドロップダウン（dropdown）
-+ 拡張子アイコン（exticon）
-+ フォントサイズ（fontsize）
-+ イメージオーバー（imageOver）
-+ インナースライド（innerslide）
-+ コナミ（konami）
-+ オパシティオーバー（opacityOver）
-+ オーバー（over）
-+ ピックメニュー（picMenu）
-+ スクロールtoビュー（s2v）
-+ スクローラー（scroller）
-+ ストライプ（stripe）
-+ タブ（tab）
-+ ティッカー（ticker）
-+ ツールチップ（tooltip）
++ [ver1.0.0] シンプルなアコーディオンパネル（accordion）
++ [ver1.0.0] ブラックアウトスクロール（blackoutscroll）
++ [ver1.0.0] ブランク（blank）
++ [ver1.0.0] パンくず（breadcrumb）
++ [ver1.0.0] バブルポップアップ（bubblepopup）
++ [ver1.0.0] ドロップダウン（dropdown）
++ [ver1.0.0] フォントサイズ（fontsize）
++ [ver1.0.0] インナースライド（innerslide）
++ [ver1.0.0] コナミ（konami）
++ [ver1.0.0] オパシティオーバー（opacityOver）
++ [ver1.0.0] オーバー（over）
++ [ver1.0.0] ピックメニュー（picMenu）
++ [ver1.0.0] スクローラー（scroller）
++ [ver1.0.0] ストライプ（stripe）
++ [ver1.0.0] タブ（tab）
++ [ver1.0.0] ティッカー（ticker）
++ [ver1.0.0] ツールチップ（tooltip）
++ [ver1.1.0] 拡張子アイコン（exticon）
++ [ver1.1.0] イメージオーバー（imageOver）
++ [ver1.1.0] スクロールtoビュー（s2v）
++ [ver1.2.0] ブリンク（blink）
++ [ver1.2.0] イーキューヘイト（eqheight）
++ [ver1.2.0] ポスフィックス（posfix）
 
 今後も独断と偏見で色々な機能が追加される予定です。
 
