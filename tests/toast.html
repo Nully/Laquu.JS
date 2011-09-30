@@ -15,23 +15,41 @@ jQuery(function(){
     });
 
     jQuery("#test2").bind("click", function(){
-        var msg = jQuery("#queue_msg1").val();
-        if(msg) {
-            laquu.Toast.show({
-                message: msg
-            });
-        }
+        laquu.Toast.show({
+            message: "メッセージ1"
+        });
+        laquu.Toast.show({
+            message: "メッセージ2"
+        });
+        laquu.Toast.show({
+            message: "メッセージ3"
+        });
+        laquu.Toast.show({
+            message: "メッセージ4"
+        });
     });
 
     jQuery("#test3").bind("click", function(){
-        var msg = jQuery("#queue_msg2").val();
-        if(msg) {
-            laquu.Toast.show({
-                message: msg,
-                fadeTime: 400,
-                showTime: 600
-            });
-        }
+        laquu.Toast.show({
+            message: "メッセージ1",
+            fadeTime: 400,
+            showTime: 600
+        });
+        laquu.Toast.show({
+            message: "メッセージ2",
+            fadeTime: 400,
+            showTime: 600
+        });
+        laquu.Toast.show({
+            message: "メッセージ3",
+            fadeTime: 400,
+            showTime: 600
+        });
+        laquu.Toast.show({
+            message: "メッセージ4",
+            fadeTime: 400,
+            showTime: 600
+        });
     });
 
     jQuery("#test4").click("bind", function(){
@@ -52,7 +70,7 @@ jQuery(function(){
             { position: "center-right",  message: "中右" },
             { position: "bottom-left",   message: "下左" },
             { position: "bottom-center", message: "下中" },
-            { position: "bottom-right",  message: "下右" },
+            { position: "bottom-right",  message: "下右" }
         ];
 
         jQuery.each(props, function(i, e) {
