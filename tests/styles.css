@@ -454,6 +454,28 @@
 }
 
 
+/* トースト
+ --------------------------------------------------------------------------- */
+#toast {}
+#toast .laquu-toast-container {
+    background: #666;
+    background: rgba(60, 60, 60, .7);
+    color: #FFF;
+    text-align: left;
+    width: 200px;
+    padding: 5px;
+    margin: 0;
+    border: 3px solid #CCC;
+    border-radius: 6px;
+}
+#toast .laquu-toast-message {
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+}
+
+
+
 /* ツールチップ
  --------------------------------------------------------------------------- */
 #tooltip {}
