@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" href="styles.css" media="all" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../src/laquu.js"></script>
+<script type="text/javascript" src="../src/toast.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    jQuery("#test1").bind("click", function(){
+        laquu.Toast.show();
+    });
+
+    jQuery("#test2").bind("click", function(){
+        var msg = jQuery("#queue_msg1").val();
+        if(msg) {
+            laquu.Toast.show({
+                message: msg
+            });
+        }
+    });
+
+    jQuery("#test3").bind("click", function(){
+        var msg = jQuery("#queue_msg2").val();
+        if(msg) {
+            laquu.Toast.show({
+                message: msg,
+                fadeTime: 400,
+                showTime: 600
+            });
+        }
+    });
+
+    jQuery("#test4").click("bind", function(){
+        laquu.Toast.dequeue();
+    });
+
+    jQuery("#test5").click("bind", function(){
+        laquu.Toast.dequeueAll();
+    });
+
+    jQuery("#test6").click("bind", function(){
+        var props = [
+            { position: "top-left",   message: "上左" },
+            { position: "top-center", message: "上中" },
+            { position: "top-right",  message: "上右" },
+            { position: "center-left",   message: "中左" },
+            { position: "center-center", message: "中中" },
+            { position: "center-right",  message: "中右" },
+            { position: "bottom-left",   message: "下左" },
+            { position: "bottom-center", message: "下中" },
+            { position: "bottom-right",  message: "下右" },
+        ];
+
+        jQuery.each(props, function(i, e) {
+            this.showTime = 500;
+            this.fadeTime = 200;
+            laquu.Toast.show(this);
+        });
+    });
+});
+</script>
+</head>
+<body id="toast" style="postion: relative;">
+<h1>トーストプラグイン</h1>
+
+<h2>オプション無し</h2>
+<div id="toast1">
+<h3>トーストのデモ</h3>
+<p><input type="button" value="トーストを表示" id="test1" /></p>
+
+<h3>メッセージキューを行う</h3>
+<p><input type="text" value="" id="queue_msg1" /><br />
+<input type="button" value="キューに追加" id="test2" /></p>
+
+<h3>メッセージキューを行い表示速度を変更する</h3>
+<p>メッセージ：<input type="text" value="" id="queue_msg2" /><br />
+<input type="button" value="キューに追加" id="test3" /></p>
+
+<h3>キューを１つずつ削除</h3>
+<p><input type="button" value="キューを1つ削除" id="test4" /></p>
+
+<h3>現在以降のキューを全て削除</h3>
+<p><input type="button" value="キューを全て削除" id="test5" /></p>
+
+<h3>全ての位置で表示</h3>
+<p><input type="button" value="全ての場所でトーストを表示" id="test6" /></p>
+<!-- ENd toast1 --></div>
+
+
+</body>
+</html>
