@@ -73,7 +73,7 @@
          * キューが有るか調べる
          */
         hasQueue: function() {
-            return (this._queues.length > 0);
+            return (this._queues.length >= 1);
         },
         /**
          * トーストのコンテナーを生成
