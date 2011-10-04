@@ -26,9 +26,10 @@
                 else
                     panels = i;
             }).find("a[href*=#]").bind("click", function(ev){
-                tabs.removeClass(o.activeTabClass).find("a[href="+ev.target.hash+"]").parent().addClass(o.activeTabClass);
-                var p = panels.hide().parent().find(ev.target.hash);
-                p.show();
+                panels.hide();
+                tabs.removeClass(o.activeTabClass);
+                $l(this).parent().addClass(o.activeTabClass);
+                var p = $l($l(this).attr("href")).show();
 
                 if($l.isFunction(o.onChange))
                     o.onChange.call(this, this, p);
