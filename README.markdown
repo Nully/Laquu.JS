@@ -27,7 +27,7 @@ Laquu.JSでサポートしている機能は次の24機能です。
 + [ver1.0.0] フォントサイズ（fontsize）
 + [ver1.0.0] インナースライド（innerslide）
 + [ver1.0.0] コナミ（konami）
-+ [ver1.0.0] オパシティオーバー（opacityOver）
++ [ver1.0.0] クリアオーバー（clearOver）
 + [ver1.0.0] オーバー（over）
 + [ver1.0.0] ピックメニュー（picMenu）
 + [ver1.0.0] スクローラー（scroller）
