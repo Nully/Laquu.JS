@@ -2,7 +2,7 @@
  * jQuery plugin laquu.
  *
  * @Auth    Nully
- * @Url     
+ * @Url
  * @Make    10/04/26(Mon)
  * Version  1.2.1
  * @License MIT Lincense

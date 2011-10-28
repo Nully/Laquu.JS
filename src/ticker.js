@@ -37,11 +37,11 @@
 
             function tween() {
                 ++current;
-    
+
                 if(current >= items.size()) {
                     current = 0;
                 }
-    
+
                 var item = items.get(current);
                 self.animate({
                     top: parseInt("-" + item.offsetTop),
@@ -58,7 +58,7 @@
                     }
                 });
             }
-    
+
             self.parent().css("position", "relative").end().css({
                 position: "absolute",
                 top: 0,
