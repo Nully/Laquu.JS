@@ -100,6 +100,7 @@ echo "標準ファイルの書き出しが完了しました。
 
 echo "最小化ファイルを書き出します。"
 if [ ! -f $COMPILED_DIR/$LAQUU_MIN ]; then
+cat COPYRIGHT >> $COMPILED_DIR/$LAQUU_MIN
 compile "laquu.js"
 for pm in $PLUGINS
 do
