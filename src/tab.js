@@ -3,6 +3,7 @@
  *
  * @since: ver1.0.0
  * @オプション
+ *   tabSelector: タブとして動作させるタブグループのCSSセレクタ
  *   activeTabClass: アクティブなタブに付与されるクラス名
  *   onChange: タブ表示が切り替わった際に呼び出されるコールバック関数
  *   triggerTabNum: 初期表示にしたいタブパネル番号を指定
@@ -10,14 +11,18 @@
 (function($l){
     $l.fn.tab = function(settings) {
         var defaults = {
+            tabSelector: "#tab",
             activeTabClass: "active",
             onChange: $l.empty,
             triggerTabNum: 0
         };
 
         return this.each(function(){
-            var self = $l(this), tabs = self.find("li"), panels,
-                o = $l.extend({}, defaults, settings || {});
+            var o = $l.extend({}, defaults, settings || {}),
+                panels,
+                self = $l(this),
+                tabGroup = self.find(o.tabSelector),
+                tabs = tabGroup.find(li);
 
             tabs.each(function(){
                 var i = $l($l("a", this).attr("href"), self);
@@ -25,7 +30,7 @@
                     panels = panels.add(i);
                 else
                     panels = i;
-            }).find("a[href*=#]").bind("click", function(ev){
+            }).find("a[href^=#]").bind("click", function(ev){
                 panels.hide();
                 tabs.removeClass(o.activeTabClass);
                 $l(this).parent().addClass(o.activeTabClass);
