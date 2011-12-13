@@ -24,10 +24,6 @@
                 tabGroup = self.find(o.tabSelector),
                 tabs = tabGroup.find(li);
 
-			// tab group not found was throw error.
-			if(tabGroup.size() < 1)
-				laquu.error("Tab group is not found.");
-
             tabs.each(function(){
                 var i = $l($l("a", this).attr("href"), self);
                 if(panels)
