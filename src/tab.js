@@ -22,7 +22,7 @@
                 panels,
                 self = $l(this),
                 tabGroup = self.find(o.tabSelector),
-                tabs = tabGroup.find("li");
+                tabs = tabGroup.find(li);
 
 			// tab group not found was throw error.
 			if(tabGroup.size() < 1)
