@@ -22,7 +22,7 @@
                 panels,
                 self = $l(this),
                 tabGroup = self.find(o.tabSelector),
-                tabs = tabGroup.find(li);
+                tabs = tabGroup.find("li");
 
             tabs.each(function(){
                 var i = $l($l("a", this).attr("href"), self);
