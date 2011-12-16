@@ -34,7 +34,8 @@
                 panels.hide();
                 tabs.removeClass(o.activeTabClass);
                 $l(this).parent().addClass(o.activeTabClass);
-                var p = $l($l(this).attr("href")).show();
+                // fix find the group child.
+                var p = self.find($l(this).attr("href")).show();
 
                 if($l.isFunction(o.onChange))
                     o.onChange.call(this, this, p);
