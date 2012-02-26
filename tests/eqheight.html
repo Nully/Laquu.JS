@@ -12,7 +12,7 @@
 jQuery(function(){
     var debug = jQuery("#debug");
     laquu("#eqheight1 .eqHeight").eqheight();
-    laquu("#eqheight2 .eqHeight").eqheight(90, 100);
+    laquu("#eqheight2 .eqHeight").eqheight(90, 100, true);
     laquu("#eqheight3 .eqHeight").eqheight(300, 400);
     laquu("#eqheight4 .eqHeight").eqheight(120, 200, false);
 });
@@ -54,7 +54,7 @@ jQuery(function(){
 <!-- End eqheight1 --></div>
 
 
-<h2>オプション有り（最小90,最大100）</h2>
+<h2>オプション有り（最小90,最大100,overflow有り）</h2>
 <div id="eqheight2">
 <div class="eqHeight">ここに文字がいっぱい入ります。ここに文字がいっぱい入ります。ここに文字がいっぱい入ります。ここに文字がいっぱい入ります。ここに文字がいっぱい入ります。<br />
 ここに文字がいっぱい入ります。ここに文字がいっぱい入ります。ここに文字がいっぱい入ります。ここに文字がいっぱい入ります。ここに文字がいっぱい入ります。<br />

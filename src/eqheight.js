@@ -6,27 +6,25 @@
  */
 (function($l){
     $l.fn.eqheight = function(min, max, enableOverflow){
-    	var _min = 120, _max = 300, tmp = 0;
-
-		// サイズのスワップ
-		min = (min ? min: _min);
-		max = (max ? max: _max);
-
-        enableOverflow = (typeof enableOverflow == "undefined") ? true : enableOverflow;
+    	var tmp = 0;
+		enableOverflow = (enableOverflow == 'undefined' ? false: enableOverflow);
+		min = (min == 'undefined' ? null: min);
+		max = (max == 'undefined' ? null: max);
 
     	this.each(function(){
-    		var _h = $l(this).outerHeight();
+    		var _h = $l(this).innerHeight();
     		if(tmp < _h) {
-    			tmp = _h;
+				tmp = _h;
     		}
     	});
 
-		if(min > tmp) tmp = min;
-		if(max < tmp) tmp = max;
+		// 最小値及び最大値での割合を出す
+		if(min != null) tmp = min;
+		if(max != null) tmp = max;
 
-        if(enableOverflow == true)
-            this.css("overflow", "auto");
+		// overflowの設定
+		if(enableOverflow) this.css("overflow", "auto");
 
-        return this.height(tmp);
+		return this.height(tmp);
     };
 })(laquu);
