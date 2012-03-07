@@ -19,12 +19,13 @@
         this.each(function(){
             var o = $l.extend({}, {
                 distX: 0,
-                distY: -30,
+                distY: 25,
                 onShow: $l.empty,
                 onHide: $l.empty,
                 onMove: $l.empty
             }, settings || {}),
-            defaultText = $(this).attr("title");
+            $this = $l(this),
+            hasAlt = false;
 
             function createTooltipContainer() {
                 return $l('<div id="laquu-tooltip-container'+ uuid() +'" class="laquu-tooltip-container"></div>')
@@ -38,8 +39,11 @@
                     outerHeigh,
                     outerWidth;
 
-                self.attr("title", null);
-                container.text(defaultText);
+                if(hasAlt) {
+                	self.removeAttr("alt");
+                }
+                self.removeAttr("title");
+                container.text(self.data("lq-tooltip-title"));
                 containerHeight = Math.floor(container.outerHeight() / 2) + o.distY;
                 containerWidth  = Math.floor(container.outerWidth() / 2) + o.distX;
 
@@ -61,15 +65,24 @@
 
 
             function hideTooltip(ev) {
-                $l(this).unbind("mousemove");
-                $l(this).attr("title", defaultText);
+            	var self = $(this);
+                self.unbind("mousemove");
+                self.attr("title", self.data("lq-tooltip-title"));
+                if(hasAlt) {
+                	self.attr("alt", self.data("lq-tooltip-alt"));
+                }
                 $l(".laquu-tooltip-container").fadeOut("fast", function(){
                     $l(this).remove();
                     o.onHide.call(this, this, self);
                 });
             }
 
-            $l(this).hover(showTooltip, hideTooltip);
+			if(typeof $this.attr("alt") !== "undefined") {
+				$this.data("lq-tooltip-alt", $this.attr("alt"));
+				hasAlt = true;
+			}
+			$this.data("lq-tooltip-title", $this.attr("title"));
+            $this.hover(showTooltip, hideTooltip);
         });
     };
 })(laquu);

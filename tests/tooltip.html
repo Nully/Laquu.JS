@@ -12,6 +12,7 @@
 jQuery(function(){
     var debug = jQuery("#debug");
     laquu("#tooltip1 p").tooltip();
+    laquu("img").tooltip();
     laquu("#tooltip2 p").tooltip({
 		distX: -100,
 		distY: -60,
@@ -36,6 +37,9 @@ jQuery(function(){
 <div id="tooltip1" class="tooltip-panel">
 <p title="ここに表示したい内容を書きます。">ここにマウスを載せてください。</p>
 <!-- End tooltip1 --></div>
+
+<h2>ゆきりん</h2>
+<p><img src="../externals/yukirin.jpg" alt="alt属性はなくなります。" title="ゆきりん可愛いよゆきりん" /></p>
 
 
 <h2>オプション有り</h2>
