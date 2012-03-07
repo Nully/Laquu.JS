@@ -12,7 +12,7 @@
 		max = (max == 'undefined' ? null: max);
 
     	this.each(function(){
-    		var _h = $l(this).innerHeight();
+    		var _h = $l(this).height();
     		if(tmp < _h) {
 				tmp = _h;
     		}
