@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Laquu.js : Laquu.JSは楽をするためのjQueryプラグイン集です" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Laquu.js</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Nully/Laquu.JS">Fork Me on GitHub</a>
+
+          <h1 id="project_title">Laquu.js</h1>
+          <h2 id="project_tagline">Laquu.JSは楽をするためのjQueryプラグイン集です</h2>
+
+          <section id="downloads">
+            <a class="zip_download_link" href="https://github.com/Nully/Laquu.JS/zipball/master">Download this project as a .zip file</a>
+            <a class="tar_download_link" href="https://github.com/Nully/Laquu.JS/tarball/master">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>Laquu.JS</h2>
+
+<p>Laquu.JSはWebサイトの管理・制作をもっと楽に制作するために作られたjQueryプラグインパックです。
+日頃の似たような作業を減らし、1ファイルで簡潔し、作業工程・精神への負担を減らせることができるプラグインです。</p>
+
+<h2>使い方</h2>
+
+<p>Laquu.JSの使い方は以下のとおりです。</p>
+
+<blockquote>
+<pre><code>&lt;script type="text/javascript" src="/path/to/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="/path/to/laquu.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+laquu(function(){
+    // ここにLaquu.JSのコードを書きます
+});
+// もしくは
+jQuery(function(){
+    // ここにLaquu.JSのコードを書きます
+});
+&lt;/script&gt;
+</code></pre>
+</blockquote>
+
+<h3>Google Closure Compilerで最小化を行う</h3>
+
+<p>Laquu.JSはver1.2.0から、Google Closure Compilerを利用し、min構成を作っています。
+build.sh（bash）を実行することで自動的に最小構成ファイルの全入りと、各プラグインの最小構成ファイルを書き出します。</p>
+
+<blockquote>
+<pre><code>$ cd Laquu.JS
+$ chmod 0755 build.sh
+$ ./build.sh
+:
+: いっぱいログが出ます
+:
+$ // 書き出し完了のメッセージが表示されれば完了です。
+</code></pre>
+</blockquote>
+
+<h2>ライセンスについて</h2>
+
+<p>MITライセンスで配布させていただいています。</p>
+
+<p>商用利用もご自由に行ってください。</p>
+
+<p>お気に召しましたら、開発者に1杯のビールかハイボールを下さい！XD</p>
+
+<h3>プラグインを利用して発生した障害などについて</h3>
+
+<p>当プラグインはMITラインセンスとして配布している為、これら全ての障害などについては一切の責任を負いません。</p>
+
+<p>全て自己責任で利用してください。</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Laquu.js maintained by <a href="https://github.com/Nully">Nully</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-12203464-8");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
