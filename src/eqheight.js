@@ -11,6 +11,10 @@
 		min = (min == 'undefined' ? null: min);
 		max = (max == 'undefined' ? null: max);
 
+        // CSSで高さを指定しても無視される例のバグを解消するため
+        // IE6以下の場合は強制的にoverflowを入れる
+        if($l.isUnderIE6) enableOverflow = true;
+
     	this.each(function(){
     		var _h = $l(this).height();
     		if(tmp < _h) {

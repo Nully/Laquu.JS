@@ -188,8 +188,8 @@
 	margin: 0 5px 10px 0;
 	width: 180px;
 }
-#eqheight1, #eqheight2, #eqheight3 { zoom: 1; }
-#eqheight1:after, #eqheight2:after, #eqheight3:after {
+#eqheight1, #eqheight2, #eqheight3, #eqheight4 { zoom: 1; }
+#eqheight1:after, #eqheight2:after, #eqheight3:after, #eqheight4:after {
 	content: " ";
 	display: block;
 	clear: both;
