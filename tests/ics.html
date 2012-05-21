@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" href="styles.css" media="all" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../src/laquu.js"></script>
+<script type="text/javascript" src="../src/ics.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    var debug = jQuery("#debug");
+    laquu("#keyword1").ics();
+    laquu("#keyword2").ics({
+    	target: 'li'
+    });
+});
+</script>
+</head>
+<body id="exticon">
+<h1>インクリメンタル検索プラグイン</h1>
+
+<h2>オプション無し（テーブルのフィルタリング）</h2>
+<div id="ics1" class="ics-panel">
+	<p>検索キーワード：<input type="text" name="keyword1" value="" id="keyword1"/></p>
+	<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<th>柏木由紀</th>
+			<td>かしわぎゆき</td>
+			<td>ゆきりん</td>
+		</tr>
+		<tr>
+			<th>大島優子</th>
+			<td>おおしまゆうこ</td>
+			<td>ゆうちゃん</td>
+		</tr>
+		<tr>
+			<th>前田敦子</th>
+			<td>まえだあつこ</td>
+			<td>あっちゃん</td>
+		</tr>
+	</table>
+<!-- End exticon1 --></div>
+
+
+<h2>オプション有り（リストをフィルタリング）</h2>
+<div id="ics2" class="ics-panel">
+	<p>検索キーワード：<input type="text" name="keyword2" value="" id="keyword2"/></p>
+	<ul>
+		<li>しのまり</li>
+		<li>まゆゆ</li>
+		<li>ルイズ</li>
+	</ul>
+<!-- End exticon2 --></div>
+
+
+</body>
+</html>

@@ -226,6 +226,38 @@
 #fontsize.large { font-size: 18px; }
 
 
+/* インクリメンタル検索
+ --------------------------------------------------------------------------- */
+.ics-panel table {
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	width: 450px;
+}
+.ics-panel th, .ics-panel td {
+	padding: 4px;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	width: 33%;
+}
+.ics-panel th {
+	background: #EFEFEF;
+}
+
+.ics-panel ul {
+	width: 450px;
+	border-top: 1px solid #ccc;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.ics-panel ul li {
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 5px;
+	background: #FCFCFC;
+}
+
 
 /* インナースライド
  --------------------------------------------------------------------------- */
