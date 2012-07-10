@@ -10,6 +10,9 @@
  * defaults:
  *    target: table > tr（テーブルの行全体）
  *    on:     keyup（キーボードが離されたら）
+ *    before: 入力直前に呼び出されるコールバック
+ *    after:  入力後に呼び出されるコールバック
+ *            beforeとafterのthis参照は指定された入力要素になる
  * -----------------------------------------------------------------------------
  * 使い方
  * jQuery("テキストボックスなどのセレクタ").inclesearch();
@@ -22,7 +25,9 @@
         inclesearch: function(options) {
             var setting = $.extend({
                 target: 'table tr',
-                on: 'keyup'
+                on: 'keyup',
+                before: function(inputValue) {},
+                after: function(elements, inputValue) {}
             }, options || {});
 
             function quote(str) {
@@ -34,7 +39,11 @@
 
             var elements = $l(setting.target);
             $l(this).bind(setting.on, function(){
-                var str = $l(this).val(), words = null;
+                var self = $l(this), str = $l(this).val(), words = null;
+
+                if($l.isFunction(setting.before))
+                    setting.before.call(self, str);
+
                 if(!str) {
                     elements.show();
                     return;
@@ -51,6 +60,9 @@
                         s.hide();
                     }
                 });
+
+                if($l.isFunction(setting.after))
+                    setting.after.call(self, elements, str, pattern);
             });
         }
     });
