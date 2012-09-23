@@ -19,14 +19,26 @@
                 onComplete: $l.empty,
                 onStep: $l.empty
             }, settings || {});
-            $l(this).bind("click", function(ev){
+
+            $l(this).click(function(ev){
                 var self = $l(this),
                     of = $l(self.attr("href")).offset();
 
-                scrollElement.animate({
+                var scrollPos = {
                     scrollTop: of.top,
                     scrollLeft: of.left
-                }, {
+                };
+
+                // safari6では現在バグが残っているため、
+                // ブラウザバージョンの差異を吸収させるため、leftオプションは
+                // safari6では無効になるようにした
+                if($.browser.webkit && navigator.appVersion) {
+                    if(navigator.appVersion.match(new RegExp("Version/6.0"))) {
+                        delete scrollPos.scrollLeft;
+                    }
+                }
+
+                scrollElement.animate(scrollPos, {
                     queue: false,
                     easing: o.easing,
                     duration: o.speed,
