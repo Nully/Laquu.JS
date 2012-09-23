@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title></title>
+<link rel="stylesheet" href="styles.css" media="all" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="../src/laquu.js"></script>
+<script type="text/javascript" src="../src/inclesearch.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+    var debug = jQuery("#debug");
+    laquu("#is1").inclesearch({
+        target: '#table1 tr'
+    });
+    laquu("#is2").inclesearch({
+        target: '#table2 tr'
+        // on: 'keypress'
+    });
+});
+</script>
+</head>
+<body id="imageover">
+    <h1>インクルサーチプラグイン</h1>
+    <h2>オプション無し</h2>
+    <div id="inclesearch1" class="is-panel">
+        <input type="text" name="search" value="" id="is1" />
+        <table border="0" cellpadding="0" cellspacing="0" id="table1">
+            <tr>
+                <th>1位</th>
+                <td>大島優子</td>
+                <td>おおしまゆうこ</td>
+            </tr>
+            <tr>
+                <th>2位</th>
+                <td>渡辺麻友</td>
+                <td>まゆゆ</td>
+            </tr>
+            <tr>
+                <th>3位</th>
+                <td>柏木由紀</td>
+                <td>ゆきりん！！！</td>
+            </tr>
+        </table>
+    <!-- End imageover1 --></div>
+
+
+    <h2>オプション有り</h2>
+    <div id="inclesearch2" class="is-panel">
+        <input type="text" name="search" value="" id="is2" />
+        <table id="table2">
+        <tbody>
+            <tr>
+            <th bgcolor="#F5F5F5">順位</th>
+            <th bgcolor="#F5F5F5">名前</th>
+            </tr>
+
+
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">1</span></b></span>位</td>
+            <td align="center"><b>大島優子（K）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">2</span></b></span>位</td>
+            <td align="center"><b>渡辺麻友（B）</b></td>
+            </tr>
+
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">3</span></b></span>位</td>
+            <td align="center"><b>柏木由紀（B）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">4</span></b></span>位</td>
+            <td align="center"><b>指原莉乃（A）</b></td>
+            </tr>
+
+
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">5</span></b></span>位</td>
+            <td align="center"><b>篠田麻里子（A）</b></td>
+            </tr>
+
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">6</span></b></span>位</td>
+            <td align="center"><b>高橋みなみ（A）</b></td>
+            </tr>
+
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">7</span></b></span>位</td>
+            <td align="center"><b>小嶋陽菜（A）</b></td>
+            </tr>
+
+
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">8</span></b></span>位</td>
+            <td align="center"><b>板野友美（A）</b></td>
+            </tr>
+
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">9</span></b></span>位</td>
+            <td align="center"><b>松井珠理奈（S）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">10</span></b></span>位</td>
+            <td align="center"><b>松井玲奈（S）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">11</span></b></span>位</td>
+            <td align="center"><b>宮澤佐江（K）</b></td>
+            </tr>
+
+
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">12</span></b></span>位</td>
+            <td align="center"><b>河西智美（B）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">13</span></b></span>位</td>
+            <td align="center"><b>北原里英（B）</b></td>
+            </tr>
+
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">14</span></b></span>位</td>
+            <td align="center"><b>峯岸みなみ（K）</b></td>
+            </tr>
+
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">15</span></b></span>位</td>
+            <td align="center"><b>横山由依（K）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 51, 102);"><b><span style="font-size: 23px;">16</span></b></span>位</td>
+            <td align="center"><b>梅田彩佳（K）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">17</span></b></span>位</td>
+            <td align="center"><b>高城亜樹（A）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">18</span></b></span>位</td>
+            <td align="center"><b>山本彩（N）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">19</span></b></span>位</td>
+            <td align="center"><b>渡辺美優紀（N）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">20</span></b></span>位</td>
+            <td align="center"><b>秋元才加（K）</b></td>
+            </tr>
+
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">21</span></b></span>位</td>
+            <td align="center"><b>佐藤亜美菜（B）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">22</span></b></span>位</td>
+            <td align="center"><b>倉持明日香（A）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">23</span></b></span>位</td>
+            <td align="center"><b>島崎遥香（4）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">24</span></b></span>位</td>
+            <td align="center"><b>高柳明音（K2）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">25</span></b></span>位</td>
+            <td align="center"><b>秦佐和子（K2）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">26</span></b></span>位</td>
+            <td align="center"><b>増田有華（B）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">27</span></b></span>位</td>
+            <td align="center"><b>大矢真那（S）</b></td>
+            </tr>
+
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">28</span></b></span>位</td>
+            <td align="center"><b>矢神久美（S）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">29</span></b></span>位</td>
+            <td align="center"><b>須田亜香里（S）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">30</span></b></span>位</td>
+            <td align="center"><b>古川愛李（K2）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">31</span></b></span>位</td>
+            <td align="center"><b>木崎ゆりあ（S）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(255, 102, 51);"><b><span style="font-size: 23px;">32</span></b></span>位</td>
+            <td align="center"><b>小木曽汐莉（K2）</b></td>
+            </tr>
+
+
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">33</span></b></span>位</td>
+            <td align="center"><b>岩佐美咲（A）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">34</span></b></span>位</td>
+            <td align="center"><b>松村香織（S研）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">35</span></b></span>位</td>
+            <td align="center"><b>向田茉夏（K2）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">36</span></b></span>位</td>
+            <td align="center"><b>仲谷明香（A）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">37</span></b></span>位</td>
+            <td align="center"><b>中田ちさと（A）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">38</span></b></span>位</td>
+            <td align="center"><b>宮崎美穂（B）</b></td>
+            </tr>
+
+
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">39</span></b></span>位</td>
+            <td align="center"><b>永尾まりや（4）</b></td>
+            </tr>
+
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">40</span></b></span>位</td>
+            <td align="center"><b>藤江れいな（K）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">41</span></b></span>位</td>
+            <td align="center"><b>小林香菜（B）</b></td>
+            </tr>
+
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">42</span></b></span>位</td>
+            <td align="center"><b>前田亜美（A）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">43</span></b></span>位</td>
+            <td align="center"><b>福本愛菜（N）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">44</span></b></span>位</td>
+            <td align="center"><b>仲川遥香（A）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">45</span></b></span>位</td>
+            <td align="center"><b>田野優花（4）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">46</span></b></span>位</td>
+            <td align="center"><b>山田菜々（N）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">47</span></b></span>位</td>
+            <td align="center"><b>宮脇咲良（H）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(204, 0, 0);"><b><span style="font-size: 23px;">48</span></b></span>位</td>
+            <td align="center"><b>片山陽加（A）</b></td>
+            </tr>
+
+
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">49</span></b></span>位</td>
+            <td align="center"><b>武藤十夢（A研）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">50</span></b></span>位</td>
+            <td align="center"><b>石田晴香（B）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">51</span></b></span>位</td>
+            <td align="center"><b>菊地あやか（K）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">52</span></b></span>位</td>
+            <td align="center"><b>多田愛佳（A）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">53</span></b></span>位</td>
+            <td align="center"><b>松井咲子（K）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">54</span></b></span>位</td>
+            <td align="center"><b>山内鈴蘭（4）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">55</span></b></span>位</td>
+            <td align="center"><b>仁藤萌乃（K）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">56</span></b></span>位</td>
+            <td align="center"><b>木本花音（E）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">57</span></b></span>位</td>
+            <td align="center"><b>大場美奈（4）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">58</span></b></span>位</td>
+            <td align="center"><b>市川美織（4）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">59</span></b></span>位</td>
+            <td align="center"><b>大家志津香（A）</b></td>
+            </tr>
+
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">60</span></b></span>位</td>
+            <td align="center"><b>小笠原茉由（N）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">61</span></b></span>位</td>
+            <td align="center"><b>佐藤すみれ（B）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">62</span></b></span>位</td>
+            <td align="center"><b>矢方美紀（K2）</b></td>
+            </tr>
+            <tr>
+            <td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">63</span></b></span>位</td>
+            <td align="center"><b>中西優香（S）</b></td>
+            </tr>
+
+
+            <tr><td><span style="color: rgb(51, 51, 51);"><b><span style="font-size: 23px;">64</span></b></span>位</td>
+            <td align="center"><b>小森美果（B）</b></td>
+            </tr>
+            </tbody>
+        </table>
+        <p><a href="http://akb48matome.com/archives/51825203.html" target="_blank">AKB48まとめんばー</a>よりデータを拝借しました。<br />
+        この場を借りてお詫び申し上げます。</p>
+    <!-- End imageover2 --></div>
+</body>
+</html>
