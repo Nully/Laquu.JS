@@ -10,18 +10,19 @@
 <script type="text/javascript" src="../src/accordion.js"></script>
 <script type="text/javascript">
 jQuery(function(){
-    var debug = jQuery("#debug");
-    laquu("#accordion1").accordion();
-    laquu("#accordion2").accordion({
+    $("#accordion1").laquu("accordion", {
+        effect: "fadeIn"
+    });
+    $("#accordion2").laquu("accordion", {
         selected: 1,
         currentClass: "test-current",
         speed: 800,
         easing: "easeOutBounce",
         onHide: function() {
-            debug.append("#" + this.id + "が非表示になりました。<br />");
+            // debug.append("#" + this.id + "が非表示になりました。<br />");
         },
         onShow: function() {
-            debug.append("#" + this.id + "が表示状態です。<br />");
+            // debug.append("#" + this.id + "が表示状態です。<br />");
         }
     });
 });
