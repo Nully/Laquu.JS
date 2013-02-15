@@ -471,16 +471,6 @@
             }, option || {});
 
             return this.each(function(){
-                /* $(this).over({
-                    onHover: function(ev){
-                        $.isFunction(options.onHover) ? options.onHover.call(this, this, ev): $.empty;
-                        $(this).stop(true, true).fadeTo(options.speed, options.opacity, options.onComplete ? options.onComplete : $.empty);
-                    },
-                    onOut: function(ev) {
-                        $.isFunction(options.onOut) ? options.onOut.call(this, this, ev): $.empty;
-                        $(this).stop(true, true).fadeTo(options.speed, 1, options.onComplete ? options.onComplete : $.empty);
-                    }
-                }); */
                 $(this).laquu("over", {
                     onHover: function(ev){
                         $.isFunction(options.onHover) ? options.onHover.call(this, this, ev): $.empty;
