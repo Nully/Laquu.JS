@@ -246,6 +246,119 @@
                     });
                 });
             });
+        },
+        /**
+         * パンくずプラグイン
+         * 
+         * @param option object
+         *   timer: アニメーションインターバル時間（ms）
+         *   animTime: アニメーション速度（ms）
+         *   isVertical: アニメーション方向 trueを指定すると縦方向に
+         *   not: アニメーションさせない要素のCSSセレクタ
+         *   lastItemClass: パンくずの最後に付くクラス
+         *   easing: アニメーションイージング
+         *   onComplete: アニメーション完了時のコールバック
+         *   onStep: アニメーション実行ごとのコールバック
+         */
+        breadcrumb: function(option) {
+            var options = $.extend({
+                timer: 100,
+                animTime: 50,
+                isVertical: false,
+                not: null,
+                lastItemClass: "breadcrumb-last",
+                easing: null,
+                onComplete: L.empty,
+                onStep: L.empty
+            }, option || {});
+
+            return this.each(function(){
+                var $t = $(this),
+                    items = $t.children(),
+                    itemSize = items.size(),
+                    current = 1,
+                    timer = null,
+                    isStop = false;
+
+                $t.css({
+                    position: "relative",
+                    height: $t.innerHeight(),
+                    overflow: "hidden"
+                });
+
+                // set children item css
+                items.filter(":not(" + options.not + ")").each(function(i, e) {
+                    var p = {
+                        position: "absolute", top: 0, left: 0, zIndex: itemSize - i
+                    },
+                    self = $(this);
+
+                    if(options.isVertical) {
+                        var left = 0;
+                        if(self.prev().size() != 0) {
+                            left = self.prev().outerWidth({ margin: true }) + parseInt(self.prev().css("left").replace("px", ""));
+                        }
+                        p.left = left;
+                        p.top = "-" + $t.outerHeight() + "px";
+                    }
+                    self.addClass("breadcrumb-items breadcrumb-item"+i).css(p);
+
+                    return this;
+                }).not(":first").hide();
+
+                items.last().addClass(options.lastItemClass);
+
+                if(options.timer < 50)
+                    options.timer = 50;
+
+                // reset interval timer.
+                options.timer = options.timer + options.animTime;
+
+                timer = setInterval(function(){
+                    var params = {},
+                        opts = {},
+                        current_item = $(items.get(current - 1));
+
+                    params.queue = false;
+                    params.top = 0;
+                    opts.duration = options.animTime;
+
+                    if(options.isVertical) {
+                        isStop = (current - itemSize) > 0;
+                    }
+                    else {
+                        var beforeLeft = current_item.prev().css("left");
+                        if(typeof beforeLeft == "undefined")
+                            beforeLeft = "0px";
+
+                        beforeLeft = parseInt(beforeLeft.replace("px", ""));
+                        params.left = current_item.prev().outerWidth({ margin: true }) + beforeLeft;
+                        current_item.css("left", beforeLeft);
+                        isStop = (current > itemSize - 1);
+                    }
+
+                    opts.complete = function() {
+                        if(options.isVertical)
+                            current_item.css("top", params.top);
+                        else
+                            current_item.css("left", params.left);
+
+                        if($.isFunction(options.onComplete))
+                            options.onComplete.apply(current_item);
+                    };
+
+                    if($.isFunction(options.onStep))
+                        opts.step = options.onStep;
+
+                    if($.easing && options.easing && $.easing[options.easing])
+                        opts.easing = options.easing;
+
+                    current_item.show().animate(params, opts);
+
+                    ++current;
+                    if(isStop) clearInterval(timer);
+                }, options.timer);
+            });
         }
     });
 
