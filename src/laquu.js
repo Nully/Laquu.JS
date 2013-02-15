@@ -87,6 +87,17 @@
             L.accordion.call(this, op);
             // L.accordion.apply(this, arguments);
         },
+        /**
+         * アコーディオンプラグイン
+         * 
+         * @param option Object
+         *        selected: bool or int    洗濯済みパネル
+         *        currentClass: string     洗濯済みクラス
+         *        speed: int               アニメーションスピード
+         *        easing: string           アニメーションのイージング
+         *        onHide: function         消えた際のコールバック関数
+         *        onShow: function         表示された際のコールバック関数
+         */
         accordion: function(option) {
             var options = $.extend({
                 selected: false,
