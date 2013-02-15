@@ -453,7 +453,7 @@
                     top: popupPos
                 });
 
-                trigger.add(popup).bind("mouseover", showBubble).bind("mouseout", hideBubble);
+                trigger.add(popup).on("mouseover", showBubble).on("mouseout", hideBubble);
             });
         },
         /**
@@ -493,6 +493,9 @@
                 });
             });
         },
+        /**
+         * オーバープラグイン
+         */
 
 
 
