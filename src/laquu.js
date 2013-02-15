@@ -207,6 +207,14 @@
                 });
                 ev.preventDefault();
             });
+        },
+        /**
+         * ブランクプラグイン
+         */
+        blank: function() {
+            this.each(function(){
+                $(this).attr("target", "_blank");
+            });
         }
     });
 
