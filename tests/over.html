@@ -11,7 +11,17 @@
 <script type="text/javascript">
 jQuery(function(){
     var debug = jQuery("#debug");
-    laquu("#over1 a").over();
+    $("#over1 a").laquu("over");
+    $("#over2 a").laquu("over", {
+    	hoverClass: "over",
+    	onHover: function() {
+    		// debug.append("マウスが乗っかりました<br />");
+    	},
+    	onOut: function() {
+    		// debug.append("マウスが離れました<br />");
+    	}
+    });
+    /* laquu("#over1 a").over();
     laquu("#over2 a").over({
     	hoverClass: "over",
     	onHover: function() {
@@ -20,7 +30,7 @@ jQuery(function(){
     	onOut: function() {
     		debug.append("マウスが離れました<br />");
     	}
-    });
+    }); */
 });
 </script>
 </head>
