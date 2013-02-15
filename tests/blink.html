@@ -10,15 +10,12 @@
 <script type="text/javascript" src="../src/blink.js"></script>
 <script type="text/javascript">
 jQuery(function(){
-    var debug = jQuery("#debug");
-    laquu("#blink1 .blink").blink();
-    laquu("#blink2 .blink").blink({
-        opacity: .1,
+    $("#blink1 .blink").laquu("blink");
+    $("#blink2 .blink").laquu("blink", {
+        speed: 1500,
+        opacity: .4,
         onComplete: function() {
-            debug.append(jQuery(this).text() + "のアニメーションが完了しました。<br />");
-        },
-        onMouseOver: function(ev) {
-            debug.append(jQuery(this).text() + "にマウスが乗りました。<br />");
+            alert("戻りました。");
         }
     });
 });

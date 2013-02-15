@@ -215,6 +215,27 @@
             this.each(function(){
                 $(this).attr("target", "_blank");
             });
+        },
+        blink: function(option) {
+            var options = $.extend({
+                opacity: .65,
+                speed: 100,
+                onComplete: L.empty,
+                onHover: L.empty,
+                onOut: L.empty
+            }, option || {});
+
+            return this.each(function(){
+                var $t = $(this);
+                $t.on("mouseover", options.onHover).on("mouseout", options.onOut);
+                $t.on("mouseover", function(ev){
+                    $(this).stop(true, true).css("opacity", options.opacity).animate({ opacity: 1 }, {
+                        duration: options.speed,
+                        queue: false,
+                        complete: options.onComplete
+                    });
+                });
+            });
         }
     });
 
