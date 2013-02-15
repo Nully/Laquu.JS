@@ -11,8 +11,8 @@
 <script type="text/javascript">
 jQuery(function(){
     var debug = jQuery("#debug");
-    laquu("#bubblepop1").bubblepopup();
-    laquu("#bubblepop2").bubblepopup({
+    $("#bubblepop1").laquu("bubblepop");
+    $("#bubblepop2").laquu("bubblepop", {
         easing: "swing",
         distance: -160,
         step: 40,
@@ -20,10 +20,10 @@ jQuery(function(){
         popupClass: ".test-bubble",
         triggerClass: ".test-trigger",
         onShow: function() {
-            debug.append("ｶｰﾁｬﾝが表示されました。<br />");
+            // debug.append("ｶｰﾁｬﾝが表示されました。<br />");
         },
         onHide: function() {
-            debug.append("('A`) &lt; ｶｰﾁｬﾝ...<br />");
+            // debug.append("('A`) &lt; ｶｰﾁｬﾝ...<br />");
         }
     });
 });

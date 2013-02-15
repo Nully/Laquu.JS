@@ -359,6 +359,102 @@
                     if(isStop) clearInterval(timer);
                 }, options.timer);
             });
+        },
+        /**
+         * バブルポッププラグイン
+         * 
+         * @param option object
+         *   easing: アニメーションイージング
+         *   distance: 要素までの距離
+         *   step: 要素までのステップ数
+         *   hideDelay: 消えるまでのインターバル
+         *   popupClass: ポップアップさせる要素のクラス名
+         *   triggerClass: ポップアップを起動する要素のクラス名
+         *   onShow: ポップアップが表示されきった際のコールバック
+         *   onHide: ポップアップが非表示になった際のコールバック
+         */
+        bubblepop: function(option) {
+            var options = $.extend({
+                easing: "swing",
+                distance: 40,
+                step: 30,
+                hideDelay: 1500,
+                popupClass: ".popup",
+                triggerClass: ".trigger",
+                onShow: L.empty,
+                onHide: L.empty
+            }, option || {});
+
+            return this.each(function(){
+                var self = $(this),
+                    popup = self.find(options.popupClass),
+                    trigger = self.find(options.triggerClass),
+                    popupPos = "-" + (options.distance + popup.outerHeight()) + "px",
+                    isShow = false,
+                    isStarted = false,
+                    timer = null;
+
+
+                function stopTimer() {
+                    if(timer) {
+                        clearTimeout(timer);
+                        timer = null;
+                    }
+                }
+
+                function showBubble() {
+                    stopTimer();
+                    if(isShow || isStarted) return;
+
+                    isStarted = true;
+                    popup.stop(true, true).css({ top: popupPos, display: "block" }).animate({
+                        opacity: 1,
+                        top: "+=" + options.step
+                    }, {
+                        queue: false,
+                        easing: options.easign,
+                        duration: options.duration,
+                        complete: function() {
+                            isShow = true;
+                            isStarted = false;
+                            options.onShow.call(this, popup, trigger);
+                        }
+                    });
+                }
+
+                function hideBubble() {
+                    stopTimer();
+                    timer = setTimeout(function(){
+                        popup.stop(true, true).animate({
+                            top: "-=" + options.step,
+                            opacity: 0
+                        }, {
+                            queue: false,
+                            easing: options.easing,
+                            duration: options.duration,
+                            complete: function() {
+                                isShow = false;
+                                isStarted = false;
+                                popup.hide();
+                                options.onHide.call(this, popup, trigger);
+                            }
+                        });
+                    }, options.hideDelay);
+                }
+
+                self.css("position", "relative");
+                popup.hide().css({
+                    opacity: 0,
+                    position: "absolute"
+                });
+
+                popup.css({
+                    left: ( Math.floor(trigger.outerWidth() / 2) - Math.floor(popup.outerWidth() / 2)),
+                    top: popupPos
+                });
+
+                trigger.add(popup).bind("mouseover", showBubble).bind("mouseout", hideBubble);
+            });
         }
     });
 
