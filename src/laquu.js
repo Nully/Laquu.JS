@@ -460,6 +460,11 @@
          * クリアオーバープラグイン
          * 
          * @param option object
+         *   opacity: 透明度
+         *   speed: アニメーション速度
+         *   onComplete: アニメーション完了時のコールバック
+         *   onHover: マウスオーバー時のコールバック
+         *   onOut: マウスアウト時のコールバック
          */
         clearover: function(option) {
             var options = $.extend({
@@ -484,8 +489,65 @@
             });
         },
         /**
-         * オーバープラグイン
+         * ドロップダウン
+         * 
+         * @param object option
+         *   hoverClass: マウスオーバー時のコールバック
+         *   showSpeed: 表示速度
+         *   hideSpeed: 非表示速度
+         *   hideTime: 消えるまでの遅延時間
+         *   onShow: 表示時のコールバック
+         *   onHide: 非表示時のコールバック
          */
+        dropdown: function(option) {
+            var options = $.extend({
+                hoverClass: "hover",
+                showSpeed: 200,
+                hideSpeed: 400,
+                hideTime: 100,
+                onShow: L.empty,
+                onHide: L.empty
+            }),
+            css = {
+                display: "none",
+                position: "absolute"
+            };
+
+            return this.each(function(){
+                var root =$(this), zIndex = 1000;
+
+                $(this).find("li").filter(function(){
+                    var ul = $("ul", this),
+                        $t = $(this);
+
+                    if(ul.size()) {
+                        ul.hide().parent("li").laquu("over", {
+                            hoverClass: options.hoverClass,
+                            onHover: function(){
+                                var _s = $(this);
+                                _s.children("ul:not(:animated)").css("z-index", ++zIndex).slideDown(options.showSpeed, function(){
+                                    if($.isFunction(options.onShow))
+                                        options.onShow.call(this);
+
+                                    $(this).css("overflow", "visible");
+                                });
+                            },
+                            onOut: function() {
+                                var _t = $(this);
+                                setTimeout(function(){
+                                    _t.children("ul").slideUp(options.hideSpeed, function(){
+                                        if($.isFunction(options.onHide))
+                                            options.onHide.call(this);
+
+                                        $(this).css("overflow", "hidden");
+                                    });
+                                }, options.hideTime);
+                            }
+                        });
+                    }
+                });
+            });
+        },
 
 
 
@@ -496,6 +558,9 @@
          * オーバープラグイン
          * 
          * @param object option
+         *   hoverClass: マウスオーバー時に付与するクラス名
+         *   onHover: マウスオーバー時のコールバック
+         *   onOut: マウスアウト時のコールバック
          */
         over: function(option) {
             var options = $.extend({

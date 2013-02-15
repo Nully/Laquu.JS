@@ -7,22 +7,20 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../src/laquu.js"></script>
-<script type="text/javascript" src="../src/over.js"></script>
-<script type="text/javascript" src="../src/dropdown.js"></script>
 <script type="text/javascript">
 jQuery(function(){
     var debug = jQuery("#debug");
-    laquu("#dropdown1 > ul").dropdown();
-    laquu("#dropdown2 > ul").dropdown({
+    $("#dropdown1 > ul").laquu("dropdown");
+    $("#dropdown2 > ul").laquu("dropdown", {
         hoverClass: "test-hover",
         showSpeed: 200,
         hideSpeed: 400,
         hideTime: 100,
         onShow: function() {
-            debug.append("#" + this.id + "が表示されました。<br />");
+            // debug.append("#" + this.id + "が表示されました。<br />");
         },
         onHide: function() {
-            debug.append("#" + this.id + "が非表示になりました。<br />");
+            // debug.append("#" + this.id + "が非表示になりました。<br />");
         }
     });
 });
