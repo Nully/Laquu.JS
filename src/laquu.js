@@ -216,6 +216,16 @@
                 $(this).attr("target", "_blank");
             });
         },
+        /**
+         * ブリンクプラグイン
+         * 
+         * @param object option
+         *   opacity: 要素の透明度
+         *   speed: アニメーション速度
+         *   onComplete: アニメーション完了時のコールバック
+         *   onHover: マウスオーバー時のコールバック
+         *   onOut: マウスアウト時のコールバック
+         */
         blink: function(option) {
             var options = $.extend({
                 opacity: .65,
