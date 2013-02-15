@@ -81,10 +81,22 @@
             alert(msg);
         },
         /**
+         * ランダムな数と文字列を合体させたUIDを取得する
+         * 
+         * @param len int 長さ
+         */
+        uid: function(len) {
+            return Math.ceil(Math.random(1, 1000) * 1000);
+        },
+        /**
          * Laquuプラグインを構築する
          */
         forge: function(fn, op) {
-            L.accordion.call(this, op);
+            if(!$.isFunction(L[fn]))
+                return L.notice("プラグイン "+ fn +" はLaquuには登録されていません。");
+
+            L[fn].call(this, op);
+            // L.accordion.call(this, op);
             // L.accordion.apply(this, arguments);
         },
         /**
@@ -142,6 +154,59 @@
             else {
 				$(targets.get(0)).trigger("click");
             }
+        },
+        /**
+         * ブラックアウトスクロール
+         * 
+         * @param option
+         *   overlayColor: オーバーレイの色（16進数）
+         *   speed: エフェクトのスピード
+         *   onShow: オーバーレイ表示時のコールバック
+         *   onHide: オーバーレイ非表示時のコールバック
+         *   @return void
+         */
+        blackoutScroll: function(option) {
+            var options = $.extend({
+                overlayColor: "#000000",
+                speed: 300,
+                onShow: L.empty,
+                onHide: L.empty
+            }, option || {}), d = $(document), w = $(window), b;
+
+            // オーバーレイの作成
+            if(!b) {
+                b = $('<div class="laquu_blackout_scroller_overlay'+ L.uid() +'" />').appendTo("body").hide().css({
+					position: "absolute",
+					top: 0,
+					left: 0,
+					zIndex: 100000
+                });
+            }
+
+            // イベントを登録
+            this.on("click", function(ev){
+                var $scrollTarget = $($(this).attr("href"));
+
+                // 対象が1個以上ある場合は普通のリンク動作を行わせる
+                if($scrollTarget.length < 1) return true;
+
+                b.css({
+                    background: options.overlayColor,
+                    width: d.width(),
+                    height: d.height()
+                }).fadeIn(options.speed, function(){
+                    $.isFunction(options.onShow) ? options.onShow.call($scrollTarget, $scrollTarget, b): L.empty();
+
+                    var offset = $scrollTarget.offset();
+                    w.scrollTop(offset.top).scrollLeft(offset.left);
+
+                    b.fadeOut(options.speed, function(){
+                        $.isFunction(options.onHide) ? options.onHide.call($scrollTarget, $scrollTarget, b): L.empty();
+                        b.hide().css({ top: 0, left: 0, width: 0, height: 0 });
+                    });
+                });
+                ev.preventDefault();
+            });
         }
     });
 
