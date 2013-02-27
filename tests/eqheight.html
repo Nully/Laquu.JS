@@ -7,15 +7,13 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../src/laquu.js"></script>
-<script type="text/javascript" src="../src/eqheight.js"></script>
 <script type="text/javascript">
 jQuery(function(){
-    var debug = jQuery("#debug");
-    laquu("#eqheight1 .eqHeight").eqheight();
-    laquu("#eqheight2 .eqHeight").eqheight(90, 100, true);
-    laquu("#eqheight3 .eqHeight").eqheight(300, 400);
-    laquu("#eqheight4 .eqHeight").eqheight(120, 200, false);
-    laquu("#eqheight5 .eqHeight").eqheight(200, 400);
+    $("#eqheight1 .eqHeight").laquu("eqheight");
+    $("#eqheight2 .eqHeight").laquu("eqheight", { min: 90, max: 100, enableOverflow: true});
+    $("#eqheight3 .eqHeight").laquu("eqheight", { min: 300, max: 400});
+    $("#eqheight4 .eqHeight").laquu("eqheight", { min: 120, max: 200, enableOverflow: true});
+    $("#eqheight5 .eqHeight").laquu("eqheight", { min: 200, max: 400});
 });
 </script>
 </head>

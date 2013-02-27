@@ -38,12 +38,13 @@
     $.extend(L, {
         version: '2.0.0',
         device: {
-            isIE: navigator.userAgent.match(/msie/),
-            isAndroid: navigator.userAgent.match(/Android/),
-            isAndoirdMobile: navigator.userAgent.match(/Android(.*?)Mobile/),
-            isiPhone: navigator.userAgent.match(/iPhone/),
-            isiPod: navigator.userAgent.match(/iPod/),
-            isiPad: navigator.userAgent.match(/iPad/)
+            isWebkit: ($.support.checkOn === false ? true: false),
+            // IE7以下のIE
+            isIE: ($.support.leadingWhitespace == false && $.support.tbody == false),
+            isIE8: ($.support.leadingWhitespace == false && $.support.tbody == true),
+            isIE9: ($.support.leadingWhitespace == true && $.support.tbody == true),
+            isFirefox: ($.support.checkOn == true && /Firefox/.test(navigator.userAgent)),
+            isOpera: ($.support.checkOn == true && /Opera/.test(navigator.userAgent))
         },
         /**
          * 絶対パスへ変換する
@@ -87,6 +88,20 @@
          */
         uid: function(len) {
             return Math.ceil(Math.random(1, 1000) * 1000);
+        },
+        /**
+         * 引数以下のバージョンかを調べる
+         * 
+         * @return bool
+         */
+        versionLessThan: function(v) {
+        },
+        /**
+         * 引数以上のバージョンかを調べる
+         * 
+         * @return bool
+         */
+        versionOverThan: function(v) {
         },
         /**
          * Laquuプラグインを構築する
@@ -548,7 +563,39 @@
                 });
             });
         },
+        /**
+         * イーキューヘイトプラグイン
+         * 
+         * @param int min 最小高さ
+         * @param int max 最高高さ
+         * @param bool enableOverflow overflowの可否
+         */
+        eqheight: function(option) {
+            var tmp = 0,
+                options = $.extend({
+                    min: null,
+                    max: null,
+                    enableOverflow: false
+                }, option || {});
 
+             if(L.device.isIE) enableOverflow = true;
+
+            this.each(function(){
+                var _h = $(this).height();
+                if(tmp < _h) {
+                    tmp = _h;
+                }
+            });
+
+            // 最小値及び最大値での割合を出す
+            if(options.min != null) tmp = options.min;
+            if(options.max != null) tmp = options.max;
+
+            // overflowの設定
+            if(options.enableOverflow) this.css("overflow", "auto");
+
+            return this.height(tmp);
+        },
 
 
 
