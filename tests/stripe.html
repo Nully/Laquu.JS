@@ -7,20 +7,18 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../src/laquu.js"></script>
-<script type="text/javascript" src="../src/over.js"></script>
-<script type="text/javascript" src="../src/stripe.js"></script>
 <script type="text/javascript">
 jQuery(function(){
     var debug = jQuery("#debug");
-    laquu("#stripe1 table tr").stripe();
-    laquu("#stripe2 table tr").stripe({
+    $("#stripe1 table tr").laquu("stripe");
+    $("#stripe2 table tr").laquu("stripe", {
 		stripeClass: ["one", "two", "three", "four"],
 		onHover: function(el, ev) {
 			debug.append("行にマウスが乗りました。<br />");
 		},
 		onOut: function() {
 			debug.append("行からマウスが離れました。<br />");
-		}
+        }
     });
 });
 </script>

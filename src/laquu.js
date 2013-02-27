@@ -1055,8 +1055,25 @@
                 });
             });
         },
+        /**
+         * ストライププラグイン
+         */
+        stripe: function(option) {
+            var o = $.extend({
+                stripeClass: ["even", "odd"],
+                hoverClass: "hover",
+                onHover: L.empty,
+                onOut: L.empty
+            }, option || {});
 
-
+            return this.each(function(i){
+                $(this).addClass(o.stripeClass[i%o.stripeClass.length]).laquu("over", {
+                    hoverClass: o.hoverClass,
+                    onHover: o.onHover,
+                    onOut: o.onOut
+                });
+            });
+        },
 
 
         /**
