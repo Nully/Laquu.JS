@@ -7,15 +7,12 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../src/laquu.js"></script>
-<script type="text/javascript" src="../src/over.js"></script>
-<script type="text/javascript" src="../src/innerslide.js"></script>
 <script type="text/javascript">
 jQuery(function(){
     var debug = jQuery("#debug");
-    laquu("#innerslide1 .sliderpanel").innerSlide();
-
-	laquu.each([ "right", "bottom", "left", "top-right", "top-left", "bottom-right", "bottom-left" ], function(i, e){
-		laquu("#innerslide2 .sliderpanel").addClass("pos-" + e).eq(i).innerSlide({
+    $("#innerslide1 .sliderpanel").laquu("innerslide");
+    $.each([ "right", "bottom", "left", "top-right", "top-left", "bottom-right", "bottom-left" ], function(i, e){
+		$("#innerslide2 .sliderpanel").addClass("pos-" + e).eq(i).laquu("innerslide", {
 			innerSlideClass: ".innerslide",
 			showSpeed: 800,
 			hideSpeed: 600,
