@@ -849,7 +849,97 @@
                 });
             });
         },
+        /**
+         * ピックメニュープラグイン
+         */
+        picmenu: function(option) {
+            var defaults = {
+                showSize: 240,
+                hideSize: 90,
+                speed: 400,
+                duration: 2000,
+                easing: "swing",
+                auto: false,
+                isVertical: false,
+                current: 0
+            };
 
+            return this.each(function(){
+                var o = $.extend({}, defaults, option || {}),
+                    self = $(this), items = null, current = 0, timer;
+
+                function startTimer() {
+                    timer = setInterval(function(){
+                        autoRotate();
+                    }, o.duration + o.speed);
+                }
+
+                function stopTimer() {
+                    var t = $(this).parent();
+                    items.each(function(i){
+                        if($(this).hasClass(t.data("tag"))) {
+                            current = (i+1);
+                            return true;
+                        }
+                    });
+
+                    clearInterval(timer);
+                    timer = null;
+                }
+
+                function autoRotate() {
+                    if(current >= items.size()) {
+                        current = 0;
+                    }
+
+                    var prev = (current === 0) ? items.size() : current;
+                    $(items.get(current)).trigger("mouseover");
+                    $(items.get(prev - 1)).trigger("mouseout");
+                    ++current;
+                }
+
+                function showImage(ev) {
+                    items.not(ev.currentTarget).trigger("mouseout");
+                    $(this).addClass("active").stop().animate( o.isVertical ? { height: o.showSize }: { width: o.showSize }, {
+                        easing: o.easing,
+                        queue: false,
+                        duration: o.speed,
+                        complete: o.complete
+                    });
+                }
+
+                function hideImage(ev) {
+                    $(this).removeClass("active").stop().animate( o.isVertical ? { height: o.hideSize }: { width: o.hideSize }, {
+                        easing: o.easing,
+                        queue: false,
+                        duration: o.speed - 100,
+                        complete: o.complete
+                    });
+                }
+
+                // 各画像要素（Aタグ）にイベントをバインド
+                items = self.find("a").css("overflow", "hidden");
+                items.bind("mouseover", showImage).bind("mouseout", hideImage);
+                items.trigger("mouseout");
+                items.each(function(i){
+                    i ++;
+                    var name = "laquu-picmenu-item" + i;
+                    $(this).data("tag", name).addClass(name);
+                });
+
+                // カレントが1以上であるなら、loopIndexの値として入れる
+                if (o.current >= 1 && items.size() > 1) {
+                    current = (o.current > items.size() ? items.size(): o.current);
+                    $(items.get(current - 1)).trigger("mouseover");
+                }
+
+                // autoがあるならば、自動めくりを実行
+                if(o.auto) {
+                    startTimer();
+                    self.find("img").bind("mouseover", stopTimer).bind("mouseout", startTimer);
+                }
+            });
+        },
 
 
 
