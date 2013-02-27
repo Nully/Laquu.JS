@@ -7,14 +7,16 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../src/laquu.js"></script>
-<script type="text/javascript" src="../src/exticon.js"></script>
+<!-- <script type="text/javascript" src="../src/exticon.js"></script> -->
 <script type="text/javascript">
 jQuery(function(){
     var debug = jQuery("#debug");
-    laquu("#exticon1 a").exticon();
+    /* laquu("#exticon1 a").exticon();
     laquu("#exticon2 a").exticon({
         prefix: "test-icon_"
-    });
+    }); */
+    $("#exticon1 a").laquu("exticon");
+    $("#exticon2 a").laquu("exticon", { prefix: "test-icon_" });
 });
 </script>
 </head>

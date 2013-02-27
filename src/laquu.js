@@ -596,7 +596,29 @@
 
             return this.height(tmp);
         },
+        /**
+         * 拡張子アイコンプラグイン
+         * 
+         */
+        exticon: function(option) {
+            var o = $.extend({}, {
+                prefix: "icon-"
+            }, option || {});
 
+            return this.each(function(){
+                var $t = $(this), href, tmp, ext;
+
+                if(!$t.attr("href") && !(/\./.test($t.attr("href")))) return true;
+
+                href = $t.attr("href");
+                tmp = href.split(".");
+                ext = tmp.pop();
+
+                if(!ext) return true;
+
+                $t.addClass(o.prefix ? o.prefix + ext: ext);
+            });
+        },
 
 
 
