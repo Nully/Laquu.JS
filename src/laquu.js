@@ -653,6 +653,97 @@
                     body.addClass($l.cookie("laquu_font-size"));
             });
         },
+        /**
+         * インクリメンタルサーチプラグイン
+         * 
+         */
+        ics: function(option) {
+            var setting = $.extend({
+                target: 'table tr',
+                on: 'keyup',
+                callback: L.emtpy
+            }, option || {});
+
+            function quote(str) {
+                return str.replace(new RegExp(/(\W)/), '\\$1');
+            }
+
+            var elements = $(setting.target);
+            $(this).bind(setting.on, function(){
+                var self = $(this),
+                    keyword = self.val(),
+                    keywords = keyword.split(new RegExp(/\s/)),
+                    i;
+
+                // 検索文字がない場合はすべての要素を表示
+                if(keyword.length == 0) {
+                    elements.show();
+                    return;
+                }
+
+                elements.each(function(){
+                    var s = $(this);
+                    s.show();
+                    // or 検索の為、半角スペースで文字列を切り出し、文字列分ループして一致を
+                    for(i in keywords) {
+                        if(keywords[i].length == 0)
+                            continue;
+
+                        var pattern = quote(keywords[i]);
+                        if(!s.text().replace(new RegExp(/\s/g), "").match(pattern)) {
+                            s.hide();
+                        }
+
+                        // 強調表示などはユーザーでやってもらうのです！
+                        if($.isFunction(setting.callback))
+                            setting.callback.call(self, elements, pattern);
+                    }
+                });
+            });
+        },
+        /**
+         * イメージオーバープラグイン
+         */
+        imageover: function(option) {
+            var defaults = {
+                suffix: "_on",
+                onHover: L.empty,
+                onOut: L.empty,
+                onImageLoaded: L.empty
+            };
+
+            function swap(e, s, c) {
+                e.src = s;
+                c.call(e, e);
+            }
+
+            return this.each(function(i, e){
+                var o = $.extend({}, defaults, option || {}),
+                    a = this.src,
+                    b,
+                    ext,
+                    overImage = new Image();
+
+                b = this.src.split(".");
+                ext = b.pop();
+                b = b.join(".") + o.suffix + "." + ext;
+
+                // プリロード
+                overImage.src = b;
+                if($.isFunction(o.onImageLoaded)) {
+                    overImage.onload = o.onImageLoaded;
+                }
+
+                $(this).laquu("over", {
+                    onHover: function(ev){
+                        swap.call(this, this, b, $.isFunction(o.onHover) ? o.onHover: L.empty);
+                    },
+                    onOut: function(ev){
+                        swap.call(this, this, a, $.isFunction(o.onOut) ? o.onOut: L.empty);
+                    }
+                });
+            });
+        },
 
 
 

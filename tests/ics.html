@@ -6,13 +6,11 @@
 <link rel="stylesheet" href="styles.css" media="all" type="text/css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="../src/laquu.js"></script>
-<script type="text/javascript" src="../src/ics.js"></script>
 <script type="text/javascript">
 jQuery(function(){
-    var debug = jQuery("#debug");
-    laquu("#keyword1").ics();
-    laquu("#keyword2").ics({
-    	target: 'li'
+    $("#keyword1").laquu("ics");
+    $("#keyword2").laquu("ics", {
+        target: 'li'
     });
 });
 </script>
