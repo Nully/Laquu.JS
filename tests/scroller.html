@@ -11,8 +11,8 @@
 <script type="text/javascript">
 jQuery(function(){
     var debug = jQuery("#debug");
-    laquu("#scroller1 a").scroller();
-    laquu("#scroller2 a").scroller({
+    $("#scroller1 a").laquu("scroller");
+    $("#scroller2 a").laquu("scroller", {
 		easing: "easeOutBounce",
 		speed: 1500,
 		onComplete: function() {

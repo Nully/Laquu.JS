@@ -180,7 +180,7 @@
          *   onHide: オーバーレイ非表示時のコールバック
          *   @return void
          */
-        blackoutScroll: function(option) {
+        blackoutscroll: function(option) {
             var options = $.extend({
                 overlayColor: "#000000",
                 speed: 300,
@@ -976,8 +976,85 @@
                 }).scrollTop(1).scrollTop(0);
             });
         },
+        /**
+         * スクロールトゥービュープラグイン
+         */
+        s2v: function(option) {
+            var o = $.extend({}, {
+                detectTop: 300,
+                fadeSpeed: 200,
+                scrollType: "default",
+                scrollOptions: {}
+            }, option || {});
+            return this.each(function(){
+                var $t = $(this), trigger;
 
+                $t.hide();
+                trigger = $t.find("a");
+                if(trigger.size()) {
+                    if(o.scrollType.toLowerCase() === "blackout") {
+                        trigger.laquu("blackoutscroll", o.scrollOptions);
+                    }
+                    else {
+                        trigger.laquu("scroller", o.scrollOptions);
+                    }
+                }
 
+                $(window).scroll(function(){
+                    var $w = $(this);
+                    if($w.scrollTop() > o.detectTop) {
+                        $t.filter(":not(:visible)").fadeIn(o.fadeSpeed);
+                    }
+                    else {
+                        $t.filter(":visible").fadeOut(o.fadeSpeed);
+                    }
+                });
+            });
+        },
+        /**
+         * スクローラープラグイン
+         */
+        scroller: function(option) {
+            var scrollElement = $("body,html");
+
+            return this.each(function(){
+                var o = $.extend({}, {
+                    easing: "swing",
+                    speed: 1500,
+                    onComplete: L.empty,
+                    onStep: L.empty
+                }, option || {});
+
+                $(this).click(function(ev){
+                    var self = $(this),
+                        of = $(self.attr("href")).offset();
+
+                    var scrollPos = {
+                        scrollTop: of.top,
+                        scrollLeft: of.left
+                    };
+
+                    // safari6では現在バグが残っているため、
+                    // ブラウザバージョンの差異を吸収させるため、leftオプションは
+                    // safari6では無効になるようにした
+                    /* if(L.device.isWebkit && navigator.appVersion) {
+                        if(navigator.appVersion.match(new RegExp("Version/6.0"))) {
+                            delete scrollPos.scrollLeft;
+                        }
+                    }*/
+
+                    scrollElement.animate(scrollPos, {
+                        queue: false,
+                        easing: o.easing,
+                        duration: o.speed,
+                        step: o.onStep,
+                        complete: o.onComplete
+                    });
+
+                    ev.preventDefault();
+                });
+            });
+        },
 
 
 
