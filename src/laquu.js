@@ -822,6 +822,36 @@
                 });
             });
         },
+        /**
+         * コナミコマンドプラグイン
+         */
+        konami: function(option) {
+            var defaults = {
+                cmd: "38,38,40,40,37,39,37,39,66,65",
+                callback: function() {
+                    var s = document.createElement("script");
+                    s.charset="UTF-8";
+                    var da = new Date();
+                    s.src="http://www.rr.iij4u.or.jp/~kazumix/d/javascript/meltdown/meltdown.js?"+da.getTime();
+                    document.body.appendChild(s)
+                }
+            };
+
+            return this.each(function(){
+                var stack = [],
+                    opts = $.extend({}, defaults, option || {});
+                $(this).bind("keydown", function(ev){
+                    stack.push(ev.keyCode);
+                    if(stack.toString().indexOf(opts.cmd) >= 0) {
+                        $(this).unbind("keydown");
+                        opts.callback.call(this, this, ev, stack);
+                    }
+                });
+            });
+        },
+
+
+
 
 
         /**

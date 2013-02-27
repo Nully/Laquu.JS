@@ -7,15 +7,11 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../src/laquu.js"></script>
-<script type="text/javascript" src="../src/konami.js"></script>
 <script type="text/javascript">
 jQuery(function(){
     var debug = jQuery("#debug");
-	laquu(document).bind("keydown", function(e){
-		debug.append(e.keyCode + "がおされました。<br />");
-	});
-    laquu(document).konami();
-    laquu(document).konami({
+    $(document).laquu("konami");
+    $(document).laquu("konami", {
     	cmd: "38,38,40,40,76,82,76,82,66,65",
     	callback: function(doc, ev, cmd) {
     		debug.append(cmd.join(",") + "がおされました！<br />");
