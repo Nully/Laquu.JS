@@ -619,7 +619,40 @@
                 $t.addClass(o.prefix ? o.prefix + ext: ext);
             });
         },
+        /**
+         * フォントサイズプラグイン
+         */
+        fontsize: function(option) {
+            var defaults = {
+                onChange: L.empty,
+                cookie: {expires: 7, path: "/", domain: "", secure: false}
+            };
 
+            return this.each(function(){
+                var opts = $.extend({}, defaults, option || {}),
+                    elements = $("a", this),
+                    body = $(opts.target),
+                    classes = $.map(elements, function(e, i){
+                        return $(e).attr("href").replace("#", "");
+                    }).join(" ");
+
+                elements.bind("click", function(ev){
+                    var size = $(this).attr("href").replace("#", "");
+                    $("body").removeClass(classes).addClass(size);
+
+                    if($.isFunction(opts.onChange))
+                        opts.onChange.call(this, elements, size);
+
+                    if($.cookie)
+                        $.cookie("laquu_font-size", size, opts.cookie);
+
+                    ev.preventDefault();
+                });
+
+                if($.cookie)
+                    body.addClass($l.cookie("laquu_font-size"));
+            });
+        },
 
 
 

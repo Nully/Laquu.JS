@@ -7,14 +7,20 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../src/laquu.js"></script>
-<script type="text/javascript" src="../src/fontsize.js"></script>
+<!-- <script type="text/javascript" src="../src/fontsize.js"></script> -->
 <script type="text/javascript">
 jQuery(function(){
-    var debug = jQuery("#debug");
+    /* var debug = jQuery("#debug");
     laquu("#fontsize1 p").fontsize();
     laquu("#fontsize2 p").fontsize({
         onChange: function() {
             debug.append(this.innerText + "がクリックされました。<br />");
+        }
+    }); */
+    $("#fontsize1 p").laquu("fontsize");
+    $("#fontsize2 p").laquu("fontsize", {
+        onChange: function() {
+            alert(this.innerText + 'がクリックされました。');
         }
     });
 });
