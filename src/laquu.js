@@ -39,8 +39,8 @@
         version: '2.0.0',
         device: {
             isWebkit: ($.support.checkOn === false ? true: false),
-            // IE7以下のIE
-            isIE: ($.support.leadingWhitespace == false && $.support.tbody == false),
+            isIE6: ($.support.leadingWhitespace == false && $.support.tbody == false && /MSIE 6.0/.test(navigator.userAgent)),
+            isIE7: ($.support.leadingWhitespace == false && $.support.tbody == false && /MSIE 7.0/.test(navigator.userAgent)),
             isIE8: ($.support.leadingWhitespace == false && $.support.tbody == true),
             isIE9: ($.support.leadingWhitespace == true && $.support.tbody == true),
             isFirefox: ($.support.checkOn == true && /Firefox/.test(navigator.userAgent)),
@@ -578,7 +578,7 @@
                     enableOverflow: false
                 }, option || {});
 
-             if(L.device.isIE) enableOverflow = true;
+             if(L.device.isIE6) enableOverflow = true;
 
             this.each(function(){
                 var _h = $(this).height();
@@ -940,6 +940,44 @@
                 }
             });
         },
+        /**
+         * ポスフィックスプラグイン
+         */
+        posfix: function() {
+            if(L.device.isIE6 === false)
+                return this;
+
+            var $w = $(window);
+            this.css("position", "absolute");
+            return this.each(function(){
+                var $t = $(this),
+                    o = {};
+
+                function isUndefined(n) {
+                    return typeof n == "undefined";
+                }
+
+                $.each([ "top", "right", "bottom", "left" ], function(i, prop){
+                    if($t.css(prop) != "auto") {
+                        o[prop] = parseInt($t.css(prop));
+                    }
+                });
+
+                $w.bind("scroll", function(ev){
+                    var pos = 0;
+                    if(!isUndefined(o.top)) {
+                        pos = $w.scrollTop() + o.top;
+                    }
+                    else if(!isUndefined(o.bottom)) {
+                        pos = $w.scrollTop() + $w.height() - $t.outerHeight({ margin: true }) - o.bottom;
+                    }
+
+                    $t.css("top", pos);
+                }).scrollTop(1).scrollTop(0);
+            });
+        },
+
+
 
 
 
