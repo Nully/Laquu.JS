@@ -1074,7 +1074,187 @@
                 });
             });
         },
+        /**
+         * タブプラグイン
+         */
+        tab: function(options) {
+            var defaults = {
+                tabSelector: "#tabs",
+                activeTabClass: "active",
+                onChange: L.empty,
+                triggerTabNum: 0,
+                isAnimate: false
+            };
 
+            return this.each(function(){
+                var o = $.extend({}, defaults, options || {}),
+                    panels,
+                    self = $(this),
+                    tabGroup = self.find(o.tabSelector),
+                    tabs = tabGroup.find("li");
+
+                tabs.each(function(){
+                    var i = $($("a", this).attr("href"), self);
+                    if(panels)
+                        panels = panels.add(i);
+                    else
+                        panels = i;
+                }).find("a[href^=#]").bind("click", function(ev){
+                    panels.hide();
+                    tabs.removeClass(o.activeTabClass);
+                    $(this).parent().addClass(o.activeTabClass);
+
+                    var p = self.find($(this).attr("href")).show();
+
+                    if($.isFunction(o.onChange))
+                        o.onChange.call(this, this, p);
+
+                    ev.preventDefault();
+                });
+
+                if(tabs.size() < o.triggerTabNum)
+                    o.triggerTabNum = 0;
+
+                $("a", tabs.get(o.triggerTabNum)).trigger("click");
+            });
+        },
+        /**
+         * ティッカープラグイン
+         */
+        ticker: function(options) {
+            return this.each(function(){
+                var self = $(this), isStarted = false, current = 0, timer = null, items = self.children();
+                var o = $.extend({}, {
+                    speed: 1000,
+                    duration: 2000,
+                    onShow: L.empty,
+                    onHide: L.empty
+                }, options || {});
+
+                function start() {
+                    if(!isStarted) {
+                        isStarted = true;
+                        timer = setInterval(function(){
+                            tween();
+                        }, o.duration + o.speed);
+                    }
+                }
+
+                function stop() {
+                    if(isStarted) {
+                        isStarted = false;
+                        clearInterval(timer);
+                        timer = null;
+                    }
+                }
+
+                function tween() {
+                    ++current;
+
+                    if(current >= items.size()) {
+                        current = 0;
+                    }
+
+                    var item = items.get(current);
+                    self.animate({
+                        top: parseInt("-" + item.offsetTop),
+                        left: item.offsetLeft
+                    }, {
+                        queue: false,
+                        duration: o.speed,
+                        complete: function() {
+                             var i = (current === 0) ? items.size(): current;
+                            $(items[i -1]).appendTo(self);
+                            self.css({ top: 0, left: 0 });
+                            o.onShow.call(item, item);
+                            o.onHide.call(items[i -1], items[i -1]);
+                        }
+                    });
+                }
+
+                self.parent().css("position", "relative").end().css({
+                    position: "absolute",
+                    top: 0,
+                    left: 0
+                }).bind("mouseover", stop).bind("mouseout", start);
+
+                start();
+            });
+        },
+
+        /**
+         * ツールチッププラグイン
+         */
+        tooltip: function(options) {
+            this.each(function(){
+                var o = $.extend({}, {
+                    distX: 0,
+                    distY: 25,
+                    onShow: L.empty,
+                    onHide: L.empty,
+                    onMove: L.empty
+                }, options || {}),
+                $this = $(this),
+                hasAlt = false;
+
+                function createTooltipContainer() {
+                    return $('<div id="laquu-tooltip-container'+ L.uid() +'" class="laquu-tooltip-container"></div>')
+                                .appendTo("body")
+                                .css({ position: "absolute", display: "none", top: 0, left: 0 });
+                }
+
+                function showTooltip(ev) {
+                    var container = createTooltipContainer(),
+                        self = $(this),
+                        outerHeigh,
+                        outerWidth;
+
+                    if(hasAlt) {
+                        self.removeAttr("alt");
+                    }
+                    self.removeAttr("title");
+                    container.text(self.data("lq-tooltip-title"));
+                    var containerHeight = Math.floor(container.outerHeight() / 2) + o.distY;
+                    var containerWidth  = Math.floor(container.outerWidth() / 2) + o.distX;
+
+                    container.css({
+                        top: ev.pageY - containerHeight,
+                        left: ev.pageX - containerWidth
+                    }).stop(true, true).fadeIn("fast", function(){
+                        o.onShow.call(this, this, self);
+                    });
+
+                    self.mousemove(function(ev){
+                        container.css({
+                            top: ev.pageY - containerHeight,
+                            left: ev.pageX - containerWidth
+                        });
+                        o.onMove.call(this, container.get(0), self);
+                    });
+                }
+
+
+                function hideTooltip(ev) {
+                    var self = $(this);
+                    self.unbind("mousemove");
+                    self.attr("title", self.data("lq-tooltip-title"));
+                    if(hasAlt) {
+                        self.attr("alt", self.data("lq-tooltip-alt"));
+                    }
+                    $(".laquu-tooltip-container").fadeOut("fast", function(){
+                        $(this).remove();
+                        o.onHide.call(this, this, self);
+                    });
+                }
+
+                if(typeof $this.attr("alt") !== "undefined") {
+                    $this.data("lq-tooltip-alt", $this.attr("alt"));
+                    hasAlt = true;
+                }
+                $this.data("lq-tooltip-title", $this.attr("title"));
+                $this.hover(showTooltip, hideTooltip);
+            });
+        },
 
         /**
          * オーバープラグイン
