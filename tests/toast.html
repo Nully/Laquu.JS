@@ -7,45 +7,44 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../src/laquu.js"></script>
-<script type="text/javascript" src="../src/toast.js"></script>
 <script type="text/javascript">
 jQuery(function(){
     jQuery("#test1").bind("click", function(){
-        laquu.Toast.show();
+        $.laquu.toast.show();
     });
 
     jQuery("#test2").bind("click", function(){
-        laquu.Toast.show({
+        $.laquu.toast.show({
             message: "メッセージ1"
         });
-        laquu.Toast.show({
+        $.laquu.toast.show({
             message: "メッセージ2"
         });
-        laquu.Toast.show({
+        $.laquu.toast.show({
             message: "メッセージ3"
         });
-        laquu.Toast.show({
+        $.laquu.toast.show({
             message: "メッセージ4"
         });
     });
 
     jQuery("#test3").bind("click", function(){
-        laquu.Toast.show({
+        $.laquu.toast.show({
             message: "メッセージ1",
             fadeTime: 400,
             showTime: 600
         });
-        laquu.Toast.show({
+        $.laquu.toast.show({
             message: "メッセージ2",
             fadeTime: 400,
             showTime: 600
         });
-        laquu.Toast.show({
+        $.laquu.toast.show({
             message: "メッセージ3",
             fadeTime: 400,
             showTime: 600
         });
-        laquu.Toast.show({
+        $.laquu.toast.show({
             message: "メッセージ4",
             fadeTime: 400,
             showTime: 600
@@ -53,11 +52,11 @@ jQuery(function(){
     });
 
     jQuery("#test4").click("bind", function(){
-        laquu.Toast.dequeue();
+        $.laquu.toast.dequeue();
     });
 
     jQuery("#test5").click("bind", function(){
-        laquu.Toast.dequeueAll();
+        $.laquu.toast.dequeueAll();
     });
 
     jQuery("#test6").click("bind", function(){
@@ -74,15 +73,15 @@ jQuery(function(){
         ];
 
         jQuery.each(props, function(i, e) {
-            this.showTime = 500;
+            this.showTime = 3000;
             this.fadeTime = 200;
-            laquu.Toast.show(this);
+            $.laquu.toast.show(this);
         });
     });
 });
 </script>
 </head>
-<body id="toast" style="postion: relative;">
+<body id="toast" style="position relative;">
 <h1>トーストプラグイン</h1>
 
 <h2>オプション無し</h2>
