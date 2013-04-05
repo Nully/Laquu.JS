@@ -24,7 +24,7 @@ PLUGINS=`ls ${SRC_DIR} | grep -v 'laquu.js'`
 
 
 #Google Closure Compiler
-G_COMPILER_NAME=google-javascript-compiler_20110921.jar
+G_COMPILER_NAME=compiler.jar
 G_COMPILER=${BUILD_DIR}/$G_COMPILER_NAME
 G_COMPILER_URL="http://code.google.com/intl/ja/closure/compiler/"
 
