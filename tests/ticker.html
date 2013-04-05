@@ -7,11 +7,21 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="../externals/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../src/laquu.js"></script>
-<script type="text/javascript" src="../src/ticker.js"></script>
 <script type="text/javascript">
 jQuery(function(){
     var debug = jQuery("#debug");
-    laquu("#ticker1 ul").ticker();
+    $("#ticker1 ul").laquu("ticker");
+    $("#ticker2 ul").laquu("ticker", {
+		speed: 600,
+		duration: 2400,
+		onShow: function(el) {
+			debug.append($(el).find("img").attr("src").split("/").pop() + "を含むティッカーが表示されました。<br />");
+		},
+		onHide: function(el) {
+			debug.append($(el).find("img").attr("src").split("/").pop() + "を含むティッカーが非表示になりまた。<br />");
+		}
+    });
+    /* laquu("#ticker1 ul").ticker();
     laquu("#ticker2 ul").ticker({
 		speed: 600,
 		duration: 2400,
@@ -21,7 +31,7 @@ jQuery(function(){
 		onHide: function(el) {
 			debug.append(laquu(el).find("img").attr("src").split("/").pop() + "を含むティッカーが非表示になりまた。<br />");
 		}
-	});
+	});*/
 });
 </script>
 </head>

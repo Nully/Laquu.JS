@@ -11,6 +11,22 @@
 <script type="text/javascript">
 jQuery(function(){
     var debug = jQuery("#debug");
+    $("#tooltip1 p").laquu("tooltip");
+    $("img").laquu("tooltip");
+    $("#tooltip2 p").laquu("tooltip", {
+		distX: -100,
+		distY: -60,
+		onShow: function() {
+			debug.append("ﾀｶｼへ ちゃんとご飯は食べるんだよ。<br />");
+		},
+		onHide: function() {
+			debug.append("お仕事頑張ってね。<br />");
+		},
+		onMove: function() {
+			debug.append("ちゃんと仕事するんだよ。<br />");
+		}
+    });
+    /*
     laquu("#tooltip1 p").tooltip();
     laquu("img").tooltip();
     laquu("#tooltip2 p").tooltip({
@@ -25,7 +41,7 @@ jQuery(function(){
 		onMove: function() {
 			debug.append("ちゃんと仕事するんだよ。<br />");
 		}
-    });
+    });*/
 });
 </script>
 </head>
